@@ -42,7 +42,7 @@
             --muted-dark: #526b74;
 
             --border: rgba(85, 232, 255, 0.16);
-            --border-strong: rgba(85, 232, 255, 0.30);
+            --border-strong: rgba(85, 232, 255, 0.34);
         }
 
 
@@ -55,7 +55,14 @@
         }
 
         body {
-            background: var(--bg);
+            background:
+                radial-gradient(
+                    circle at 20% 10%,
+                    rgba(85, 232, 255, 0.035),
+                    transparent 30%
+                ),
+                var(--bg);
+
             color: var(--white);
 
             font-family:
@@ -71,30 +78,26 @@
             color: inherit;
         }
 
-        img {
-            max-width: 100%;
-            display: block;
-        }
-
         button,
         input,
         textarea {
             font: inherit;
         }
 
-
-        /* =====================================================
-           LAYOUT
-        ===================================================== */
+        section {
+            padding: 110px 0;
+            scroll-margin-top: 110px;
+        }
 
         .container {
             width: min(1180px, calc(100% - 40px));
             margin: 0 auto;
         }
 
-        section {
-            padding: 110px 0;
-        }
+
+        /* =====================================================
+           SECTION TEXT
+        ===================================================== */
 
         .section-label {
             margin-bottom: 14px;
@@ -115,15 +118,13 @@
                 clamp(40px, 6vw, 70px);
 
             line-height: 0.98;
+
             letter-spacing: -0.055em;
         }
 
-        .cyan {
-            color: var(--cyan);
-        }
-
         .section-description {
-            max-width: 680px;
+            max-width: 700px;
+
             margin-top: 20px;
 
             color: var(--muted);
@@ -131,45 +132,72 @@
             font-size: 15px;
         }
 
+        .cyan {
+            color: var(--cyan);
+        }
+
 
         /* =====================================================
-           GLASS NAVBAR
+           FLOATING GLASS NAVBAR
         ===================================================== */
 
         .navbar {
-            position: sticky;
-            top: 0;
+            position: fixed;
+
+            top: 18px;
+            left: 50%;
+
+            transform: translateX(-50%);
+
             z-index: 1000;
 
-            border-bottom:
+            width:
+                min(
+                    1080px,
+                    calc(100% - 30px)
+                );
+
+            border:
                 1px solid
-                rgba(85, 232, 255, 0.12);
+                rgba(255, 255, 255, 0.13);
+
+            border-radius: 19px;
 
             background:
-                rgba(3, 8, 13, 0.62);
+                rgba(5, 14, 20, 0.52);
 
-            backdrop-filter: blur(18px);
-            -webkit-backdrop-filter: blur(18px);
+            backdrop-filter: blur(22px);
+            -webkit-backdrop-filter: blur(22px);
+
+            box-shadow:
+                0 18px 50px rgba(0, 0, 0, 0.28),
+                inset 0 1px 0
+                rgba(255, 255, 255, 0.07);
         }
 
         .nav-inner {
-            min-height: 72px;
+            min-height: 66px;
+
+            padding: 0 18px;
 
             display: flex;
             align-items: center;
             justify-content: space-between;
 
-            gap: 30px;
+            gap: 25px;
         }
 
         .logo {
             color: var(--white);
 
-            font-size: 21px;
+            font-size: 20px;
             font-weight: 800;
 
-            text-decoration: none;
             letter-spacing: -0.03em;
+
+            text-decoration: none;
+
+            white-space: nowrap;
         }
 
         .logo span {
@@ -180,12 +208,117 @@
             display: flex;
             align-items: center;
 
-            gap: 22px;
+            gap: 17px;
 
             list-style: none;
         }
 
         .nav-links a {
+            color: var(--muted);
+
+            font-size: 10px;
+            font-weight: 800;
+
+            text-decoration: none;
+
+            white-space: nowrap;
+        }
+
+        .nav-links a:hover {
+            color: var(--cyan);
+        }
+
+        .admin-link {
+            padding:
+                7px 11px;
+
+            border:
+                1px solid
+                rgba(85, 232, 255, 0.23);
+
+            border-radius: 7px;
+
+            color: var(--cyan) !important;
+
+            background:
+                rgba(85, 232, 255, 0.045);
+        }
+
+
+        /* =====================================================
+           MOBILE NAVIGATION
+        ===================================================== */
+
+        .mobile-nav-button {
+            display: none;
+
+            width: 40px;
+            height: 40px;
+
+            align-items: center;
+            justify-content: center;
+
+            border:
+                1px solid
+                rgba(85, 232, 255, 0.18);
+
+            border-radius: 10px;
+
+            background:
+                rgba(85, 232, 255, 0.04);
+
+            color: var(--cyan);
+
+            cursor: pointer;
+        }
+
+        .mobile-nav-button span,
+        .mobile-nav-button span::before,
+        .mobile-nav-button span::after {
+            width: 18px;
+            height: 2px;
+
+            display: block;
+
+            background: var(--cyan);
+
+            content: "";
+        }
+
+        .mobile-nav-button span {
+            position: relative;
+        }
+
+        .mobile-nav-button span::before {
+            position: absolute;
+            top: -6px;
+        }
+
+        .mobile-nav-button span::after {
+            position: absolute;
+            top: 6px;
+        }
+
+        .mobile-menu {
+            display: none;
+
+            padding:
+                0 15px 15px;
+        }
+
+        .mobile-menu.open {
+            display: block;
+        }
+
+        .mobile-menu a {
+            display: block;
+
+            padding: 11px 12px;
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,0.055);
+
             color: var(--muted);
 
             font-size: 12px;
@@ -194,8 +327,23 @@
             text-decoration: none;
         }
 
-        .nav-links a:hover {
+        .mobile-menu a:hover {
             color: var(--cyan);
+        }
+
+        .mobile-menu .mobile-admin {
+            margin-top: 8px;
+
+            border:
+                1px solid
+                rgba(85, 232, 255, 0.18);
+
+            border-radius: 8px;
+
+            color: var(--cyan);
+
+            background:
+                rgba(85, 232, 255, 0.04);
         }
 
 
@@ -208,6 +356,7 @@
             flex-wrap: wrap;
 
             gap: 12px;
+
             margin-top: 30px;
         }
 
@@ -218,7 +367,8 @@
             align-items: center;
             justify-content: center;
 
-            padding: 0 19px;
+            padding:
+                0 19px;
 
             border-radius: 8px;
 
@@ -226,6 +376,10 @@
             font-weight: 800;
 
             text-decoration: none;
+
+            border: 1px solid transparent;
+
+            cursor: pointer;
         }
 
         .button-primary {
@@ -236,15 +390,16 @@
         .button-secondary {
             background: var(--card);
 
-            border:
-                1px solid
+            border-color:
                 var(--border);
 
             color: var(--white);
         }
 
         .button-secondary:hover {
-            border-color: var(--border-strong);
+            border-color:
+                var(--border-strong);
+
             color: var(--cyan);
         }
 
@@ -254,7 +409,9 @@
         ===================================================== */
 
         .hero {
-            min-height: calc(100vh - 72px);
+            min-height: 100vh;
+
+            padding-top: 150px;
 
             display: grid;
 
@@ -329,6 +486,7 @@
             margin-top: 18px;
 
             font-size: 28px;
+
             line-height: 1.1;
         }
 
@@ -344,6 +502,7 @@
             margin-top: 24px;
 
             display: grid;
+
             gap: 9px;
 
             list-style: none;
@@ -364,6 +523,56 @@
             color: var(--text);
 
             font-size: 12px;
+        }
+
+
+        /* =====================================================
+           CARD POPUP EFFECT
+        ===================================================== */
+
+        .project-card,
+        .interest-card,
+        .skill-group,
+        .education-card,
+        .beyond-card,
+        .hero-card,
+        .contact-info,
+        .contact-form,
+        .resume-box {
+            transition:
+                transform 180ms ease,
+                border-color 180ms ease,
+                box-shadow 180ms ease,
+                background 180ms ease;
+        }
+
+        .project-card:hover,
+        .interest-card:hover,
+        .skill-group:hover,
+        .education-card:hover,
+        .beyond-card:hover,
+        .hero-card:hover,
+        .contact-info:hover,
+        .contact-form:hover,
+        .resume-box:hover {
+            transform: translateY(-7px);
+
+            border-color:
+                rgba(85, 232, 255, 0.36);
+
+            box-shadow:
+                0 18px 45px
+                rgba(0, 0, 0, 0.30),
+
+                0 0 28px
+                rgba(85, 232, 255, 0.075);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(13, 29, 39, 0.97),
+                    rgba(9, 23, 32, 0.97)
+                );
         }
 
 
@@ -429,6 +638,7 @@
 
         .education-top {
             display: flex;
+
             justify-content: space-between;
 
             gap: 30px;
@@ -436,6 +646,7 @@
 
         .education-card h3 {
             font-size: 22px;
+
             line-height: 1.3;
         }
 
@@ -623,6 +834,7 @@
             margin-top: 28px;
 
             font-size: 22px;
+
             line-height: 1.2;
         }
 
@@ -659,6 +871,7 @@
 
         .project-link {
             margin-top: auto;
+
             padding-top: 25px;
 
             color: var(--cyan);
@@ -675,7 +888,7 @@
 
 
         /* =====================================================
-           BEYOND PROJECTS
+           BEYOND
         ===================================================== */
 
         .beyond-grid {
@@ -724,6 +937,7 @@
             padding: 40px;
 
             display: flex;
+
             align-items: center;
             justify-content: space-between;
 
@@ -812,10 +1026,6 @@
             word-break: break-word;
         }
 
-        .contact-email:hover {
-            color: var(--cyan-soft);
-        }
-
         .social-links {
             margin-top: 25px;
 
@@ -864,7 +1074,8 @@
 
         .form-group input:focus,
         .form-group textarea:focus {
-            border-color: var(--border-strong);
+            border-color:
+                var(--border-strong);
         }
 
         .form-group textarea {
@@ -887,7 +1098,8 @@
         ===================================================== */
 
         footer {
-            padding: 28px 0 35px;
+            padding:
+                28px 0 35px;
 
             border-top:
                 1px solid
@@ -908,7 +1120,7 @@
 
 
         /* =====================================================
-           MOBILE
+           TABLET
         ===================================================== */
 
         @media (max-width: 950px) {
@@ -918,7 +1130,7 @@
 
                 min-height: auto;
 
-                padding-top: 90px;
+                padding-top: 150px;
             }
 
             .about-grid {
@@ -935,51 +1147,59 @@
             .contact-grid {
                 grid-template-columns: 1fr;
             }
+
+            .nav-links {
+                gap: 12px;
+            }
+
+            .nav-links a {
+                font-size: 9px;
+            }
         }
 
 
-        @media (max-width: 650px) {
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media (max-width: 700px) {
 
             .container {
                 width:
-                    min(
-                        calc(100% - 24px),
-                        1180px
-                    );
+                    calc(100% - 24px);
             }
 
             section {
                 padding: 80px 0;
+
+                scroll-margin-top: 100px;
+            }
+
+            .navbar {
+                top: 10px;
+
+                width:
+                    calc(100% - 18px);
+
+                border-radius: 16px;
             }
 
             .nav-inner {
-                min-height: auto;
+                min-height: 62px;
 
-                padding: 16px 0;
-
-                flex-direction: column;
-                align-items: flex-start;
+                padding: 0 13px;
             }
 
-            .nav-links {
-                width: 100%;
+            .desktop-nav {
+                display: none;
+            }
 
+            .mobile-nav-button {
                 display: flex;
-
-                gap: 16px;
-
-                overflow-x: auto;
-
-                padding-bottom: 3px;
-            }
-
-            .nav-links a {
-                font-size: 10px;
-                white-space: nowrap;
             }
 
             .hero {
-                padding-top: 70px;
+                padding-top: 125px;
             }
 
             .hero h1 {
@@ -999,6 +1219,7 @@
 
             .education-top {
                 flex-direction: column;
+
                 gap: 10px;
             }
 
@@ -1008,6 +1229,7 @@
 
             .resume-box {
                 flex-direction: column;
+
                 align-items: flex-start;
 
                 padding: 30px;
@@ -1023,6 +1245,27 @@
             }
         }
 
+
+        /* =====================================================
+           VERY SMALL PHONES
+        ===================================================== */
+
+        @media (max-width: 390px) {
+
+            .hero h1 {
+                font-size: 47px;
+            }
+
+            .button {
+                width: 100%;
+            }
+
+            .buttons {
+                width: 100%;
+            }
+
+        }
+
     </style>
 </head>
 
@@ -1031,12 +1274,12 @@
 
 
     <!-- =====================================================
-         NAVIGATION
-    ====================================================== -->
+         FLOATING NAVBAR
+    ===================================================== -->
 
     <header class="navbar">
 
-        <div class="container nav-inner">
+        <div class="nav-inner">
 
             <a
                 href="#home"
@@ -1046,7 +1289,9 @@
             </a>
 
 
-            <nav>
+            <!-- DESKTOP NAV -->
+
+            <nav class="desktop-nav">
 
                 <ul class="nav-links">
 
@@ -1092,9 +1337,76 @@
                         </a>
                     </li>
 
+                    <li>
+                        <a
+                            href="admin.html"
+                            class="admin-link"
+                        >
+                            Admin
+                        </a>
+                    </li>
+
                 </ul>
 
             </nav>
+
+
+            <!-- MOBILE MENU BUTTON -->
+
+            <button
+                type="button"
+                class="mobile-nav-button"
+                id="mobileNavButton"
+                aria-label="Open navigation menu"
+                aria-expanded="false"
+            >
+                <span></span>
+            </button>
+
+        </div>
+
+
+        <!-- MOBILE NAV -->
+
+        <div
+            class="mobile-menu"
+            id="mobileMenu"
+        >
+
+            <a href="#about">
+                About
+            </a>
+
+            <a href="#education">
+                Education
+            </a>
+
+            <a href="#interests">
+                Interests
+            </a>
+
+            <a href="#skills">
+                Skills
+            </a>
+
+            <a href="#projects">
+                Projects
+            </a>
+
+            <a href="#resume">
+                Resume
+            </a>
+
+            <a href="#contact">
+                Contact
+            </a>
+
+            <a
+                href="admin.html"
+                class="mobile-admin"
+            >
+                Admin Login
+            </a>
 
         </div>
 
@@ -1165,7 +1477,6 @@
                     </div>
 
                 </div>
-
 
 
                 <div class="hero-card">
@@ -1266,9 +1577,9 @@
 
 
                         <div class="about-highlight">
-                            I like learning by building, experimenting
-                            with ideas and turning concepts into
-                            useful working projects.
+                            I like learning by building,
+                            experimenting with ideas and turning
+                            concepts into useful working projects.
                         </div>
 
                     </div>
@@ -1320,7 +1631,7 @@
                             </h3>
 
 
-                            <!-- CHANGE THIS -->
+                            <!-- REPLACE THESE TWO VALUES -->
 
                             <div class="college-name">
                                 YOUR COLLEGE NAME
@@ -1328,8 +1639,6 @@
 
                         </div>
 
-
-                        <!-- CHANGE THIS -->
 
                         <div class="college-period">
                             YOUR START YEAR — PRESENT
@@ -1383,7 +1692,6 @@
 
                 <div class="interest-grid">
 
-
                     <article class="interest-card">
 
                         <div class="interest-number">
@@ -1402,7 +1710,6 @@
                     </article>
 
 
-
                     <article class="interest-card">
 
                         <div class="interest-number">
@@ -1418,7 +1725,6 @@
                         </p>
 
                     </article>
-
 
 
                     <article class="interest-card">
@@ -1439,7 +1745,6 @@
                     </article>
 
 
-
                     <article class="interest-card">
 
                         <div class="interest-number">
@@ -1458,7 +1763,6 @@
                     </article>
 
 
-
                     <article class="interest-card">
 
                         <div class="interest-number">
@@ -1475,7 +1779,6 @@
                         </p>
 
                     </article>
-
 
 
                     <article class="interest-card">
@@ -1526,7 +1829,6 @@
 
                 <div class="skills-grid">
 
-
                     <div class="skill-group">
 
                         <h3>
@@ -1534,16 +1836,13 @@
                         </h3>
 
                         <ul class="skill-list">
-
                             <li>C</li>
                             <li>C++</li>
                             <li>Python</li>
                             <li>Embedded C</li>
-
                         </ul>
 
                     </div>
-
 
 
                     <div class="skill-group">
@@ -1553,16 +1852,13 @@
                         </h3>
 
                         <ul class="skill-list">
-
                             <li>Arduino</li>
                             <li>ESP32</li>
                             <li>Microcontrollers</li>
                             <li>Sensors</li>
-
                         </ul>
 
                     </div>
-
 
 
                     <div class="skill-group">
@@ -1572,17 +1868,14 @@
                         </h3>
 
                         <ul class="skill-list">
-
                             <li>Digital Electronics</li>
                             <li>Circuit Design</li>
                             <li>UART</li>
                             <li>I2C</li>
                             <li>SPI</li>
-
                         </ul>
 
                     </div>
-
 
 
                     <div class="skill-group">
@@ -1592,16 +1885,13 @@
                         </h3>
 
                         <ul class="skill-list">
-
                             <li>Connected Devices</li>
                             <li>MQTT</li>
                             <li>Sensor Systems</li>
                             <li>ESP32</li>
-
                         </ul>
 
                     </div>
-
 
 
                     <div class="skill-group">
@@ -1611,16 +1901,13 @@
                         </h3>
 
                         <ul class="skill-list">
-
                             <li>Git</li>
                             <li>GitHub</li>
                             <li>VS Code</li>
                             <li>Arduino IDE</li>
-
                         </ul>
 
                     </div>
-
 
 
                     <div class="skill-group">
@@ -1630,12 +1917,10 @@
                         </h3>
 
                         <ul class="skill-list">
-
                             <li>Problem Solving</li>
                             <li>System Design</li>
                             <li>Prototyping</li>
                             <li>Learning</li>
-
                         </ul>
 
                     </div>
@@ -1678,8 +1963,6 @@
                 <div class="projects-grid">
 
 
-                    <!-- PROJECT 01 -->
-
                     <article class="project-card">
 
                         <div class="project-number">
@@ -1704,14 +1987,12 @@
 
 
                         <div class="project-tags">
-
                             <span>ESP32</span>
                             <span>Blynk</span>
                             <span>DHT22</span>
                             <span>Soil Sensor</span>
                             <span>LDR</span>
                             <span>IoT</span>
-
                         </div>
 
 
@@ -1728,8 +2009,6 @@
 
 
 
-                    <!-- PROJECT 02 -->
-
                     <article class="project-card">
 
                         <div class="project-number">
@@ -1743,24 +2022,22 @@
 
 
                         <p>
-                            A sensor-based robotic car built using
-                            an Arduino UNO. It uses ultrasonic and
-                            IR sensors to detect obstacles and a
-                            servo motor to scan different
-                            directions while the Arduino controls
-                            the movement system.
+                            A sensor-based robotic car built
+                            using an Arduino UNO. It uses
+                            ultrasonic and IR sensors to detect
+                            obstacles and a servo motor to scan
+                            different directions while the
+                            Arduino controls the movement system.
                         </p>
 
 
                         <div class="project-tags">
-
                             <span>Arduino UNO</span>
                             <span>Embedded C/C++</span>
                             <span>Ultrasonic</span>
                             <span>IR Sensors</span>
                             <span>Servo</span>
                             <span>L298N</span>
-
                         </div>
 
 
@@ -1776,8 +2053,6 @@
                     </article>
 
 
-
-                    <!-- PROJECT 03 -->
 
                     <article class="project-card">
 
@@ -1803,14 +2078,12 @@
 
 
                         <div class="project-tags">
-
                             <span>Raspberry Pi</span>
                             <span>Pi Zero 2 W</span>
                             <span>Python</span>
                             <span>Ultrasonic</span>
                             <span>Servo</span>
                             <span>L298N</span>
-
                         </div>
 
 
@@ -1834,7 +2107,7 @@
 
 
         <!-- =================================================
-             BEYOND PROJECTS
+             BEYOND
         ================================================== -->
 
         <section id="beyond">
@@ -1855,7 +2128,6 @@
 
 
                 <div class="beyond-grid">
-
 
                     <article class="beyond-card">
 
@@ -1878,7 +2150,6 @@
                         </p>
 
                     </article>
-
 
 
                     <article class="beyond-card">
@@ -2007,8 +2278,6 @@
                 <div class="contact-grid">
 
 
-                    <!-- CONTACT INFORMATION -->
-
                     <div class="contact-info">
 
                         <h3>
@@ -2042,11 +2311,6 @@
                             </a>
 
 
-                            <!--
-                                REPLACE THIS WITH YOUR
-                                REAL LINKEDIN URL
-                            -->
-
                             <a
                                 href="https://www.linkedin.com/"
                                 target="_blank"
@@ -2061,8 +2325,6 @@
                     </div>
 
 
-
-                    <!-- FORMSPREE FORM -->
 
                     <div class="contact-form">
 
@@ -2137,8 +2399,8 @@
 
 
                             <p class="form-note">
-                                Your message will be sent securely
-                                through the portfolio contact form.
+                                Your message will be sent through
+                                the portfolio contact form.
                             </p>
 
                         </form>
@@ -2175,6 +2437,74 @@
         </div>
 
     </footer>
+
+
+
+    <!-- =====================================================
+         MOBILE NAV SCRIPT
+    ====================================================== -->
+
+    <script>
+
+        const mobileNavButton =
+            document.getElementById(
+                "mobileNavButton"
+            );
+
+        const mobileMenu =
+            document.getElementById(
+                "mobileMenu"
+            );
+
+
+        mobileNavButton.addEventListener(
+            "click",
+            function () {
+
+                const isOpen =
+                    mobileMenu.classList.toggle(
+                        "open"
+                    );
+
+                mobileNavButton.setAttribute(
+                    "aria-expanded",
+                    String(isOpen)
+                );
+
+            }
+        );
+
+
+        const mobileLinks =
+            mobileMenu.querySelectorAll(
+                "a"
+            );
+
+
+        mobileLinks.forEach(
+            function (link) {
+
+                link.addEventListener(
+                    "click",
+                    function () {
+
+                        mobileMenu.classList.remove(
+                            "open"
+                        );
+
+                        mobileNavButton.setAttribute(
+                            "aria-expanded",
+                            "false"
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+    </script>
+
 
 </body>
 </html>
