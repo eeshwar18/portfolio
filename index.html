@@ -1,1435 +1,2177 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Ocean Signal — ECE Music</title>
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Eeshwar — ECE Portfolio</title>
 
 <style>
+
 /* =========================================================
-   OCEAN ECE MUSIC PLAYER
-   Single-file version
-   ========================================================= */
-
-:root {
-    --bg: #020b12;
-    --bg2: #041824;
-    --panel: rgba(5, 25, 38, 0.78);
-    --panel2: rgba(7, 34, 49, 0.72);
-
-    --cyan: #58e8ff;
-    --blue: #2e9dff;
-    --aqua: #48ffd1;
-    --white: #eefcff;
-    --muted: #82a9b8;
-
-    --border: rgba(94, 225, 255, 0.16);
-
-    --shadow:
-        0 0 30px rgba(49, 209, 255, 0.10),
-        inset 0 0 30px rgba(55, 205, 255, 0.025);
-}
+   RESET
+========================================================= */
 
 * {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
 
-html,
-body {
-    margin: 0;
-    min-height: 100%;
-    font-family:
-        Inter,
-        ui-sans-serif,
-        system-ui,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        sans-serif;
-    background:
-        radial-gradient(circle at 20% 20%, rgba(0, 168, 255, 0.10), transparent 30%),
-        radial-gradient(circle at 80% 70%, rgba(0, 255, 209, 0.06), transparent 30%),
-        linear-gradient(145deg, #01070c, #03131e 55%, #020b12);
-    color: var(--white);
+html {
+    scroll-behavior: smooth;
 }
 
-/* =========================================================
-   BACKGROUND
-   ========================================================= */
-
 body {
+
+    background:
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(0, 229, 255, .08),
+            transparent 28%
+        ),
+
+        radial-gradient(
+            circle at 80% 60%,
+            rgba(0, 150, 255, .06),
+            transparent 30%
+        ),
+
+        #02080d;
+
+    color: #ecfbff;
+
+    font-family:
+        Inter,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
     overflow-x: hidden;
 }
 
-.ocean {
+
+/* =========================================================
+   VARIABLES
+========================================================= */
+
+:root {
+
+    --cyan: #56e7ff;
+    --cyan2: #00bfff;
+
+    --dark:
+        #02080d;
+
+    --panel:
+        rgba(5, 20, 29, .78);
+
+    --border:
+        rgba(86, 231, 255, .16);
+
+    --muted:
+        #7d9aa6;
+
+    --white:
+        #effcff;
+
+}
+
+
+/* =========================================================
+   BACKGROUND GRID
+========================================================= */
+
+body::before {
+
+    content: "";
+
     position: fixed;
+
     inset: 0;
-    overflow: hidden;
+
     pointer-events: none;
-    z-index: 0;
-}
 
-.ocean::before {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 45%;
-    left: 0;
-    bottom: -10%;
-    background:
-        radial-gradient(
-            ellipse at center,
-            rgba(37, 211, 255, 0.09),
-            transparent 65%
-        );
-    filter: blur(20px);
-    animation: waterGlow 7s ease-in-out infinite alternate;
-}
+    opacity: .22;
 
-@keyframes waterGlow {
-    from {
-        transform: translateY(0) scale(1);
-    }
+    background-image:
 
-    to {
-        transform: translateY(-25px) scale(1.05);
-    }
-}
-
-.bubble {
-    position: absolute;
-    bottom: -40px;
-    width: 5px;
-    height: 5px;
-    border: 1px solid rgba(126, 235, 255, 0.35);
-    border-radius: 50%;
-    animation: bubbleUp linear infinite;
-}
-
-@keyframes bubbleUp {
-    0% {
-        transform: translateY(0);
-        opacity: 0;
-    }
-
-    15% {
-        opacity: .8;
-    }
-
-    100% {
-        transform: translateY(-110vh);
-        opacity: 0;
-    }
-}
-
-.bubble:nth-child(1) {
-    left: 7%;
-    animation-duration: 12s;
-}
-
-.bubble:nth-child(2) {
-    left: 18%;
-    animation-duration: 17s;
-    animation-delay: 3s;
-}
-
-.bubble:nth-child(3) {
-    left: 31%;
-    animation-duration: 14s;
-    animation-delay: 1s;
-}
-
-.bubble:nth-child(4) {
-    left: 48%;
-    animation-duration: 19s;
-    animation-delay: 6s;
-}
-
-.bubble:nth-child(5) {
-    left: 66%;
-    animation-duration: 15s;
-    animation-delay: 2s;
-}
-
-.bubble:nth-child(6) {
-    left: 82%;
-    animation-duration: 21s;
-    animation-delay: 5s;
-}
-
-.bubble:nth-child(7) {
-    left: 92%;
-    animation-duration: 13s;
-    animation-delay: 7s;
-}
-
-/* =========================================================
-   MAIN
-   ========================================================= */
-
-.app {
-    position: relative;
-    z-index: 2;
-
-    width: min(1450px, calc(100% - 40px));
-    min-height: 100vh;
-
-    margin: auto;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    padding: 50px 0;
-}
-
-.player {
-    width: 100%;
-
-    padding: 34px;
-
-    border: 1px solid var(--border);
-    border-radius: 30px;
-
-    background:
         linear-gradient(
-            135deg,
-            rgba(7, 31, 45, 0.82),
-            rgba(2, 13, 21, 0.90)
-        );
-
-    box-shadow:
-        0 30px 100px rgba(0, 0, 0, .45),
-        var(--shadow);
-
-    backdrop-filter: blur(24px);
-}
-
-/* =========================================================
-   TOP BAR
-   ========================================================= */
-
-.topbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    margin-bottom: 28px;
-}
-
-.brand {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-
-    color: var(--cyan);
-
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: .18em;
-    text-transform: uppercase;
-}
-
-.signal-dot {
-    width: 9px;
-    height: 9px;
-    border-radius: 50%;
-
-    background: var(--aqua);
-
-    box-shadow:
-        0 0 10px var(--aqua),
-        0 0 25px rgba(72,255,209,.5);
-
-    animation: pulse 1.5s ease-in-out infinite;
-}
-
-@keyframes pulse {
-    50% {
-        transform: scale(1.4);
-        opacity: .6;
-    }
-}
-
-.top-actions {
-    display: flex;
-    gap: 10px;
-}
-
-.icon-btn {
-    width: 40px;
-    height: 40px;
-
-    border-radius: 50%;
-
-    border: 1px solid var(--border);
-
-    background: rgba(255,255,255,.025);
-
-    color: #8cc8d8;
-
-    cursor: pointer;
-
-    transition:
-        transform .2s ease,
-        background .2s ease,
-        color .2s ease;
-}
-
-.icon-btn:hover {
-    transform: translateY(-2px);
-    background: rgba(78,225,255,.08);
-    color: var(--cyan);
-}
-
-/* =========================================================
-   CONTENT
-   ========================================================= */
-
-.content {
-    display: grid;
-
-    grid-template-columns:
-        minmax(330px, 1fr)
-        minmax(360px, 1.15fr);
-
-    gap: 42px;
-
-    align-items: center;
-}
-
-/* =========================================================
-   OCEAN ARTWORK
-   ========================================================= */
-
-.art-card {
-    position: relative;
-
-    aspect-ratio: 1 / 1;
-
-    min-height: 420px;
-
-    overflow: hidden;
-
-    border-radius: 24px;
-
-    border: 1px solid rgba(78, 223, 255, .2);
-
-    background:
-        radial-gradient(
-            circle at 50% 45%,
-            rgba(37, 204, 255, .25),
-            transparent 27%
+            rgba(86,231,255,.025) 1px,
+            transparent 1px
         ),
+
         linear-gradient(
-            145deg,
-            #032b3e,
-            #02131e 58%,
-            #01080e
+            90deg,
+            rgba(86,231,255,.025) 1px,
+            transparent 1px
         );
 
-    box-shadow:
-        inset 0 0 70px rgba(29, 215, 255, .08),
-        0 25px 70px rgba(0,0,0,.35);
-}
+    background-size: 50px 50px;
 
-.art-card::after {
-    content: "";
-
-    position: absolute;
-    inset: 0;
-
-    background:
+    mask-image:
         linear-gradient(
-            110deg,
-            transparent 20%,
-            rgba(255,255,255,.04),
-            transparent 80%
+            to bottom,
+            black,
+            transparent
         );
 
-    transform: translateX(-100%);
-
-    animation: scan 7s ease-in-out infinite;
+    z-index: -2;
 }
 
-@keyframes scan {
-    0%, 40% {
-        transform: translateX(-100%);
-    }
 
-    65%, 100% {
-        transform: translateX(100%);
-    }
-}
+/* =========================================================
+   NAVBAR
+========================================================= */
 
-/* ocean rings */
+.navbar {
 
-.ocean-ring {
-    position: absolute;
+    position: fixed;
 
-    left: 50%;
-    top: 50%;
-
-    transform: translate(-50%, -50%);
-
-    border-radius: 50%;
-
-    border: 1px solid rgba(73, 228, 255, .16);
-
-    animation: ringPulse 4s ease-in-out infinite;
-}
-
-.ring1 {
-    width: 65%;
-    height: 65%;
-}
-
-.ring2 {
-    width: 82%;
-    height: 82%;
-
-    animation-delay: 1s;
-}
-
-.ring3 {
-    width: 100%;
-    height: 100%;
-
-    animation-delay: 2s;
-}
-
-@keyframes ringPulse {
-    0%, 100% {
-        transform: translate(-50%, -50%) scale(.96);
-        opacity: .35;
-    }
-
-    50% {
-        transform: translate(-50%, -50%) scale(1.02);
-        opacity: .75;
-    }
-}
-
-/* chip */
-
-.chip {
-    position: absolute;
-
-    left: 50%;
-    top: 50%;
-
-    width: 145px;
-    height: 145px;
-
-    transform: translate(-50%, -50%);
-
-    border-radius: 22px;
-
-    display: flex;
-    flex-direction: column;
-
-    align-items: center;
-    justify-content: center;
-
-    background:
-        linear-gradient(
-            145deg,
-            #092f3e,
-            #061923
-        );
-
-    border: 1px solid rgba(89, 232, 255, .5);
-
-    box-shadow:
-        0 0 30px rgba(47, 219, 255, .25),
-        inset 0 0 25px rgba(54, 225, 255, .07);
-
-    z-index: 4;
-}
-
-.chip strong {
-    font-size: 31px;
-    letter-spacing: .08em;
-
-    color: #d9fbff;
-
-    text-shadow:
-        0 0 12px rgba(89,232,255,.6);
-}
-
-.chip span {
-    margin-top: 5px;
-
-    color: var(--cyan);
-
-    font-size: 10px;
-    letter-spacing: .25em;
-    text-transform: uppercase;
-}
-
-/* chip pins */
-
-.pin {
-    position: absolute;
-
-    background: #55eaff;
-
-    box-shadow: 0 0 8px #55eaff;
-}
-
-.pin.top,
-.pin.bottom {
-    width: 5px;
-    height: 20px;
+    top: 20px;
 
     left: 50%;
 
     transform: translateX(-50%);
+
+    width:
+        min(1180px, calc(100% - 40px));
+
+    height: 68px;
+
+    padding:
+        0 25px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    border:
+
+        1px solid
+        rgba(86,231,255,.12);
+
+    border-radius: 18px;
+
+    background:
+        rgba(2, 12, 18, .72);
+
+    backdrop-filter:
+        blur(20px);
+
+    z-index: 1000;
+
+    box-shadow:
+        0 10px 40px rgba(0,0,0,.25);
 }
 
-.pin.top {
-    top: -20px;
+
+/* logo */
+
+.logo {
+
+    color: white;
+
+    font-size: 20px;
+
+    font-weight: 700;
+
+    letter-spacing: -.02em;
 }
 
-.pin.bottom {
-    bottom: -20px;
+.logo span {
+
+    color: var(--cyan);
+
 }
 
-.pin.left,
-.pin.right {
-    width: 20px;
-    height: 5px;
 
-    top: 50%;
+/* nav */
 
-    transform: translateY(-50%);
+.nav-links {
+
+    display: flex;
+
+    gap: 32px;
+
+    list-style: none;
+
 }
 
-.pin.left {
-    left: -20px;
+.nav-links a {
+
+    position: relative;
+
+    color: #87a8b5;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    transition: .25s ease;
+
 }
 
-.pin.right {
-    right: -20px;
+.nav-links a:hover {
+
+    color: white;
+
 }
 
-/* circuit lines */
+.nav-links a::after {
 
-.circuit {
+    content: "";
+
     position: absolute;
+
+    left: 0;
+
+    bottom: -8px;
+
+    width: 0;
 
     height: 2px;
 
     background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(73,231,255,.85),
-            transparent
-        );
+        var(--cyan);
 
-    box-shadow:
-        0 0 9px rgba(55,225,255,.5);
+    transition: .25s ease;
+
 }
 
-.c1 {
-    width: 44%;
-    left: 3%;
-    top: 36%;
-    transform: rotate(-10deg);
+.nav-links a:hover::after {
+
+    width: 100%;
+
 }
 
-.c2 {
-    width: 38%;
-    right: 2%;
-    top: 28%;
-    transform: rotate(18deg);
+
+/* =========================================================
+   GENERAL
+========================================================= */
+
+section {
+
+    width:
+        min(1180px, calc(100% - 40px));
+
+    margin:
+        auto;
+
 }
 
-.c3 {
-    width: 40%;
-    left: 5%;
-    bottom: 28%;
-    transform: rotate(15deg);
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero {
+
+    min-height: 100vh;
+
+    padding-top: 160px;
+
+    display: grid;
+
+    grid-template-columns:
+        1.05fr
+        .95fr;
+
+    gap: 70px;
+
+    align-items: center;
+
 }
 
-.c4 {
-    width: 46%;
-    right: 1%;
-    bottom: 34%;
-    transform: rotate(-12deg);
+
+/* hero left */
+
+.hero-tags {
+
+    color: var(--cyan);
+
+    font-size: 11px;
+
+    letter-spacing: .17em;
+
+    font-weight: 700;
+
+    margin-bottom: 25px;
+
 }
 
-/* glowing nodes */
+.hero h1 {
 
-.node {
-    position: absolute;
+    font-size:
+        clamp(48px, 6vw, 82px);
 
-    width: 9px;
-    height: 9px;
+    line-height: .96;
 
-    border-radius: 50%;
+    letter-spacing: -.055em;
 
-    background: #70f6ff;
-
-    box-shadow:
-        0 0 8px #70f6ff,
-        0 0 20px rgba(70,228,255,.65);
-
-    animation: nodePulse 2s ease-in-out infinite;
 }
 
-@keyframes nodePulse {
-    50% {
-        transform: scale(1.7);
-        opacity: .55;
-    }
+.hero h1 .cyan {
+
+    color:
+        var(--cyan);
+
 }
 
-.n1 { left: 19%; top: 29%; }
-.n2 { left: 28%; top: 66%; animation-delay: .5s; }
-.n3 { right: 21%; top: 34%; animation-delay: 1s; }
-.n4 { right: 17%; bottom: 23%; animation-delay: 1.5s; }
-.n5 { left: 12%; bottom: 21%; animation-delay: .9s; }
+.hero-description {
 
-/* ocean wave */
+    margin-top: 28px;
 
-.wave {
-    position: absolute;
+    max-width: 580px;
 
-    left: -5%;
-    bottom: 7%;
+    color: #91aeb8;
 
-    width: 110%;
-    height: 80px;
+    font-size: 16px;
 
-    opacity: .8;
+    line-height: 1.7;
 
-    background:
-        radial-gradient(
-            ellipse at 50% 100%,
-            rgba(68, 229, 255, .17),
-            transparent 65%
-        );
-
-    border-radius: 50%;
-
-    transform: rotate(-3deg);
 }
 
-/* artwork labels */
 
-.art-label {
-    position: absolute;
+/* buttons */
 
-    z-index: 5;
+.hero-buttons {
 
-    left: 22px;
-    top: 20px;
-
-    padding: 8px 12px;
-
-    border: 1px solid rgba(90, 228, 255, .18);
-    border-radius: 999px;
-
-    background: rgba(0, 12, 19, .4);
-
-    color: #8ddcea;
-
-    font-size: 10px;
-    letter-spacing: .18em;
-    text-transform: uppercase;
-}
-
-.art-bottom {
-    position: absolute;
-
-    left: 22px;
-    right: 22px;
-    bottom: 20px;
-
-    z-index: 5;
+    margin-top: 30px;
 
     display: flex;
-    justify-content: space-between;
+
+    gap: 14px;
+
+}
+
+.btn {
+
+    padding:
+        13px 19px;
+
+    border-radius: 10px;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    transition:
+        transform .2s,
+        box-shadow .2s;
+
+}
+
+.btn-primary {
+
+    color: #001017;
+
+    background:
+        var(--cyan);
+
+    box-shadow:
+        0 0 20px
+        rgba(86,231,255,.16);
+
+}
+
+.btn-secondary {
+
+    color: white;
+
+    border:
+        1px solid
+        var(--border);
+
+    background:
+        rgba(255,255,255,.025);
+
+}
+
+.btn:hover {
+
+    transform:
+        translateY(-2px);
+
+}
+
+
+/* socials */
+
+.socials {
+
+    margin-top: 30px;
+
+    display: flex;
+
+    gap: 25px;
+
+}
+
+.socials a {
+
+    color: #7695a0;
+
+    text-decoration: none;
+
+    font-size: 12px;
+
+    transition: .2s;
+
+}
+
+.socials a:hover {
+
+    color:
+        var(--cyan);
+
+}
+
+
+/* =========================================================
+   OLED DISPLAY
+========================================================= */
+
+.oled-wrapper {
+
+    position: relative;
+
+}
+
+.oled {
+
+    position: relative;
+
+    min-height: 450px;
+
+    padding: 20px;
+
+    border-radius: 24px;
+
+    border:
+        1px solid
+        rgba(86,231,255,.35);
+
+    background:
+        #01090f;
+
+    box-shadow:
+
+        0 0 45px
+        rgba(0,210,255,.12),
+
+        inset 0 0 40px
+        rgba(0,210,255,.04);
+
+    overflow: hidden;
+
+}
+
+
+/* scanline */
+
+.oled::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+
+    height: 2px;
+
+    top: -5px;
+
+    background:
+        rgba(86,231,255,.2);
+
+    box-shadow:
+        0 0 12px
+        rgba(86,231,255,.5);
+
+    animation:
+        scan 5s linear infinite;
+
+}
+
+@keyframes scan {
+
+    0% {
+        top: -5px;
+    }
+
+    100% {
+        top: 100%;
+    }
+
+}
+
+
+/* stars */
+
+.star {
+
+    position: absolute;
+
+    width: 3px;
+
+    height: 3px;
+
+    background:
+        var(--cyan);
+
+    box-shadow:
+        0 0 8px
+        var(--cyan);
+
+    animation:
+        twinkle 2s ease-in-out infinite;
+
+}
+
+.star:nth-child(1) {
+    left: 14%;
+    top: 18%;
+}
+
+.star:nth-child(2) {
+    left: 34%;
+    top: 12%;
+    animation-delay: .4s;
+}
+
+.star:nth-child(3) {
+    left: 72%;
+    top: 19%;
+    animation-delay: .8s;
+}
+
+.star:nth-child(4) {
+    left: 85%;
+    top: 35%;
+    animation-delay: 1.2s;
+}
+
+@keyframes twinkle {
+
+    50% {
+        opacity: .25;
+        transform: scale(.5);
+    }
+
+}
+
+
+/* moon */
+
+.moon {
+
+    position: absolute;
+
+    top: 45px;
+    left: 50px;
+
+    width: 55px;
+    height: 55px;
+
+    border-radius: 50%;
+
+    background:
+        var(--cyan);
+
+    box-shadow:
+        0 0 25px
+        rgba(86,231,255,.3);
+
+}
+
+.moon::after {
+
+    content: "";
+
+    position: absolute;
+
+    top: -8px;
+    left: 14px;
+
+    width: 55px;
+    height: 55px;
+
+    border-radius: 50%;
+
+    background:
+        #01090f;
+
+}
+
+
+/* ground */
+
+.ground {
+
+    position: absolute;
+
+    bottom: 80px;
+
+    left: 0;
+
+    width: 100%;
+
+    height: 2px;
+
+    background:
+        var(--cyan);
+
+    box-shadow:
+        0 0 10px
+        var(--cyan);
+
+}
+
+
+/* pixel runner */
+
+.runner {
+
+    position: absolute;
+
+    bottom: 82px;
+
+    left: 15%;
+
+    width: 60px;
+
+    height: 70px;
+
+    animation:
+        run 4s linear infinite;
+
+}
+
+@keyframes run {
+
+    0% {
+        left: 12%;
+    }
+
+    100% {
+        left: 78%;
+    }
+
+}
+
+
+/* head */
+
+.runner-head {
+
+    position: absolute;
+
+    width: 35px;
+
+    height: 30px;
+
+    right: 0;
+
+    top: 0;
+
+    background:
+        var(--cyan);
+
+}
+
+.runner-head::before {
+
+    content: "";
+
+    position: absolute;
+
+    right: -8px;
+
+    top: 8px;
+
+    width: 10px;
+
+    height: 10px;
+
+    background:
+        var(--cyan);
+
+}
+
+
+/* body */
+
+.runner-body {
+
+    position: absolute;
+
+    left: 13px;
+
+    top: 28px;
+
+    width: 25px;
+
+    height: 30px;
+
+    background:
+        var(--cyan);
+
+}
+
+
+/* legs */
+
+.runner-leg {
+
+    position: absolute;
+
+    width: 8px;
+
+    height: 25px;
+
+    bottom: 0;
+
+    background:
+        var(--cyan);
+
+    transform-origin: top;
+
+    animation:
+        legs .25s infinite alternate;
+
+}
+
+.runner-leg.one {
+
+    left: 17px;
+
+}
+
+.runner-leg.two {
+
+    left: 31px;
+
+    animation-delay:
+        .125s;
+
+}
+
+@keyframes legs {
+
+    to {
+        transform:
+            rotate(22deg);
+    }
+
+}
+
+
+/* info */
+
+.oled-info {
+
+    position: absolute;
+
+    top: 30px;
+
+    right: 30px;
+
+    text-align: right;
+
+    color:
+        var(--cyan);
 
     font-size: 10px;
 
     letter-spacing: .15em;
 
-    color: #72b8c8;
 }
+
+.status {
+
+    margin-top: 8px;
+
+    color:
+        #60838f;
+
+}
+
 
 /* =========================================================
-   DETAILS
-   ========================================================= */
+   ABOUT
+========================================================= */
 
-.details {
-    min-width: 0;
+.about {
+
+    padding-top: 130px;
+
+    padding-bottom: 130px;
+
 }
 
-.now-playing {
-    display: flex;
-    align-items: center;
-    gap: 9px;
 
-    margin-bottom: 14px;
+.section-number {
 
-    color: var(--cyan);
+    color:
+        var(--cyan);
 
     font-size: 12px;
-    font-weight: 700;
 
-    letter-spacing: .18em;
-    text-transform: uppercase;
+    letter-spacing: .2em;
+
+    margin-bottom: 12px;
+
 }
 
-.wave-icon {
-    width: 26px;
-    height: 18px;
+.about-grid {
 
-    display: flex;
-    align-items: center;
-    gap: 2px;
+    display: grid;
+
+    grid-template-columns:
+        1fr
+        1fr;
+
+    gap: 50px;
+
+    align-items: start;
+
 }
 
-.wave-icon i {
-    width: 3px;
+.section-title {
 
-    border-radius: 5px;
+    font-size:
+        clamp(40px, 5vw, 65px);
 
-    background: var(--cyan);
+    letter-spacing:
+        -.045em;
 
-    animation: miniWave .8s ease-in-out infinite alternate;
 }
 
-.wave-icon i:nth-child(1) { height: 6px; }
-.wave-icon i:nth-child(2) { height: 14px; animation-delay: .1s; }
-.wave-icon i:nth-child(3) { height: 9px; animation-delay: .2s; }
-.wave-icon i:nth-child(4) { height: 17px; animation-delay: .3s; }
-.wave-icon i:nth-child(5) { height: 7px; animation-delay: .4s; }
+.about-text {
 
-@keyframes miniWave {
-    to {
-        transform: scaleY(.35);
-    }
+    margin-top: 20px;
+
+    color:
+        #8ca7b1;
+
+    line-height:
+        1.8;
+
+    max-width: 550px;
+
 }
 
-/* =========================================================
-   TITLE HOVER POPUP — RESTORED V1 BEHAVIOR
-   ========================================================= */
-
-.title-zone {
-    position: relative;
+.know-more {
 
     display: inline-block;
+
+    margin-top: 20px;
+
+    color:
+        var(--cyan);
+
+    text-decoration: none;
+
+    font-size: 13px;
+
 }
 
-.title-zone h1 {
-    margin: 0;
 
-    font-size: clamp(44px, 6vw, 82px);
+/* =========================================================
+   MINI MUSIC PLAYER
+   ========================================================= */
 
-    line-height: .95;
+.music-mini {
 
-    letter-spacing: -.045em;
+    position: relative;
 
-    font-weight: 800;
+    width: 100%;
 
-    cursor: default;
+    max-width: 470px;
 
-    transition:
-        transform .3s ease,
-        text-shadow .3s ease;
-}
+    margin-left: auto;
 
-.title-zone:hover h1 {
-    transform: translateX(5px);
+    padding: 17px;
 
-    text-shadow:
-        0 0 20px rgba(76,226,255,.25);
-}
+    border-radius: 20px;
 
-/*
-   Move cursor close to title:
-   popup appears automatically.
-*/
-
-.title-popup {
-    position: absolute;
-
-    left: 0;
-    top: calc(100% + 18px);
-
-    width: 300px;
-
-    padding: 18px;
-
-    border-radius: 16px;
-
-    border: 1px solid rgba(76,224,255,.18);
+    border:
+        1px solid
+        rgba(86,231,255,.18);
 
     background:
         linear-gradient(
             145deg,
-            rgba(5, 33, 48, .96),
-            rgba(2, 14, 22, .98)
+            rgba(6,30,42,.9),
+            rgba(2,13,20,.95)
         );
 
     box-shadow:
-        0 20px 50px rgba(0,0,0,.4),
-        0 0 25px rgba(45,211,255,.08);
+        0 20px 60px
+        rgba(0,0,0,.35),
 
-    backdrop-filter: blur(20px);
+        0 0 35px
+        rgba(0,210,255,.06);
 
-    opacity: 0;
-    visibility: hidden;
-
-    transform:
-        translateY(-8px)
-        scale(.97);
-
-    transform-origin: top left;
+    backdrop-filter:
+        blur(18px);
 
     transition:
-        opacity .22s ease,
-        transform .22s ease,
-        visibility .22s;
+        transform .3s ease,
+        border-color .3s ease;
 
-    z-index: 50;
 }
 
-.title-zone:hover .title-popup,
-.title-zone:focus-within .title-popup {
-    opacity: 1;
-    visibility: visible;
+.music-mini:hover {
 
     transform:
-        translateY(0)
-        scale(1);
+        translateY(-5px);
+
+    border-color:
+        rgba(86,231,255,.35);
+
 }
 
-.title-popup::before {
+
+/* music top */
+
+.music-top {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+}
+
+
+/* album */
+
+.album {
+
+    position: relative;
+
+    flex-shrink: 0;
+
+    width: 72px;
+
+    height: 72px;
+
+    border-radius: 14px;
+
+    overflow: hidden;
+
+    background:
+
+        radial-gradient(
+            circle at center,
+            #55eaff,
+            #06485c 20%,
+            #021923 55%,
+            #01080d
+        );
+
+    border:
+        1px solid
+        rgba(86,231,255,.35);
+
+    box-shadow:
+        0 0 20px
+        rgba(86,231,255,.12);
+
+}
+
+
+/* circuit inside album */
+
+.album::before {
+
     content: "";
 
     position: absolute;
 
-    top: -6px;
-    left: 22px;
+    width: 120px;
 
-    width: 12px;
-    height: 12px;
-
-    background: #062333;
-
-    border-left: 1px solid rgba(76,224,255,.18);
-    border-top: 1px solid rgba(76,224,255,.18);
-
-    transform: rotate(45deg);
-}
-
-.popup-title {
-    color: var(--cyan);
-
-    font-size: 11px;
-    font-weight: 700;
-
-    letter-spacing: .16em;
-    text-transform: uppercase;
-
-    margin-bottom: 8px;
-}
-
-.popup-text {
-    color: #8eafba;
-
-    font-size: 13px;
-    line-height: 1.55;
-}
-
-.subtitle {
-    margin: 15px 0 0;
-
-    color: var(--cyan);
-
-    font-size: 21px;
-    font-weight: 600;
-}
-
-.artist {
-    margin-top: 6px;
-
-    color: var(--muted);
-
-    font-size: 14px;
-}
-
-/* =========================================================
-   WAVEFORM
-   ========================================================= */
-
-.visualizer {
-    position: relative;
-
-    height: 170px;
-
-    margin-top: 34px;
-
-    padding: 20px;
-
-    border-radius: 22px;
-
-    overflow: hidden;
-
-    border: 1px solid rgba(83,225,255,.14);
+    height: 2px;
 
     background:
-        linear-gradient(
-            rgba(18,111,140,.06) 1px,
-            transparent 1px
-        ),
-        linear-gradient(
-            90deg,
-            rgba(18,111,140,.06) 1px,
-            transparent 1px
-        );
+        var(--cyan);
 
-    background-size: 30px 30px;
+    top: 36px;
+
+    left: -20px;
+
+    box-shadow:
+        0 -15px 0
+            rgba(86,231,255,.45),
+
+        0 15px 0
+            rgba(86,231,255,.25);
+
+    transform:
+        rotate(-25deg);
+
 }
 
-.visualizer::before {
-    content: "";
+
+/* chip */
+
+.album-chip {
+
+    position: absolute;
+
+    width: 25px;
+
+    height: 25px;
+
+    left: 24px;
+
+    top: 24px;
+
+    background:
+        #092b38;
+
+    border:
+        1px solid
+        var(--cyan);
+
+    box-shadow:
+        0 0 12px
+        rgba(86,231,255,.45);
+
+}
+
+.album-chip::after {
+
+    content:
+        "ECE";
 
     position: absolute;
 
     inset: 0;
 
-    background:
-        radial-gradient(
-            ellipse at center,
-            rgba(51,220,255,.08),
-            transparent 65%
-        );
+    display: grid;
+
+    place-items: center;
+
+    color:
+        var(--cyan);
+
+    font-size: 6px;
+
+    font-weight: bold;
+
 }
 
-.waveform {
-    position: absolute;
 
-    left: 20px;
-    right: 20px;
+/* music text */
 
-    top: 50%;
+.music-info {
 
-    height: 90px;
+    min-width: 0;
 
-    transform: translateY(-50%);
+}
+
+.music-label {
+
+    color:
+        var(--cyan);
+
+    font-size: 9px;
+
+    letter-spacing:
+        .16em;
+
+    text-transform:
+        uppercase;
+
+}
+
+.music-title {
+
+    margin-top: 5px;
+
+    color: white;
+
+    font-size: 18px;
+
+    font-weight: 700;
+
+}
+
+.music-artist {
+
+    margin-top: 3px;
+
+    color:
+        #718f9b;
+
+    font-size: 11px;
+
+}
+
+
+/* equalizer */
+
+.equalizer {
+
+    margin-left: auto;
 
     display: flex;
 
     align-items: center;
-    justify-content: center;
 
-    gap: 5px;
+    gap: 3px;
+
+    height: 25px;
+
 }
 
-.bar {
-    width: 4px;
+.equalizer span {
 
-    height: 15px;
+    width: 3px;
 
-    border-radius: 10px;
+    height: 10px;
+
+    border-radius: 4px;
 
     background:
-        linear-gradient(
-            to top,
-            var(--blue),
-            var(--aqua)
-        );
+        var(--cyan);
 
     box-shadow:
-        0 0 9px rgba(71,231,255,.5);
-
-    transform-origin: center;
+        0 0 6px
+        rgba(86,231,255,.6);
 
     animation:
-        equalize
-        var(--speed)
-        ease-in-out
-        infinite alternate;
+        equalizer
+        .7s ease-in-out infinite alternate;
+
 }
 
-@keyframes equalize {
-    from {
-        transform: scaleY(.25);
-    }
+.equalizer span:nth-child(2) {
+
+    animation-delay:
+        .15s;
+
+}
+
+.equalizer span:nth-child(3) {
+
+    animation-delay:
+        .3s;
+
+}
+
+.equalizer span:nth-child(4) {
+
+    animation-delay:
+        .45s;
+
+}
+
+@keyframes equalizer {
 
     to {
-        transform: scaleY(var(--height));
+
+        height:
+            23px;
+
     }
+
 }
 
-.visualizer-label {
-    position: absolute;
 
-    left: 20px;
-    top: 15px;
+/* progress */
 
-    color: #638b9a;
+.music-progress {
 
-    font-size: 9px;
+    margin-top: 15px;
 
-    letter-spacing: .2em;
-
-    text-transform: uppercase;
 }
 
-/* =========================================================
-   PROGRESS
-   ========================================================= */
+.music-progress-line {
 
-.progress-area {
-    margin-top: 26px;
-}
-
-.progress-row {
-    display: flex;
-    justify-content: space-between;
-
-    margin-bottom: 9px;
-
-    color: #8bb6c4;
-
-    font-size: 12px;
-
-    font-variant-numeric: tabular-nums;
-}
-
-.progress {
     position: relative;
 
-    height: 5px;
+    height: 4px;
 
     border-radius: 20px;
 
-    background: rgba(117, 180, 198, .12);
+    background:
+        rgba(255,255,255,.08);
 
     cursor: pointer;
+
 }
 
-.progress-fill {
+.music-progress-fill {
+
     position: absolute;
 
     left: 0;
     top: 0;
     bottom: 0;
 
-    width: 22%;
+    width: 32%;
 
     border-radius: inherit;
 
     background:
         linear-gradient(
             90deg,
-            var(--blue),
-            var(--aqua)
+            var(--cyan2),
+            var(--cyan)
         );
 
     box-shadow:
-        0 0 12px rgba(66,224,255,.65);
+        0 0 10px
+        rgba(86,231,255,.5);
+
 }
 
-.progress-thumb {
-    position: absolute;
+.music-times {
 
-    top: 50%;
-    left: 22%;
+    margin-top: 6px;
 
-    width: 13px;
-    height: 13px;
+    display: flex;
 
-    transform: translate(-50%, -50%);
+    justify-content:
+        space-between;
 
-    border-radius: 50%;
+    color:
+        #607f8b;
 
-    background: #e7feff;
+    font-size: 9px;
 
-    box-shadow:
-        0 0 12px var(--cyan);
-
-    transition: left .05s linear;
 }
 
-/* =========================================================
-   CONTROLS
-   ========================================================= */
 
-.controls {
+/* music controls */
+
+.music-controls {
+
+    margin-top: 12px;
+
     display: flex;
 
     align-items: center;
-    justify-content: center;
 
-    gap: 26px;
+    justify-content:
+        space-between;
 
-    margin-top: 28px;
 }
 
-.control {
-    width: 43px;
-    height: 43px;
+.music-controls button {
 
     border: 0;
 
-    border-radius: 50%;
-
     background: transparent;
 
-    color: #8fbcc8;
+    color:
+        #7196a2;
 
     cursor: pointer;
 
-    font-size: 18px;
+    font-size: 14px;
 
-    transition:
-        color .2s ease,
-        transform .2s ease,
-        background .2s ease;
 }
 
-.control:hover {
-    color: var(--cyan);
+.music-controls button:hover {
 
-    background: rgba(69,220,255,.07);
+    color:
+        var(--cyan);
 
-    transform: translateY(-2px);
 }
 
-.play {
-    width: 72px;
-    height: 72px;
+.music-play {
+
+    width: 34px;
+
+    height: 34px;
 
     display: grid;
+
     place-items: center;
 
-    border-radius: 50%;
-
-    border: 1px solid rgba(87,229,255,.65);
+    border-radius: 50% !important;
 
     background:
-        radial-gradient(
-            circle,
-            rgba(70,222,255,.18),
-            rgba(3,28,41,.8)
-        );
+        rgba(86,231,255,.09) !important;
 
-    color: white;
+    border:
+        1px solid
+        rgba(86,231,255,.3) !important;
 
-    font-size: 25px;
+    color:
+        white !important;
 
-    box-shadow:
-        0 0 25px rgba(62,220,255,.18),
-        inset 0 0 20px rgba(62,220,255,.05);
 }
 
-.play:hover {
-    transform: scale(1.06);
-
-    box-shadow:
-        0 0 35px rgba(62,220,255,.35);
-}
 
 /* =========================================================
-   BOTTOM
-   ========================================================= */
+   SKILLS
+========================================================= */
 
-.bottom {
+.skills {
+
+    padding:
+        100px 0;
+
+}
+
+.cards {
+
+    margin-top: 45px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 16px;
+
+}
+
+.card {
+
+    padding: 25px;
+
+    min-height: 170px;
+
+    border-radius: 18px;
+
+    border:
+        1px solid
+        var(--border);
+
+    background:
+        rgba(5,20,29,.6);
+
+    transition:
+        transform .3s,
+        border-color .3s;
+
+}
+
+.card:hover {
+
+    transform:
+        translateY(-6px);
+
+    border-color:
+        rgba(86,231,255,.4);
+
+}
+
+.card-icon {
+
+    font-size: 27px;
+
+    color:
+        var(--cyan);
+
+}
+
+.card h3 {
+
+    margin-top: 25px;
+
+    font-size: 19px;
+
+}
+
+.card p {
+
+    margin-top: 5px;
+
+    color:
+        #718d98;
+
+    font-size: 12px;
+
+}
+
+.card-line {
+
+    margin-top: 25px;
+
+    height: 2px;
+
+    width: 55%;
+
+    background:
+        var(--cyan);
+
+    box-shadow:
+        0 0 8px
+        rgba(86,231,255,.5);
+
+}
+
+
+/* =========================================================
+   PROJECTS
+========================================================= */
+
+.projects {
+
+    padding:
+        100px 0;
+
+}
+
+.project-grid {
+
+    margin-top: 45px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 18px;
+
+}
+
+.project {
+
+    min-height: 260px;
+
+    padding: 26px;
+
+    border-radius: 18px;
+
+    border:
+        1px solid
+        var(--border);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(7,28,39,.8),
+            rgba(2,13,19,.8)
+        );
+
+    transition:
+        transform .3s,
+        border-color .3s;
+
+}
+
+.project:hover {
+
+    transform:
+        translateY(-6px);
+
+    border-color:
+        rgba(86,231,255,.35);
+
+}
+
+.project-number {
+
+    color:
+        var(--cyan);
+
+    font-size: 11px;
+
+}
+
+.project h3 {
+
+    margin-top: 35px;
+
+    font-size: 22px;
+
+}
+
+.project p {
+
+    margin-top: 12px;
+
+    color:
+        #718f9a;
+
+    line-height:
+        1.6;
+
+    font-size: 13px;
+
+}
+
+.project-tags {
+
+    margin-top: 22px;
+
     display: flex;
 
-    justify-content: space-between;
-    align-items: center;
+    gap: 8px;
 
-    margin-top: 34px;
+    flex-wrap: wrap;
 
-    gap: 20px;
 }
 
-.tag {
-    padding: 11px 15px;
+.project-tags span {
 
-    border: 1px solid rgba(74,222,255,.12);
+    padding:
+        6px 9px;
 
-    border-radius: 12px;
+    border-radius: 7px;
 
-    color: #6f9daa;
+    border:
+        1px solid
+        var(--border);
 
-    font-size: 10px;
+    color:
+        #75a2af;
 
-    letter-spacing: .12em;
+    font-size: 9px;
 
-    text-transform: uppercase;
 }
 
-.volume {
-    display: flex;
 
-    align-items: center;
+/* =========================================================
+   CONTACT
+========================================================= */
 
-    gap: 12px;
+.contact {
 
-    color: #6f9daa;
+    padding:
+        130px 0;
+
 }
 
-.volume input {
-    width: 110px;
+.contact-box {
 
-    accent-color: var(--cyan);
+    padding:
+        55px;
 
-    cursor: pointer;
+    border-radius: 25px;
+
+    border:
+        1px solid
+        var(--border);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(5,28,40,.8),
+            rgba(2,12,18,.8)
+        );
+
+    text-align:
+        center;
+
 }
+
+.contact-box h2 {
+
+    font-size:
+        clamp(40px, 5vw, 65px);
+
+}
+
+.contact-box p {
+
+    margin:
+        20px auto;
+
+    max-width:
+        580px;
+
+    color:
+        #7f9da8;
+
+    line-height:
+        1.7;
+
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+
+    width:
+        min(1180px, calc(100% - 40px));
+
+    margin:
+        auto;
+
+    padding:
+        25px 0 35px;
+
+    border-top:
+        1px solid
+        rgba(86,231,255,.08);
+
+    color:
+        #4d6974;
+
+    font-size:
+        10px;
+
+    display:
+        flex;
+
+    justify-content:
+        space-between;
+
+}
+
+
+/* =========================================================
+   V1 TITLE POPUP
+========================================================= */
+
+.title-popup {
+
+    position: fixed;
+
+    z-index: 2000;
+
+    width: 270px;
+
+    padding: 16px;
+
+    border-radius: 14px;
+
+    border:
+        1px solid
+        rgba(86,231,255,.25);
+
+    background:
+        rgba(3,18,27,.95);
+
+    backdrop-filter:
+        blur(18px);
+
+    box-shadow:
+        0 15px 45px
+        rgba(0,0,0,.4),
+
+        0 0 25px
+        rgba(86,231,255,.08);
+
+    pointer-events:
+        none;
+
+    opacity: 0;
+
+    transform:
+        translateY(8px)
+        scale(.96);
+
+    transition:
+        opacity .18s ease,
+        transform .18s ease;
+
+}
+
+.title-popup.show {
+
+    opacity: 1;
+
+    transform:
+        translateY(0)
+        scale(1);
+
+}
+
+.popup-small {
+
+    color:
+        var(--cyan);
+
+    font-size:
+        9px;
+
+    letter-spacing:
+        .16em;
+
+    text-transform:
+        uppercase;
+
+}
+
+.popup-big {
+
+    margin-top: 7px;
+
+    color:
+        white;
+
+    font-size:
+        14px;
+
+}
+
+.popup-desc {
+
+    margin-top: 7px;
+
+    color:
+        #6e8995;
+
+    font-size:
+        11px;
+
+    line-height:
+        1.5;
+
+}
+
 
 /* =========================================================
    RESPONSIVE
-   ========================================================= */
+========================================================= */
 
-@media (max-width: 950px) {
+@media(max-width: 900px) {
 
-    .content {
-        grid-template-columns: 1fr;
+    .hero {
+
+        grid-template-columns:
+            1fr;
+
+        padding-top:
+            140px;
+
     }
 
-    .art-card {
-        max-width: 650px;
-        width: 100%;
-        margin: auto;
+    .oled {
+
+        min-height:
+            380px;
+
     }
 
-    .details {
-        width: 100%;
+    .about-grid {
+
+        grid-template-columns:
+            1fr;
+
     }
+
+    .music-mini {
+
+        margin:
+            30px 0 0;
+
+        max-width:
+            100%;
+
+    }
+
+    .cards {
+
+        grid-template-columns:
+            repeat(2,1fr);
+
+    }
+
+    .project-grid {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
 }
 
-@media (max-width: 600px) {
 
-    .app {
-        width: calc(100% - 20px);
-        padding: 20px 0;
+@media(max-width: 600px) {
+
+    .navbar {
+
+        width:
+            calc(100% - 20px);
+
     }
 
-    .player {
-        padding: 20px;
-        border-radius: 22px;
+    .nav-links {
+
+        gap:
+            13px;
+
     }
 
-    .content {
-        gap: 28px;
+    .nav-links a {
+
+        font-size:
+            10px;
+
     }
 
-    .art-card {
-        min-height: auto;
+    .hero {
+
+        padding-top:
+            120px;
+
     }
 
-    .title-zone h1 {
-        font-size: 48px;
+    .hero-buttons {
+
+        flex-direction:
+            column;
+
     }
 
-    .title-popup {
-        width: min(290px, calc(100vw - 70px));
+    .socials {
+
+        flex-wrap:
+            wrap;
+
     }
 
-    .controls {
-        gap: 10px;
+    .cards {
+
+        grid-template-columns:
+            1fr;
+
     }
 
-    .bottom {
-        align-items: flex-start;
-        flex-direction: column;
+    .oled {
+
+        min-height:
+            320px;
+
     }
 
-    .volume {
-        width: 100%;
+    .contact-box {
+
+        padding:
+            30px 20px;
+
     }
 
-    .volume input {
-        flex: 1;
+    footer {
+
+        flex-direction:
+            column;
+
+        gap:
+            10px;
+
     }
+
 }
+
 </style>
 </head>
 
+
 <body>
 
-<!-- =======================================================
-     BACKGROUND
-     ======================================================= -->
 
-<div class="ocean">
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-</div>
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<header class="navbar">
+
+    <div class="logo">
+        Eeshwar<span>.</span>
+    </div>
+
+    <nav>
+
+        <ul class="nav-links">
+
+            <li>
+                <a href="#about">About</a>
+            </li>
+
+            <li>
+                <a href="#skills">Skills</a>
+            </li>
+
+            <li>
+                <a href="#projects">Projects</a>
+            </li>
+
+            <li>
+                <a href="#contact">Contact</a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+</header>
 
 
-<!-- =======================================================
-     APPLICATION
-     ======================================================= -->
+<!-- =====================================================
+     HERO
+===================================================== -->
 
-<main class="app">
+<section class="hero">
 
-<div class="player">
+    <div>
 
-    <!-- TOP -->
-    <div class="topbar">
-
-        <div class="brand">
-            <span class="signal-dot"></span>
-            Ocean Signal
+        <div class="hero-tags">
+            EMBEDDED SYSTEMS · IOT · FIRMWARE
         </div>
 
-        <div class="top-actions">
-            <button class="icon-btn" title="Favorite">♡</button>
-            <button class="icon-btn" title="More">⋮</button>
+        <h1>
+
+            Building things that
+
+            <br>
+
+            <span class="cyan">
+                connect hardware &
+            </span>
+
+            <br>
+
+            <span class="cyan">
+                software.
+            </span>
+
+        </h1>
+
+        <p class="hero-description">
+
+            Electronics & Communication Engineering student
+            focused on Embedded Systems, IoT and hardware
+            development.
+
+        </p>
+
+
+        <div class="hero-buttons">
+
+            <a
+                href="#projects"
+                class="btn btn-primary"
+            >
+                → Explore Projects
+            </a>
+
+            <a
+                href="#contact"
+                class="btn btn-secondary"
+            >
+                ↓ Contact Me
+            </a>
+
+        </div>
+
+
+        <div class="socials">
+
+            <a href="#">
+                GitHub ↗
+            </a>
+
+            <a href="#">
+                LinkedIn ↗
+            </a>
+
+            <a href="mailto:yourmail@example.com">
+                Email ↗
+            </a>
+
         </div>
 
     </div>
 
 
-    <!-- MAIN CONTENT -->
-    <section class="content">
+    <!-- OLED -->
 
+    <div class="oled-wrapper">
 
-        <!-- =================================================
-             ARTWORK
-             ================================================= -->
+        <div class="oled">
 
-        <div class="art-card">
+            <span class="star"></span>
+            <span class="star"></span>
+            <span class="star"></span>
+            <span class="star"></span>
 
-            <div class="art-label">
-                ECE / OCEAN SYSTEMS
-            </div>
+            <div class="moon"></div>
 
-            <div class="ocean-ring ring1"></div>
-            <div class="ocean-ring ring2"></div>
-            <div class="ocean-ring ring3"></div>
+            <div class="oled-info">
 
-            <div class="circuit c1"></div>
-            <div class="circuit c2"></div>
-            <div class="circuit c3"></div>
-            <div class="circuit c4"></div>
+                SYSTEM ONLINE
 
-            <div class="node n1"></div>
-            <div class="node n2"></div>
-            <div class="node n3"></div>
-            <div class="node n4"></div>
-            <div class="node n5"></div>
+                <div class="status">
+                    MCU · OK
+                </div>
 
-            <div class="chip">
+                <div class="status">
+                    IoT · CONNECTED
+                </div>
 
-                <span class="pin top"></span>
-                <span class="pin bottom"></span>
-                <span class="pin left"></span>
-                <span class="pin right"></span>
-
-                <strong>ECE</strong>
-                <span>Ocean Systems</span>
+                <div class="status">
+                    SENSOR · ACTIVE
+                </div>
 
             </div>
 
-            <div class="wave"></div>
 
-            <div class="art-bottom">
-                <span>DEEP SIGNAL</span>
-                <span>24.7 kHz</span>
+            <div class="runner">
+
+                <div class="runner-head"></div>
+
+                <div class="runner-body"></div>
+
+                <div class="runner-leg one"></div>
+
+                <div class="runner-leg two"></div>
+
             </div>
+
+            <div class="ground"></div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     ABOUT
+===================================================== -->
+
+<section
+    class="about"
+    id="about"
+>
+
+    <div class="section-number">
+        01 · ABOUT
+    </div>
+
+
+    <div class="about-grid">
+
+
+        <!-- ABOUT TEXT -->
+
+        <div>
+
+            <h2 class="section-title">
+
+                About<br>
+
+                <span class="cyan">
+                    Me.
+                </span>
+
+            </h2>
+
+
+            <p class="about-text">
+
+                I'm an Electronics and Communication Engineering
+                student interested in building practical Embedded
+                Systems, IoT and hardware solutions.
+
+                I enjoy understanding how hardware and software
+                communicate and turning ideas into working systems.
+
+            </p>
+
+
+            <a
+                href="#contact"
+                class="know-more"
+            >
+                Know more about me →
+            </a>
 
         </div>
 
 
+
         <!-- =================================================
-             PLAYER DETAILS
-             ================================================= -->
+             NEW MINI MUSIC PLAYER
+        ================================================= -->
 
-        <div class="details">
+        <div class="music-mini">
 
-            <div class="now-playing">
+            <div class="music-top">
 
-                <div class="wave-icon">
-                    <i></i>
-                    <i></i>
-                    <i></i>
-                    <i></i>
-                    <i></i>
+
+                <!-- ALBUM -->
+
+                <div class="album">
+
+                    <div class="album-chip"></div>
+
                 </div>
 
-                NOW PLAYING
 
-            </div>
+                <!-- MUSIC INFO -->
 
+                <div class="music-info">
 
-            <!-- =============================================
-                 TITLE + V1 POPUP
-                 ============================================= -->
-
-            <div class="title-zone">
-
-                <h1>SIGNAL<br>BELOW</h1>
-
-                <div class="title-popup">
-
-                    <div class="popup-title">
-                        ECE SIGNAL DETECTED
+                    <div class="music-label">
+                        NOW PLAYING
                     </div>
 
-                    <div class="popup-text">
-                        An ocean-inspired electronic soundscape
-                        representing signal flow, communication,
-                        embedded systems and the movement of data
-                        through an underwater environment.
+                    <div class="music-title">
+                        Signal Below
+                    </div>
+
+                    <div class="music-artist">
+                        Ocean Frequency · ECE
                     </div>
 
                 </div>
 
-            </div>
 
+                <!-- EQUALIZER -->
 
-            <div class="subtitle">
-                Ocean Electronic Systems
-            </div>
+                <div class="equalizer">
 
-            <div class="artist">
-                ECE Vibes · Deep Frequency
-            </div>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
 
-
-            <!-- =============================================
-                 VISUALIZER
-                 ============================================= -->
-
-            <div class="visualizer">
-
-                <div class="visualizer-label">
-                    LIVE SIGNAL / AUDIO SPECTRUM
                 </div>
 
-                <div class="waveform" id="waveform"></div>
-
             </div>
 
 
-            <!-- =============================================
-                 PROGRESS
-                 ============================================= -->
+            <!-- PROGRESS -->
 
-            <div class="progress-area">
+            <div class="music-progress">
 
-                <div class="progress-row">
+                <div
+                    class="music-progress-line"
+                    id="musicProgress"
+                >
 
-                    <span id="currentTime">
-                        0:37
+                    <div
+                        class="music-progress-fill"
+                        id="musicFill"
+                    ></div>
+
+                </div>
+
+
+                <div class="music-times">
+
+                    <span id="musicCurrent">
+                        0:00
                     </span>
 
                     <span>
@@ -1438,182 +2180,489 @@ body {
 
                 </div>
 
-                <div class="progress" id="progress">
-
-                    <div
-                        class="progress-fill"
-                        id="progressFill">
-                    </div>
-
-                    <div
-                        class="progress-thumb"
-                        id="progressThumb">
-                    </div>
-
-                </div>
-
             </div>
 
 
-            <!-- =============================================
-                 CONTROLS
-                 ============================================= -->
+            <!-- CONTROLS -->
 
-            <div class="controls">
+            <div class="music-controls">
 
-                <button
-                    class="control"
-                    id="shuffle"
-                    title="Shuffle">
-                    ⤨
+                <button>
+                    ↶
                 </button>
 
-                <button
-                    class="control"
-                    id="previous"
-                    title="Previous">
+                <button>
                     |◀
                 </button>
 
                 <button
-                    class="control play"
-                    id="play"
-                    title="Play">
+                    class="music-play"
+                    id="musicPlay"
+                >
                     ▶
                 </button>
 
-                <button
-                    class="control"
-                    id="next"
-                    title="Next">
+                <button>
                     ▶|
                 </button>
 
-                <button
-                    class="control"
-                    id="repeat"
-                    title="Repeat">
-                    ↻
+                <button>
+                    ↷
                 </button>
-
-            </div>
-
-
-            <!-- =============================================
-                 FOOTER
-                 ============================================= -->
-
-            <div class="bottom">
-
-                <div class="tag">
-                    🌊 Feel the frequency · Read the signal
-                </div>
-
-                <div class="volume">
-
-                    <span>🔊</span>
-
-                    <input
-                        id="volume"
-                        type="range"
-                        min="0"
-                        max="100"
-                        value="70">
-
-                </div>
 
             </div>
 
         </div>
 
-    </section>
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     SKILLS
+===================================================== -->
+
+<section
+    class="skills"
+    id="skills"
+>
+
+    <div class="section-number">
+        02 · FOCUS
+    </div>
+
+    <h2 class="section-title">
+        What I <span class="cyan">Build.</span>
+    </h2>
+
+
+    <div class="cards">
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                ◈
+            </div>
+
+            <h3>
+                ECE
+            </h3>
+
+            <p>
+                Electronics & Communication
+            </p>
+
+            <div class="card-line"></div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                ◉
+            </div>
+
+            <h3>
+                IoT
+            </h3>
+
+            <p>
+                Connected Systems
+            </p>
+
+            <div class="card-line"></div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                &lt;/&gt;
+            </div>
+
+            <h3>
+                Firmware
+            </h3>
+
+            <p>
+                Embedded Programming
+            </p>
+
+            <div class="card-line"></div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                ⚙
+            </div>
+
+            <h3>
+                Hardware
+            </h3>
+
+            <p>
+                Circuit & System Design
+            </p>
+
+            <div class="card-line"></div>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     PROJECTS
+===================================================== -->
+
+<section
+    class="projects"
+    id="projects"
+>
+
+    <div class="section-number">
+        03 · PROJECTS
+    </div>
+
+    <h2 class="section-title">
+        Things I've <span class="cyan">Built.</span>
+    </h2>
+
+
+    <div class="project-grid">
+
+
+        <article class="project">
+
+            <div class="project-number">
+                01
+            </div>
+
+            <h3>
+                Embedded Systems
+            </h3>
+
+            <p>
+                Hardware-software projects involving
+                microcontrollers, sensors and real-time
+                control.
+            </p>
+
+            <div class="project-tags">
+
+                <span>
+                    MCU
+                </span>
+
+                <span>
+                    Embedded C
+                </span>
+
+                <span>
+                    Sensors
+                </span>
+
+            </div>
+
+        </article>
+
+
+        <article class="project">
+
+            <div class="project-number">
+                02
+            </div>
+
+            <h3>
+                IoT Systems
+            </h3>
+
+            <p>
+                Connected devices capable of collecting,
+                processing and transmitting real-world data.
+            </p>
+
+            <div class="project-tags">
+
+                <span>
+                    ESP32
+                </span>
+
+                <span>
+                    MQTT
+                </span>
+
+                <span>
+                    IoT
+                </span>
+
+            </div>
+
+        </article>
+
+
+        <article class="project">
+
+            <div class="project-number">
+                03
+            </div>
+
+            <h3>
+                Hardware Design
+            </h3>
+
+            <p>
+                Exploring circuits, communication interfaces
+                and practical electronic system design.
+            </p>
+
+            <div class="project-tags">
+
+                <span>
+                    SPI
+                </span>
+
+                <span>
+                    I2C
+                </span>
+
+                <span>
+                    UART
+                </span>
+
+            </div>
+
+        </article>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     CONTACT
+===================================================== -->
+
+<section
+    class="contact"
+    id="contact"
+>
+
+    <div class="contact-box">
+
+        <div class="section-number">
+            04 · CONTACT
+        </div>
+
+        <h2>
+            Let's build something
+            <span class="cyan">
+                interesting.
+            </span>
+        </h2>
+
+        <p>
+
+            Have an embedded systems idea,
+            hardware project or IoT concept?
+
+            Let's connect and turn it into something real.
+
+        </p>
+
+        <a
+            href="mailto:yourmail@example.com"
+            class="btn btn-primary"
+        >
+            Send a Signal →
+        </a>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+    <span>
+        © 2026 Eeshwar.
+    </span>
+
+    <span>
+        Built with hardware × software.
+    </span>
+
+</footer>
+
+
+
+<!-- =====================================================
+     V1 TITLE POPUP
+===================================================== -->
+
+<div
+    class="title-popup"
+    id="titlePopup"
+>
+
+    <div class="popup-small">
+        SYSTEM MESSAGE
+    </div>
+
+    <div class="popup-big">
+        Hardware meets software.
+    </div>
+
+    <div class="popup-desc">
+        Move around the title to discover
+        small interactive details.
+    </div>
 
 </div>
 
-</main>
 
 
 <script>
 
 /* =========================================================
-   WAVEFORM GENERATION
-   ========================================================= */
+   V1 TITLE PROXIMITY POPUP
+========================================================= */
 
-const waveform = document.getElementById("waveform");
+const title =
+    document.querySelector(".hero h1");
 
-const barCount = 72;
+const popup =
+    document.getElementById("titlePopup");
 
-for (let i = 0; i < barCount; i++) {
 
-    const bar = document.createElement("span");
+document.addEventListener(
+    "mousemove",
+    (event) => {
 
-    bar.className = "bar";
+        const rect =
+            title.getBoundingClientRect();
 
-    const height =
-        0.35 +
-        Math.random() * 1.6;
+        const padding =
+            80;
 
-    const speed =
-        (0.45 + Math.random() * 0.8).toFixed(2) + "s";
+        const nearTitle =
 
-    bar.style.setProperty(
-        "--height",
-        height
-    );
+            event.clientX >
+                rect.left - padding &&
 
-    bar.style.setProperty(
-        "--speed",
-        speed
-    );
+            event.clientX <
+                rect.right + padding &&
 
-    bar.style.animationDelay =
-        (-Math.random() * 1.2) + "s";
+            event.clientY >
+                rect.top - padding &&
 
-    waveform.appendChild(bar);
-}
+            event.clientY <
+                rect.bottom + padding;
+
+
+        if (nearTitle) {
+
+            popup.classList.add(
+                "show"
+            );
+
+
+            popup.style.left =
+                (
+                    event.clientX + 18
+                ) + "px";
+
+
+            popup.style.top =
+                (
+                    event.clientY + 18
+                ) + "px";
+
+
+        } else {
+
+            popup.classList.remove(
+                "show"
+            );
+
+        }
+
+    }
+);
+
 
 
 /* =========================================================
-   PLAYER STATE
-   ========================================================= */
+   MINI MUSIC PLAYER
+========================================================= */
 
-const playButton =
-    document.getElementById("play");
+const play =
+    document.getElementById(
+        "musicPlay"
+    );
+
+const fill =
+    document.getElementById(
+        "musicFill"
+    );
+
+const current =
+    document.getElementById(
+        "musicCurrent"
+    );
 
 const progress =
-    document.getElementById("progress");
-
-const progressFill =
-    document.getElementById("progressFill");
-
-const progressThumb =
-    document.getElementById("progressThumb");
-
-const currentTime =
-    document.getElementById("currentTime");
-
-const volume =
-    document.getElementById("volume");
-
-const TOTAL_TIME = 168;
-
-let currentSeconds = 37;
-
-let playing = false;
-
-let timer = null;
+    document.getElementById(
+        "musicProgress"
+    );
 
 
-/* =========================================================
-   TIME FORMAT
-   ========================================================= */
+const duration =
+    168;
 
-function formatTime(seconds) {
+let time =
+    0;
 
-    seconds = Math.floor(seconds);
+let playing =
+    false;
+
+let timer;
+
+
+/* time format */
+
+function formatTime(
+    seconds
+) {
+
+    seconds =
+        Math.floor(
+            seconds
+        );
 
     const minutes =
-        Math.floor(seconds / 60);
+        Math.floor(
+            seconds / 60
+        );
 
     const secs =
         seconds % 60;
@@ -1621,90 +2670,110 @@ function formatTime(seconds) {
     return (
         minutes +
         ":" +
-        String(secs).padStart(2, "0")
+        String(secs)
+            .padStart(
+                2,
+                "0"
+            )
     );
+
 }
 
 
-/* =========================================================
-   UPDATE PLAYER
-   ========================================================= */
+/* update */
 
-function updatePlayer() {
-
-    if (currentSeconds > TOTAL_TIME) {
-        currentSeconds = 0;
-    }
+function updateMusic() {
 
     const percentage =
-        (currentSeconds / TOTAL_TIME) * 100;
+        (time / duration) *
+        100;
 
-    progressFill.style.width =
+    fill.style.width =
         percentage + "%";
 
-    progressThumb.style.left =
-        percentage + "%";
-
-    currentTime.textContent =
-        formatTime(currentSeconds);
-}
-
-
-/* =========================================================
-   PLAY / PAUSE
-   ========================================================= */
-
-function startPlayer() {
-
-    if (playing) return;
-
-    playing = true;
-
-    playButton.textContent = "Ⅱ";
-
-    timer = setInterval(() => {
-
-        currentSeconds += 0.1;
-
-        updatePlayer();
-
-        if (currentSeconds >= TOTAL_TIME) {
-            currentSeconds = 0;
-        }
-
-    }, 100);
+    current.textContent =
+        formatTime(time);
 
 }
 
 
-function pausePlayer() {
+/* start */
 
-    playing = false;
+function startMusic() {
 
-    playButton.textContent = "▶";
+    if (playing)
+        return;
 
-    clearInterval(timer);
+    playing =
+        true;
+
+    play.textContent =
+        "Ⅱ";
+
+
+    timer =
+        setInterval(
+            () => {
+
+                time += .1;
+
+                if (
+                    time >=
+                    duration
+                ) {
+
+                    time =
+                        0;
+
+                }
+
+                updateMusic();
+
+            },
+            100
+        );
 
 }
 
 
-playButton.addEventListener(
+/* pause */
+
+function pauseMusic() {
+
+    playing =
+        false;
+
+    play.textContent =
+        "▶";
+
+    clearInterval(
+        timer
+    );
+
+}
+
+
+/* click */
+
+play.addEventListener(
     "click",
     () => {
 
         if (playing) {
-            pausePlayer();
+
+            pauseMusic();
+
         } else {
-            startPlayer();
+
+            startMusic();
+
         }
 
     }
 );
 
 
-/* =========================================================
-   PROGRESS BAR CLICK
-   ========================================================= */
+/* progress click */
 
 progress.addEventListener(
     "click",
@@ -1713,197 +2782,103 @@ progress.addEventListener(
         const rect =
             progress.getBoundingClientRect();
 
-        const x =
-            event.clientX - rect.left;
+        const percent =
+            (
+                event.clientX -
+                rect.left
+            ) /
+            rect.width;
 
-        const percentage =
+        time =
             Math.max(
                 0,
                 Math.min(
-                    1,
-                    x / rect.width
+                    duration,
+                    percent *
+                    duration
                 )
             );
 
-        currentSeconds =
-            percentage * TOTAL_TIME;
-
-        updatePlayer();
+        updateMusic();
 
     }
 );
 
 
+updateMusic();
+
+
 /* =========================================================
-   PREVIOUS
-   ========================================================= */
+   SCROLL NAV ACTIVE STATE
+========================================================= */
 
-document
-    .getElementById("previous")
-    .addEventListener(
-        "click",
-        () => {
+const sections =
+    document.querySelectorAll(
+        "section[id]"
+    );
 
-            currentSeconds =
-                Math.max(
-                    0,
-                    currentSeconds - 10
-                );
-
-            updatePlayer();
-
-        }
+const navLinks =
+    document.querySelectorAll(
+        ".nav-links a"
     );
 
 
-/* =========================================================
-   NEXT
-   ========================================================= */
-
-document
-    .getElementById("next")
-    .addEventListener(
-        "click",
-        () => {
-
-            currentSeconds =
-                Math.min(
-                    TOTAL_TIME,
-                    currentSeconds + 10
-                );
-
-            updatePlayer();
-
-        }
-    );
-
-
-/* =========================================================
-   SHUFFLE
-   ========================================================= */
-
-let shuffled = false;
-
-document
-    .getElementById("shuffle")
-    .addEventListener(
-        "click",
-        function () {
-
-            shuffled = !shuffled;
-
-            this.style.color =
-                shuffled
-                    ? "#58e8ff"
-                    : "";
-
-        }
-    );
-
-
-/* =========================================================
-   REPEAT
-   ========================================================= */
-
-let repeating = false;
-
-document
-    .getElementById("repeat")
-    .addEventListener(
-        "click",
-        function () {
-
-            repeating = !repeating;
-
-            this.style.color =
-                repeating
-                    ? "#48ffd1"
-                    : "";
-
-        }
-    );
-
-
-/* =========================================================
-   VOLUME
-   ========================================================= */
-
-volume.addEventListener(
-    "input",
+window.addEventListener(
+    "scroll",
     () => {
 
-        const value =
-            volume.value;
-
-        volume.style.accentColor =
-            `rgb(
-                ${40 + value / 3},
-                ${180 + value / 5},
-                255
-            )`;
-
-    }
-);
+        let currentSection =
+            "";
 
 
-/* =========================================================
-   INITIAL STATE
-   ========================================================= */
+        sections.forEach(
+            section => {
 
-updatePlayer();
+                const top =
+                    section.offsetTop;
+
+                if (
+                    window.scrollY >=
+                    top - 250
+                ) {
+
+                    currentSection =
+                        section.id;
+
+                }
+
+            }
+        );
 
 
-/* =========================================================
-   TITLE POPUP:
-   Additional "near title" behavior.
+        navLinks.forEach(
+            link => {
 
-   When the mouse enters the upper-right area around the
-   title, the popup gets a little more visible. This gives
-   us the V1-style proximity interaction.
-   ========================================================= */
+                link.style.color =
+                    "#87a8b5";
 
-const titleZone =
-    document.querySelector(".title-zone");
 
-const popup =
-    document.querySelector(".title-popup");
+                if (
+                    link.getAttribute(
+                        "href"
+                    ) ===
+                    "#" +
+                    currentSection
+                ) {
 
-document.addEventListener(
-    "mousemove",
-    (event) => {
+                    link.style.color =
+                        "#56e7ff";
 
-        const rect =
-            titleZone.getBoundingClientRect();
+                }
 
-        const padding = 75;
-
-        const nearTitle =
-            event.clientX >= rect.left - padding &&
-            event.clientX <= rect.right + padding &&
-            event.clientY >= rect.top - padding &&
-            event.clientY <= rect.bottom + padding;
-
-        if (nearTitle) {
-
-            popup.style.opacity = "1";
-            popup.style.visibility = "visible";
-            popup.style.transform =
-                "translateY(0) scale(1)";
-
-        } else if (
-            !titleZone.matches(":hover")
-        ) {
-
-            popup.style.opacity = "";
-            popup.style.visibility = "";
-            popup.style.transform = "";
-
-        }
+            }
+        );
 
     }
 );
 
 </script>
+
 
 </body>
 </html>
