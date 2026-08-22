@@ -1,1 +1,1690 @@
 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Admin | Eeshwar Portfolio</title>
+
+    <!-- Supabase JavaScript -->
+    <script
+        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+    ></script>
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #03080d;
+            --card: #091720;
+            --card2: #0d1d27;
+
+            --cyan: #55e8ff;
+            --cyan-soft: #8af1ff;
+
+            --white: #f2fbff;
+            --text: #c8dbe1;
+            --muted: #78919b;
+
+            --danger: #ff6875;
+
+            --border: rgba(85, 232, 255, 0.16);
+        }
+
+
+        body {
+
+            min-height: 100vh;
+
+            background:
+                radial-gradient(
+                    circle at 20% 10%,
+                    rgba(85, 232, 255, 0.055),
+                    transparent 30%
+                ),
+                var(--bg);
+
+            color: var(--white);
+
+            font-family:
+                Inter,
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+        }
+
+
+        .page {
+
+            width:
+                min(1000px, calc(100% - 30px));
+
+            margin: 0 auto;
+
+            padding:
+                30px 0 60px;
+
+        }
+
+
+        /* =========================================
+           TOP BAR
+        ========================================= */
+
+        .topbar {
+
+            min-height: 64px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 20px;
+
+            padding:
+                0 18px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.13);
+
+            border-radius: 18px;
+
+            background:
+                rgba(5,14,20,0.58);
+
+            backdrop-filter:
+                blur(22px);
+
+            -webkit-backdrop-filter:
+                blur(22px);
+
+            box-shadow:
+                0 18px 50px
+                rgba(0,0,0,0.28);
+
+        }
+
+
+        .brand {
+
+            color: var(--white);
+
+            font-size: 19px;
+
+            font-weight: 800;
+
+            text-decoration: none;
+
+        }
+
+
+        .brand span {
+            color: var(--cyan);
+        }
+
+
+        .back-link {
+
+            color: var(--muted);
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            text-decoration: none;
+
+        }
+
+
+        .back-link:hover {
+            color: var(--cyan);
+        }
+
+
+        /* =========================================
+           LOGIN
+        ========================================= */
+
+        .login-wrapper {
+
+            min-height:
+                calc(100vh - 125px);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+        }
+
+
+        .login-card {
+
+            width:
+                min(460px, 100%);
+
+            padding: 35px;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius: 20px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    var(--card2),
+                    var(--card)
+                );
+
+            box-shadow:
+                0 25px 70px
+                rgba(0,0,0,0.35);
+
+        }
+
+
+        .login-label {
+
+            color: var(--cyan);
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            letter-spacing:
+                0.18em;
+
+        }
+
+
+        .login-card h1 {
+
+            margin-top: 16px;
+
+            font-size: 38px;
+
+            line-height: 1;
+
+            letter-spacing:
+                -0.045em;
+
+        }
+
+
+        .login-card h1 span {
+            color: var(--cyan);
+        }
+
+
+        .login-description {
+
+            margin-top: 15px;
+
+            color: var(--muted);
+
+            font-size: 13px;
+
+        }
+
+
+        .form {
+
+            margin-top: 28px;
+
+        }
+
+
+        .field {
+
+            margin-bottom: 16px;
+
+        }
+
+
+        .field label {
+
+            display: block;
+
+            margin-bottom: 7px;
+
+            color: var(--text);
+
+            font-size: 11px;
+
+            font-weight: 800;
+
+        }
+
+
+        .field input {
+
+            width: 100%;
+
+            height: 48px;
+
+            padding:
+                0 14px;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius: 8px;
+
+            outline: none;
+
+            background:
+                rgba(3,8,13,0.65);
+
+            color: var(--white);
+
+            font-size: 13px;
+
+        }
+
+
+        .field input:focus {
+
+            border-color:
+                rgba(85,232,255,0.5);
+
+        }
+
+
+        .button {
+
+            width: 100%;
+
+            height: 48px;
+
+            border: 0;
+
+            border-radius: 8px;
+
+            background:
+                var(--cyan);
+
+            color: #001017;
+
+            font-size: 12px;
+
+            font-weight: 900;
+
+            cursor: pointer;
+
+        }
+
+
+        .button:hover {
+
+            background:
+                var(--cyan-soft);
+
+        }
+
+
+        .button:disabled {
+
+            opacity: 0.55;
+
+            cursor: not-allowed;
+
+        }
+
+
+        .message {
+
+            display: none;
+
+            margin-top: 16px;
+
+            padding: 12px 14px;
+
+            border-radius: 8px;
+
+            font-size: 11px;
+
+            line-height: 1.5;
+
+        }
+
+
+        .message.show {
+            display: block;
+        }
+
+
+        .message.error {
+
+            border:
+                1px solid
+                rgba(255,104,117,0.25);
+
+            background:
+                rgba(255,104,117,0.06);
+
+            color: #ff9ba3;
+
+        }
+
+
+        .message.success {
+
+            border:
+                1px solid
+                rgba(85,232,255,0.2);
+
+            background:
+                rgba(85,232,255,0.05);
+
+            color: var(--cyan);
+
+        }
+
+
+        .security-note {
+
+            margin-top: 20px;
+
+            color: var(--muted);
+
+            font-size: 10px;
+
+            line-height: 1.6;
+
+        }
+
+
+        /* =========================================
+           OTP
+        ========================================= */
+
+        #otpSection {
+            display: none;
+        }
+
+
+        #otpSection.show {
+            display: block;
+        }
+
+
+        .otp-input {
+
+            text-align: center;
+
+            letter-spacing:
+                0.45em;
+
+            font-size: 22px !important;
+
+            font-weight: 800;
+
+        }
+
+
+        .back-button {
+
+            width: 100%;
+
+            margin-top: 10px;
+
+            height: 42px;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius: 8px;
+
+            background:
+                transparent;
+
+            color: var(--muted);
+
+            font-size: 11px;
+
+            font-weight: 800;
+
+            cursor: pointer;
+
+        }
+
+
+        .back-button:hover {
+            color: var(--cyan);
+        }
+
+
+        /* =========================================
+           ADMIN DASHBOARD
+        ========================================= */
+
+        #dashboard {
+
+            display: none;
+
+        }
+
+
+        #dashboard.show {
+            display: block;
+        }
+
+
+        .dashboard-header {
+
+            margin-top: 45px;
+
+            display: flex;
+
+            align-items: flex-end;
+
+            justify-content: space-between;
+
+            gap: 20px;
+
+        }
+
+
+        .dashboard-label {
+
+            color: var(--cyan);
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            letter-spacing:
+                0.18em;
+
+        }
+
+
+        .dashboard-header h1 {
+
+            margin-top: 12px;
+
+            font-size:
+                clamp(40px, 6vw, 65px);
+
+            line-height: 0.95;
+
+            letter-spacing:
+                -0.06em;
+
+        }
+
+
+        .user-email {
+
+            margin-top: 10px;
+
+            color: var(--muted);
+
+            font-size: 12px;
+
+        }
+
+
+        .logout-button {
+
+            padding:
+                11px 15px;
+
+            border:
+                1px solid
+                rgba(255,104,117,0.25);
+
+            border-radius: 8px;
+
+            background:
+                rgba(255,104,117,0.04);
+
+            color: #ff929b;
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            cursor: pointer;
+
+        }
+
+
+        .logout-button:hover {
+
+            background:
+                rgba(255,104,117,0.08);
+
+        }
+
+
+        .dashboard-grid {
+
+            margin-top: 35px;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 18px;
+
+        }
+
+
+        .admin-card {
+
+            padding: 25px;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius: 17px;
+
+            background: var(--card);
+
+        }
+
+
+        .admin-card.full {
+
+            grid-column:
+                1 / -1;
+
+        }
+
+
+        .admin-card h2 {
+
+            font-size: 20px;
+
+        }
+
+
+        .admin-card p {
+
+            margin-top: 8px;
+
+            color: var(--muted);
+
+            font-size: 12px;
+
+        }
+
+
+        .status {
+
+            margin-top: 20px;
+
+            padding: 14px;
+
+            border-radius: 8px;
+
+            background:
+                rgba(85,232,255,0.04);
+
+            border:
+                1px solid
+                rgba(85,232,255,0.1);
+
+            color: var(--cyan);
+
+            font-size: 11px;
+
+        }
+
+
+        .coming {
+
+            margin-top: 20px;
+
+            padding: 20px;
+
+            border:
+                1px dashed
+                rgba(85,232,255,0.16);
+
+            border-radius: 10px;
+
+            color: var(--muted);
+
+            font-size: 12px;
+
+            line-height: 1.7;
+
+        }
+
+
+        /* =========================================
+           MOBILE
+        ========================================= */
+
+        @media (max-width: 650px) {
+
+            .page {
+
+                width:
+                    calc(100% - 18px);
+
+            }
+
+
+            .topbar {
+
+                border-radius: 15px;
+
+            }
+
+
+            .login-card {
+
+                padding: 25px;
+
+            }
+
+
+            .dashboard-header {
+
+                align-items:
+                    flex-start;
+
+                flex-direction:
+                    column;
+
+            }
+
+
+            .dashboard-grid {
+
+                grid-template-columns:
+                    1fr;
+
+            }
+
+
+            .admin-card.full {
+
+                grid-column:
+                    auto;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="page">
+
+
+    <!-- =========================================
+         TOP BAR
+    ========================================== -->
+
+    <header class="topbar">
+
+        <a
+            href="index.html"
+            class="brand"
+        >
+            Eeshwar<span>.</span> Admin
+        </a>
+
+
+        <a
+            href="index.html"
+            class="back-link"
+        >
+            ← Back to Portfolio
+        </a>
+
+    </header>
+
+
+
+    <!-- =========================================
+         LOGIN AREA
+    ========================================== -->
+
+    <div
+        id="loginArea"
+        class="login-wrapper"
+    >
+
+        <div class="login-card">
+
+
+            <!-- EMAIL LOGIN -->
+
+            <div id="emailSection">
+
+                <div class="login-label">
+                    PRIVATE ADMIN AREA
+                </div>
+
+
+                <h1>
+                    Admin
+                    <span>Login.</span>
+                </h1>
+
+
+                <p class="login-description">
+
+                    Enter one of your authorized admin
+                    email addresses. A one-time password
+                    will be sent to that email.
+
+                </p>
+
+
+                <form
+                    id="emailForm"
+                    class="form"
+                >
+
+                    <div class="field">
+
+                        <label for="email">
+                            ADMIN EMAIL
+                        </label>
+
+
+                        <input
+                            type="email"
+                            id="email"
+                            placeholder="Enter your admin email"
+                            autocomplete="email"
+                            required
+                        >
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="button"
+                        id="sendOtpButton"
+                    >
+                        SEND OTP
+                    </button>
+
+                </form>
+
+            </div>
+
+
+
+            <!-- OTP LOGIN -->
+
+            <div id="otpSection">
+
+                <div class="login-label">
+                    EMAIL VERIFICATION
+                </div>
+
+
+                <h1>
+                    Enter
+                    <span>OTP.</span>
+                </h1>
+
+
+                <p class="login-description">
+
+                    Enter the one-time password sent
+                    to your authorized email address.
+
+                </p>
+
+
+                <form
+                    id="otpForm"
+                    class="form"
+                >
+
+                    <div class="field">
+
+                        <label for="otp">
+                            6-DIGIT OTP
+                        </label>
+
+
+                        <input
+                            type="text"
+                            id="otp"
+                            class="otp-input"
+                            inputmode="numeric"
+                            autocomplete="one-time-code"
+                            maxlength="6"
+                            placeholder="000000"
+                            required
+                        >
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="button"
+                        id="verifyOtpButton"
+                    >
+                        VERIFY OTP
+                    </button>
+
+                </form>
+
+
+                <button
+                    type="button"
+                    class="back-button"
+                    id="changeEmailButton"
+                >
+                    ← Use Different Email
+                </button>
+
+            </div>
+
+
+            <div
+                id="message"
+                class="message"
+            ></div>
+
+
+            <div class="security-note">
+
+                Only these two authorized accounts can
+                access this dashboard. Visitors to the
+                portfolio never need to log in.
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================================
+         DASHBOARD
+    ========================================== -->
+
+    <main
+        id="dashboard"
+    >
+
+        <div class="dashboard-header">
+
+            <div>
+
+                <div class="dashboard-label">
+                    AUTHENTICATED ADMIN
+                </div>
+
+
+                <h1>
+                    Welcome
+                    <span style="color:var(--cyan);">
+                        Back.
+                    </span>
+                </h1>
+
+
+                <div
+                    id="userEmail"
+                    class="user-email"
+                ></div>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="logout-button"
+                id="logoutButton"
+            >
+                LOG OUT
+            </button>
+
+        </div>
+
+
+
+        <div class="dashboard-grid">
+
+
+            <section class="admin-card">
+
+                <h2>
+                    Portfolio Status
+                </h2>
+
+
+                <p>
+                    Your admin authentication is working.
+                </p>
+
+
+                <div class="status">
+                    ● AUTHENTICATED
+                </div>
+
+            </section>
+
+
+
+            <section class="admin-card">
+
+                <h2>
+                    Admin Accounts
+                </h2>
+
+
+                <p>
+                    Two authorized accounts are configured
+                    for this portfolio.
+                </p>
+
+
+                <div class="status">
+
+                    eeshwar182007@gmail.com<br>
+
+                    chocoboychocoboy859@gmail.com
+
+                </div>
+
+            </section>
+
+
+
+            <section class="admin-card full">
+
+                <h2>
+                    Portfolio Editor
+                </h2>
+
+
+                <p>
+                    This is where we'll add your actual
+                    portfolio editing system.
+                </p>
+
+
+                <div class="coming">
+
+                    <strong>
+                        Next step:
+                    </strong>
+
+                    We'll connect this dashboard to a
+                    Supabase database so you can edit your
+                    About Me, college information, interests,
+                    skills, projects and other portfolio
+                    content from here without manually
+                    changing your HTML.
+
+                </div>
+
+            </section>
+
+
+        </div>
+
+    </main>
+
+
+</div>
+
+
+
+<script>
+
+    /* =====================================================
+       SUPABASE CONFIGURATION
+    ===================================================== */
+
+    const SUPABASE_URL =
+        "https://kwnzxf1ncwmtpvisnhkb.supabase.co";
+
+
+    const SUPABASE_PUBLISHABLE_KEY =
+        "sb_publishable_ZcTkgrlSgTXQ4_Q5Y6eLIg_a8s4UcSk";
+
+
+    const supabaseClient =
+        window.supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_PUBLISHABLE_KEY,
+            {
+                auth: {
+                    persistSession: true,
+                    autoRefreshToken: true,
+                    detectSessionInUrl: true
+                }
+            }
+        );
+
+
+
+    /* =====================================================
+       AUTHORIZED ADMINS
+    ===================================================== */
+
+    const ADMIN_EMAILS = [
+
+        "eeshwar182007@gmail.com",
+
+        "chocoboychocoboy859@gmail.com"
+
+    ];
+
+
+
+    /* =====================================================
+       ELEMENTS
+    ===================================================== */
+
+    const loginArea =
+        document.getElementById(
+            "loginArea"
+        );
+
+
+    const emailSection =
+        document.getElementById(
+            "emailSection"
+        );
+
+
+    const otpSection =
+        document.getElementById(
+            "otpSection"
+        );
+
+
+    const emailForm =
+        document.getElementById(
+            "emailForm"
+        );
+
+
+    const otpForm =
+        document.getElementById(
+            "otpForm"
+        );
+
+
+    const emailInput =
+        document.getElementById(
+            "email"
+        );
+
+
+    const otpInput =
+        document.getElementById(
+            "otp"
+        );
+
+
+    const sendOtpButton =
+        document.getElementById(
+            "sendOtpButton"
+        );
+
+
+    const verifyOtpButton =
+        document.getElementById(
+            "verifyOtpButton"
+        );
+
+
+    const changeEmailButton =
+        document.getElementById(
+            "changeEmailButton"
+        );
+
+
+    const logoutButton =
+        document.getElementById(
+            "logoutButton"
+        );
+
+
+    const message =
+        document.getElementById(
+            "message"
+        );
+
+
+    const dashboard =
+        document.getElementById(
+            "dashboard"
+        );
+
+
+    const userEmail =
+        document.getElementById(
+            "userEmail"
+        );
+
+
+
+    let loginEmail = "";
+
+
+
+    /* =====================================================
+       HELPERS
+    ===================================================== */
+
+    function normalizeEmail(email) {
+
+        return email
+            .trim()
+            .toLowerCase();
+
+    }
+
+
+    function isAdmin(email) {
+
+        return ADMIN_EMAILS.includes(
+            normalizeEmail(email)
+        );
+
+    }
+
+
+    function showMessage(
+        text,
+        type = "error"
+    ) {
+
+        message.textContent = text;
+
+        message.className =
+            "message show " + type;
+
+    }
+
+
+    function clearMessage() {
+
+        message.textContent = "";
+
+        message.className =
+            "message";
+
+    }
+
+
+    function showDashboard(email) {
+
+        loginArea.style.display =
+            "none";
+
+        dashboard.classList.add(
+            "show"
+        );
+
+        userEmail.textContent =
+            email;
+
+    }
+
+
+    function showLogin() {
+
+        loginArea.style.display =
+            "flex";
+
+        dashboard.classList.remove(
+            "show"
+        );
+
+    }
+
+
+
+    /* =====================================================
+       CHECK EXISTING SESSION
+    ===================================================== */
+
+    async function checkSession() {
+
+        const {
+            data,
+            error
+        } =
+            await supabaseClient.auth.getUser();
+
+
+        if (
+            error ||
+            !data ||
+            !data.user
+        ) {
+
+            return;
+
+        }
+
+
+        const email =
+            normalizeEmail(
+                data.user.email || ""
+            );
+
+
+        if (!isAdmin(email)) {
+
+            await supabaseClient.auth.signOut();
+
+            return;
+
+        }
+
+
+        showDashboard(email);
+
+    }
+
+
+
+    /* =====================================================
+       SEND OTP
+    ===================================================== */
+
+    emailForm.addEventListener(
+        "submit",
+        async function(event) {
+
+            event.preventDefault();
+
+            clearMessage();
+
+
+            const email =
+                normalizeEmail(
+                    emailInput.value
+                );
+
+
+            /* First security check */
+
+            if (!isAdmin(email)) {
+
+                showMessage(
+                    "Access denied. This email is not an authorized portfolio admin.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            sendOtpButton.disabled =
+                true;
+
+            sendOtpButton.textContent =
+                "SENDING...";
+
+
+            try {
+
+                const {
+                    error
+                } =
+                    await supabaseClient.auth.signInWithOtp({
+
+                        email: email,
+
+                        options: {
+
+                            shouldCreateUser:
+                                false
+
+                        }
+
+                    });
+
+
+                if (error) {
+
+                    throw error;
+
+                }
+
+
+                loginEmail =
+                    email;
+
+
+                emailSection.style.display =
+                    "none";
+
+                otpSection.classList.add(
+                    "show"
+                );
+
+
+                showMessage(
+                    "OTP sent. Check your email and enter the 6-digit code.",
+                    "success"
+                );
+
+
+                otpInput.focus();
+
+
+            } catch (error) {
+
+                console.error(error);
+
+
+                showMessage(
+                    error.message ||
+                    "Could not send OTP. Please try again.",
+                    "error"
+                );
+
+            } finally {
+
+                sendOtpButton.disabled =
+                    false;
+
+                sendOtpButton.textContent =
+                    "SEND OTP";
+
+            }
+
+        }
+    );
+
+
+
+    /* =====================================================
+       VERIFY OTP
+    ===================================================== */
+
+    otpForm.addEventListener(
+        "submit",
+        async function(event) {
+
+            event.preventDefault();
+
+            clearMessage();
+
+
+            const otp =
+                otpInput.value
+                    .replace(/\D/g, "")
+                    .trim();
+
+
+            if (
+                !loginEmail ||
+                !isAdmin(loginEmail)
+            ) {
+
+                showMessage(
+                    "Invalid admin session.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            if (otp.length !== 6) {
+
+                showMessage(
+                    "Please enter the 6-digit OTP.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            verifyOtpButton.disabled =
+                true;
+
+            verifyOtpButton.textContent =
+                "VERIFYING...";
+
+
+            try {
+
+                const {
+                    data,
+                    error
+                } =
+                    await supabaseClient.auth.verifyOtp({
+
+                        email:
+                            loginEmail,
+
+                        token:
+                            otp,
+
+                        type:
+                            "email"
+
+                    });
+
+
+                if (error) {
+
+                    throw error;
+
+                }
+
+
+                const authenticatedEmail =
+                    normalizeEmail(
+                        data.user?.email ||
+                        ""
+                    );
+
+
+                /* SECOND security check */
+
+                if (
+                    !isAdmin(
+                        authenticatedEmail
+                    )
+                ) {
+
+                    await supabaseClient.auth.signOut();
+
+                    throw new Error(
+                        "This account is not authorized as a portfolio admin."
+                    );
+
+                }
+
+
+                showDashboard(
+                    authenticatedEmail
+                );
+
+
+            } catch (error) {
+
+                console.error(error);
+
+
+                showMessage(
+                    error.message ||
+                    "Invalid or expired OTP.",
+                    "error"
+                );
+
+            } finally {
+
+                verifyOtpButton.disabled =
+                    false;
+
+                verifyOtpButton.textContent =
+                    "VERIFY OTP";
+
+            }
+
+        }
+    );
+
+
+
+    /* =====================================================
+       CHANGE EMAIL
+    ===================================================== */
+
+    changeEmailButton.addEventListener(
+        "click",
+        function() {
+
+            loginEmail = "";
+
+            otpInput.value = "";
+
+            otpSection.classList.remove(
+                "show"
+            );
+
+            emailSection.style.display =
+                "block";
+
+            clearMessage();
+
+            emailInput.focus();
+
+        }
+    );
+
+
+
+    /* =====================================================
+       LOGOUT
+    ===================================================== */
+
+    logoutButton.addEventListener(
+        "click",
+        async function() {
+
+            await supabaseClient.auth.signOut();
+
+            loginEmail = "";
+
+            emailInput.value = "";
+
+            otpInput.value = "";
+
+            emailSection.style.display =
+                "block";
+
+            otpSection.classList.remove(
+                "show"
+
+            );
+
+            clearMessage();
+
+            showLogin();
+
+        }
+    );
+
+
+
+    /* =====================================================
+       AUTH STATE LISTENER
+    ===================================================== */
+
+    supabaseClient.auth.onAuthStateChange(
+        async function(event, session) {
+
+            if (
+                event === "SIGNED_OUT"
+            ) {
+
+                showLogin();
+
+                return;
+
+            }
+
+
+            if (
+                session &&
+                session.user
+            ) {
+
+                const email =
+                    normalizeEmail(
+                        session.user.email || ""
+                    );
+
+
+                if (
+                    isAdmin(email)
+                ) {
+
+                    showDashboard(
+                        email
+                    );
+
+                }
+
+            }
+
+        }
+    );
+
+
+
+    /* =====================================================
+       START
+    ===================================================== */
+
+    checkSession();
+
+</script>
+
+
+</body>
+
+</html>
