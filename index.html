@@ -1,2884 +1,1919 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Eeshwar - Electronics and Communication Engineering student portfolio."
+    >
+
+    <title>Eeshwar | Portfolio</title>
+
+    <style>
+        /* =========================================
+           RESET
+        ========================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #03080d;
+            --bg-soft: #071219;
+            --card: #091720;
+            --card-light: #0d1d27;
+
+            --cyan: #55e8ff;
+            --cyan-soft: #8af1ff;
+
+            --white: #f2fbff;
+            --text: #c8dbe1;
+            --muted: #78919b;
+            --muted-dark: #526b74;
+
+            --border: rgba(85, 232, 255, 0.16);
+            --border-strong: rgba(85, 232, 255, 0.3);
+        }
+
+        html {
+            scroll-behavior: auto;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--white);
+
+            font-family:
+                Inter,
+                "Segoe UI",
+                Arial,
+                sans-serif;
 
-<meta charset="UTF-8">
+            line-height: 1.6;
+        }
 
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
+        body,
+        a,
+        button {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
 
-<title>Eeshwar — ECE Portfolio</title>
+        button,
+        input,
+        textarea {
+            font: inherit;
+        }
 
-<style>
+        /* =========================================
+           LAYOUT
+        ========================================= */
 
-/* =========================================================
-   RESET
-========================================================= */
+        .container {
+            width: min(1180px, calc(100% - 40px));
+            margin: 0 auto;
+        }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+        section {
+            padding: 110px 0;
+        }
 
-html {
-    scroll-behavior: smooth;
-}
+        .section-label {
+            margin-bottom: 14px;
 
-body {
+            color: var(--cyan);
 
-    background:
-        radial-gradient(
-            circle at 15% 20%,
-            rgba(0, 229, 255, .08),
-            transparent 28%
-        ),
+            font-size: 11px;
+            font-weight: 800;
 
-        radial-gradient(
-            circle at 80% 60%,
-            rgba(0, 150, 255, .06),
-            transparent 30%
-        ),
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+        }
 
-        #02080d;
+        .section-title {
+            color: var(--white);
 
-    color: #ecfbff;
+            font-size:
+                clamp(40px, 6vw, 70px);
 
-    font-family:
-        Inter,
-        "Segoe UI",
-        Arial,
-        sans-serif;
+            line-height: 0.98;
+            letter-spacing: -0.055em;
+        }
 
-    overflow-x: hidden;
-}
+        .cyan {
+            color: var(--cyan);
+        }
 
+        .section-description {
+            max-width: 680px;
+            margin-top: 20px;
 
-/* =========================================================
-   VARIABLES
-========================================================= */
+            color: var(--muted);
 
-:root {
+            font-size: 15px;
+        }
 
-    --cyan: #56e7ff;
-    --cyan2: #00bfff;
+        /* =========================================
+           NAVIGATION
+        ========================================= */
 
-    --dark:
-        #02080d;
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
 
-    --panel:
-        rgba(5, 20, 29, .78);
+            border-bottom:
+                1px solid
+                rgba(85, 232, 255, 0.1);
 
-    --border:
-        rgba(86, 231, 255, .16);
+            background:
+                rgba(3, 8, 13, 0.97);
+        }
 
-    --muted:
-        #7d9aa6;
+        .nav-inner {
+            min-height: 72px;
 
-    --white:
-        #effcff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
 
-}
+            gap: 30px;
+        }
 
+        .logo {
+            color: var(--white);
 
-/* =========================================================
-   BACKGROUND GRID
-========================================================= */
+            font-size: 21px;
+            font-weight: 800;
 
-body::before {
+            text-decoration: none;
+            letter-spacing: -0.03em;
+        }
 
-    content: "";
+        .logo span {
+            color: var(--cyan);
+        }
 
-    position: fixed;
+        .nav-links {
+            display: flex;
+            align-items: center;
 
-    inset: 0;
+            gap: 24px;
 
-    pointer-events: none;
+            list-style: none;
+        }
 
-    opacity: .22;
+        .nav-links a {
+            color: var(--muted);
 
-    background-image:
+            font-size: 12px;
+            font-weight: 700;
 
-        linear-gradient(
-            rgba(86,231,255,.025) 1px,
-            transparent 1px
-        ),
+            text-decoration: none;
+        }
 
-        linear-gradient(
-            90deg,
-            rgba(86,231,255,.025) 1px,
-            transparent 1px
-        );
+        .nav-links a:hover {
+            color: var(--cyan);
+        }
 
-    background-size: 50px 50px;
+        /* =========================================
+           BUTTONS
+        ========================================= */
 
-    mask-image:
-        linear-gradient(
-            to bottom,
-            black,
-            transparent
-        );
+        .buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
 
-    z-index: -2;
-}
+            margin-top: 30px;
+        }
 
+        .button {
+            min-height: 46px;
 
-/* =========================================================
-   NAVBAR
-========================================================= */
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
 
-.navbar {
+            padding: 0 19px;
 
-    position: fixed;
+            border-radius: 8px;
 
-    top: 20px;
+            font-size: 12px;
+            font-weight: 800;
 
-    left: 50%;
+            text-decoration: none;
+        }
 
-    transform: translateX(-50%);
+        .button-primary {
+            background: var(--cyan);
+            color: #001017;
+        }
 
-    width:
-        min(1180px, calc(100% - 40px));
+        .button-primary:hover {
+            background: var(--cyan-soft);
+        }
 
-    height: 68px;
+        .button-secondary {
+            background: var(--card);
 
-    padding:
-        0 25px;
+            border:
+                1px solid
+                var(--border);
 
-    display: flex;
+            color: var(--white);
+        }
 
-    align-items: center;
+        .button-secondary:hover {
+            border-color: var(--border-strong);
+            color: var(--cyan);
+        }
 
-    justify-content: space-between;
+        /* =========================================
+           HERO
+        ========================================= */
 
-    border:
+        .hero {
+            min-height: calc(100vh - 72px);
 
-        1px solid
-        rgba(86,231,255,.12);
+            display: grid;
 
-    border-radius: 18px;
+            grid-template-columns:
+                minmax(0, 1.25fr)
+                minmax(300px, 0.75fr);
 
-    background:
-        rgba(2, 12, 18, .72);
+            align-items: center;
 
-    backdrop-filter:
-        blur(20px);
+            gap: 70px;
+        }
 
-    z-index: 1000;
+        .hero-label {
+            margin-bottom: 25px;
 
-    box-shadow:
-        0 10px 40px rgba(0,0,0,.25);
-}
+            color: var(--cyan);
 
+            font-size: 11px;
+            font-weight: 800;
 
-/* logo */
+            letter-spacing: 0.18em;
+        }
 
-.logo {
+        .hero h1 {
+            max-width: 850px;
 
-    color: white;
+            font-size:
+                clamp(55px, 8vw, 100px);
 
-    font-size: 20px;
+            line-height: 0.9;
 
-    font-weight: 700;
+            letter-spacing: -0.07em;
+        }
 
-    letter-spacing: -.02em;
-}
+        .hero-description {
+            max-width: 650px;
 
-.logo span {
+            margin-top: 28px;
 
-    color: var(--cyan);
+            color: var(--muted);
 
-}
+            font-size: 17px;
+        }
 
+        .hero-card {
+            padding: 30px;
 
-/* nav */
+            border:
+                1px solid
+                var(--border);
 
-.nav-links {
+            border-radius: 18px;
 
-    display: flex;
+            background:
+                linear-gradient(
+                    145deg,
+                    var(--card-light),
+                    var(--card)
+                );
+        }
 
-    gap: 32px;
+        .hero-card-label {
+            color: var(--cyan);
 
-    list-style: none;
+            font-size: 10px;
+            font-weight: 800;
 
-}
+            letter-spacing: 0.16em;
+        }
 
-.nav-links a {
+        .hero-card h2 {
+            margin-top: 18px;
 
-    position: relative;
+            font-size: 28px;
+            line-height: 1.1;
+        }
 
-    color: #87a8b5;
+        .hero-card p {
+            margin-top: 14px;
 
-    text-decoration: none;
+            color: var(--muted);
 
-    font-size: 13px;
+            font-size: 13px;
+        }
 
-    transition: .25s ease;
+        .focus-list {
+            margin-top: 24px;
 
-}
+            display: grid;
+            gap: 9px;
 
-.nav-links a:hover {
+            list-style: none;
+        }
 
-    color: white;
+        .focus-list li {
+            padding: 11px 13px;
 
-}
+            border:
+                1px solid
+                rgba(85, 232, 255, 0.1);
 
-.nav-links a::after {
+            border-radius: 7px;
 
-    content: "";
+            background:
+                rgba(85, 232, 255, 0.025);
 
-    position: absolute;
+            color: var(--text);
 
-    left: 0;
+            font-size: 12px;
+        }
 
-    bottom: -8px;
+        /* =========================================
+           ABOUT
+        ========================================= */
 
-    width: 0;
+        .about-grid {
+            display: grid;
 
-    height: 2px;
+            grid-template-columns:
+                0.75fr
+                1.25fr;
 
-    background:
-        var(--cyan);
+            gap: 70px;
+        }
 
-    transition: .25s ease;
+        .about-content {
+            color: var(--text);
 
-}
+            font-size: 15px;
+        }
 
-.nav-links a:hover::after {
+        .about-content p + p {
+            margin-top: 18px;
+        }
 
-    width: 100%;
+        .about-highlight {
+            margin-top: 28px;
 
-}
+            padding: 20px;
 
+            border-left:
+                2px solid
+                var(--cyan);
 
-/* =========================================================
-   GENERAL
-========================================================= */
+            background:
+                rgba(85, 232, 255, 0.035);
 
-section {
+            color: var(--text);
 
-    width:
-        min(1180px, calc(100% - 40px));
+            font-size: 14px;
+        }
 
-    margin:
-        auto;
+        /* =========================================
+           EDUCATION
+        ========================================= */
 
-}
+        .education-card {
+            margin-top: 45px;
 
+            padding: 30px;
 
-/* =========================================================
-   HERO
-========================================================= */
+            border:
+                1px solid
+                var(--border);
 
-.hero {
+            border-radius: 18px;
 
-    min-height: 100vh;
+            background: var(--card);
+        }
 
-    padding-top: 160px;
+        .education-top {
+            display: flex;
+            justify-content: space-between;
 
-    display: grid;
+            gap: 30px;
+        }
 
-    grid-template-columns:
-        1.05fr
-        .95fr;
+        .education-card h3 {
+            font-size: 22px;
+            line-height: 1.3;
+        }
 
-    gap: 70px;
+        .college-name {
+            margin-top: 8px;
 
-    align-items: center;
+            color: var(--cyan);
 
-}
+            font-size: 14px;
+            font-weight: 700;
+        }
 
+        .college-period {
+            color: var(--muted-dark);
 
-/* hero left */
+            font-size: 12px;
 
-.hero-tags {
+            white-space: nowrap;
+        }
 
-    color: var(--cyan);
+        .education-card p {
+            margin-top: 18px;
 
-    font-size: 11px;
+            color: var(--muted);
 
-    letter-spacing: .17em;
+            font-size: 14px;
+        }
 
-    font-weight: 700;
+        /* =========================================
+           INTERESTS
+        ========================================= */
 
-    margin-bottom: 25px;
+        .interest-grid {
+            margin-top: 45px;
 
-}
+            display: grid;
 
-.hero h1 {
+            grid-template-columns:
+                repeat(3, 1fr);
 
-    font-size:
-        clamp(48px, 6vw, 82px);
+            gap: 16px;
+        }
 
-    line-height: .96;
+        .interest-card {
+            min-height: 145px;
 
-    letter-spacing: -.055em;
+            padding: 23px;
 
-}
+            border:
+                1px solid
+                var(--border);
 
-.hero h1 .cyan {
+            border-radius: 15px;
 
-    color:
-        var(--cyan);
+            background: var(--card);
+        }
 
-}
+        .interest-number {
+            color: var(--cyan);
 
-.hero-description {
+            font-size: 10px;
+            font-weight: 800;
+        }
 
-    margin-top: 28px;
+        .interest-card h3 {
+            margin-top: 24px;
 
-    max-width: 580px;
+            font-size: 18px;
+        }
 
-    color: #91aeb8;
+        .interest-card p {
+            margin-top: 5px;
 
-    font-size: 16px;
+            color: var(--muted);
 
-    line-height: 1.7;
+            font-size: 12px;
+        }
 
-}
+        /* =========================================
+           SKILLS
+        ========================================= */
 
+        .skills-grid {
+            margin-top: 45px;
 
-/* buttons */
+            display: grid;
 
-.hero-buttons {
+            grid-template-columns:
+                repeat(3, 1fr);
 
-    margin-top: 30px;
+            gap: 17px;
+        }
 
-    display: flex;
+        .skill-group {
+            padding: 25px;
 
-    gap: 14px;
+            border:
+                1px solid
+                var(--border);
 
-}
+            border-radius: 15px;
 
-.btn {
+            background: var(--card);
+        }
 
-    padding:
-        13px 19px;
+        .skill-group h3 {
+            font-size: 18px;
+        }
 
-    border-radius: 10px;
+        .skill-list {
+            margin-top: 19px;
 
-    text-decoration: none;
+            display: flex;
+            flex-wrap: wrap;
 
-    font-size: 13px;
+            gap: 7px;
 
-    font-weight: 700;
+            list-style: none;
+        }
 
-    transition:
-        transform .2s,
-        box-shadow .2s;
+        .skill-list li {
+            padding: 6px 9px;
 
-}
+            border:
+                1px solid
+                rgba(85, 232, 255, 0.12);
 
-.btn-primary {
+            border-radius: 5px;
 
-    color: #001017;
+            color: var(--muted);
 
-    background:
-        var(--cyan);
+            font-size: 11px;
+        }
 
-    box-shadow:
-        0 0 20px
-        rgba(86,231,255,.16);
+        /* =========================================
+           PROJECTS
+        ========================================= */
 
-}
+        .projects-grid {
+            margin-top: 45px;
 
-.btn-secondary {
+            display: grid;
 
-    color: white;
+            grid-template-columns:
+                repeat(3, 1fr);
 
-    border:
-        1px solid
-        var(--border);
+            gap: 18px;
+        }
 
-    background:
-        rgba(255,255,255,.025);
+        .project-card {
+            min-height: 330px;
 
-}
+            display: flex;
+            flex-direction: column;
 
-.btn:hover {
+            padding: 27px;
 
-    transform:
-        translateY(-2px);
+            border:
+                1px solid
+                var(--border);
 
-}
+            border-radius: 18px;
 
+            background:
+                linear-gradient(
+                    145deg,
+                    var(--card-light),
+                    var(--card)
+                );
+        }
 
-/* socials */
+        .project-number {
+            color: var(--cyan);
 
-.socials {
+            font-size: 10px;
+            font-weight: 800;
 
-    margin-top: 30px;
+            letter-spacing: 0.1em;
+        }
 
-    display: flex;
+        .project-card h3 {
+            margin-top: 28px;
 
-    gap: 25px;
+            font-size: 22px;
+            line-height: 1.2;
+        }
 
-}
+        .project-card p {
+            margin-top: 13px;
 
-.socials a {
+            color: var(--muted);
 
-    color: #7695a0;
+            font-size: 13px;
+        }
 
-    text-decoration: none;
+        .project-tags {
+            margin-top: 20px;
 
-    font-size: 12px;
+            display: flex;
+            flex-wrap: wrap;
 
-    transition: .2s;
+            gap: 7px;
+        }
 
-}
+        .project-tags span {
+            padding: 5px 8px;
 
-.socials a:hover {
+            border:
+                1px solid
+                rgba(85, 232, 255, 0.12);
 
-    color:
-        var(--cyan);
+            border-radius: 5px;
 
-}
+            color: var(--muted);
 
+            font-size: 9px;
+        }
 
-/* =========================================================
-   OLED DISPLAY
-========================================================= */
+        .project-link {
+            margin-top: auto;
+            padding-top: 25px;
 
-.oled-wrapper {
+            color: var(--cyan);
 
-    position: relative;
+            font-size: 12px;
+            font-weight: 800;
 
-}
+            text-decoration: none;
+        }
 
-.oled {
+        .project-link:hover {
+            color: var(--cyan-soft);
+        }
 
-    position: relative;
+        /* =========================================
+           BEYOND PROJECTS
+        ========================================= */
 
-    min-height: 450px;
+        .beyond-grid {
+            margin-top: 45px;
 
-    padding: 20px;
+            display: grid;
 
-    border-radius: 24px;
+            grid-template-columns:
+                repeat(2, 1fr);
 
-    border:
-        1px solid
-        rgba(86,231,255,.35);
+            gap: 18px;
+        }
 
-    background:
-        #01090f;
+        .beyond-card {
+            padding: 30px;
 
-    box-shadow:
+            border:
+                1px solid
+                var(--border);
 
-        0 0 45px
-        rgba(0,210,255,.12),
+            border-radius: 17px;
 
-        inset 0 0 40px
-        rgba(0,210,255,.04);
+            background: var(--card);
+        }
 
-    overflow: hidden;
+        .beyond-card h3 {
+            font-size: 21px;
+        }
 
-}
+        .beyond-card p {
+            margin-top: 14px;
 
+            color: var(--muted);
 
-/* scanline */
+            font-size: 14px;
+        }
 
-.oled::after {
+        /* =========================================
+           RESUME
+        ========================================= */
 
-    content: "";
+        .resume-box {
+            margin-top: 45px;
 
-    position: absolute;
+            padding: 40px;
 
-    left: 0;
-    right: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
 
-    height: 2px;
+            gap: 30px;
 
-    top: -5px;
+            border:
+                1px solid
+                var(--border);
 
-    background:
-        rgba(86,231,255,.2);
+            border-radius: 20px;
 
-    box-shadow:
-        0 0 12px
-        rgba(86,231,255,.5);
+            background:
+                linear-gradient(
+                    145deg,
+                    var(--card-light),
+                    var(--card)
+                );
+        }
 
-    animation:
-        scan 5s linear infinite;
+        .resume-box h3 {
+            font-size: 25px;
+        }
 
-}
+        .resume-box p {
+            margin-top: 7px;
 
-@keyframes scan {
+            color: var(--muted);
 
-    0% {
-        top: -5px;
-    }
+            font-size: 13px;
+        }
 
-    100% {
-        top: 100%;
-    }
+        /* =========================================
+           CONTACT
+        ========================================= */
 
-}
+        .contact-box {
+            padding: 60px 30px;
 
+            border:
+                1px solid
+                var(--border);
 
-/* stars */
+            border-radius: 20px;
 
-.star {
+            background: var(--card);
 
-    position: absolute;
+            text-align: center;
+        }
 
-    width: 3px;
+        .contact-box h2 {
+            max-width: 800px;
 
-    height: 3px;
+            margin: 0 auto;
 
-    background:
-        var(--cyan);
+            font-size:
+                clamp(40px, 6vw, 70px);
 
-    box-shadow:
-        0 0 8px
-        var(--cyan);
+            line-height: 0.95;
 
-    animation:
-        twinkle 2s ease-in-out infinite;
+            letter-spacing: -0.055em;
+        }
 
-}
+        .contact-box p {
+            max-width: 600px;
 
-.star:nth-child(1) {
-    left: 14%;
-    top: 18%;
-}
+            margin: 20px auto 0;
 
-.star:nth-child(2) {
-    left: 34%;
-    top: 12%;
-    animation-delay: .4s;
-}
+            color: var(--muted);
 
-.star:nth-child(3) {
-    left: 72%;
-    top: 19%;
-    animation-delay: .8s;
-}
+            font-size: 14px;
+        }
 
-.star:nth-child(4) {
-    left: 85%;
-    top: 35%;
-    animation-delay: 1.2s;
-}
+        .contact-links {
+            margin-top: 28px;
 
-@keyframes twinkle {
+            display: flex;
+            flex-wrap: wrap;
 
-    50% {
-        opacity: .25;
-        transform: scale(.5);
-    }
+            justify-content: center;
 
-}
+            gap: 10px;
+        }
 
+        /* =========================================
+           FOOTER
+        ========================================= */
 
-/* moon */
+        footer {
+            padding: 28px 0 35px;
 
-.moon {
+            border-top:
+                1px solid
+                rgba(85, 232, 255, 0.1);
 
-    position: absolute;
+            color: var(--muted-dark);
 
-    top: 45px;
-    left: 50px;
+            font-size: 11px;
+        }
 
-    width: 55px;
-    height: 55px;
+        .footer-inner {
+            display: flex;
 
-    border-radius: 50%;
+            justify-content: space-between;
 
-    background:
-        var(--cyan);
+            gap: 20px;
+        }
 
-    box-shadow:
-        0 0 25px
-        rgba(86,231,255,.3);
+        /* =========================================
+           MOBILE
+        ========================================= */
 
-}
+        @media (max-width: 950px) {
 
-.moon::after {
+            .hero {
+                grid-template-columns: 1fr;
 
-    content: "";
+                min-height: auto;
 
-    position: absolute;
+                padding-top: 90px;
+            }
 
-    top: -8px;
-    left: 14px;
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
 
-    width: 55px;
-    height: 55px;
+            .interest-grid,
+            .skills-grid,
+            .projects-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+        }
 
-    border-radius: 50%;
+        @media (max-width: 650px) {
 
-    background:
-        #01090f;
+            .container {
+                width:
+                    min(
+                        calc(100% - 24px),
+                        1180px
+                    );
+            }
 
-}
+            section {
+                padding: 80px 0;
+            }
 
+            .nav-inner {
+                min-height: auto;
 
-/* ground */
+                padding: 16px 0;
 
-.ground {
+                flex-direction: column;
+                align-items: flex-start;
+            }
 
-    position: absolute;
+            .nav-links {
+                width: 100%;
 
-    bottom: 80px;
+                display: grid;
 
-    left: 0;
+                grid-template-columns:
+                    repeat(4, auto);
 
-    width: 100%;
+                gap: 14px;
 
-    height: 2px;
+                overflow-x: auto;
+            }
 
-    background:
-        var(--cyan);
+            .nav-links a {
+                font-size: 10px;
+            }
 
-    box-shadow:
-        0 0 10px
-        var(--cyan);
+            .hero {
+                padding-top: 70px;
+            }
 
-}
+            .hero h1 {
+                font-size: 55px;
+            }
 
+            .hero-description {
+                font-size: 15px;
+            }
 
-/* pixel runner */
+            .interest-grid,
+            .skills-grid,
+            .projects-grid,
+            .beyond-grid {
+                grid-template-columns: 1fr;
+            }
 
-.runner {
+            .education-top {
+                flex-direction: column;
+                gap: 10px;
+            }
 
-    position: absolute;
+            .college-period {
+                white-space: normal;
+            }
 
-    bottom: 82px;
+            .resume-box {
+                flex-direction: column;
+                align-items: flex-start;
 
-    left: 15%;
+                padding: 30px;
+            }
 
-    width: 60px;
+            .contact-box {
+                padding: 45px 20px;
+            }
 
-    height: 70px;
-
-    animation:
-        run 4s linear infinite;
-
-}
-
-@keyframes run {
-
-    0% {
-        left: 12%;
-    }
-
-    100% {
-        left: 78%;
-    }
-
-}
-
-
-/* head */
-
-.runner-head {
-
-    position: absolute;
-
-    width: 35px;
-
-    height: 30px;
-
-    right: 0;
-
-    top: 0;
-
-    background:
-        var(--cyan);
-
-}
-
-.runner-head::before {
-
-    content: "";
-
-    position: absolute;
-
-    right: -8px;
-
-    top: 8px;
-
-    width: 10px;
-
-    height: 10px;
-
-    background:
-        var(--cyan);
-
-}
-
-
-/* body */
-
-.runner-body {
-
-    position: absolute;
-
-    left: 13px;
-
-    top: 28px;
-
-    width: 25px;
-
-    height: 30px;
-
-    background:
-        var(--cyan);
-
-}
-
-
-/* legs */
-
-.runner-leg {
-
-    position: absolute;
-
-    width: 8px;
-
-    height: 25px;
-
-    bottom: 0;
-
-    background:
-        var(--cyan);
-
-    transform-origin: top;
-
-    animation:
-        legs .25s infinite alternate;
-
-}
-
-.runner-leg.one {
-
-    left: 17px;
-
-}
-
-.runner-leg.two {
-
-    left: 31px;
-
-    animation-delay:
-        .125s;
-
-}
-
-@keyframes legs {
-
-    to {
-        transform:
-            rotate(22deg);
-    }
-
-}
-
-
-/* info */
-
-.oled-info {
-
-    position: absolute;
-
-    top: 30px;
-
-    right: 30px;
-
-    text-align: right;
-
-    color:
-        var(--cyan);
-
-    font-size: 10px;
-
-    letter-spacing: .15em;
-
-}
-
-.status {
-
-    margin-top: 8px;
-
-    color:
-        #60838f;
-
-}
-
-
-/* =========================================================
-   ABOUT
-========================================================= */
-
-.about {
-
-    padding-top: 130px;
-
-    padding-bottom: 130px;
-
-}
-
-
-.section-number {
-
-    color:
-        var(--cyan);
-
-    font-size: 12px;
-
-    letter-spacing: .2em;
-
-    margin-bottom: 12px;
-
-}
-
-.about-grid {
-
-    display: grid;
-
-    grid-template-columns:
-        1fr
-        1fr;
-
-    gap: 50px;
-
-    align-items: start;
-
-}
-
-.section-title {
-
-    font-size:
-        clamp(40px, 5vw, 65px);
-
-    letter-spacing:
-        -.045em;
-
-}
-
-.about-text {
-
-    margin-top: 20px;
-
-    color:
-        #8ca7b1;
-
-    line-height:
-        1.8;
-
-    max-width: 550px;
-
-}
-
-.know-more {
-
-    display: inline-block;
-
-    margin-top: 20px;
-
-    color:
-        var(--cyan);
-
-    text-decoration: none;
-
-    font-size: 13px;
-
-}
-
-
-/* =========================================================
-   MINI MUSIC PLAYER
-   ========================================================= */
-
-.music-mini {
-
-    position: relative;
-
-    width: 100%;
-
-    max-width: 470px;
-
-    margin-left: auto;
-
-    padding: 17px;
-
-    border-radius: 20px;
-
-    border:
-        1px solid
-        rgba(86,231,255,.18);
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(6,30,42,.9),
-            rgba(2,13,20,.95)
-        );
-
-    box-shadow:
-        0 20px 60px
-        rgba(0,0,0,.35),
-
-        0 0 35px
-        rgba(0,210,255,.06);
-
-    backdrop-filter:
-        blur(18px);
-
-    transition:
-        transform .3s ease,
-        border-color .3s ease;
-
-}
-
-.music-mini:hover {
-
-    transform:
-        translateY(-5px);
-
-    border-color:
-        rgba(86,231,255,.35);
-
-}
-
-
-/* music top */
-
-.music-top {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 15px;
-
-}
-
-
-/* album */
-
-.album {
-
-    position: relative;
-
-    flex-shrink: 0;
-
-    width: 72px;
-
-    height: 72px;
-
-    border-radius: 14px;
-
-    overflow: hidden;
-
-    background:
-
-        radial-gradient(
-            circle at center,
-            #55eaff,
-            #06485c 20%,
-            #021923 55%,
-            #01080d
-        );
-
-    border:
-        1px solid
-        rgba(86,231,255,.35);
-
-    box-shadow:
-        0 0 20px
-        rgba(86,231,255,.12);
-
-}
-
-
-/* circuit inside album */
-
-.album::before {
-
-    content: "";
-
-    position: absolute;
-
-    width: 120px;
-
-    height: 2px;
-
-    background:
-        var(--cyan);
-
-    top: 36px;
-
-    left: -20px;
-
-    box-shadow:
-        0 -15px 0
-            rgba(86,231,255,.45),
-
-        0 15px 0
-            rgba(86,231,255,.25);
-
-    transform:
-        rotate(-25deg);
-
-}
-
-
-/* chip */
-
-.album-chip {
-
-    position: absolute;
-
-    width: 25px;
-
-    height: 25px;
-
-    left: 24px;
-
-    top: 24px;
-
-    background:
-        #092b38;
-
-    border:
-        1px solid
-        var(--cyan);
-
-    box-shadow:
-        0 0 12px
-        rgba(86,231,255,.45);
-
-}
-
-.album-chip::after {
-
-    content:
-        "ECE";
-
-    position: absolute;
-
-    inset: 0;
-
-    display: grid;
-
-    place-items: center;
-
-    color:
-        var(--cyan);
-
-    font-size: 6px;
-
-    font-weight: bold;
-
-}
-
-
-/* music text */
-
-.music-info {
-
-    min-width: 0;
-
-}
-
-.music-label {
-
-    color:
-        var(--cyan);
-
-    font-size: 9px;
-
-    letter-spacing:
-        .16em;
-
-    text-transform:
-        uppercase;
-
-}
-
-.music-title {
-
-    margin-top: 5px;
-
-    color: white;
-
-    font-size: 18px;
-
-    font-weight: 700;
-
-}
-
-.music-artist {
-
-    margin-top: 3px;
-
-    color:
-        #718f9b;
-
-    font-size: 11px;
-
-}
-
-
-/* equalizer */
-
-.equalizer {
-
-    margin-left: auto;
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 3px;
-
-    height: 25px;
-
-}
-
-.equalizer span {
-
-    width: 3px;
-
-    height: 10px;
-
-    border-radius: 4px;
-
-    background:
-        var(--cyan);
-
-    box-shadow:
-        0 0 6px
-        rgba(86,231,255,.6);
-
-    animation:
-        equalizer
-        .7s ease-in-out infinite alternate;
-
-}
-
-.equalizer span:nth-child(2) {
-
-    animation-delay:
-        .15s;
-
-}
-
-.equalizer span:nth-child(3) {
-
-    animation-delay:
-        .3s;
-
-}
-
-.equalizer span:nth-child(4) {
-
-    animation-delay:
-        .45s;
-
-}
-
-@keyframes equalizer {
-
-    to {
-
-        height:
-            23px;
-
-    }
-
-}
-
-
-/* progress */
-
-.music-progress {
-
-    margin-top: 15px;
-
-}
-
-.music-progress-line {
-
-    position: relative;
-
-    height: 4px;
-
-    border-radius: 20px;
-
-    background:
-        rgba(255,255,255,.08);
-
-    cursor: pointer;
-
-}
-
-.music-progress-fill {
-
-    position: absolute;
-
-    left: 0;
-    top: 0;
-    bottom: 0;
-
-    width: 32%;
-
-    border-radius: inherit;
-
-    background:
-        linear-gradient(
-            90deg,
-            var(--cyan2),
-            var(--cyan)
-        );
-
-    box-shadow:
-        0 0 10px
-        rgba(86,231,255,.5);
-
-}
-
-.music-times {
-
-    margin-top: 6px;
-
-    display: flex;
-
-    justify-content:
-        space-between;
-
-    color:
-        #607f8b;
-
-    font-size: 9px;
-
-}
-
-
-/* music controls */
-
-.music-controls {
-
-    margin-top: 12px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content:
-        space-between;
-
-}
-
-.music-controls button {
-
-    border: 0;
-
-    background: transparent;
-
-    color:
-        #7196a2;
-
-    cursor: pointer;
-
-    font-size: 14px;
-
-}
-
-.music-controls button:hover {
-
-    color:
-        var(--cyan);
-
-}
-
-.music-play {
-
-    width: 34px;
-
-    height: 34px;
-
-    display: grid;
-
-    place-items: center;
-
-    border-radius: 50% !important;
-
-    background:
-        rgba(86,231,255,.09) !important;
-
-    border:
-        1px solid
-        rgba(86,231,255,.3) !important;
-
-    color:
-        white !important;
-
-}
-
-
-/* =========================================================
-   SKILLS
-========================================================= */
-
-.skills {
-
-    padding:
-        100px 0;
-
-}
-
-.cards {
-
-    margin-top: 45px;
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(4, 1fr);
-
-    gap: 16px;
-
-}
-
-.card {
-
-    padding: 25px;
-
-    min-height: 170px;
-
-    border-radius: 18px;
-
-    border:
-        1px solid
-        var(--border);
-
-    background:
-        rgba(5,20,29,.6);
-
-    transition:
-        transform .3s,
-        border-color .3s;
-
-}
-
-.card:hover {
-
-    transform:
-        translateY(-6px);
-
-    border-color:
-        rgba(86,231,255,.4);
-
-}
-
-.card-icon {
-
-    font-size: 27px;
-
-    color:
-        var(--cyan);
-
-}
-
-.card h3 {
-
-    margin-top: 25px;
-
-    font-size: 19px;
-
-}
-
-.card p {
-
-    margin-top: 5px;
-
-    color:
-        #718d98;
-
-    font-size: 12px;
-
-}
-
-.card-line {
-
-    margin-top: 25px;
-
-    height: 2px;
-
-    width: 55%;
-
-    background:
-        var(--cyan);
-
-    box-shadow:
-        0 0 8px
-        rgba(86,231,255,.5);
-
-}
-
-
-/* =========================================================
-   PROJECTS
-========================================================= */
-
-.projects {
-
-    padding:
-        100px 0;
-
-}
-
-.project-grid {
-
-    margin-top: 45px;
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
-    gap: 18px;
-
-}
-
-.project {
-
-    min-height: 260px;
-
-    padding: 26px;
-
-    border-radius: 18px;
-
-    border:
-        1px solid
-        var(--border);
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(7,28,39,.8),
-            rgba(2,13,19,.8)
-        );
-
-    transition:
-        transform .3s,
-        border-color .3s;
-
-}
-
-.project:hover {
-
-    transform:
-        translateY(-6px);
-
-    border-color:
-        rgba(86,231,255,.35);
-
-}
-
-.project-number {
-
-    color:
-        var(--cyan);
-
-    font-size: 11px;
-
-}
-
-.project h3 {
-
-    margin-top: 35px;
-
-    font-size: 22px;
-
-}
-
-.project p {
-
-    margin-top: 12px;
-
-    color:
-        #718f9a;
-
-    line-height:
-        1.6;
-
-    font-size: 13px;
-
-}
-
-.project-tags {
-
-    margin-top: 22px;
-
-    display: flex;
-
-    gap: 8px;
-
-    flex-wrap: wrap;
-
-}
-
-.project-tags span {
-
-    padding:
-        6px 9px;
-
-    border-radius: 7px;
-
-    border:
-        1px solid
-        var(--border);
-
-    color:
-        #75a2af;
-
-    font-size: 9px;
-
-}
-
-
-/* =========================================================
-   CONTACT
-========================================================= */
-
-.contact {
-
-    padding:
-        130px 0;
-
-}
-
-.contact-box {
-
-    padding:
-        55px;
-
-    border-radius: 25px;
-
-    border:
-        1px solid
-        var(--border);
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(5,28,40,.8),
-            rgba(2,12,18,.8)
-        );
-
-    text-align:
-        center;
-
-}
-
-.contact-box h2 {
-
-    font-size:
-        clamp(40px, 5vw, 65px);
-
-}
-
-.contact-box p {
-
-    margin:
-        20px auto;
-
-    max-width:
-        580px;
-
-    color:
-        #7f9da8;
-
-    line-height:
-        1.7;
-
-}
-
-
-/* =========================================================
-   FOOTER
-========================================================= */
-
-footer {
-
-    width:
-        min(1180px, calc(100% - 40px));
-
-    margin:
-        auto;
-
-    padding:
-        25px 0 35px;
-
-    border-top:
-        1px solid
-        rgba(86,231,255,.08);
-
-    color:
-        #4d6974;
-
-    font-size:
-        10px;
-
-    display:
-        flex;
-
-    justify-content:
-        space-between;
-
-}
-
-
-/* =========================================================
-   V1 TITLE POPUP
-========================================================= */
-
-.title-popup {
-
-    position: fixed;
-
-    z-index: 2000;
-
-    width: 270px;
-
-    padding: 16px;
-
-    border-radius: 14px;
-
-    border:
-        1px solid
-        rgba(86,231,255,.25);
-
-    background:
-        rgba(3,18,27,.95);
-
-    backdrop-filter:
-        blur(18px);
-
-    box-shadow:
-        0 15px 45px
-        rgba(0,0,0,.4),
-
-        0 0 25px
-        rgba(86,231,255,.08);
-
-    pointer-events:
-        none;
-
-    opacity: 0;
-
-    transform:
-        translateY(8px)
-        scale(.96);
-
-    transition:
-        opacity .18s ease,
-        transform .18s ease;
-
-}
-
-.title-popup.show {
-
-    opacity: 1;
-
-    transform:
-        translateY(0)
-        scale(1);
-
-}
-
-.popup-small {
-
-    color:
-        var(--cyan);
-
-    font-size:
-        9px;
-
-    letter-spacing:
-        .16em;
-
-    text-transform:
-        uppercase;
-
-}
-
-.popup-big {
-
-    margin-top: 7px;
-
-    color:
-        white;
-
-    font-size:
-        14px;
-
-}
-
-.popup-desc {
-
-    margin-top: 7px;
-
-    color:
-        #6e8995;
-
-    font-size:
-        11px;
-
-    line-height:
-        1.5;
-
-}
-
-
-/* =========================================================
-   RESPONSIVE
-========================================================= */
-
-@media(max-width: 900px) {
-
-    .hero {
-
-        grid-template-columns:
-            1fr;
-
-        padding-top:
-            140px;
-
-    }
-
-    .oled {
-
-        min-height:
-            380px;
-
-    }
-
-    .about-grid {
-
-        grid-template-columns:
-            1fr;
-
-    }
-
-    .music-mini {
-
-        margin:
-            30px 0 0;
-
-        max-width:
-            100%;
-
-    }
-
-    .cards {
-
-        grid-template-columns:
-            repeat(2,1fr);
-
-    }
-
-    .project-grid {
-
-        grid-template-columns:
-            1fr;
-
-    }
-
-}
-
-
-@media(max-width: 600px) {
-
-    .navbar {
-
-        width:
-            calc(100% - 20px);
-
-    }
-
-    .nav-links {
-
-        gap:
-            13px;
-
-    }
-
-    .nav-links a {
-
-        font-size:
-            10px;
-
-    }
-
-    .hero {
-
-        padding-top:
-            120px;
-
-    }
-
-    .hero-buttons {
-
-        flex-direction:
-            column;
-
-    }
-
-    .socials {
-
-        flex-wrap:
-            wrap;
-
-    }
-
-    .cards {
-
-        grid-template-columns:
-            1fr;
-
-    }
-
-    .oled {
-
-        min-height:
-            320px;
-
-    }
-
-    .contact-box {
-
-        padding:
-            30px 20px;
-
-    }
-
-    footer {
-
-        flex-direction:
-            column;
-
-        gap:
-            10px;
-
-    }
-
-}
-
-</style>
+            .footer-inner {
+                flex-direction: column;
+            }
+        }
+    </style>
 </head>
-
 
 <body>
 
+    <!-- =========================================
+         NAVIGATION
+    ========================================= -->
 
-<!-- =====================================================
-     NAVBAR
-===================================================== -->
+    <header class="navbar">
 
-<header class="navbar">
-
-    <div class="logo">
-        Eeshwar<span>.</span>
-    </div>
-
-    <nav>
-
-        <ul class="nav-links">
-
-            <li>
-                <a href="#about">About</a>
-            </li>
-
-            <li>
-                <a href="#skills">Skills</a>
-            </li>
-
-            <li>
-                <a href="#projects">Projects</a>
-            </li>
-
-            <li>
-                <a href="#contact">Contact</a>
-            </li>
-
-        </ul>
-
-    </nav>
-
-</header>
-
-
-<!-- =====================================================
-     HERO
-===================================================== -->
-
-<section class="hero">
-
-    <div>
-
-        <div class="hero-tags">
-            EMBEDDED SYSTEMS · IOT · FIRMWARE
-        </div>
-
-        <h1>
-
-            Building things that
-
-            <br>
-
-            <span class="cyan">
-                connect hardware &
-            </span>
-
-            <br>
-
-            <span class="cyan">
-                software.
-            </span>
-
-        </h1>
-
-        <p class="hero-description">
-
-            Electronics & Communication Engineering student
-            focused on Embedded Systems, IoT and hardware
-            development.
-
-        </p>
-
-
-        <div class="hero-buttons">
+        <div class="container nav-inner">
 
             <a
-                href="#projects"
-                class="btn btn-primary"
+                href="#home"
+                class="logo"
             >
-                → Explore Projects
+                Eeshwar<span>.</span>
             </a>
 
-            <a
-                href="#contact"
-                class="btn btn-secondary"
-            >
-                ↓ Contact Me
-            </a>
+            <nav>
+
+                <ul class="nav-links">
+
+                    <li>
+                        <a href="#about">
+                            About
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#education">
+                            Education
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#interests">
+                            Interests
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#skills">
+                            Skills
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#projects">
+                            Projects
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#resume">
+                            Resume
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#contact">
+                            Contact
+                        </a>
+                    </li>
+
+                </ul>
+
+            </nav>
 
         </div>
 
+    </header>
 
-        <div class="socials">
 
-            <a href="#">
-                GitHub ↗
-            </a>
+    <main>
 
-            <a href="#">
-                LinkedIn ↗
-            </a>
+        <!-- =====================================
+             HOME
+        ====================================== -->
 
-            <a href="mailto:yourmail@example.com">
-                Email ↗
-            </a>
+        <section id="home">
 
-        </div>
+            <div class="container hero">
 
-    </div>
+                <div>
 
-
-    <!-- OLED -->
-
-    <div class="oled-wrapper">
-
-        <div class="oled">
-
-            <span class="star"></span>
-            <span class="star"></span>
-            <span class="star"></span>
-            <span class="star"></span>
-
-            <div class="moon"></div>
-
-            <div class="oled-info">
-
-                SYSTEM ONLINE
-
-                <div class="status">
-                    MCU · OK
-                </div>
-
-                <div class="status">
-                    IoT · CONNECTED
-                </div>
-
-                <div class="status">
-                    SENSOR · ACTIVE
-                </div>
-
-            </div>
-
-
-            <div class="runner">
-
-                <div class="runner-head"></div>
-
-                <div class="runner-body"></div>
-
-                <div class="runner-leg one"></div>
-
-                <div class="runner-leg two"></div>
-
-            </div>
-
-            <div class="ground"></div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-
-<!-- =====================================================
-     ABOUT
-===================================================== -->
-
-<section
-    class="about"
-    id="about"
->
-
-    <div class="section-number">
-        01 · ABOUT
-    </div>
-
-
-    <div class="about-grid">
-
-
-        <!-- ABOUT TEXT -->
-
-        <div>
-
-            <h2 class="section-title">
-
-                About<br>
-
-                <span class="cyan">
-                    Me.
-                </span>
-
-            </h2>
-
-
-            <p class="about-text">
-
-                I'm an Electronics and Communication Engineering
-                student interested in building practical Embedded
-                Systems, IoT and hardware solutions.
-
-                I enjoy understanding how hardware and software
-                communicate and turning ideas into working systems.
-
-            </p>
-
-
-            <a
-                href="#contact"
-                class="know-more"
-            >
-                Know more about me →
-            </a>
-
-        </div>
-
-
-
-        <!-- =================================================
-             NEW MINI MUSIC PLAYER
-        ================================================= -->
-
-        <div class="music-mini">
-
-            <div class="music-top">
-
-
-                <!-- ALBUM -->
-
-                <div class="album">
-
-                    <div class="album-chip"></div>
-
-                </div>
-
-
-                <!-- MUSIC INFO -->
-
-                <div class="music-info">
-
-                    <div class="music-label">
-                        NOW PLAYING
+                    <div class="hero-label">
+                        ELECTRONICS & COMMUNICATION ENGINEERING
                     </div>
 
-                    <div class="music-title">
-                        Signal Below
-                    </div>
+                    <h1>
+                        Hi, I'm
+                        <span class="cyan">
+                            Eeshwar.
+                        </span>
+                    </h1>
 
-                    <div class="music-artist">
-                        Ocean Frequency · ECE
+                    <p class="hero-description">
+                        I'm an Electronics and Communication
+                        Engineering student interested in
+                        Embedded Systems, IoT, electronics,
+                        hardware and software.
+                    </p>
+
+                    <div class="buttons">
+
+                        <a
+                            href="#projects"
+                            class="button button-primary"
+                        >
+                            View My Work
+                        </a>
+
+                        <a
+                            href="assets/resume.pdf"
+                            target="_blank"
+                            class="button button-secondary"
+                        >
+                            View Resume
+                        </a>
+
+                        <a
+                            href="#contact"
+                            class="button button-secondary"
+                        >
+                            Contact Me
+                        </a>
+
                     </div>
 
                 </div>
 
 
-                <!-- EQUALIZER -->
+                <div class="hero-card">
 
-                <div class="equalizer">
+                    <div class="hero-card-label">
+                        WHAT I LIKE TO WORK ON
+                    </div>
 
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
+                    <h2>
+                        Hardware × Software
+                    </h2>
+
+                    <p>
+                        I enjoy learning how systems work and
+                        building practical projects that combine
+                        electronics, programming and real-world
+                        problem solving.
+                    </p>
+
+                    <ul class="focus-list">
+
+                        <li>
+                            Embedded Systems
+                        </li>
+
+                        <li>
+                            IoT & Connected Devices
+                        </li>
+
+                        <li>
+                            Electronics & Hardware
+                        </li>
+
+                        <li>
+                            Firmware & Programming
+                        </li>
+
+                    </ul>
 
                 </div>
 
             </div>
 
+        </section>
 
-            <!-- PROGRESS -->
 
-            <div class="music-progress">
+        <!-- =====================================
+             ABOUT
+        ====================================== -->
 
-                <div
-                    class="music-progress-line"
-                    id="musicProgress"
-                >
+        <section id="about">
 
-                    <div
-                        class="music-progress-fill"
-                        id="musicFill"
-                    ></div>
+            <div class="container">
+
+                <div class="section-label">
+                    01 · ABOUT ME
+                </div>
+
+                <div class="about-grid">
+
+                    <h2 class="section-title">
+                        About
+                        <span class="cyan">
+                            Me.
+                        </span>
+                    </h2>
+
+                    <div class="about-content">
+
+                        <p>
+                            I'm an Electronics and Communication
+                            Engineering student interested in
+                            technology, electronics and building
+                            practical systems.
+                        </p>
+
+                        <p>
+                            I enjoy working with both hardware
+                            and software and understanding how
+                            different parts of a system work
+                            together.
+                        </p>
+
+                        <p>
+                            My interests include embedded systems,
+                            IoT, electronics, hardware development,
+                            programming and learning new
+                            technologies through practical work.
+                        </p>
+
+                        <div class="about-highlight">
+                            I like learning by building, experimenting
+                            with ideas and turning concepts into
+                            useful working projects.
+                        </div>
+
+                    </div>
 
                 </div>
 
+            </div>
 
-                <div class="music-times">
+        </section>
 
-                    <span id="musicCurrent">
-                        0:00
+
+        <!-- =====================================
+             EDUCATION
+        ====================================== -->
+
+        <section id="education">
+
+            <div class="container">
+
+                <div class="section-label">
+                    02 · EDUCATION
+                </div>
+
+                <h2 class="section-title">
+                    My
+                    <span class="cyan">
+                        Education.
                     </span>
+                </h2>
 
-                    <span>
-                        2:48
-                    </span>
+                <p class="section-description">
+                    My college education and current academic
+                    background.
+                </p>
+
+
+                <div class="education-card">
+
+                    <div class="education-top">
+
+                        <div>
+
+                            <h3>
+                                B.E. in Electronics
+                                and Communication Engineering
+                            </h3>
+
+                            <!-- CHANGE THIS -->
+                            <div class="Jeppiaar Engineering College">
+                                YOUR COLLEGE NAME
+                            </div>
+
+                        </div>
+
+                        <!-- CHANGE THIS -->
+                        <div class="2024-2028">
+                            YOUR START YEAR — PRESENT
+                        </div>
+
+                    </div>
+
+                    <p>
+                        Currently pursuing Electronics and
+                        Communication Engineering with an
+                        interest in embedded systems, IoT,
+                        electronics, programming and
+                        hardware-software integration.
+                    </p>
 
                 </div>
 
             </div>
 
+        </section>
 
-            <!-- CONTROLS -->
 
-            <div class="music-controls">
+        <!-- =====================================
+             INTERESTS
+        ====================================== -->
 
-                <button>
-                    ↶
-                </button>
+        <section id="interests">
 
-                <button>
-                    |◀
-                </button>
+            <div class="container">
 
-                <button
-                    class="music-play"
-                    id="musicPlay"
-                >
-                    ▶
-                </button>
+                <div class="section-label">
+                    03 · INTERESTS
+                </div>
 
-                <button>
-                    ▶|
-                </button>
+                <h2 class="section-title">
+                    What I'm
+                    <span class="cyan">
+                        Interested In.
+                    </span>
+                </h2>
 
-                <button>
-                    ↷
-                </button>
+                <p class="section-description">
+                    Areas I enjoy exploring, learning about
+                    and working with.
+                </p>
+
+
+                <div class="interest-grid">
+
+                    <article class="interest-card">
+
+                        <div class="interest-number">
+                            01
+                        </div>
+
+                        <h3>
+                            Embedded Systems
+                        </h3>
+
+                        <p>
+                            Microcontrollers and embedded
+                            applications.
+                        </p>
+
+                    </article>
+
+
+                    <article class="interest-card">
+
+                        <div class="interest-number">
+                            02
+                        </div>
+
+                        <h3>
+                            IoT
+                        </h3>
+
+                        <p>
+                            Connected devices and smart systems.
+                        </p>
+
+                    </article>
+
+
+                    <article class="interest-card">
+
+                        <div class="interest-number">
+                            03
+                        </div>
+
+                        <h3>
+                            Electronics
+                        </h3>
+
+                        <p>
+                            Circuits and practical electronic
+                            systems.
+                        </p>
+
+                    </article>
+
+
+                    <article class="interest-card">
+
+                        <div class="interest-number">
+                            04
+                        </div>
+
+                        <h3>
+                            Firmware
+                        </h3>
+
+                        <p>
+                            Programming and controlling
+                            embedded hardware.
+                        </p>
+
+                    </article>
+
+
+                    <article class="interest-card">
+
+                        <div class="interest-number">
+                            05
+                        </div>
+
+                        <h3>
+                            Hardware
+                        </h3>
+
+                        <p>
+                            Building and understanding
+                            electronic hardware.
+                        </p>
+
+                    </article>
+
+
+                    <article class="interest-card">
+
+                        <div class="interest-number">
+                            06
+                        </div>
+
+                        <h3>
+                            Automation
+                        </h3>
+
+                        <p>
+                            Technology that solves practical
+                            problems.
+                        </p>
+
+                    </article>
+
+                </div>
 
             </div>
 
-        </div>
-
-    </div>
-
-</section>
+        </section>
 
 
+        <!-- =====================================
+             SKILLS
+        ====================================== -->
 
-<!-- =====================================================
-     SKILLS
-===================================================== -->
+        <section id="skills">
 
-<section
-    class="skills"
-    id="skills"
->
+            <div class="container">
 
-    <div class="section-number">
-        02 · FOCUS
-    </div>
+                <div class="section-label">
+                    04 · SKILLS
+                </div>
 
-    <h2 class="section-title">
-        What I <span class="cyan">Build.</span>
-    </h2>
-
-
-    <div class="cards">
+                <h2 class="section-title">
+                    Things I
+                    <span class="cyan">
+                        Work With.
+                    </span>
+                </h2>
 
 
-        <div class="card">
+                <div class="skills-grid">
 
-            <div class="card-icon">
-                ◈
+                    <div class="skill-group">
+
+                        <h3>
+                            Programming
+                        </h3>
+
+                        <ul class="skill-list">
+
+                            <li>C</li>
+                            <li>C++</li>
+                            <li>Python</li>
+                            <li>Embedded C</li>
+
+                        </ul>
+
+                    </div>
+
+
+                    <div class="skill-group">
+
+                        <h3>
+                            Embedded
+                        </h3>
+
+                        <ul class="skill-list">
+
+                            <li>Arduino</li>
+                            <li>ESP32</li>
+                            <li>Microcontrollers</li>
+                            <li>Sensors</li>
+
+                        </ul>
+
+                    </div>
+
+
+                    <div class="skill-group">
+
+                        <h3>
+                            Hardware
+                        </h3>
+
+                        <ul class="skill-list">
+
+                            <li>Digital Electronics</li>
+                            <li>Circuit Design</li>
+                            <li>UART</li>
+                            <li>I2C</li>
+                            <li>SPI</li>
+
+                        </ul>
+
+                    </div>
+
+
+                    <div class="skill-group">
+
+                        <h3>
+                            IoT
+                        </h3>
+
+                        <ul class="skill-list">
+
+                            <li>Connected Devices</li>
+                            <li>MQTT</li>
+                            <li>Sensor Systems</li>
+                            <li>ESP32</li>
+
+                        </ul>
+
+                    </div>
+
+
+                    <div class="skill-group">
+
+                        <h3>
+                            Tools
+                        </h3>
+
+                        <ul class="skill-list">
+
+                            <li>Git</li>
+                            <li>GitHub</li>
+                            <li>VS Code</li>
+                            <li>Arduino IDE</li>
+
+                        </ul>
+
+                    </div>
+
+
+                    <div class="skill-group">
+
+                        <h3>
+                            Other
+                        </h3>
+
+                        <ul class="skill-list">
+
+                            <li>Problem Solving</li>
+                            <li>System Design</li>
+                            <li>Prototyping</li>
+                            <li>Learning</li>
+
+                        </ul>
+
+                    </div>
+
+                </div>
+
             </div>
 
-            <h3>
-                ECE
-            </h3>
-
-            <p>
-                Electronics & Communication
-            </p>
-
-            <div class="card-line"></div>
-
-        </div>
+        </section>
 
 
-        <div class="card">
+        <!-- =====================================
+             PROJECTS
+        ====================================== -->
 
-            <div class="card-icon">
-                ◉
-            </div>
-
-            <h3>
-                IoT
-            </h3>
-
-            <p>
-                Connected Systems
-            </p>
-
-            <div class="card-line"></div>
-
-        </div>
-
-
-        <div class="card">
-
-            <div class="card-icon">
-                &lt;/&gt;
-            </div>
-
-            <h3>
-                Firmware
-            </h3>
-
-            <p>
-                Embedded Programming
-            </p>
-
-            <div class="card-line"></div>
-
-        </div>
-
-
-        <div class="card">
-
-            <div class="card-icon">
-                ⚙
-            </div>
-
-            <h3>
-                Hardware
-            </h3>
-
-            <p>
-                Circuit & System Design
-            </p>
-
-            <div class="card-line"></div>
-
-        </div>
-
-
-    </div>
-
-</section>
-
-
-
-<!-- =====================================================
+       <!-- =====================================
      PROJECTS
-===================================================== -->
+====================================== -->
 
-<section
-    class="projects"
-    id="projects"
->
+<section id="projects">
 
-    <div class="section-number">
-        03 · PROJECTS
-    </div>
+    <div class="container">
 
-    <h2 class="section-title">
-        Things I've <span class="cyan">Built.</span>
-    </h2>
-
-
-    <div class="project-grid">
-
-
-        <article class="project">
-
-            <div class="project-number">
-                01
-            </div>
-
-            <h3>
-                Embedded Systems
-            </h3>
-
-            <p>
-                Hardware-software projects involving
-                microcontrollers, sensors and real-time
-                control.
-            </p>
-
-            <div class="project-tags">
-
-                <span>
-                    MCU
-                </span>
-
-                <span>
-                    Embedded C
-                </span>
-
-                <span>
-                    Sensors
-                </span>
-
-            </div>
-
-        </article>
-
-
-        <article class="project">
-
-            <div class="project-number">
-                02
-            </div>
-
-            <h3>
-                IoT Systems
-            </h3>
-
-            <p>
-                Connected devices capable of collecting,
-                processing and transmitting real-world data.
-            </p>
-
-            <div class="project-tags">
-
-                <span>
-                    ESP32
-                </span>
-
-                <span>
-                    MQTT
-                </span>
-
-                <span>
-                    IoT
-                </span>
-
-            </div>
-
-        </article>
-
-
-        <article class="project">
-
-            <div class="project-number">
-                03
-            </div>
-
-            <h3>
-                Hardware Design
-            </h3>
-
-            <p>
-                Exploring circuits, communication interfaces
-                and practical electronic system design.
-            </p>
-
-            <div class="project-tags">
-
-                <span>
-                    SPI
-                </span>
-
-                <span>
-                    I2C
-                </span>
-
-                <span>
-                    UART
-                </span>
-
-            </div>
-
-        </article>
-
-
-    </div>
-
-</section>
-
-
-
-<!-- =====================================================
-     CONTACT
-===================================================== -->
-
-<section
-    class="contact"
-    id="contact"
->
-
-    <div class="contact-box">
-
-        <div class="section-number">
-            04 · CONTACT
+        <div class="section-label">
+            05 · PROJECTS
         </div>
 
-        <h2>
-            Let's build something
+        <h2 class="section-title">
+            Things I've
             <span class="cyan">
-                interesting.
+                Built.
             </span>
         </h2>
 
-        <p>
-
-            Have an embedded systems idea,
-            hardware project or IoT concept?
-
-            Let's connect and turn it into something real.
-
+        <p class="section-description">
+            A selection of my embedded systems, IoT,
+            electronics and robotics projects.
         </p>
 
-        <a
-            href="mailto:yourmail@example.com"
-            class="btn btn-primary"
-        >
-            Send a Signal →
-        </a>
+
+        <div class="projects-grid">
+
+
+            <!-- PROJECT 01 -->
+
+            <article class="project-card">
+
+                <div class="project-number">
+                    PROJECT 01
+                </div>
+
+                <h3>
+                    Smart Agriculture
+                </h3>
+
+                <p>
+                    An IoT-based smart agriculture system
+                    built using an ESP32 and Blynk. The system
+                    monitors temperature, humidity, soil
+                    moisture and light levels and uses a relay
+                    to control irrigation automatically when
+                    the soil becomes too dry.
+                </p>
+
+                <div class="project-tags">
+
+                    <span>ESP32</span>
+
+                    <span>Blynk</span>
+
+                    <span>DHT22</span>
+
+                    <span>Soil Sensor</span>
+
+                    <span>LDR</span>
+
+                    <span>IoT</span>
+
+                </div>
+
+                <a
+                    href="https://github.com/eeshwar18/SMART-AGRICULTURE"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="project-link"
+                >
+                    View Project →
+                </a>
+
+            </article>
+
+
+            <!-- PROJECT 02 -->
+
+            <article class="project-card">
+
+                <div class="project-number">
+                    PROJECT 02
+                </div>
+
+                <h3>
+                    Smart Arduino Car
+                </h3>
+
+                <p>
+                    A sensor-based robotic car built using an
+                    Arduino UNO. It uses ultrasonic and IR
+                    sensors to detect obstacles and a servo
+                    motor to scan different directions while
+                    the Arduino controls the movement system.
+                </p>
+
+                <div class="project-tags">
+
+                    <span>Arduino UNO</span>
+
+                    <span>Embedded C/C++</span>
+
+                    <span>Ultrasonic</span>
+
+                    <span>IR Sensors</span>
+
+                    <span>Servo</span>
+
+                    <span>L298N</span>
+
+                </div>
+
+                <a
+                    href="https://github.com/eeshwar18/Smart-car-ARDUINO-"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="project-link"
+                >
+                    View Project →
+                </a>
+
+            </article>
+
+
+            <!-- PROJECT 03 -->
+
+            <article class="project-card">
+
+                <div class="project-number">
+                    PROJECT 03
+                </div>
+
+                <h3>
+                    Raspberry Pi Smart Car
+                </h3>
+
+                <p>
+                    A Raspberry Pi Zero 2 W based robotic car
+                    designed for obstacle detection. An
+                    ultrasonic sensor mounted on a servo scans
+                    different directions while the Raspberry Pi
+                    processes the readings and controls the
+                    motors through an L298N driver.
+                </p>
+
+                <div class="project-tags">
+
+                    <span>Raspberry Pi</span>
+
+                    <span>Pi Zero 2 W</span>
+
+                    <span>Python</span>
+
+                    <span>Ultrasonic</span>
+
+                    <span>Servo</span>
+
+                    <span>L298N</span>
+
+                </div>
+
+                <a
+                    href="https://github.com/eeshwar18/Raspberry-car"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="project-link"
+                >
+                    View Project →
+                </a>
+
+            </article>
+
+
+        </div>
 
     </div>
 
 </section>
+        
 
 
+        <!-- =====================================
+             BEYOND PROJECTS
+        ====================================== -->
 
-<!-- =====================================================
-     FOOTER
-===================================================== -->
+        <section id="beyond">
 
-<footer>
+            <div class="container">
 
-    <span>
-        © 2026 Eeshwar.
-    </span>
+                <div class="section-label">
+                    06 · BEYOND PROJECTS
+                </div>
 
-    <span>
-        Built with hardware × software.
-    </span>
+                <h2 class="section-title">
+                    More About
+                    <span class="cyan">
+                        Me.
+                    </span>
+                </h2>
 
-</footer>
 
+                <div class="beyond-grid">
 
+                    <article class="beyond-card">
 
-<!-- =====================================================
-     V1 TITLE POPUP
-===================================================== -->
+                        <h3>
+                            What I Like To Work On
+                        </h3>
 
-<div
-    class="title-popup"
-    id="titlePopup"
->
+                        <p>
+                            I enjoy working on practical ideas
+                            where electronics, programming and
+                            problem solving come together.
+                        </p>
 
-    <div class="popup-small">
-        SYSTEM MESSAGE
-    </div>
+                        <p>
+                            I like experimenting with hardware,
+                            learning how systems work and
+                            turning ideas into useful projects.
+                        </p>
 
-    <div class="popup-big">
-        Hardware meets software.
-    </div>
+                    </article>
 
-    <div class="popup-desc">
-        Move around the title to discover
-        small interactive details.
-    </div>
 
-</div>
+                    <article class="beyond-card">
 
+                        <h3>
+                            What I'm Learning
+                        </h3>
 
+                        <p>
+                            I'm continuously exploring new
+                            technologies and improving my
+                            understanding of embedded systems,
+                            IoT, electronics and programming.
+                        </p>
 
-<script>
+                        <p>
+                            I enjoy learning through practical
+                            projects and experimentation.
+                        </p>
 
-/* =========================================================
-   V1 TITLE PROXIMITY POPUP
-========================================================= */
+                    </article>
 
-const title =
-    document.querySelector(".hero h1");
+                </div>
 
-const popup =
-    document.getElementById("titlePopup");
+            </div>
 
+        </section>
 
-document.addEventListener(
-    "mousemove",
-    (event) => {
 
-        const rect =
-            title.getBoundingClientRect();
+        <!-- =====================================
+             RESUME
+        ====================================== -->
 
-        const padding =
-            80;
+        <section id="resume">
 
-        const nearTitle =
+            <div class="container">
 
-            event.clientX >
-                rect.left - padding &&
+                <div class="section-label">
+                    07 · RESUME
+                </div>
 
-            event.clientX <
-                rect.right + padding &&
+                <h2 class="section-title">
+                    My
+                    <span class="cyan">
+                        Resume.
+                    </span>
+                </h2>
 
-            event.clientY >
-                rect.top - padding &&
 
-            event.clientY <
-                rect.bottom + padding;
+                <div class="resume-box">
 
+                    <div>
 
-        if (nearTitle) {
+                        <h3>
+                            My Professional Resume
+                        </h3>
 
-            popup.classList.add(
-                "show"
-            );
+                        <p>
+                            View or download my latest resume.
+                        </p>
 
+                    </div>
 
-            popup.style.left =
-                (
-                    event.clientX + 18
-                ) + "px";
 
+                    <div class="buttons">
 
-            popup.style.top =
-                (
-                    event.clientY + 18
-                ) + "px";
+                        <a
+                            href="assets/resume.pdf"
+                            target="_blank"
+                            class="button button-primary"
+                        >
+                            View Resume
+                        </a>
 
+                        <a
+                            href="assets/resume.pdf"
+                            download
+                            class="button button-secondary"
+                        >
+                            Download Resume
+                        </a>
 
-        } else {
+                    </div>
 
-            popup.classList.remove(
-                "show"
-            );
+                </div>
 
-        }
+            </div>
 
-    }
-);
+        </section>
 
 
+        <!-- =====================================
+             CONTACT
+        ====================================== -->
 
-/* =========================================================
-   MINI MUSIC PLAYER
-========================================================= */
+        <section id="contact">
 
-const play =
-    document.getElementById(
-        "musicPlay"
-    );
+            <div class="container">
 
-const fill =
-    document.getElementById(
-        "musicFill"
-    );
+                <div class="contact-box">
 
-const current =
-    document.getElementById(
-        "musicCurrent"
-    );
+                    <div class="section-label">
+                        08 · CONTACT
+                    </div>
 
-const progress =
-    document.getElementById(
-        "musicProgress"
-    );
+                    <h2>
+                        Let's build something
+                        <span class="cyan">
+                            useful.
+                        </span>
+                    </h2>
 
+                    <p>
+                        Have an idea, project, opportunity or
+                        simply want to connect? Feel free to
+                        reach out.
+                    </p>
 
-const duration =
-    168;
 
-let time =
-    0;
+                    <div class="contact-links">
 
-let playing =
-    false;
+                        <a
+                            href="mailto:eeshwar182007@gmail.com"
+                            class="button button-primary"
+                        >
+                            Email Me
+                        </a>
 
-let timer;
+                        <!-- CHANGE GITHUB LINK -->
+                        <a
+                            href="https://github.com/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="button button-secondary"
+                        >
+                            GitHub
+                        </a>
 
+                        <!-- CHANGE LINKEDIN LINK -->
+                        <a
+                            href="https://www.linkedin.com/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="button button-secondary"
+                        >
+                            LinkedIn
+                        </a>
 
-/* time format */
+                    </div>
 
-function formatTime(
-    seconds
-) {
+                </div>
 
-    seconds =
-        Math.floor(
-            seconds
-        );
+            </div>
 
-    const minutes =
-        Math.floor(
-            seconds / 60
-        );
+        </section>
 
-    const secs =
-        seconds % 60;
+    </main>
 
-    return (
-        minutes +
-        ":" +
-        String(secs)
-            .padStart(
-                2,
-                "0"
-            )
-    );
 
-}
+    <!-- =========================================
+         FOOTER
+    ========================================= -->
 
+    <footer>
 
-/* update */
+        <div class="container footer-inner">
 
-function updateMusic() {
+            <span>
+                © 2026 Eeshwar. All rights reserved.
+            </span>
 
-    const percentage =
-        (time / duration) *
-        100;
+            <span>
+                Electronics × Hardware × Software
+            </span>
 
-    fill.style.width =
-        percentage + "%";
+        </div>
 
-    current.textContent =
-        formatTime(time);
-
-}
-
-
-/* start */
-
-function startMusic() {
-
-    if (playing)
-        return;
-
-    playing =
-        true;
-
-    play.textContent =
-        "Ⅱ";
-
-
-    timer =
-        setInterval(
-            () => {
-
-                time += .1;
-
-                if (
-                    time >=
-                    duration
-                ) {
-
-                    time =
-                        0;
-
-                }
-
-                updateMusic();
-
-            },
-            100
-        );
-
-}
-
-
-/* pause */
-
-function pauseMusic() {
-
-    playing =
-        false;
-
-    play.textContent =
-        "▶";
-
-    clearInterval(
-        timer
-    );
-
-}
-
-
-/* click */
-
-play.addEventListener(
-    "click",
-    () => {
-
-        if (playing) {
-
-            pauseMusic();
-
-        } else {
-
-            startMusic();
-
-        }
-
-    }
-);
-
-
-/* progress click */
-
-progress.addEventListener(
-    "click",
-    (event) => {
-
-        const rect =
-            progress.getBoundingClientRect();
-
-        const percent =
-            (
-                event.clientX -
-                rect.left
-            ) /
-            rect.width;
-
-        time =
-            Math.max(
-                0,
-                Math.min(
-                    duration,
-                    percent *
-                    duration
-                )
-            );
-
-        updateMusic();
-
-    }
-);
-
-
-updateMusic();
-
-
-/* =========================================================
-   SCROLL NAV ACTIVE STATE
-========================================================= */
-
-const sections =
-    document.querySelectorAll(
-        "section[id]"
-    );
-
-const navLinks =
-    document.querySelectorAll(
-        ".nav-links a"
-    );
-
-
-window.addEventListener(
-    "scroll",
-    () => {
-
-        let currentSection =
-            "";
-
-
-        sections.forEach(
-            section => {
-
-                const top =
-                    section.offsetTop;
-
-                if (
-                    window.scrollY >=
-                    top - 250
-                ) {
-
-                    currentSection =
-                        section.id;
-
-                }
-
-            }
-        );
-
-
-        navLinks.forEach(
-            link => {
-
-                link.style.color =
-                    "#87a8b5";
-
-
-                if (
-                    link.getAttribute(
-                        "href"
-                    ) ===
-                    "#" +
-                    currentSection
-                ) {
-
-                    link.style.color =
-                        "#56e7ff";
-
-                }
-
-            }
-        );
-
-    }
-);
-
-</script>
-
+    </footer>
 
 </body>
 </html>
