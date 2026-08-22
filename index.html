@@ -1,654 +1,2742 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Eeshwar | Embedded Systems & IoT</title>
 
-    <meta name="description"
-        content="Eeshwar - Electronics and Communication Engineering student focused on Embedded Systems, IoT and firmware development.">
+    <meta
+        name="description"
+        content="Eeshwar - Electronics and Communication Engineering student focused on Embedded Systems, IoT and hardware development."
+    >
 
-    <link rel="stylesheet" href="style.css">
+    <style>
+
+        /* =========================================================
+           GLOBAL
+           ========================================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #061018;
+            color: #eaf8ff;
+
+            font-family:
+                Inter,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+
+            line-height: 1.6;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button {
+            font: inherit;
+        }
+
+
+        /* =========================================================
+           OCEAN / IOT COLORS
+           ========================================================= */
+
+        :root {
+            --bg: #061018;
+            --bg-soft: #091720;
+
+            --card: #0b1b25;
+            --card-hover: #0d222e;
+
+            --blue: #20d9ff;
+            --blue-bright: #5ee7ff;
+            --blue-dark: #007ea0;
+
+            --text: #ecfaff;
+            --muted: #91adba;
+            --border: rgba(56, 211, 255, 0.18);
+
+            --max-width: 1180px;
+        }
+
+
+        /* =========================================================
+           NAVBAR
+           ========================================================= */
+
+        nav {
+            position: fixed;
+
+            top: 0;
+            left: 0;
+            right: 0;
+
+            height: 76px;
+
+            z-index: 1000;
+
+            background:
+                rgba(6, 16, 24, 0.88);
+
+            backdrop-filter:
+                blur(16px);
+
+            border-bottom:
+                1px solid var(--border);
+        }
+
+        .nav-container {
+            max-width: var(--max-width);
+
+            height: 100%;
+
+            margin: auto;
+
+            padding:
+                0 28px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .logo span {
+            color: var(--blue);
+        }
+
+        .nav-links {
+            display: flex;
+
+            align-items: center;
+
+            gap: 34px;
+
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--muted);
+
+            font-size: 15px;
+
+            transition:
+                color 0.25s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--blue);
+        }
+
+
+        /* =========================================================
+           GENERAL SECTIONS
+           ========================================================= */
+
+        section {
+            max-width: var(--max-width);
+
+            margin: auto;
+
+            padding:
+                120px 28px;
+        }
+
+        .section-number {
+            color: var(--blue);
+
+            font-family:
+                "Courier New",
+                monospace;
+
+            font-size: 14px;
+
+            letter-spacing: 2px;
+
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-size: clamp(38px, 5vw, 58px);
+
+            line-height: 1.05;
+
+            letter-spacing: -2px;
+
+            margin-bottom: 55px;
+        }
+
+        .section-description {
+            max-width: 780px;
+
+            color: var(--muted);
+
+            font-size: 18px;
+        }
+
+
+        /* =========================================================
+           HERO
+           ========================================================= */
+
+        .hero {
+            min-height: 100vh;
+
+            padding-top: 150px;
+
+            display: grid;
+
+            grid-template-columns:
+                1.05fr
+                0.95fr;
+
+            gap: 65px;
+
+            align-items: center;
+        }
+
+        .hero-label {
+            color: var(--blue);
+
+            font-family:
+                "Courier New",
+                monospace;
+
+            font-size: 14px;
+
+            letter-spacing: 2px;
+
+            margin-bottom: 22px;
+        }
+
+        .hero h1 {
+            font-size:
+                clamp(48px, 7vw, 82px);
+
+            line-height: 0.98;
+
+            letter-spacing: -4px;
+
+            margin-bottom: 28px;
+        }
+
+        .hero h1 .highlight {
+            color: var(--blue);
+        }
+
+        .hero-description {
+            color: var(--muted);
+
+            font-size: 19px;
+
+            max-width: 720px;
+
+            margin-bottom: 35px;
+        }
+
+        .hero-buttons {
+            display: flex;
+
+            gap: 15px;
+
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding:
+                14px 24px;
+
+            border-radius: 10px;
+
+            border:
+                1px solid var(--border);
+
+            font-weight: 700;
+
+            transition:
+                transform 0.25s ease,
+                border-color 0.25s ease,
+                background 0.25s ease;
+        }
+
+        .btn:hover {
+            transform:
+                translateY(-3px);
+
+            border-color:
+                rgba(32, 217, 255, 0.55);
+        }
+
+        .btn-primary {
+            background: var(--blue);
+
+            color: #031018;
+
+            border-color: var(--blue);
+
+            box-shadow:
+                0 10px 30px
+                rgba(32, 217, 255, 0.18);
+        }
+
+        .btn-secondary {
+            background:
+                rgba(255, 255, 255, 0.025);
+
+            color: var(--text);
+        }
+
+
+        /* =========================================================
+           PIXEL CAT DISPLAY
+           ========================================================= */
+
+        .cat-display {
+            width: 100%;
+
+            max-width: 600px;
+
+            aspect-ratio: 1.42 / 1;
+
+            padding: 13px;
+
+            border-radius: 28px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #0b202b,
+                    #020b12 55%,
+                    #071923
+                );
+
+            border:
+                1px solid
+                rgba(32, 217, 255, 0.55);
+
+            box-shadow:
+                0 0 30px
+                rgba(32, 217, 255, 0.12),
+
+                0 25px 70px
+                rgba(0, 0, 0, 0.35),
+
+                inset 0 0 35px
+                rgba(32, 217, 255, 0.04);
+        }
+
+        .display-screen {
+            position: relative;
+
+            width: 100%;
+            height: 100%;
+
+            overflow: hidden;
+
+            border-radius: 19px;
+
+            background:
+                radial-gradient(
+                    circle at 50% 45%,
+                    rgba(0, 190, 255, 0.09),
+                    transparent 55%
+                ),
+
+                #020a10;
+
+            border:
+                1px solid
+                rgba(32, 217, 255, 0.22);
+
+            box-shadow:
+                inset 0 0 40px
+                rgba(0, 190, 255, 0.07);
+        }
+
+        /* pixel grid */
+
+        .display-screen::before {
+            content: "";
+
+            position: absolute;
+
+            inset: 0;
+
+            background-image:
+
+                linear-gradient(
+                    rgba(32, 217, 255, 0.025)
+                    1px,
+                    transparent 1px
+                ),
+
+                linear-gradient(
+                    90deg,
+                    rgba(32, 217, 255, 0.025)
+                    1px,
+                    transparent 1px
+                );
+
+            background-size:
+                7px 7px;
+
+            pointer-events: none;
+
+            z-index: 50;
+        }
+
+        /* scanline */
+
+        .display-screen::after {
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+            right: 0;
+
+            top: -10px;
+
+            height: 2px;
+
+            background:
+                rgba(32, 217, 255, 0.12);
+
+            box-shadow:
+                0 0 12px
+                rgba(32, 217, 255, 0.2);
+
+            animation:
+                scan 5s linear infinite;
+
+            pointer-events: none;
+
+            z-index: 51;
+        }
+
+        @keyframes scan {
+            from {
+                top: -10px;
+            }
+
+            to {
+                top: 110%;
+            }
+        }
+
+
+        /* =========================================================
+           MOON
+           ========================================================= */
+
+        .pixel-moon {
+            position: absolute;
+
+            width: 42px;
+            height: 42px;
+
+            left: 9%;
+            top: 11%;
+
+            border-radius: 50%;
+
+            background:
+                var(--blue);
+
+            box-shadow:
+                0 0 18px
+                rgba(32, 217, 255, 0.38);
+        }
+
+        .pixel-moon::after {
+            content: "";
+
+            position: absolute;
+
+            width: 39px;
+            height: 39px;
+
+            left: 13px;
+            top: -7px;
+
+            border-radius: 50%;
+
+            background:
+                #020a10;
+        }
+
+
+        /* =========================================================
+           STARS
+           ========================================================= */
+
+        .star {
+            position: absolute;
+
+            color: var(--blue);
+
+            font-family:
+                monospace;
+
+            text-shadow:
+                0 0 8px
+                rgba(32, 217, 255, 0.7);
+
+            animation:
+                twinkle 2.5s ease-in-out infinite;
+        }
+
+        .star-1 {
+            left: 31%;
+            top: 14%;
+        }
+
+        .star-2 {
+            left: 49%;
+            top: 20%;
+
+            animation-delay:
+                0.5s;
+        }
+
+        .star-3 {
+            left: 68%;
+            top: 12%;
+
+            animation-delay:
+                1s;
+        }
+
+        .star-4 {
+            left: 83%;
+            top: 27%;
+
+            animation-delay:
+                1.5s;
+        }
+
+        @keyframes twinkle {
+            0%,
+            100% {
+                opacity: 0.2;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+
+        /* =========================================================
+           BACKGROUND CITY
+           ========================================================= */
+
+        .pixel-city {
+            position: absolute;
+
+            left: 0;
+            bottom: 26%;
+
+            width: 100%;
+            height: 100px;
+
+            display: flex;
+
+            align-items: flex-end;
+
+            gap: 6px;
+
+            opacity: 0.12;
+        }
+
+        .pixel-city span {
+            width: 12%;
+
+            background:
+                var(--blue-dark);
+        }
+
+        .pixel-city span:nth-child(1) {
+            height: 35%;
+        }
+
+        .pixel-city span:nth-child(2) {
+            height: 62%;
+        }
+
+        .pixel-city span:nth-child(3) {
+            height: 48%;
+        }
+
+        .pixel-city span:nth-child(4) {
+            height: 80%;
+        }
+
+        .pixel-city span:nth-child(5) {
+            height: 55%;
+        }
+
+
+        /* =========================================================
+           CAT
+           ========================================================= */
+
+        .pixel-cat {
+            position: absolute;
+
+            left: 42%;
+            bottom: 22%;
+
+            width: 140px;
+            height: 140px;
+
+            z-index: 10;
+
+            transform-origin:
+                bottom center;
+        }
+
+        .cat-body {
+            position: absolute;
+
+            left: 34px;
+            top: 54px;
+
+            width: 65px;
+            height: 43px;
+
+            background:
+                var(--blue);
+
+            border-radius:
+                9px 14px 8px 8px;
+
+            box-shadow:
+                0 0 14px
+                rgba(32, 217, 255, 0.48);
+        }
+
+        .cat-head {
+            position: absolute;
+
+            left: 82px;
+            top: 29px;
+
+            width: 47px;
+            height: 44px;
+
+            background:
+                var(--blue);
+
+            border-radius:
+                9px;
+
+            box-shadow:
+                0 0 14px
+                rgba(32, 217, 255, 0.48);
+
+            transition:
+                transform 0.5s ease;
+        }
+
+        .cat-ear {
+            position: absolute;
+
+            top: -10px;
+
+            width: 18px;
+            height: 18px;
+
+            background:
+                var(--blue);
+        }
+
+        .ear-left {
+            left: 3px;
+
+            clip-path:
+                polygon(
+                    0 100%,
+                    20% 0,
+                    100% 100%
+                );
+        }
+
+        .ear-right {
+            right: 3px;
+
+            clip-path:
+                polygon(
+                    0 100%,
+                    80% 0,
+                    100% 100%
+                );
+        }
+
+        .cat-eye {
+            position: absolute;
+
+            top: 15px;
+
+            width: 5px;
+            height: 7px;
+
+            background:
+                #001018;
+
+            transition:
+                height 0.15s ease;
+        }
+
+        .eye-left {
+            left: 11px;
+        }
+
+        .eye-right {
+            right: 11px;
+        }
+
+        .cat-nose {
+            position: absolute;
+
+            left: 21px;
+            top: 26px;
+
+            width: 5px;
+            height: 4px;
+
+            background:
+                #001018;
+        }
+
+        .cat-tail {
+            position: absolute;
+
+            left: 10px;
+            top: 41px;
+
+            width: 47px;
+            height: 46px;
+
+            border:
+                7px solid
+                var(--blue);
+
+            border-right-color:
+                transparent;
+
+            border-bottom-color:
+                transparent;
+
+            border-radius:
+                50%;
+
+            transform:
+                rotate(-30deg);
+
+            filter:
+                drop-shadow(
+                    0 0 7px
+                    rgba(32, 217, 255, 0.4)
+                );
+
+            transform-origin:
+                right bottom;
+        }
+
+        .cat-leg {
+            position: absolute;
+
+            top: 88px;
+
+            width: 10px;
+            height: 37px;
+
+            background:
+                var(--blue);
+
+            border-radius:
+                4px;
+
+            transform-origin:
+                top center;
+        }
+
+        .leg-back {
+            left: 46px;
+        }
+
+        .leg-front {
+            left: 81px;
+        }
+
+        .cat-paw {
+            position: absolute;
+
+            left: 87px;
+            top: 72px;
+
+            width: 20px;
+            height: 9px;
+
+            border-radius:
+                6px;
+
+            background:
+                var(--blue);
+
+            transform-origin:
+                right center;
+        }
+
+
+        /* =========================================================
+           GROUND
+           ========================================================= */
+
+        .pixel-ground {
+            position: absolute;
+
+            left: 7%;
+            bottom: 19%;
+
+            width: 86%;
+            height: 4px;
+
+            background:
+                var(--blue);
+
+            box-shadow:
+                0 0 12px
+                rgba(32, 217, 255, 0.5);
+        }
+
+
+        /* =========================================================
+           PLANTS
+           ========================================================= */
+
+        .pixel-plant {
+            position: absolute;
+
+            bottom: 24%;
+
+            width: 40px;
+            height: 58px;
+
+            z-index: 5;
+        }
+
+        .plant-left {
+            left: 14%;
+        }
+
+        .plant-right {
+            right: 14%;
+        }
+
+        .pixel-plant::before {
+            content: "";
+
+            position: absolute;
+
+            left: 18px;
+            bottom: 0;
+
+            width: 4px;
+            height: 40px;
+
+            background:
+                var(--blue-dark);
+        }
+
+        .pixel-plant span {
+            position: absolute;
+
+            width: 19px;
+            height: 10px;
+
+            background:
+                var(--blue);
+
+            border-radius:
+                10px;
+        }
+
+        .pixel-plant span:nth-child(1) {
+            left: 0;
+            top: 17px;
+
+            transform:
+                rotate(-30deg);
+        }
+
+        .pixel-plant span:nth-child(2) {
+            right: 0;
+            top: 25px;
+
+            transform:
+                rotate(30deg);
+        }
+
+        .pixel-plant span:nth-child(3) {
+            left: 8px;
+            top: 4px;
+
+            transform:
+                rotate(-10deg);
+        }
+
+
+        /* =========================================================
+           CAT WALK
+           ========================================================= */
+
+        .pixel-cat.walking {
+            animation:
+                walkBody 0.55s
+                ease-in-out
+                infinite;
+        }
+
+        .pixel-cat.walking .leg-back {
+            animation:
+                backLeg 0.55s
+                ease-in-out
+                infinite
+                alternate;
+        }
+
+        .pixel-cat.walking .leg-front {
+            animation:
+                frontLeg 0.55s
+                ease-in-out
+                infinite
+                alternate;
+        }
+
+        .pixel-cat.walking .cat-tail {
+            animation:
+                tailMove 0.7s
+                ease-in-out
+                infinite
+                alternate;
+        }
+
+        @keyframes walkBody {
+            0%,
+            100% {
+                transform:
+                    translateX(-25px)
+                    translateY(0);
+            }
+
+            50% {
+                transform:
+                    translateX(25px)
+                    translateY(-4px);
+            }
+        }
+
+        @keyframes backLeg {
+            from {
+                transform:
+                    rotate(25deg);
+            }
+
+            to {
+                transform:
+                    rotate(-25deg);
+            }
+        }
+
+        @keyframes frontLeg {
+            from {
+                transform:
+                    rotate(-25deg);
+            }
+
+            to {
+                transform:
+                    rotate(25deg);
+            }
+        }
+
+        @keyframes tailMove {
+            from {
+                transform:
+                    rotate(-40deg);
+            }
+
+            to {
+                transform:
+                    rotate(-15deg);
+            }
+        }
+
+
+        /* =========================================================
+           RUN
+           ========================================================= */
+
+        .pixel-cat.running {
+            animation:
+                runBody 0.3s
+                ease-in-out
+                infinite;
+        }
+
+        .pixel-cat.running .leg-back {
+            animation:
+                runBack 0.3s
+                infinite
+                alternate;
+        }
+
+        .pixel-cat.running .leg-front {
+            animation:
+                runFront 0.3s
+                infinite
+                alternate;
+        }
+
+        .pixel-cat.running .cat-tail {
+            animation:
+                runTail 0.3s
+                infinite
+                alternate;
+        }
+
+        @keyframes runBody {
+            0%,
+            100% {
+                transform:
+                    translateX(-45px)
+                    translateY(0)
+                    rotate(-2deg);
+            }
+
+            50% {
+                transform:
+                    translateX(45px)
+                    translateY(-9px)
+                    rotate(2deg);
+            }
+        }
+
+        @keyframes runBack {
+            from {
+                transform:
+                    rotate(55deg);
+            }
+
+            to {
+                transform:
+                    rotate(-55deg);
+            }
+        }
+
+        @keyframes runFront {
+            from {
+                transform:
+                    rotate(-55deg);
+            }
+
+            to {
+                transform:
+                    rotate(55deg);
+            }
+        }
+
+        @keyframes runTail {
+            from {
+                transform:
+                    rotate(-55deg);
+            }
+
+            to {
+                transform:
+                    rotate(-5deg);
+            }
+        }
+
+
+        /* =========================================================
+           LICKING PAW
+           ========================================================= */
+
+        .pixel-cat.licking {
+            animation:
+                lickBody 2.8s
+                ease-in-out
+                infinite;
+        }
+
+        .pixel-cat.licking .cat-paw {
+            animation:
+                lickPaw 2.8s
+                ease-in-out
+                infinite;
+        }
+
+        .pixel-cat.licking .cat-eye {
+            animation:
+                blink 2.8s
+                ease-in-out
+                infinite;
+        }
+
+        @keyframes lickBody {
+            0%,
+            100% {
+                transform:
+                    translateY(0);
+            }
+
+            45% {
+                transform:
+                    translateY(2px);
+            }
+
+            70% {
+                transform:
+                    translateY(0);
+            }
+        }
+
+        @keyframes lickPaw {
+            0%,
+            20% {
+                transform:
+                    translate(0, 0)
+                    rotate(0);
+            }
+
+            35%,
+            70% {
+                transform:
+                    translate(-18px, -27px)
+                    rotate(-35deg);
+            }
+
+            82%,
+            100% {
+                transform:
+                    translate(0, 0)
+                    rotate(0);
+            }
+        }
+
+        @keyframes blink {
+            0%,
+            42%,
+            50%,
+            100% {
+                height: 7px;
+            }
+
+            45%,
+            47% {
+                height: 1px;
+            }
+        }
+
+
+        /* =========================================================
+           STRETCH
+           ========================================================= */
+
+        .pixel-cat.stretching {
+            animation:
+                stretchBody 3s
+                ease-in-out
+                infinite;
+        }
+
+        .pixel-cat.stretching .cat-body {
+            animation:
+                stretchBack 3s
+                ease-in-out
+                infinite;
+        }
+
+        .pixel-cat.stretching .cat-head {
+            animation:
+                stretchHead 3s
+                ease-in-out
+                infinite;
+        }
+
+        .pixel-cat.stretching .leg-front {
+            animation:
+                stretchFront 3s
+                ease-in-out
+                infinite;
+        }
+
+        .pixel-cat.stretching .leg-back {
+            animation:
+                stretchBackLeg 3s
+                ease-in-out
+                infinite;
+        }
+
+        @keyframes stretchBody {
+            0%,
+            100% {
+                transform:
+                    translateY(0);
+            }
+
+            45%,
+            70% {
+                transform:
+                    translateY(8px);
+            }
+        }
+
+        @keyframes stretchBack {
+            0%,
+            100% {
+                transform:
+                    scaleX(1);
+            }
+
+            50% {
+                transform:
+                    scaleX(1.3);
+            }
+        }
+
+        @keyframes stretchHead {
+            0%,
+            100% {
+                transform:
+                    translate(0, 0);
+            }
+
+            50% {
+                transform:
+                    translate(8px, 20px);
+            }
+        }
+
+        @keyframes stretchFront {
+            0%,
+            100% {
+                transform:
+                    rotate(0);
+            }
+
+            50% {
+                transform:
+                    rotate(-55deg);
+            }
+        }
+
+        @keyframes stretchBackLeg {
+            0%,
+            100% {
+                transform:
+                    rotate(0);
+            }
+
+            50% {
+                transform:
+                    rotate(35deg);
+            }
+        }
+
+
+        /* =========================================================
+           SITTING
+           ========================================================= */
+
+        .pixel-cat.sitting {
+            animation:
+                sitBody 2.4s
+                ease-in-out
+                infinite;
+        }
+
+        .pixel-cat.sitting .cat-leg {
+            animation:
+                sitLegs 2.4s
+                ease-in-out
+                infinite;
+        }
+
+        .pixel-cat.sitting .cat-tail {
+            animation:
+                sitTail 2.4s
+                ease-in-out
+                infinite;
+        }
+
+        @keyframes sitBody {
+            0%,
+            100% {
+                transform:
+                    translateY(0);
+            }
+
+            50% {
+                transform:
+                    translateY(10px);
+            }
+        }
+
+        @keyframes sitLegs {
+            0%,
+            100% {
+                transform:
+                    rotate(0);
+            }
+
+            50% {
+                transform:
+                    rotate(75deg);
+            }
+        }
+
+        @keyframes sitTail {
+            0%,
+            100% {
+                transform:
+                    rotate(-30deg);
+            }
+
+            50% {
+                transform:
+                    rotate(15deg);
+            }
+        }
+
+
+        /* =========================================================
+           ABOUT
+           ========================================================= */
+
+        .about-section {
+            border-top:
+                1px solid var(--border);
+        }
+
+        .about-content {
+            max-width: 850px;
+        }
+
+        .about-content p {
+            color: var(--muted);
+
+            font-size: 18px;
+
+            margin-bottom: 22px;
+        }
+
+        .about-cards {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 18px;
+
+            margin-top: 50px;
+        }
+
+        .about-card {
+            padding: 28px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 15px;
+
+            background:
+                rgba(255, 255, 255, 0.025);
+        }
+
+        .about-card h3 {
+            font-size: 22px;
+
+            margin-bottom: 6px;
+        }
+
+        .about-card p {
+            margin: 0;
+
+            font-size: 15px;
+        }
+
+
+        /* =========================================================
+           SKILLS
+           ========================================================= */
+
+        .skills-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 20px;
+        }
+
+        .skill-card {
+            padding: 32px;
+
+            min-height: 170px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 16px;
+
+            background:
+                rgba(255, 255, 255, 0.025);
+
+            transition:
+                transform 0.25s ease,
+                border-color 0.25s ease,
+                background 0.25s ease;
+        }
+
+        .skill-card:hover {
+            transform:
+                translateY(-5px);
+
+            border-color:
+                rgba(32, 217, 255, 0.45);
+
+            background:
+                var(--card-hover);
+        }
+
+        .skill-card h3 {
+            font-size: 23px;
+
+            margin-bottom: 15px;
+        }
+
+        .skill-card p {
+            color: var(--muted);
+
+            font-size: 16px;
+        }
+
+
+        /* =========================================================
+           PROJECTS
+           ========================================================= */
+
+        .projects-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 25px;
+        }
+
+        .project-card {
+            display: flex;
+
+            flex-direction: column;
+
+            min-height: 440px;
+
+            padding: 35px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 17px;
+
+            background:
+                rgba(255, 255, 255, 0.025);
+
+            transition:
+                transform 0.25s ease,
+                border-color 0.25s ease;
+        }
+
+        .project-card:hover {
+            transform:
+                translateY(-6px);
+
+            border-color:
+                rgba(32, 217, 255, 0.45);
+        }
+
+        .project-number {
+            color: var(--blue);
+
+            font-family:
+                "Courier New",
+                monospace;
+
+            margin-bottom: 80px;
+        }
+
+        .project-type {
+            color: var(--blue);
+
+            font-family:
+                "Courier New",
+                monospace;
+
+            font-size: 13px;
+
+            margin-bottom: 12px;
+        }
+
+        .project-card h3 {
+            font-size: 30px;
+
+            margin-bottom: 15px;
+
+            line-height: 1.15;
+        }
+
+        .project-card p {
+            color: var(--muted);
+
+            font-size: 16px;
+
+            margin-bottom: 20px;
+        }
+
+        .tags {
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 8px;
+
+            margin-bottom: 25px;
+        }
+
+        .tag {
+            padding:
+                6px 11px;
+
+            border-radius: 6px;
+
+            background:
+                rgba(32, 217, 255, 0.07);
+
+            color:
+                #9defff;
+
+            font-size: 12px;
+        }
+
+        .project-link {
+            margin-top: auto;
+
+            color: var(--blue);
+
+            font-weight: 700;
+        }
+
+        .project-link:hover {
+            color: var(--blue-bright);
+        }
+
+
+        /* =========================================================
+           LEARNING
+           ========================================================= */
+
+        .learning-list {
+            border-top:
+                1px solid var(--border);
+        }
+
+        .learning-item {
+            display: grid;
+
+            grid-template-columns:
+                60px
+                1fr;
+
+            gap: 15px;
+
+            padding:
+                25px 0;
+
+            border-bottom:
+                1px solid var(--border);
+        }
+
+        .learning-number {
+            color: var(--blue);
+
+            font-family:
+                "Courier New",
+                monospace;
+        }
+
+        .learning-item h3 {
+            font-size: 19px;
+
+            font-weight: 600;
+        }
+
+
+        /* =========================================================
+           CONTACT
+           ========================================================= */
+
+        .contact-section {
+            text-align: center;
+
+            padding-top: 150px;
+
+            padding-bottom: 150px;
+        }
+
+        .contact-section .section-title {
+            margin-bottom: 20px;
+        }
+
+        .contact-description {
+            color: var(--muted);
+
+            max-width: 700px;
+
+            margin:
+                0 auto 35px;
+
+            font-size: 18px;
+        }
+
+        .contact-buttons {
+            display: flex;
+
+            justify-content: center;
+
+            flex-wrap: wrap;
+
+            gap: 14px;
+        }
+
+
+        /* =========================================================
+           FOOTER
+           ========================================================= */
+
+        footer {
+            border-top:
+                1px solid var(--border);
+
+            padding:
+                25px 28px;
+
+            text-align: center;
+
+            color: var(--muted);
+
+            font-size: 13px;
+        }
+
+
+        /* =========================================================
+           MOBILE
+           ========================================================= */
+
+        @media (max-width: 950px) {
+
+            .hero {
+                grid-template-columns:
+                    1fr;
+
+                padding-top:
+                    130px;
+            }
+
+            .cat-display {
+                max-width:
+                    680px;
+
+                margin:
+                    0 auto;
+            }
+
+            .about-cards {
+                grid-template-columns:
+                    1fr;
+            }
+        }
+
+
+        @media (max-width: 700px) {
+
+            nav {
+                height: 68px;
+            }
+
+            .nav-container {
+                padding:
+                    0 18px;
+            }
+
+            .nav-links {
+                gap: 13px;
+            }
+
+            .nav-links a {
+                font-size: 12px;
+            }
+
+            section {
+                padding:
+                    90px 20px;
+            }
+
+            .hero {
+                padding-top:
+                    110px;
+
+                gap: 45px;
+            }
+
+            .hero h1 {
+                font-size:
+                    clamp(43px, 13vw, 65px);
+
+                letter-spacing:
+                    -3px;
+            }
+
+            .hero-description {
+                font-size:
+                    17px;
+            }
+
+            .skills-grid,
+            .projects-grid {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .project-card {
+                min-height:
+                    400px;
+            }
+
+            .section-title {
+                margin-bottom:
+                    38px;
+            }
+
+            .cat-display {
+                aspect-ratio:
+                    1.25 / 1;
+
+                padding:
+                    8px;
+
+                border-radius:
+                    20px;
+            }
+
+            .display-screen {
+                border-radius:
+                    14px;
+            }
+
+            .pixel-cat {
+                left:
+                    35%;
+
+                transform:
+                    scale(0.78);
+
+                transform-origin:
+                    bottom center;
+            }
+
+            .pixel-moon {
+                width:
+                    30px;
+
+                height:
+                    30px;
+            }
+
+            .pixel-moon::after {
+                width:
+                    28px;
+
+                height:
+                    28px;
+            }
+
+        }
+
+
+        @media (max-width: 450px) {
+
+            .nav-links {
+                gap:
+                    9px;
+            }
+
+            .nav-links a {
+                font-size:
+                    11px;
+            }
+
+            .logo {
+                font-size:
+                    21px;
+            }
+
+            .pixel-cat {
+                left:
+                    28%;
+
+                transform:
+                    scale(0.65);
+            }
+
+        }
+
+    </style>
 </head>
+
 
 <body>
 
-    <!-- Navigation -->
-    <header class="navbar">
 
-        <a href="#home" class="logo">
-            Eeshwar<span>.</span>
-        </a>
+    <!-- =========================================================
+         NAVIGATION
+         ========================================================= -->
 
-        <nav>
-            <a href="#about">About</a>
-            <a href="#skills">Skills</a>
-            <a href="#projects">Projects</a>
-            <a href="#contact">Contact</a>
-        </nav>
+    <nav>
 
-    </header>
+        <div class="nav-container">
 
+            <a href="#home" class="logo">
+                Eeshwar<span>.</span>
+            </a>
 
-    <!-- Hero -->
-    <section id="home" class="hero">
+            <ul class="nav-links">
 
-        <div class="hero-content">
+                <li>
+                    <a href="#about">
+                        About
+                    </a>
+                </li>
 
-            <p class="eyebrow">
-                EMBEDDED SYSTEMS • IoT • FIRMWARE
-            </p>
+                <li>
+                    <a href="#skills">
+                        Skills
+                    </a>
+                </li>
 
-            <h1>
-                Building things that
-                <span>connect hardware & software.</span>
-            </h1>
+                <li>
+                    <a href="#projects">
+                        Projects
+                    </a>
+                </li>
 
-            <p class="hero-text">
-                I'm Eeshwar, an Electronics and Communication Engineering
-                student passionate about Embedded Systems, IoT and
-                hardware-software integration.
-            </p>
+                <li>
+                    <a href="#contact">
+                        Contact
+                    </a>
+                </li>
 
-            <div class="hero-buttons">
-
-                <a href="#projects" class="btn primary">
-                    Explore Projects
-                </a>
-
-                <a href="resume.pdf"
-                   class="btn secondary"
-                   target="_blank">
-                    Resume
-                </a>
-
-            </div>
-
-            <div class="hero-links">
-
-                <a href="https://github.com/eeshwar18"
-                   target="_blank"
-                   rel="noopener noreferrer">
-                    GitHub ↗
-                </a>
-
-                <a href="https://www.linkedin.com/in/eeshwar18/"
-                   target="_blank"
-                   rel="noopener noreferrer">
-                    LinkedIn ↗
-                </a>
-
-                <a href="mailto:eeshwar182007@gmail.com">
-                    Email ↗
-                </a>
-
-            </div>
+            </ul>
 
         </div>
 
-
-        <!-- IoT visual -->
-        <div class="iot-visual">
-
-            <div class="connection connection-one"></div>
-            <div class="connection connection-two"></div>
-            <div class="connection connection-three"></div>
-
-            <div class="iot-node node-sensor">
-                <span class="node-icon">◉</span>
-                <strong>Sensor</strong>
-                <small>Input</small>
-            </div>
-
-            <div class="iot-node node-mcu">
-                <span class="node-icon">▣</span>
-                <strong>MCU</strong>
-                <small>Process</small>
-            </div>
-
-            <div class="iot-node node-cloud">
-                <span class="node-icon">☁</span>
-                <strong>IoT</strong>
-                <small>Connect</small>
-            </div>
-
-            <div class="iot-node node-output">
-                <span class="node-icon">◈</span>
-                <strong>Output</strong>
-                <small>Control</small>
-            </div>
-
-            <div class="pulse pulse-one"></div>
-            <div class="pulse pulse-two"></div>
-
-        </div>
-
-    </section>
+    </nav>
 
 
-    <!-- About -->
-    <section id="about" class="section">
+    <!-- =========================================================
+         HERO
+         ========================================================= -->
 
-        <div class="section-heading">
+    <main id="home">
 
-            <p class="section-number">01</p>
+        <section class="hero">
 
-            <h2>About Me</h2>
+            <div class="hero-content">
 
-        </div>
-
-
-        <div class="about-content">
-
-            <div class="about-text">
-
-                <p>
-                    I'm an Electronics and Communication Engineering student
-                    interested in building practical Embedded Systems and
-                    IoT solutions.
-                </p>
-
-                <p>
-                    I enjoy working with microcontrollers, sensors,
-                    communication protocols and hardware-software
-                    integration.
-                </p>
-
-                <p>
-                    My current focus is developing stronger skills in
-                    embedded firmware, microcontroller-based systems,
-                    debugging and real-world hardware development.
-                </p>
-
-            </div>
-
-
-            <div class="about-stats">
-
-                <div class="stat-card">
-                    <strong>ECE</strong>
-                    <span>Student</span>
+                <div class="hero-label">
+                    ECE STUDENT • EMBEDDED SYSTEMS • IoT
                 </div>
 
-                <div class="stat-card">
-                    <strong>IoT</strong>
-                    <span>Development</span>
-                </div>
+                <h1>
 
-                <div class="stat-card">
-                    <strong>Firmware</strong>
-                    <span>Learning</span>
-                </div>
-
-                <div class="stat-card">
-                    <strong>Hardware</strong>
-                    <span>Building</span>
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- Skills -->
-    <section id="skills" class="section">
-
-        <div class="section-heading">
-
-            <p class="section-number">02</p>
-
-            <h2>Technical Skills</h2>
-
-        </div>
-
-
-        <div class="skills-grid">
-
-            <div class="skill-card">
-
-                <span class="skill-index">01</span>
-
-                <h3>Languages</h3>
-
-                <p>
-                    Embedded C
-                    <br>
-                    C
-                    <br>
-                    Python
-                </p>
-
-            </div>
-
-
-            <div class="skill-card">
-
-                <span class="skill-index">02</span>
-
-                <h3>Microcontrollers</h3>
-
-                <p>
-                    STM32
-                    <br>
-                    ESP32
-                    <br>
-                    Arduino
-                </p>
-
-            </div>
-
-
-            <div class="skill-card">
-
-                <span class="skill-index">03</span>
-
-                <h3>Hardware</h3>
-
-                <p>
-                    Sensors
-                    <br>
-                    Motors & Servos
-                    <br>
-                    Motor Drivers
-                </p>
-
-            </div>
-
-
-            <div class="skill-card">
-
-                <span class="skill-index">04</span>
-
-                <h3>Communication</h3>
-
-                <p>
-                    UART
-                    <br>
-                    I²C
-                    <br>
-                    SPI
-                </p>
-
-            </div>
-
-
-            <div class="skill-card">
-
-                <span class="skill-index">05</span>
-
-                <h3>IoT</h3>
-
-                <p>
-                    ESP32
-                    <br>
-                    Wi-Fi
-                    <br>
-                    Blynk IoT
-                </p>
-
-            </div>
-
-
-            <div class="skill-card">
-
-                <span class="skill-index">06</span>
-
-                <h3>Tools</h3>
-
-                <p>
-                    Arduino IDE
-                    <br>
-                    KiCad
-                    <br>
-                    Git & GitHub
-                </p>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- Projects -->
-    <section id="projects" class="section">
-
-        <div class="section-heading">
-
-            <p class="section-number">03</p>
-
-            <h2>Featured Projects</h2>
-
-        </div>
-
-
-        <div class="projects-grid">
-
-
-            <!-- Smart Agriculture -->
-            <article class="project-card">
-
-                <div class="project-top">
-
-                    <span class="project-number">01</span>
-
-                    <span class="project-category">
-                        IoT • Embedded
+                    Building things that
+                    <span class="highlight">
+                        connect hardware &amp; software.
                     </span>
 
+                </h1>
+
+                <p class="hero-description">
+
+                    I'm Eeshwar, an Electronics and Communication
+                    Engineering student passionate about Embedded
+                    Systems, IoT and hardware development.
+
+                </p>
+
+                <div class="hero-buttons">
+
+                    <a
+                        href="#projects"
+                        class="btn btn-primary"
+                    >
+                        View Projects
+                    </a>
+
+                    <a
+                        href="https://github.com/eeshwar18"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="btn btn-secondary"
+                    >
+                        GitHub
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 ANIMATED CAT DISPLAY
+                 ================================================= -->
+
+            <div class="cat-display">
+
+                <div class="display-screen">
+
+                    <!-- stars -->
+
+                    <span class="star star-1">
+                        ✦
+                    </span>
+
+                    <span class="star star-2">
+                        ·
+                    </span>
+
+                    <span class="star star-3">
+                        ✦
+                    </span>
+
+                    <span class="star star-4">
+                        ·
+                    </span>
+
+
+                    <!-- moon -->
+
+                    <div class="pixel-moon"></div>
+
+
+                    <!-- background buildings -->
+
+                    <div class="pixel-city">
+
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+
+                    </div>
+
+
+                    <!-- CAT -->
+
+                    <div
+                        class="pixel-cat"
+                        id="pixelCat"
+                    >
+
+                        <div class="cat-tail"></div>
+
+                        <div class="cat-body"></div>
+
+                        <div class="cat-head">
+
+                            <div
+                                class="cat-ear ear-left"
+                            ></div>
+
+                            <div
+                                class="cat-ear ear-right"
+                            ></div>
+
+                            <div
+                                class="cat-eye eye-left"
+                            ></div>
+
+                            <div
+                                class="cat-eye eye-right"
+                            ></div>
+
+                            <div class="cat-nose"></div>
+
+                        </div>
+
+                        <div
+                            class="cat-leg leg-back"
+                        ></div>
+
+                        <div
+                            class="cat-leg leg-front"
+                        ></div>
+
+                        <div class="cat-paw"></div>
+
+                    </div>
+
+
+                    <!-- ground -->
+
+                    <div class="pixel-ground"></div>
+
+
+                    <!-- plants -->
+
+                    <div
+                        class="pixel-plant plant-left"
+                    >
+
+                        <span></span>
+                        <span></span>
+                        <span></span>
+
+                    </div>
+
+                    <div
+                        class="pixel-plant plant-right"
+                    >
+
+                        <span></span>
+                        <span></span>
+                        <span></span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             ABOUT
+             ===================================================== -->
+
+        <section
+            id="about"
+            class="about-section"
+        >
+
+            <div class="section-number">
+                01
+            </div>
+
+            <h2 class="section-title">
+                About Me
+            </h2>
+
+            <div class="about-content">
+
+                <p>
+                    I'm an Electronics and Communication
+                    Engineering student interested in building
+                    practical Embedded Systems and IoT solutions.
+                </p>
+
+                <p>
+                    I enjoy working with microcontrollers,
+                    sensors, communication protocols and connected
+                    devices. My goal is to develop strong skills
+                    in firmware, hardware and embedded product
+                    development.
+                </p>
+
+            </div>
+
+
+            <div class="about-cards">
+
+                <div class="about-card">
+
+                    <h3>
+                        ECE
+                    </h3>
+
+                    <p>
+                        Student
+                    </p>
+
                 </div>
 
 
-                <div class="project-content">
+                <div class="about-card">
 
-                    <h3>Smart Agriculture</h3>
+                    <h3>
+                        IoT
+                    </h3>
 
                     <p>
-                        IoT-based agriculture monitoring system using
-                        Arduino, ESP32, sensors and Blynk for monitoring
-                        and automated irrigation.
+                        Development
+                    </p>
+
+                </div>
+
+
+                <div class="about-card">
+
+                    <h3>
+                        Embedded
+                    </h3>
+
+                    <p>
+                        Systems
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             SKILLS
+             ===================================================== -->
+
+        <section id="skills">
+
+            <div class="section-number">
+                02
+            </div>
+
+            <h2 class="section-title">
+                Skills
+            </h2>
+
+
+            <div class="skills-grid">
+
+
+                <div class="skill-card">
+
+                    <h3>
+                        Embedded
+                    </h3>
+
+                    <p>
+                        Embedded C • Arduino • ESP32 • STM32
+                    </p>
+
+                </div>
+
+
+                <div class="skill-card">
+
+                    <h3>
+                        Hardware
+                    </h3>
+
+                    <p>
+                        Sensors • Actuators • Microcontrollers
+                        • Motor Drivers
+                    </p>
+
+                </div>
+
+
+                <div class="skill-card">
+
+                    <h3>
+                        Communication
+                    </h3>
+
+                    <p>
+                        UART • I²C • SPI
+                    </p>
+
+                </div>
+
+
+                <div class="skill-card">
+
+                    <h3>
+                        IoT
+                    </h3>
+
+                    <p>
+                        ESP32 • Blynk IoT • Wi-Fi
+                    </p>
+
+                </div>
+
+
+                <div class="skill-card">
+
+                    <h3>
+                        PCB Design
+                    </h3>
+
+                    <p>
+                        KiCad • Schematic Design • PCB Layout
+                    </p>
+
+                </div>
+
+
+                <div class="skill-card">
+
+                    <h3>
+                        Development
+                    </h3>
+
+                    <p>
+                        Arduino IDE • Wokwi • Git • GitHub
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             PROJECTS
+             ===================================================== -->
+
+        <section id="projects">
+
+            <div class="section-number">
+                03
+            </div>
+
+            <h2 class="section-title">
+                Featured Projects
+            </h2>
+
+
+            <div class="projects-grid">
+
+
+                <!-- PROJECT 1 -->
+
+                <article class="project-card">
+
+                    <div class="project-number">
+                        01
+                    </div>
+
+                    <div class="project-type">
+                        IoT • Embedded Systems
+                    </div>
+
+                    <h3>
+                        Smart Agriculture
+                    </h3>
+
+                    <p>
+                        IoT-based agriculture monitoring
+                        system using Arduino, ESP32,
+                        environmental sensors and Blynk
+                        for remote monitoring and
+                        automated irrigation.
                     </p>
 
 
                     <div class="tags">
 
-                        <span>Arduino</span>
-                        <span>ESP32</span>
-                        <span>Blynk</span>
-                        <span>IoT</span>
+                        <span class="tag">
+                            Arduino
+                        </span>
+
+                        <span class="tag">
+                            ESP32
+                        </span>
+
+                        <span class="tag">
+                            Blynk
+                        </span>
+
+                        <span class="tag">
+                            IoT
+                        </span>
 
                     </div>
 
 
-                    <div class="project-actions">
+                    <!-- Change this to the project repo later -->
 
-                        <a href="smart-agriculture.html"
-                           class="project-link">
-                            Case Study →
-                        </a>
+                    <a
+                        href="https://github.com/eeshwar18"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="project-link"
+                    >
+                        View on GitHub →
+                    </a>
 
-                        <a href="https://github.com/eeshwar18/SMART-AGRICULTURE"
-                           target="_blank"
-                           rel="noopener noreferrer"
-                           class="github-link">
-                            GitHub ↗
-                        </a>
+                </article>
 
+
+                <!-- PROJECT 2 -->
+
+                <article class="project-card">
+
+                    <div class="project-number">
+                        02
                     </div>
 
-                </div>
-
-            </article>
-
-
-            <!-- Smart Arduino Car -->
-            <article class="project-card">
-
-                <div class="project-top">
-
-                    <span class="project-number">02</span>
-
-                    <span class="project-category">
+                    <div class="project-type">
                         Robotics • Arduino
-                    </span>
+                    </div>
 
-                </div>
-
-
-                <div class="project-content">
-
-                    <h3>Smart Arduino Car</h3>
+                    <h3>
+                        Smart Arduino Car
+                    </h3>
 
                     <p>
-                        Sensor-based robotic car using Arduino UNO,
-                        ultrasonic and IR sensors, servo motor and
-                        L298N motor driver.
+                        Sensor-based robotic car using
+                        Arduino UNO, ultrasonic and IR
+                        sensors, servo motor and L298N
+                        motor driver.
                     </p>
 
 
                     <div class="tags">
 
-                        <span>Arduino</span>
-                        <span>Ultrasonic</span>
-                        <span>IR</span>
-                        <span>L298N</span>
+                        <span class="tag">
+                            Arduino
+                        </span>
+
+                        <span class="tag">
+                            Ultrasonic
+                        </span>
+
+                        <span class="tag">
+                            IR Sensor
+                        </span>
+
+                        <span class="tag">
+                            L298N
+                        </span>
 
                     </div>
 
 
-                    <div class="project-actions">
+                    <a
+                        href="https://github.com/eeshwar18"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="project-link"
+                    >
+                        View on GitHub →
+                    </a>
 
-                        <a href="smart-car.html"
-                           class="project-link">
-                            Case Study →
-                        </a>
+                </article>
 
-                        <a href="https://github.com/eeshwar18/Smart-car-ARDUINO-"
-                           target="_blank"
-                           rel="noopener noreferrer"
-                           class="github-link">
-                            GitHub ↗
-                        </a>
 
+                <!-- PROJECT 3 -->
+
+                <article class="project-card">
+
+                    <div class="project-number">
+                        03
                     </div>
 
-                </div>
+                    <div class="project-type">
+                        Embedded • Raspberry Pi
+                    </div>
 
-            </article>
-
-
-            <!-- Raspberry Pi Car -->
-            <article class="project-card">
-
-                <div class="project-top">
-
-                    <span class="project-number">03</span>
-
-                    <span class="project-category">
-                        Raspberry Pi • Robotics
-                    </span>
-
-                </div>
-
-
-                <div class="project-content">
-
-                    <h3>Raspberry Pi Smart Car</h3>
+                    <h3>
+                        Raspberry Pi Robot
+                    </h3>
 
                     <p>
-                        Compact robotic car using Raspberry Pi Zero 2 W,
-                        ultrasonic sensing, servo scanning and L298N
-                        motor control.
+                        Embedded robotics project using
+                        Raspberry Pi Zero 2 W, L298N motor
+                        driver, motors, ultrasonic sensor,
+                        servo and battery power.
                     </p>
 
 
                     <div class="tags">
 
-                        <span>Raspberry Pi</span>
-                        <span>Python</span>
-                        <span>Ultrasonic</span>
-                        <span>L298N</span>
+                        <span class="tag">
+                            Raspberry Pi
+                        </span>
+
+                        <span class="tag">
+                            L298N
+                        </span>
+
+                        <span class="tag">
+                            Ultrasonic
+                        </span>
+
+                        <span class="tag">
+                            Servo
+                        </span>
 
                     </div>
 
 
-                    <div class="project-actions">
+                    <a
+                        href="https://github.com/eeshwar18"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="project-link"
+                    >
+                        View on GitHub →
+                    </a>
 
-                        <a href="raspberry-car.html"
-                           class="project-link">
-                            Case Study →
-                        </a>
+                </article>
 
-                        <a href="https://github.com/eeshwar18/Raspberry-car"
-                           target="_blank"
-                           rel="noopener noreferrer"
-                           class="github-link">
-                            GitHub ↗
-                        </a>
+
+                <!-- PROJECT 4 -->
+
+                <article class="project-card">
+
+                    <div class="project-number">
+                        04
+                    </div>
+
+                    <div class="project-type">
+                        Embedded Systems • Hardware
+                    </div>
+
+                    <h3>
+                        More Projects Coming
+                    </h3>
+
+                    <p>
+                        More hardware, embedded and IoT
+                        projects will be added as I continue
+                        building and learning.
+                    </p>
+
+
+                    <div class="tags">
+
+                        <span class="tag">
+                            Embedded
+                        </span>
+
+                        <span class="tag">
+                            Hardware
+                        </span>
+
+                        <span class="tag">
+                            IoT
+                        </span>
 
                     </div>
 
+
+                    <a
+                        href="https://github.com/eeshwar18"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="project-link"
+                    >
+                        Visit GitHub →
+                    </a>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             CURRENTLY LEARNING
+             ===================================================== -->
+
+        <section id="learning">
+
+            <div class="section-number">
+                04
+            </div>
+
+            <h2 class="section-title">
+                Currently Learning
+            </h2>
+
+
+            <div class="learning-list">
+
+
+                <div class="learning-item">
+
+                    <div class="learning-number">
+                        01
+                    </div>
+
+                    <h3>
+                        Advanced Embedded C
+                    </h3>
+
                 </div>
 
-            </article>
+
+                <div class="learning-item">
+
+                    <div class="learning-number">
+                        02
+                    </div>
+
+                    <h3>
+                        STM32 Microcontrollers
+                    </h3>
+
+                </div>
 
 
-        </div>
+                <div class="learning-item">
 
-    </section>
+                    <div class="learning-number">
+                        03
+                    </div>
 
+                    <h3>
+                        PCB Design with KiCad
+                    </h3>
 
-    <!-- Currently Learning -->
-    <section class="section learning">
-
-        <div class="section-heading">
-
-            <p class="section-number">04</p>
-
-            <h2>Currently Learning</h2>
-
-        </div>
+                </div>
 
 
-        <div class="learning-grid">
+                <div class="learning-item">
 
-            <div class="learning-card">
+                    <div class="learning-number">
+                        04
+                    </div>
 
-                <span>01</span>
+                    <h3>
+                        IoT &amp; Embedded Communication
+                    </h3>
 
-                <div>
-                    <h3>Embedded Firmware</h3>
-                    <p>
-                        Strengthening Embedded C and microcontroller
-                        programming.
-                    </p>
                 </div>
 
             </div>
 
+        </section>
 
-            <div class="learning-card">
 
-                <span>02</span>
+        <!-- =====================================================
+             CONTACT
+             ===================================================== -->
 
-                <div>
-                    <h3>STM32</h3>
-                    <p>
-                        Developing deeper understanding of STM32
-                        peripherals and firmware.
-                    </p>
-                </div>
+        <section
+            id="contact"
+            class="contact-section"
+        >
 
+            <div class="section-number">
+                05
             </div>
 
+            <h2 class="section-title">
+                Let's Build Something.
+            </h2>
 
-            <div class="learning-card">
+            <p class="contact-description">
 
-                <span>03</span>
+                I'm always interested in learning,
+                building and exploring new Embedded
+                Systems and IoT projects.
 
-                <div>
-                    <h3>PCB Design</h3>
-                    <p>
-                        Learning schematic design and PCB layout
-                        using KiCad.
-                    </p>
-                </div>
-
-            </div>
-
-
-            <div class="learning-card">
-
-                <span>04</span>
-
-                <div>
-                    <h3>IoT Systems</h3>
-                    <p>
-                        Exploring connected devices, sensors and
-                        cloud-based monitoring.
-                    </p>
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- Contact -->
-    <section id="contact" class="section contact">
-
-        <div class="contact-content">
-
-            <p class="section-number">05</p>
-
-            <h2>Let's Build Something.</h2>
-
-            <p>
-                Interested in Embedded Systems, IoT and hardware
-                development? Let's connect.
             </p>
 
 
             <div class="contact-buttons">
 
-                <a href="mailto:eeshwar182007@gmail.com"
-                   class="btn primary">
+                <a
+                    href="mailto:eeshwar182007@gmail.com"
+                    class="btn btn-primary"
+                >
                     Email Me
                 </a>
 
-                <a href="https://www.linkedin.com/in/eeshwar18/"
-                   target="_blank"
-                   rel="noopener noreferrer"
-                   class="btn secondary">
+                <a
+                    href="https://github.com/eeshwar18"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn btn-secondary"
+                >
+                    GitHub
+                </a>
+
+                <a
+                    href="https://www.linkedin.com/in/eeshwar18/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn btn-secondary"
+                >
                     LinkedIn
                 </a>
 
             </div>
 
+        </section>
 
-            <div class="contact-links">
-
-                <a href="https://github.com/eeshwar18"
-                   target="_blank"
-                   rel="noopener noreferrer">
-                    GitHub
-                </a>
-
-                <span>•</span>
-
-                <a href="mailto:eeshwar182007@gmail.com">
-                    eeshwar182007@gmail.com
-                </a>
-
-            </div>
-
-        </div>
-
-    </section>
+    </main>
 
 
-    <!-- Footer -->
+    <!-- =========================================================
+         FOOTER
+         ========================================================= -->
+
     <footer>
 
-        <p>
-            © 2026 Eeshwar • Embedded Systems & IoT
-        </p>
-
-        <a href="#home">
-            Back to top ↑
-        </a>
+        © 2026 Eeshwar.
+        Built with curiosity &amp; embedded systems.
 
     </footer>
 
 
-    <script src="script.js"></script>
+    <!-- =========================================================
+         CAT ANIMATION JAVASCRIPT
+         ========================================================= -->
+
+    <script>
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+                const cat =
+                    document.getElementById(
+                        "pixelCat"
+                    );
+
+                if (!cat) {
+                    return;
+                }
+
+
+                const animations = [
+
+                    {
+                        className: "walking",
+                        duration: 5200
+                    },
+
+                    {
+                        className: "running",
+                        duration: 4200
+                    },
+
+                    {
+                        className: "licking",
+                        duration: 4200
+                    },
+
+                    {
+                        className: "stretching",
+                        duration: 4200
+                    },
+
+                    {
+                        className: "sitting",
+                        duration: 3500
+                    }
+
+                ];
+
+
+                let current = 0;
+
+
+                function playNext() {
+
+                    cat.classList.remove(
+                        "walking",
+                        "running",
+                        "licking",
+                        "stretching",
+                        "sitting"
+                    );
+
+
+                    /* Restart CSS animation */
+
+                    void cat.offsetWidth;
+
+
+                    const animation =
+                        animations[current];
+
+
+                    cat.classList.add(
+                        animation.className
+                    );
+
+
+                    current =
+                        (current + 1)
+                        % animations.length;
+
+
+                    setTimeout(
+                        playNext,
+                        animation.duration
+                    );
+
+                }
+
+
+                playNext();
+
+            }
+
+        );
+
+    </script>
+
 
 </body>
-
 </html>
