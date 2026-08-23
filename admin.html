@@ -817,38 +817,33 @@
         .exact-login-form {
             position: absolute;
             inset: 0;
-            z-index: 5;
+            z-index: 10;
         }
 
         .exact-email-input {
             position: absolute;
-            left: 26.15%;
-            top: 73.25%;
-            width: 46.55%;
-            height: 5.75%;
+            left: 26.55%;
+            top: 74.85%;
+            width: 45.95%;
+            height: 6.05%;
             border: 0;
             outline: none;
-            background: rgba(0,0,0,0);
+            background: transparent;
             color: #f2fbff;
-            font: 500 11px/1 Inter, "Segoe UI", Arial, sans-serif;
-            padding: 0 4.2%;
+            font: 500 12px/1 Inter, "Segoe UI", Arial, sans-serif;
+            padding: 0 3.2% 0 13.5%;
             caret-color: #55e8ff;
         }
 
-        .exact-email-input::placeholder {
-            color: rgba(210,225,255,.50);
-        }
+        .exact-email-input::placeholder { color: transparent; }
+        .exact-email-input:focus { box-shadow: none; border-radius: 0; }
 
-        .exact-email-input:focus {
-            box-shadow: 0 0 0 1px rgba(85,232,255,.45);
-            border-radius: 7px;
-        }
 
         .exact-send-button {
             position: absolute;
-            left: 26.15%;
-            top: 80.52%;
-            width: 46.55%;
+            left: 26.55%;
+            top: 82.45%;
+            width: 45.95%;
             height: 6.25%;
             border: 0;
             border-radius: 7px;
@@ -870,7 +865,7 @@
             position: absolute;
             left: 18%;
             right: 18%;
-            top: 86.0%;
+            top: 89.25%;
             z-index: 7;
             min-height: 18px;
             text-align: center;
@@ -1034,8 +1029,8 @@
 .reactor-fx {
     position: absolute;
     left: 50%;
-    top: 33.7%;
-    width: 47%;
+    top: 34.0%;
+    width: 44%;
     aspect-ratio: 1;
     transform: translate(-50%, -50%);
     pointer-events: none;
@@ -1193,7 +1188,7 @@
     z-index: 30;
     pointer-events: none;
     opacity: 0;
-    background: radial-gradient(circle at 50% 33.7%,
+    background: radial-gradient(circle at 50% 34.0%,
         rgba(220,252,255,1) 0%,
         rgba(80,225,255,.72) 8%,
         rgba(70,100,255,.20) 24%,
@@ -1207,7 +1202,7 @@ body.reactor-auth-transition .reactor-login-flash {
 .reactor-login-burst {
     position: absolute;
     left: 50%;
-    top: 33.7%;
+    top: 34.0%;
     width: 5%;
     aspect-ratio: 1;
     transform: translate(-50%, -50%);
@@ -1338,6 +1333,24 @@ body.editor-unlocked #fullV4Editor {
                 onerror="this.style.display='none';document.getElementById('imageLoadError').style.display='block';"
             >
 
+            <!-- Transparent cinematic reactor animation. The PNG above remains untouched. -->
+            <div class="reactor-fx" aria-hidden="true">
+                <div class="reactor-bloom"></div>
+                <div class="reactor-ring r1"></div>
+                <div class="reactor-ring r2"></div>
+                <div class="reactor-ring r3"></div>
+                <div class="reactor-spokes"></div>
+                <div class="reactor-arc"></div>
+                <div class="reactor-arc a2"></div>
+                <div class="reactor-core"></div>
+                <div class="reactor-shock"></div>
+                <div class="reactor-sweep"></div>
+                <div class="reactor-surge"></div>
+                <div class="reactor-sparks"></div>
+            </div>
+            <div class="reactor-login-flash" aria-hidden="true"></div>
+            <div class="reactor-login-burst" aria-hidden="true"></div>
+
             <div id="imageLoadError" style="
                 display:none;
                 position:absolute;
@@ -1353,7 +1366,7 @@ body.editor-unlocked #fullV4Editor {
             ">
                 Login image not found.<br>
                 Make sure the file is exactly:<br>
-                <b>assets/admin-login-full.png</b>
+                <b>assets/admin-login-approved.png</b>
             </div>
 
             <!-- Transparent functional controls positioned over the exact artwork -->
@@ -1713,23 +1726,21 @@ body.editor-unlocked #fullV4Editor {
 
 
     function showDashboard(email) {
+        // Keep the login artwork visible while the reactor performs its
+        // cinematic authentication power-up. The existing Supabase/OTP
+        // verification has already succeeded before this function runs.
         document.body.classList.add("reactor-auth-transition");
-        document.body.classList.remove("login-view");
-
-        loginArea.style.display = "none";
         dashboard.classList.add("show");
         userEmail.textContent = email;
 
-        if (typeof loadPortfolioFromSupabase === "function") {
-            setTimeout(function(){
-                document.body.classList.add("editor-unlocked");
+        setTimeout(function () {
+            document.body.classList.remove("reactor-auth-transition");
+            document.body.classList.remove("login-view");
+            document.body.classList.add("editor-unlocked");
+            if (typeof loadPortfolioFromSupabase === "function") {
                 loadPortfolioFromSupabase();
-            }, 900);
-        } else {
-            setTimeout(function(){
-                document.body.classList.add("editor-unlocked");
-            }, 900);
-        }
+            }
+        }, 950);
     }
 
 
