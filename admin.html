@@ -751,6 +751,28 @@
             display: none;
         }
 
+        body:not(.login-view) .topbar {
+            display: flex;
+        }
+
+        .exact-back-link {
+            position: absolute;
+            top: 2.5%;
+            right: 4.5%;
+            width: 18%;
+            height: 4.5%;
+            z-index: 8;
+            display: block;
+            text-decoration: none;
+            color: transparent;
+            background: transparent;
+            border-radius: 5px;
+        }
+
+        .exact-back-link:focus-visible {
+            outline: 1px solid rgba(85,232,255,.7);
+        }
+
         .exact-login-wrapper {
             width: 100%;
             min-height: 100vh;
@@ -950,6 +972,16 @@
             display: none;
         }
 
+        /* The reactor/login artwork exists ONLY on the login screen. */
+        body:not(.login-view) .exact-login-wrapper {
+            display: none !important;
+        }
+
+        body:not(.login-view) .exact-login-image,
+        body:not(.login-view) .exact-login-scene {
+            display: none !important;
+        }
+
         @media (max-width: 604px) {
             .exact-login-wrapper {
                 min-height: 100svh;
@@ -1011,6 +1043,12 @@
     >
 
         <div class="exact-login-scene">
+
+            <a
+                href="./index.html"
+                class="exact-back-link"
+                aria-label="Back to Portfolio"
+            ></a>
 
             <img
                 class="exact-login-image"
