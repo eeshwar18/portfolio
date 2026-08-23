@@ -736,12 +736,241 @@
 
     
 
+
+        /* =====================================================
+           EXACT LOGIN SCREEN
+           Uses the supplied screenshot as a complete image.
+           IMPORTANT: contain + fixed aspect ratio = NO CROPPING.
+        ===================================================== */
+
+        body.login-view {
+            overflow-x: hidden;
+        }
+
+        body.login-view .topbar {
+            display: none;
+        }
+
+        .exact-login-wrapper {
+            width: 100%;
+            min-height: 100vh;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #000;
+        }
+
+        .exact-login-scene {
+            position: relative;
+            width: min(604px, 100vw);
+            aspect-ratio: 604 / 583;
+            max-height: 100vh;
+            overflow: hidden;
+            flex: 0 0 auto;
+            background: #000;
+        }
+
+        .exact-login-image {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: contain;
+            object-position: center center;
+            max-width: 100%;
+            max-height: 100%;
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+
+        /* The image is the source of truth. These controls are transparent
+           overlays, so the artwork underneath is never altered. */
+
+        .exact-login-form {
+            position: absolute;
+            inset: 0;
+            z-index: 5;
+        }
+
+        .exact-email-input {
+            position: absolute;
+            left: 28.1%;
+            top: 71.9%;
+            width: 42.0%;
+            height: 5.7%;
+            border: 0;
+            outline: none;
+            background: rgba(0,0,0,0);
+            color: #f2fbff;
+            font: 500 11px/1 Inter, "Segoe UI", Arial, sans-serif;
+            padding: 0 4.2%;
+            caret-color: #55e8ff;
+        }
+
+        .exact-email-input::placeholder {
+            color: rgba(210,225,255,.50);
+        }
+
+        .exact-email-input:focus {
+            box-shadow: 0 0 0 1px rgba(85,232,255,.45);
+            border-radius: 7px;
+        }
+
+        .exact-send-button {
+            position: absolute;
+            left: 28.1%;
+            top: 79.4%;
+            width: 42.0%;
+            height: 5.9%;
+            border: 0;
+            border-radius: 7px;
+            background: transparent;
+            cursor: pointer;
+        }
+
+        .exact-send-button:disabled {
+            cursor: wait;
+        }
+
+        .exact-send-hit {
+            position: absolute;
+            inset: 0;
+            border-radius: 7px;
+        }
+
+        .exact-message {
+            position: absolute;
+            left: 18%;
+            right: 18%;
+            top: 86.0%;
+            z-index: 7;
+            min-height: 18px;
+            text-align: center;
+            font: 600 9px/1.4 Inter, "Segoe UI", Arial, sans-serif;
+            pointer-events: none;
+        }
+
+        .exact-message.message.show.success {
+            display: block;
+            color: #55e8ff;
+            background: transparent;
+            border: 0;
+            padding: 0;
+            margin: 0;
+        }
+
+        .exact-message.message.show.error {
+            display: block;
+            color: #ff9aa4;
+            background: transparent;
+            border: 0;
+            padding: 0;
+            margin: 0;
+        }
+
+        /* OTP panel deliberately sits above the same full image.
+           The original image itself remains untouched. */
+        .exact-otp-overlay {
+            display: none;
+            position: absolute;
+            inset: 0;
+            z-index: 10;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,.20);
+        }
+
+        #otpSection.exact-otp-overlay.show {
+            display: flex !important;
+        }
+
+        .exact-otp-panel {
+            width: 48%;
+            padding: 5%;
+            border: 1px solid rgba(85,232,255,.30);
+            border-radius: 12px;
+            background: rgba(3,10,18,.93);
+            box-shadow: 0 20px 60px rgba(0,0,0,.55),
+                        0 0 30px rgba(85,232,255,.08);
+            text-align: center;
+            backdrop-filter: blur(8px);
+        }
+
+        .exact-otp-title {
+            color: #55e8ff;
+            font: 800 10px/1.2 Inter, "Segoe UI", Arial, sans-serif;
+            letter-spacing: .16em;
+        }
+
+        .exact-otp-panel p {
+            margin: 10px 0 14px;
+            color: #a9c0c9;
+            font: 500 9px/1.5 Inter, "Segoe UI", Arial, sans-serif;
+        }
+
+        .exact-otp-input {
+            width: 100%;
+            height: 36px;
+            border: 1px solid rgba(85,232,255,.25);
+            border-radius: 7px;
+            background: #03080d;
+            color: #f2fbff;
+            text-align: center;
+            letter-spacing: .3em;
+            outline: none;
+        }
+
+        .exact-verify-button {
+            width: 100%;
+            height: 36px;
+            margin-top: 9px;
+            border: 0;
+            border-radius: 7px;
+            background: linear-gradient(90deg,#31c6ee,#6941ff);
+            color: white;
+            font: 800 9px/1 Inter, "Segoe UI", Arial, sans-serif;
+            cursor: pointer;
+        }
+
+        .exact-change-button {
+            margin-top: 12px;
+            border: 0;
+            background: transparent;
+            color: #8c78ff;
+            font: 700 8px/1 Inter, "Segoe UI", Arial, sans-serif;
+            cursor: pointer;
+        }
+
+        /* Hide the old OTP/email card controls because the exact screenshot
+           is now the complete login UI. */
+        .exact-email-state {
+            display: none;
+        }
+
+        @media (max-width: 604px) {
+            .exact-login-wrapper {
+                min-height: 100svh;
+            }
+
+            .exact-login-scene {
+                width: 100vw;
+                max-width: 604px;
+            }
+
+            .exact-email-input {
+                font-size: 10px;
+            }
+        }
+
 </style>
 
 </head>
 
 
-<body>
+<body class="login-view">
 
 
 <div class="page">
@@ -778,112 +1007,74 @@
 
     <div
         id="loginArea"
-        class="login-wrapper"
+        class="login-wrapper exact-login-wrapper"
     >
 
-        <div class="login-card">
+        <div class="exact-login-scene">
 
+            <img
+                class="exact-login-image"
+                src="./assets/admin-login-full.png"
+                alt="Eeshwar Admin Login"
+                draggable="false"
+                onerror="this.style.display='none';document.getElementById('imageLoadError').style.display='block';"
+            >
 
-            <!-- EMAIL LOGIN -->
-
-            <div id="emailSection">
-
-                <div class="login-label">
-                    PRIVATE ADMIN AREA
-                </div>
-
-
-                <h1>
-                    Admin
-                    <span>Login.</span>
-                </h1>
-
-
-                <p class="login-description">
-
-                    Enter one of your authorized admin
-                    email addresses. A one-time password
-                    will be sent to that email.
-
-                </p>
-
-
-                <form
-                    id="emailForm"
-                    class="form"
-                >
-
-                    <div class="field">
-
-                        <label for="email">
-                            ADMIN EMAIL
-                        </label>
-
-
-                        <input
-                            type="email"
-                            id="email"
-                            placeholder="Enter your admin email"
-                            autocomplete="email"
-                            required
-                        >
-
-                    </div>
-
-
-                    <button
-                        type="submit"
-                        class="button"
-                        id="sendOtpButton"
-                    >
-                        SEND OTP
-                    </button>
-
-                </form>
-
+            <div id="imageLoadError" style="
+                display:none;
+                position:absolute;
+                inset:0;
+                z-index:20;
+                align-items:center;
+                justify-content:center;
+                text-align:center;
+                padding:30px;
+                color:#55e8ff;
+                background:#000;
+                font:700 12px/1.7 Inter,'Segoe UI',Arial,sans-serif;
+            ">
+                Login image not found.<br>
+                Make sure the file is exactly:<br>
+                <b>assets/admin-login-full.png</b>
             </div>
 
-
-
-            <!-- OTP LOGIN -->
-
-            <div id="otpSection">
-
-                <div class="login-label">
-                    EMAIL VERIFICATION
-                </div>
-
-
-                <h1>
-                    Enter
-                    <span>OTP.</span>
-                </h1>
-
-
-                <p class="login-description">
-
-                    Enter the one-time password sent
-                    to your authorized email address.
-
-                </p>
-
-
-                <form
-                    id="otpForm"
-                    class="form"
+            <!-- Transparent functional controls positioned over the exact artwork -->
+            <form id="emailForm" class="exact-login-form">
+                <input
+                    type="email"
+                    id="email"
+                    class="exact-email-input"
+                    placeholder="Enter your admin email"
+                    autocomplete="email"
+                    aria-label="Admin email"
+                    required
                 >
 
-                    <div class="field">
+                <button
+                    type="submit"
+                    id="sendOtpButton"
+                    class="exact-send-button"
+                    aria-label="Send OTP"
+                >
+                    <span class="exact-send-hit"></span>
+                </button>
+            </form>
 
-                        <label for="otp">
-                            6-DIGIT OTP
-                        </label>
+            <!-- OTP state: artwork stays uncropped; only controls/text change -->
+            <div id="otpSection" class="exact-otp-overlay">
 
+                <div class="exact-otp-panel">
+                    <div class="exact-otp-title">EMAIL VERIFICATION</div>
 
+                    <p>
+                        Enter the 6-digit OTP sent to your authorized email.
+                    </p>
+
+                    <form id="otpForm">
                         <input
                             type="text"
                             id="otp"
-                            class="otp-input"
+                            class="exact-otp-input"
                             inputmode="numeric"
                             autocomplete="one-time-code"
                             maxlength="6"
@@ -891,49 +1082,33 @@
                             required
                         >
 
-                    </div>
-
+                        <button
+                            type="submit"
+                            id="verifyOtpButton"
+                            class="exact-verify-button"
+                        >
+                            VERIFY OTP
+                        </button>
+                    </form>
 
                     <button
-                        type="submit"
-                        class="button"
-                        id="verifyOtpButton"
+                        type="button"
+                        id="changeEmailButton"
+                        class="exact-change-button"
                     >
-                        VERIFY OTP
+                        ← USE DIFFERENT EMAIL
                     </button>
-
-                </form>
-
-
-                <button
-                    type="button"
-                    class="back-button"
-                    id="changeEmailButton"
-                >
-                    ← Use Different Email
-                </button>
+                </div>
 
             </div>
 
+            <div id="emailSection" class="exact-email-state"></div>
 
-            <div
-                id="message"
-                class="message"
-            ></div>
-
-
-            <div class="security-note">
-
-                Only these two authorized accounts can
-                access this dashboard. Visitors to the
-                portfolio never need to log in.
-
-            </div>
+            <div id="message" class="exact-message"></div>
 
         </div>
 
     </div>
-
 
 
     <!-- =========================================
@@ -1220,6 +1395,7 @@
 
 
     function showDashboard(email) {
+        document.body.classList.remove("login-view");
         loginArea.style.display = "none";
         dashboard.classList.add("show");
         userEmail.textContent = email;
@@ -1231,6 +1407,8 @@
 
 
     function showLogin() {
+
+        document.body.classList.add("login-view");
 
         loginArea.style.display =
             "flex";
