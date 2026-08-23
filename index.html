@@ -133,118 +133,141 @@
 
 
         /* =====================================================
-   FLOATING GLASS NAVBAR
-===================================================== */
+           FLOATING GLASS NAVBAR
+        ===================================================== */
 
-.navbar {
-    position: fixed;
-    top: 18px;
-    left: 50%;
-    transform: translateX(-50%);
+        .navbar {
+            position: fixed;
+            top: 18px;
+            left: 50%;
+            transform: translateX(-50%);
 
-    z-index: 1000;
+            z-index: 1000;
 
-    width: min(1050px, calc(100% - 30px));
+            width: min(1050px, calc(100% - 30px));
 
-    border: 1px solid rgba(255,255,255,0.14);
-    border-radius: 18px;
+            border: 1px solid rgba(255,255,255,0.14);
+            border-radius: 18px;
 
-    background: rgba(7, 18, 25, 0.48);
+            background: rgba(7, 18, 25, 0.48);
 
-    backdrop-filter: blur(22px);
-    -webkit-backdrop-filter: blur(22px);
+            backdrop-filter: blur(22px);
+            -webkit-backdrop-filter: blur(22px);
 
-    box-shadow:
-        0 15px 45px rgba(0,0,0,0.25),
-        inset 0 1px 0 rgba(255,255,255,0.08);
-}
+            box-shadow:
+                0 15px 45px rgba(0,0,0,0.25),
+                inset 0 1px 0 rgba(255,255,255,0.08);
+        }
 
-.nav-inner {
-    min-height: 64px;
+        .nav-inner {
+            min-height: 64px;
 
-    padding: 0 18px;
+            padding: 0 18px;
 
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
 
-    gap: 25px;
-}
+            gap: 25px;
+        }
 
-.logo {
-    color: var(--white);
+        .logo {
+            color: var(--white);
 
-    font-size: 20px;
-    font-weight: 800;
+            font-size: 20px;
+            font-weight: 800;
 
-    text-decoration: none;
-}
+            text-decoration: none;
+        }
 
-.logo span {
-    color: var(--cyan);
-}
+        .logo span {
+            color: var(--cyan);
+        }
 
-.nav-links {
-    display: flex;
-    align-items: center;
+        .nav-links {
+            display: flex;
+            align-items: center;
 
-    gap: 18px;
+            gap: 18px;
 
-    list-style: none;
-}
+            list-style: none;
+        }
 
-.nav-links a {
-    color: var(--muted);
+        .nav-links a {
+            color: var(--muted);
 
-    font-size: 11px;
-    font-weight: 700;
+            font-size: 11px;
+            font-weight: 700;
 
-    text-decoration: none;
-}
+            text-decoration: none;
+        }
 
-.nav-links a:hover {
-    color: var(--cyan);
-}
+        .nav-links a:hover {
+            color: var(--cyan);
+        }
 
 
         /* =====================================================
            TRIPLE-LINE NAVIGATION MENU
            Visible on laptop/desktop and mobile.
         ===================================================== */
+
         .nav-menu-toggle {
             width: 44px;
             height: 44px;
             flex: 0 0 44px;
+
             display: inline-flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+
             gap: 5px;
+
             border: 1px solid rgba(180, 108, 255, 0.24);
             border-radius: 10px;
+
             background: rgba(12, 7, 20, 0.62);
+
             color: var(--white);
+
             cursor: pointer;
-            transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+
+            transition:
+                border-color .2s ease,
+                box-shadow .2s ease,
+                transform .2s ease;
         }
 
         .nav-menu-toggle:hover {
             border-color: rgba(180, 108, 255, 0.58);
-            box-shadow: 0 0 22px rgba(180, 108, 255, 0.16);
+
+            box-shadow:
+                0 0 22px rgba(180, 108, 255, 0.16);
+
             transform: translateY(-1px);
         }
 
         .nav-menu-toggle span {
             width: 19px;
             height: 2px;
+
             border-radius: 99px;
+
             background: var(--cyan);
-            box-shadow: 0 0 7px rgba(180, 108, 255, 0.45);
-            transition: transform .2s ease, opacity .2s ease;
+
+            box-shadow:
+                0 0 7px rgba(180, 108, 255, 0.45);
+
+            transition:
+                transform .2s ease,
+                opacity .2s ease;
         }
 
         .navbar.nav-open .nav-menu-toggle span:nth-child(1) {
-            transform: translateY(7px) rotate(45deg);
+            transform:
+                translateY(7px)
+                rotate(45deg);
         }
 
         .navbar.nav-open .nav-menu-toggle span:nth-child(2) {
@@ -252,38 +275,66 @@
         }
 
         .navbar.nav-open .nav-menu-toggle span:nth-child(3) {
-            transform: translateY(-7px) rotate(-45deg);
+            transform:
+                translateY(-7px)
+                rotate(-45deg);
         }
 
         .navbar nav {
             position: absolute;
+
             top: calc(100% + 10px);
             right: 18px;
+
             width: 230px;
+
             padding: 10px;
-            border: 1px solid rgba(180, 108, 255, 0.22);
+
+            border:
+                1px solid
+                rgba(180, 108, 255, 0.22);
+
             border-radius: 14px;
-            background: rgba(7, 4, 14, 0.94);
+
+            background:
+                rgba(7, 4, 14, 0.94);
+
             backdrop-filter: blur(22px);
             -webkit-backdrop-filter: blur(22px);
-            box-shadow: 0 20px 55px rgba(0,0,0,.42),
-                        0 0 35px rgba(180,108,255,.10);
+
+            box-shadow:
+                0 20px 55px rgba(0,0,0,.42),
+                0 0 35px rgba(180,108,255,.10);
+
             opacity: 0;
             visibility: hidden;
-            transform: translateY(-8px) scale(.98);
+
+            transform:
+                translateY(-8px)
+                scale(.98);
+
             transform-origin: top right;
-            transition: opacity .2s ease, visibility .2s ease, transform .2s ease;
+
+            transition:
+                opacity .2s ease,
+                visibility .2s ease,
+                transform .2s ease;
         }
 
         .navbar.nav-open nav {
             opacity: 1;
             visibility: visible;
-            transform: translateY(0) scale(1);
+
+            transform:
+                translateY(0)
+                scale(1);
         }
 
         .navbar .nav-links {
             width: 100%;
+
             display: grid;
+
             gap: 3px;
         }
 
@@ -293,26 +344,208 @@
 
         .navbar .nav-links a {
             display: block;
+
             width: 100%;
+
             padding: 11px 12px;
+
             border-radius: 8px;
         }
 
         .navbar .nav-links a:hover {
             color: var(--cyan);
-            background: rgba(180, 108, 255, 0.09);
+
+            background:
+                rgba(180, 108, 255, 0.09);
         }
 
         .navbar .admin-nav-item a {
             color: var(--cyan);
-            border: 1px solid rgba(180, 108, 255, 0.22);
-            background: rgba(180, 108, 255, 0.07);
+
+            border:
+                1px solid
+                rgba(180, 108, 255, 0.22);
+
+            background:
+                rgba(180, 108, 255, 0.07);
         }
 
         .navbar .admin-nav-item a:hover {
             color: #f4eaff;
-            background: rgba(180, 108, 255, 0.15);
-            border-color: rgba(180, 108, 255, 0.5);
+
+            background:
+                rgba(180, 108, 255, 0.15);
+
+            border-color:
+                rgba(180, 108, 255, 0.5);
+        }
+
+
+        /* =====================================================
+           PREMIUM GLOSSY CARD EFFECT
+           ONLY NEW ADDITION
+        ===================================================== */
+
+        .interest-card,
+        .skill-group,
+        .project-card,
+        .beyond-card,
+        .education-card,
+        .hero-card,
+        .resume-box,
+        .contact-info,
+        .contact-form {
+
+            position: relative;
+
+            overflow: hidden;
+
+            transform-style: preserve-3d;
+
+            transition:
+                transform 0.18s ease,
+                border-color 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+
+        /* Cursor-following purple glow */
+
+        .interest-card::before,
+        .skill-group::before,
+        .project-card::before,
+        .beyond-card::before,
+        .education-card::before,
+        .hero-card::before,
+        .resume-box::before,
+        .contact-info::before,
+        .contact-form::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 220px;
+            height: 220px;
+
+            left: var(--glow-x, 50%);
+            top: var(--glow-y, 50%);
+
+            transform:
+                translate(-50%, -50%);
+
+            pointer-events: none;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(180,108,255,0.25) 0%,
+                    rgba(180,108,255,0.13) 25%,
+                    rgba(180,108,255,0.055) 48%,
+                    transparent 74%
+                );
+
+            opacity: 0;
+
+            transition:
+                opacity 0.25s ease;
+        }
+
+
+        /* Glossy glass reflection */
+
+        .interest-card::after,
+        .skill-group::after,
+        .project-card::after,
+        .beyond-card::after,
+        .education-card::after,
+        .hero-card::after,
+        .resume-box::after,
+        .contact-info::after,
+        .contact-form::after {
+
+            content: "";
+
+            position: absolute;
+
+            inset: 0;
+
+            pointer-events: none;
+
+            border-radius: inherit;
+
+            background:
+                linear-gradient(
+                    115deg,
+                    transparent 18%,
+                    rgba(255,255,255,0.025) 35%,
+                    rgba(255,255,255,0.075) 47%,
+                    rgba(180,108,255,0.11) 51%,
+                    rgba(255,255,255,0.025) 58%,
+                    transparent 76%
+                );
+
+            opacity: 0;
+
+            transform:
+                translateX(-45%);
+
+            transition:
+                opacity 0.3s ease,
+                transform 0.55s ease;
+        }
+
+
+        /* Premium hover state */
+
+        .interest-card.gloss-active,
+        .skill-group.gloss-active,
+        .project-card.gloss-active,
+        .beyond-card.gloss-active,
+        .education-card.gloss-active,
+        .hero-card.gloss-active,
+        .resume-box.gloss-active,
+        .contact-info.gloss-active,
+        .contact-form.gloss-active {
+
+            border-color:
+                rgba(180,108,255,0.42);
+
+            box-shadow:
+                0 18px 55px rgba(0,0,0,0.35),
+                0 0 35px rgba(180,108,255,0.12),
+                inset 0 1px 0 rgba(255,255,255,0.10);
+        }
+
+        .interest-card.gloss-active::before,
+        .skill-group.gloss-active::before,
+        .project-card.gloss-active::before,
+        .beyond-card.gloss-active::before,
+        .education-card.gloss-active::before,
+        .hero-card.gloss-active::before,
+        .resume-box.gloss-active::before,
+        .contact-info.gloss-active::before,
+        .contact-form.gloss-active::before {
+
+            opacity: 1;
+        }
+
+        .interest-card.gloss-active::after,
+        .skill-group.gloss-active::after,
+        .project-card.gloss-active::after,
+        .beyond-card.gloss-active::after,
+        .education-card.gloss-active::after,
+        .hero-card.gloss-active::after,
+        .resume-box.gloss-active::after,
+        .contact-info.gloss-active::after,
+        .contact-form.gloss-active::after {
+
+            opacity: 1;
+
+            transform:
+                translateX(45%);
         }
 
 
@@ -1072,25 +1305,36 @@
             .nav-inner {
                 min-height: 64px;
                 padding: 0 12px;
+
                 flex-direction: row;
                 align-items: center;
             }
 
             .navbar nav {
                 right: 12px;
-                width: min(230px, calc(100vw - 48px));
+
+                width:
+                    min(
+                        230px,
+                        calc(100vw - 48px)
+                    );
             }
 
             .nav-links {
                 width: 100%;
+
                 display: grid;
+
                 gap: 3px;
+
                 overflow: visible;
+
                 padding-bottom: 0;
             }
 
             .nav-links a {
                 font-size: 10px;
+
                 white-space: normal;
             }
 
@@ -1115,6 +1359,7 @@
 
             .education-top {
                 flex-direction: column;
+
                 gap: 10px;
             }
 
@@ -1124,6 +1369,7 @@
 
             .resume-box {
                 flex-direction: column;
+
                 align-items: flex-start;
 
                 padding: 30px;
@@ -1813,8 +2059,6 @@
                 <div class="projects-grid">
 
 
-                    <!-- PROJECT 01 -->
-
                     <article class="project-card">
 
                         <div class="project-number">
@@ -1863,8 +2107,6 @@
 
 
 
-                    <!-- PROJECT 02 -->
-
                     <article class="project-card">
 
                         <div class="project-number">
@@ -1911,8 +2153,6 @@
                     </article>
 
 
-
-                    <!-- PROJECT 03 -->
 
                     <article class="project-card">
 
@@ -2142,8 +2382,6 @@
                 <div class="contact-grid">
 
 
-                    <!-- CONTACT INFORMATION -->
-
                     <div class="contact-info">
 
                         <h3>
@@ -2177,11 +2415,6 @@
                             </a>
 
 
-                            <!--
-                                REPLACE THIS WITH YOUR
-                                REAL LINKEDIN URL
-                            -->
-
                             <a
                                 href="https://www.linkedin.com/"
                                 target="_blank"
@@ -2196,8 +2429,6 @@
                     </div>
 
 
-
-                    <!-- FORMSPREE FORM -->
 
                     <div class="contact-form">
 
@@ -2317,43 +2548,228 @@
    TRIPLE-LINE NAVIGATION
    Works on laptop and mobile.
 ===================================================== */
+
 (function () {
-    const navbar = document.querySelector(".navbar");
-    const toggle = document.getElementById("navMenuToggle");
-    const nav = document.getElementById("portfolioNav");
+
+    const navbar =
+        document.querySelector(".navbar");
+
+    const toggle =
+        document.getElementById("navMenuToggle");
+
+    const nav =
+        document.getElementById("portfolioNav");
 
     if (!navbar || !toggle || !nav) return;
 
-    function closeMenu() {
-        navbar.classList.remove("nav-open");
-        toggle.setAttribute("aria-expanded", "false");
-        toggle.setAttribute("aria-label", "Open navigation menu");
-    }
 
-    toggle.addEventListener("click", function (event) {
-        event.stopPropagation();
-        const open = navbar.classList.toggle("nav-open");
-        toggle.setAttribute("aria-expanded", String(open));
+    function closeMenu() {
+
+        navbar.classList.remove("nav-open");
+
+        toggle.setAttribute(
+            "aria-expanded",
+            "false"
+        );
+
         toggle.setAttribute(
             "aria-label",
-            open ? "Close navigation menu" : "Open navigation menu"
+            "Open navigation menu"
         );
-    });
+    }
 
-    nav.addEventListener("click", function (event) {
-        const link = event.target.closest("a");
-        if (link) closeMenu();
-    });
 
-    document.addEventListener("click", function (event) {
-        if (!navbar.contains(event.target)) closeMenu();
-    });
+    toggle.addEventListener(
+        "click",
+        function (event) {
 
-    document.addEventListener("keydown", function (event) {
-        if (event.key === "Escape") closeMenu();
-    });
+            event.stopPropagation();
+
+            const open =
+                navbar.classList.toggle(
+                    "nav-open"
+                );
+
+            toggle.setAttribute(
+                "aria-expanded",
+                String(open)
+            );
+
+            toggle.setAttribute(
+                "aria-label",
+                open
+                    ? "Close navigation menu"
+                    : "Open navigation menu"
+            );
+        }
+    );
+
+
+    nav.addEventListener(
+        "click",
+        function (event) {
+
+            const link =
+                event.target.closest("a");
+
+            if (link) {
+                closeMenu();
+            }
+        }
+    );
+
+
+    document.addEventListener(
+        "click",
+        function (event) {
+
+            if (!navbar.contains(event.target)) {
+                closeMenu();
+            }
+        }
+    );
+
+
+    document.addEventListener(
+        "keydown",
+        function (event) {
+
+            if (event.key === "Escape") {
+                closeMenu();
+            }
+        }
+    );
+
 })();
 </script>
+
+
+<script>
+/* =====================================================
+   PREMIUM GLOSSY CURSOR EFFECT
+   ONLY ADDITION
+===================================================== */
+
+(function () {
+
+    const cards =
+        document.querySelectorAll(
+            ".interest-card, " +
+            ".skill-group, " +
+            ".project-card, " +
+            ".beyond-card, " +
+            ".education-card, " +
+            ".hero-card, " +
+            ".resume-box, " +
+            ".contact-info, " +
+            ".contact-form"
+        );
+
+
+    cards.forEach(function (card) {
+
+
+        card.addEventListener(
+            "mouseenter",
+            function () {
+
+                card.classList.add(
+                    "gloss-active"
+                );
+            }
+        );
+
+
+        card.addEventListener(
+            "mousemove",
+            function (event) {
+
+                const rect =
+                    card.getBoundingClientRect();
+
+
+                const x =
+                    (
+                        (event.clientX - rect.left)
+                        / rect.width
+                    ) * 100;
+
+
+                const y =
+                    (
+                        (event.clientY - rect.top)
+                        / rect.height
+                    ) * 100;
+
+
+                card.style.setProperty(
+                    "--glow-x",
+                    x + "%"
+                );
+
+
+                card.style.setProperty(
+                    "--glow-y",
+                    y + "%"
+                );
+
+
+                /*
+                   Extremely subtle 3D movement.
+                   This keeps the original layout intact.
+                */
+
+                const rotateX =
+                    ((y - 50) / 50) * -1.5;
+
+
+                const rotateY =
+                    ((x - 50) / 50) * 1.5;
+
+
+                card.style.transform =
+                    "perspective(900px) " +
+                    "rotateX(" +
+                    rotateX +
+                    "deg) " +
+                    "rotateY(" +
+                    rotateY +
+                    "deg) " +
+                    "translateY(-2px)";
+            }
+        );
+
+
+        card.addEventListener(
+            "mouseleave",
+            function () {
+
+                card.classList.remove(
+                    "gloss-active"
+                );
+
+
+                card.style.transform = "";
+
+
+                card.style.setProperty(
+                    "--glow-x",
+                    "50%"
+                );
+
+
+                card.style.setProperty(
+                    "--glow-y",
+                    "50%"
+                );
+            }
+        );
+
+    });
+
+})();
+</script>
+
 
 </body>
 </html>
