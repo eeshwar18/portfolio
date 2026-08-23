@@ -784,11 +784,11 @@
             background: #000;
         }
 
-        .exact-login-scene {
+         .exact-login-scene {
             position: relative;
-            width: min(604px, 100vw);
-            height: min(583px, 100vh);
-            aspect-ratio: 604 / 583;
+            width: min(1277px, 100vw, 103.65vh);
+            height: auto;
+            aspect-ratio: 1277 / 1232;
             max-height: 100vh;
             overflow: hidden;
             flex: 0 0 auto;
@@ -804,6 +804,7 @@
             display: block;
             object-fit: contain;
             object-position: center center;
+            z-index: 1;
             max-width: 100%;
             max-height: 100%;
             user-select: none;
@@ -821,10 +822,10 @@
 
         .exact-email-input {
             position: absolute;
-            left: 28.1%;
-            top: 71.9%;
-            width: 42.0%;
-            height: 5.7%;
+            left: 26.15%;
+            top: 73.25%;
+            width: 46.55%;
+            height: 5.75%;
             border: 0;
             outline: none;
             background: rgba(0,0,0,0);
@@ -845,10 +846,10 @@
 
         .exact-send-button {
             position: absolute;
-            left: 28.1%;
-            top: 79.4%;
-            width: 42.0%;
-            height: 5.9%;
+            left: 26.15%;
+            top: 80.52%;
+            width: 46.55%;
+            height: 6.25%;
             border: 0;
             border-radius: 7px;
             background: transparent;
@@ -1033,13 +1034,14 @@
 .reactor-fx {
     position: absolute;
     left: 50%;
-    top: 32.9%;
-    width: 33.5%;
+    top: 33.7%;
+    width: 47%;
     aspect-ratio: 1;
     transform: translate(-50%, -50%);
     pointer-events: none;
     mix-blend-mode: screen;
     z-index: 3;
+    opacity: 1;
 }
 
 .reactor-bloom {
@@ -1191,7 +1193,7 @@
     z-index: 30;
     pointer-events: none;
     opacity: 0;
-    background: radial-gradient(circle at 50% 32.9%,
+    background: radial-gradient(circle at 50% 33.7%,
         rgba(220,252,255,1) 0%,
         rgba(80,225,255,.72) 8%,
         rgba(70,100,255,.20) 24%,
@@ -1205,7 +1207,7 @@ body.reactor-auth-transition .reactor-login-flash {
 .reactor-login-burst {
     position: absolute;
     left: 50%;
-    top: 32.9%;
+    top: 33.7%;
     width: 5%;
     aspect-ratio: 1;
     transform: translate(-50%, -50%);
