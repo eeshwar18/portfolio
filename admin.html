@@ -11,6 +11,7 @@
     >
 
     <title>Admin | Eeshwar Portfolio</title>
+    <!-- STEP 3 FIXED: single source of truth is D.projects -->
 
     <!-- Supabase JavaScript -->
     <script
@@ -734,7 +735,7 @@
         }
 
     
-        .editor-toolbar{margin-top:24px;display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap}.editor-toolbar p{color:var(--muted);font-size:12px}.project-list{margin-top:22px;display:grid;gap:18px}.project-editor{padding:20px;border:1px solid var(--border);border-radius:16px;background:linear-gradient(145deg,var(--card2),var(--card))}.project-editor-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}.project-number{color:var(--cyan);font-size:10px;font-weight:900;letter-spacing:.12em}.project-actions{display:flex;gap:8px;flex-wrap:wrap}.small-button{padding:8px 11px;border-radius:7px;background:transparent;border:1px solid var(--border);color:var(--muted);font-size:10px;font-weight:800;cursor:pointer}.small-button:hover{color:var(--cyan);border-color:rgba(85,232,255,.35)}.small-button.delete{color:#ff929b;border-color:rgba(255,104,117,.25)}.project-editor-grid{display:grid;grid-template-columns:260px 1fr;gap:20px}.image-box{min-height:210px;border:1px dashed rgba(85,232,255,.25);border-radius:12px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:rgba(85,232,255,.025)}.image-box img{width:100%;height:210px;object-fit:cover;display:none}.image-placeholder{text-align:center;padding:20px;color:var(--muted);font-size:11px;line-height:1.6}.image-placeholder strong{display:block;color:var(--text);font-size:13px;margin-bottom:6px}.image-input{display:none}.upload-button{display:inline-flex;margin-top:10px;padding:9px 12px;border:1px solid var(--border);border-radius:7px;color:var(--cyan);font-size:10px;font-weight:800;cursor:pointer}.editor-fields{display:grid;gap:14px}.editor-field label{display:block;margin-bottom:7px;color:var(--text);font-size:11px;font-weight:800}.editor-field input,.editor-field textarea{width:100%;padding:12px 14px;border:1px solid var(--border);border-radius:8px;outline:none;background:rgba(3,8,13,.65);color:var(--white);font-size:13px}.editor-field textarea{min-height:120px;resize:vertical}.project-footer{margin-top:18px;padding-top:16px;border-top:1px solid rgba(255,255,255,.06);color:var(--muted);font-size:10px}.empty-projects{padding:35px;text-align:center;border:1px dashed rgba(85,232,255,.16);border-radius:12px;color:var(--muted);font-size:12px}.editor-note{margin-top:18px;padding:14px;border-radius:10px;background:rgba(85,232,255,.035);border:1px solid rgba(85,232,255,.08);color:var(--muted);font-size:11px;line-height:1.6}@media(max-width:750px){.project-editor-grid{grid-template-columns:1fr}.image-box{min-height:180px}.image-box img{height:180px}}
+
 </style>
 
 </head>
@@ -1026,19 +1027,6 @@
 
             </section>
 
-
-
-            <section class="admin-card full">
-                <div style="color:var(--cyan);font-size:10px;font-weight:800;letter-spacing:.18em;">01 · PORTFOLIO EDITOR</div>
-                <h2 style="margin-top:10px;">Projects</h2>
-                <p>Add, edit and preview your project cards. Permanent saving and image storage come in the next steps.</p>
-                <div class="editor-toolbar">
-                    <p id="projectCount">0 projects</p>
-                    <button type="button" class="button" id="addProjectButton" style="width:auto;padding:0 18px;">+ ADD PROJECT</button>
-                </div>
-                <div id="projectList" class="project-list"></div>
-                <div class="editor-note"><strong style="color:var(--text);">Step 1:</strong> This is the editor interface. You can add project cards, edit their text, delete them and preview an image. Nothing is permanently saved yet.</div>
-            </section>
 
 
         </div>
@@ -1658,32 +1646,6 @@
 
 
 
-
-    /* PROJECT EDITOR - STEP 1 UI */
-    const projectList=document.getElementById("projectList");
-    const projectCount=document.getElementById("projectCount");
-    const addProjectButton=document.getElementById("addProjectButton");
-    let projects=[
-      {title:"Smart Agriculture",description:"An IoT-based smart agriculture system built using an ESP32 and Blynk.",tags:"ESP32, Blynk, DHT22, Soil Sensor, LDR, IoT",url:"https://github.com/eeshwar18/SMART-AGRICULTURE",image:""},
-      {title:"Smart Arduino Car",description:"A sensor-based robotic car built using an Arduino UNO.",tags:"Arduino UNO, Embedded C/C++, Ultrasonic, IR Sensors, Servo, L298N",url:"https://github.com/eeshwar18/Smart-car-ARDUINO-",image:""},
-      {title:"Raspberry Pi Smart Car",description:"A Raspberry Pi Zero 2 W based robotic car designed for obstacle detection.",tags:"Raspberry Pi, Pi Zero 2 W, Python, Ultrasonic, Servo, L298N",url:"https://github.com/eeshwar18/Raspberry-car",image:""}
-    ];
-    function esc(v){return String(v??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/\"/g,"&quot;").replace(/'/g,"&#039;");}
-    function renderProjects(){
-      projectList.innerHTML=""; projectCount.textContent=projects.length+(projects.length===1?" project":" projects");
-      if(!projects.length){projectList.innerHTML='<div class="empty-projects">No projects yet. Click <strong style="color:var(--cyan);">+ ADD PROJECT</strong> to create your first project.</div>';return;}
-      projects.forEach((p,i)=>{
-        const card=document.createElement("article"); card.className="project-editor";
-        card.innerHTML=`<div class="project-editor-head"><div class="project-number">PROJECT ${String(i+1).padStart(2,"0")}</div><div class="project-actions"><button type="button" class="small-button" data-action="clear">CLEAR IMAGE</button><button type="button" class="small-button delete" data-action="delete">DELETE</button></div></div><div class="project-editor-grid"><div><div class="image-box">${p.image?`<img src="${esc(p.image)}" alt="Project image" style="display:block">`:''}<div class="image-placeholder" style="${p.image?'display:none':''}"><strong>${p.image?'Image selected':'PROJECT IMAGE'}</strong>${p.image?'Preview is shown above.':'Choose an image to preview it here.'}<br><label class="upload-button">CHOOSE IMAGE<input class="image-input" type="file" accept="image/*"></label></div></div></div><div class="editor-fields"><div class="editor-field"><label>TITLE</label><input data-field="title" value="${esc(p.title)}" placeholder="Project title"></div><div class="editor-field"><label>DESCRIPTION</label><textarea data-field="description" placeholder="Describe your project">${esc(p.description)}</textarea></div><div class="editor-field"><label>TECHNOLOGIES — comma separated</label><input data-field="tags" value="${esc(p.tags)}" placeholder="ESP32, Blynk, IoT"></div><div class="editor-field"><label>PROJECT URL</label><input type="url" data-field="url" value="${esc(p.url)}" placeholder="https://github.com/..."></div></div></div><div class="project-footer">Choose an image, edit the project, then use SAVE CHANGES to publish it.</div>`;
-        card.querySelectorAll('[data-field]').forEach(el=>el.addEventListener('input',()=>p[el.dataset.field]=el.value));
-        card.querySelector('[data-action="delete"]').onclick=()=>{projects.splice(i,1);renderProjects()};
-        card.querySelector('[data-action="clear"]').onclick=()=>{p.image="";renderProjects()};
-        card.querySelector('.image-input').onchange=e=>{const f=e.target.files?.[0];if(!f)return;if(!f.type.startsWith('image/')){showMessage('Please choose an image file.');return;}const r=new FileReader();r.onload=()=>{p.image=r.result;renderProjects()};r.readAsDataURL(f)};
-        projectList.appendChild(card);
-      });
-    }
-    addProjectButton.onclick=()=>{projects.push({title:"",description:"",tags:"",url:"",image:""});renderProjects();document.querySelectorAll('.project-editor').at(-1)?.scrollIntoView({behavior:'smooth',block:'center'})};
-    renderProjects();
 
     /* =====================================================
        START
