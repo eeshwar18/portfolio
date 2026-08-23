@@ -13,6 +13,11 @@
         content="Eeshwar - Electronics and Communication Engineering student portfolio."
     >
 
+    <meta
+        name="theme-color"
+        content="#03080d"
+    >
+
     <title>Eeshwar | Portfolio</title>
 
     <style>
@@ -43,6 +48,17 @@
 
             --border: rgba(85, 232, 255, 0.16);
             --border-strong: rgba(85, 232, 255, 0.34);
+
+            --shadow:
+                0 20px 60px rgba(0, 0, 0, 0.30);
+
+            --radius-sm: 8px;
+            --radius-md: 14px;
+            --radius-lg: 18px;
+            --radius-xl: 24px;
+
+            --transition:
+                180ms cubic-bezier(0.22, 1, 0.36, 1);
         }
 
 
@@ -51,17 +67,32 @@
         ===================================================== */
 
         html {
-            scroll-behavior: auto;
+            scroll-behavior: smooth;
+            scroll-padding-top: 105px;
         }
 
         body {
+            min-height: 100vh;
+
+            overflow-x: hidden;
+
             background:
                 radial-gradient(
-                    circle at 20% 10%,
-                    rgba(85, 232, 255, 0.035),
+                    circle at 15% 5%,
+                    rgba(85, 232, 255, 0.055),
+                    transparent 27%
+                ),
+                radial-gradient(
+                    circle at 85% 45%,
+                    rgba(85, 232, 255, 0.025),
                     transparent 30%
                 ),
-                var(--bg);
+                linear-gradient(
+                    180deg,
+                    #03080d 0%,
+                    #040b10 50%,
+                    #03080d 100%
+                );
 
             color: var(--white);
 
@@ -72,6 +103,39 @@
                 sans-serif;
 
             line-height: 1.6;
+
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+        }
+
+        body::before {
+            position: fixed;
+
+            inset: 0;
+
+            z-index: -1;
+
+            pointer-events: none;
+
+            background-image:
+                linear-gradient(
+                    rgba(85, 232, 255, 0.018) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(85, 232, 255, 0.018) 1px,
+                    transparent 1px
+                );
+
+            background-size: 80px 80px;
+
+            content: "";
+        }
+
+        ::selection {
+            background: rgba(85, 232, 255, 0.25);
+            color: var(--white);
         }
 
         a {
@@ -84,13 +148,48 @@
             font: inherit;
         }
 
+        button,
+        a {
+            -webkit-tap-highlight-color: transparent;
+        }
+
         section {
-            padding: 110px 0;
-            scroll-margin-top: 110px;
+            position: relative;
+
+            padding: 125px 0;
+
+            scroll-margin-top: 105px;
+        }
+
+        section::before {
+            position: absolute;
+
+            top: 0;
+            left: 50%;
+
+            width: min(1180px, calc(100% - 40px));
+            height: 1px;
+
+            transform: translateX(-50%);
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(85, 232, 255, 0.10),
+                    transparent
+                );
+
+            content: "";
+        }
+
+        section:first-child::before {
+            display: none;
         }
 
         .container {
             width: min(1180px, calc(100% - 40px));
+
             margin: 0 auto;
         }
 
@@ -100,22 +199,35 @@
         ===================================================== */
 
         .section-label {
-            margin-bottom: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+
+            margin-bottom: 16px;
 
             color: var(--cyan);
 
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 800;
 
-            letter-spacing: 0.18em;
+            letter-spacing: 0.2em;
             text-transform: uppercase;
+        }
+
+        .section-label::before {
+            width: 22px;
+            height: 1px;
+
+            background: var(--cyan);
+
+            content: "";
         }
 
         .section-title {
             color: var(--white);
 
             font-size:
-                clamp(40px, 6vw, 70px);
+                clamp(42px, 6vw, 70px);
 
             line-height: 0.98;
 
@@ -125,11 +237,12 @@
         .section-description {
             max-width: 700px;
 
-            margin-top: 20px;
+            margin-top: 22px;
 
             color: var(--muted);
 
             font-size: 15px;
+            line-height: 1.8;
         }
 
         .cyan {
@@ -159,20 +272,39 @@
 
             border:
                 1px solid
-                rgba(255, 255, 255, 0.13);
+                rgba(255, 255, 255, 0.11);
 
             border-radius: 19px;
 
             background:
-                rgba(5, 14, 20, 0.52);
+                rgba(5, 14, 20, 0.66);
 
-            backdrop-filter: blur(22px);
-            -webkit-backdrop-filter: blur(22px);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
 
             box-shadow:
-                0 18px 50px rgba(0, 0, 0, 0.28),
+                0 18px 50px rgba(0, 0, 0, 0.30),
                 inset 0 1px 0
                 rgba(255, 255, 255, 0.07);
+
+            transition:
+                background var(--transition),
+                box-shadow var(--transition),
+                border-color var(--transition);
+        }
+
+        .navbar.scrolled {
+            background:
+                rgba(4, 12, 18, 0.88);
+
+            border-color:
+                rgba(85, 232, 255, 0.18);
+
+            box-shadow:
+                0 18px 55px rgba(0, 0, 0, 0.42),
+                0 0 35px rgba(85, 232, 255, 0.035),
+                inset 0 1px 0
+                rgba(255, 255, 255, 0.08);
         }
 
         .nav-inner {
@@ -188,12 +320,14 @@
         }
 
         .logo {
+            position: relative;
+
             color: var(--white);
 
             font-size: 20px;
             font-weight: 800;
 
-            letter-spacing: -0.03em;
+            letter-spacing: -0.04em;
 
             text-decoration: none;
 
@@ -208,12 +342,25 @@
             display: flex;
             align-items: center;
 
-            gap: 17px;
+            gap: 6px;
 
             list-style: none;
         }
 
         .nav-links a {
+            position: relative;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            min-height: 36px;
+
+            padding:
+                0 9px;
+
+            border-radius: 7px;
+
             color: var(--muted);
 
             font-size: 10px;
@@ -222,26 +369,78 @@
             text-decoration: none;
 
             white-space: nowrap;
+
+            transition:
+                color var(--transition),
+                background var(--transition);
+        }
+
+        .nav-links a::after {
+            position: absolute;
+
+            right: 9px;
+            bottom: 4px;
+            left: 9px;
+
+            height: 1px;
+
+            transform: scaleX(0);
+
+            transform-origin: center;
+
+            background: var(--cyan);
+
+            content: "";
+
+            transition:
+                transform var(--transition);
         }
 
         .nav-links a:hover {
+            color: var(--white);
+
+            background:
+                rgba(85, 232, 255, 0.045);
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            transform: scaleX(1);
+        }
+
+        .nav-links a.active {
             color: var(--cyan);
+
+            background:
+                rgba(85, 232, 255, 0.06);
         }
 
         .admin-link {
+            margin-left: 4px;
+
             padding:
-                7px 11px;
+                0 12px !important;
 
             border:
                 1px solid
                 rgba(85, 232, 255, 0.23);
 
-            border-radius: 7px;
-
             color: var(--cyan) !important;
 
             background:
                 rgba(85, 232, 255, 0.045);
+        }
+
+        .admin-link::after {
+            display: none;
+        }
+
+        .admin-link:hover {
+            border-color:
+                rgba(85, 232, 255, 0.42);
+
+            background:
+                rgba(85, 232, 255, 0.09) !important;
         }
 
 
@@ -270,6 +469,18 @@
             color: var(--cyan);
 
             cursor: pointer;
+
+            transition:
+                background var(--transition),
+                border-color var(--transition);
+        }
+
+        .mobile-nav-button:hover {
+            border-color:
+                rgba(85, 232, 255, 0.35);
+
+            background:
+                rgba(85, 232, 255, 0.08);
         }
 
         .mobile-nav-button span,
@@ -283,6 +494,10 @@
             background: var(--cyan);
 
             content: "";
+
+            transition:
+                transform var(--transition),
+                opacity var(--transition);
         }
 
         .mobile-nav-button span {
@@ -299,6 +514,20 @@
             top: 6px;
         }
 
+        .mobile-nav-button[aria-expanded="true"] span {
+            background: transparent;
+        }
+
+        .mobile-nav-button[aria-expanded="true"] span::before {
+            top: 0;
+            transform: rotate(45deg);
+        }
+
+        .mobile-nav-button[aria-expanded="true"] span::after {
+            top: 0;
+            transform: rotate(-45deg);
+        }
+
         .mobile-menu {
             display: none;
 
@@ -313,11 +542,13 @@
         .mobile-menu a {
             display: block;
 
-            padding: 11px 12px;
+            padding: 12px;
 
             border-bottom:
                 1px solid
                 rgba(255,255,255,0.055);
+
+            border-radius: 6px;
 
             color: var(--muted);
 
@@ -325,10 +556,17 @@
             font-weight: 700;
 
             text-decoration: none;
+
+            transition:
+                color var(--transition),
+                background var(--transition);
         }
 
         .mobile-menu a:hover {
             color: var(--cyan);
+
+            background:
+                rgba(85, 232, 255, 0.04);
         }
 
         .mobile-menu .mobile-admin {
@@ -337,8 +575,6 @@
             border:
                 1px solid
                 rgba(85, 232, 255, 0.18);
-
-            border-radius: 8px;
 
             color: var(--cyan);
 
@@ -355,12 +591,14 @@
             display: flex;
             flex-wrap: wrap;
 
-            gap: 12px;
+            gap: 11px;
 
             margin-top: 30px;
         }
 
         .button {
+            position: relative;
+
             min-height: 46px;
 
             display: inline-flex;
@@ -370,7 +608,7 @@
             padding:
                 0 19px;
 
-            border-radius: 8px;
+            border-radius: 9px;
 
             font-size: 12px;
             font-weight: 800;
@@ -380,15 +618,85 @@
             border: 1px solid transparent;
 
             cursor: pointer;
+
+            overflow: hidden;
+
+            transition:
+                transform var(--transition),
+                border-color var(--transition),
+                background var(--transition),
+                color var(--transition),
+                box-shadow var(--transition);
+        }
+
+        .button::before {
+            position: absolute;
+
+            top: 0;
+            bottom: 0;
+            left: -100%;
+
+            width: 70%;
+
+            transform: skewX(-20deg);
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(255,255,255,0.18),
+                    transparent
+                );
+
+            content: "";
+
+            transition:
+                left 500ms ease;
+        }
+
+        .button:hover::before {
+            left: 130%;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+        }
+
+        .button:active {
+            transform: translateY(0);
+        }
+
+        .button:focus-visible,
+        a:focus-visible,
+        input:focus-visible,
+        textarea:focus-visible {
+            outline:
+                2px solid
+                var(--cyan);
+
+            outline-offset: 3px;
         }
 
         .button-primary {
             background: var(--cyan);
             color: #001017;
+
+            box-shadow:
+                0 8px 25px
+                rgba(85, 232, 255, 0.12);
+        }
+
+        .button-primary:hover {
+            background: var(--cyan-soft);
+
+            box-shadow:
+                0 12px 30px
+                rgba(85, 232, 255, 0.20);
         }
 
         .button-secondary {
-            background: var(--card);
+            background:
+                rgba(9, 23, 32, 0.75);
 
             border-color:
                 var(--border);
@@ -401,6 +709,9 @@
                 var(--border-strong);
 
             color: var(--cyan);
+
+            background:
+                rgba(85, 232, 255, 0.055);
         }
 
 
@@ -425,6 +736,10 @@
         }
 
         .hero-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+
             margin-bottom: 25px;
 
             color: var(--cyan);
@@ -433,6 +748,15 @@
             font-weight: 800;
 
             letter-spacing: 0.18em;
+        }
+
+        .hero-label::before {
+            width: 30px;
+            height: 1px;
+
+            background: var(--cyan);
+
+            content: "";
         }
 
         .hero h1 {
@@ -454,26 +778,56 @@
             color: var(--muted);
 
             font-size: 17px;
+            line-height: 1.75;
         }
 
         .hero-card {
-            padding: 30px;
+            position: relative;
+
+            padding: 32px;
 
             border:
                 1px solid
                 var(--border);
 
-            border-radius: 18px;
+            border-radius: var(--radius-lg);
 
             background:
                 linear-gradient(
                     145deg,
-                    var(--card-light),
-                    var(--card)
+                    rgba(13, 29, 39, 0.92),
+                    rgba(9, 23, 32, 0.88)
                 );
+
+            box-shadow:
+                0 25px 60px
+                rgba(0, 0, 0, 0.20);
+
+            overflow: hidden;
+        }
+
+        .hero-card::before {
+            position: absolute;
+
+            top: -80px;
+            right: -80px;
+
+            width: 180px;
+            height: 180px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(85, 232, 255, 0.055);
+
+            filter: blur(3px);
+
+            content: "";
         }
 
         .hero-card-label {
+            position: relative;
+
             color: var(--cyan);
 
             font-size: 10px;
@@ -483,6 +837,8 @@
         }
 
         .hero-card h2 {
+            position: relative;
+
             margin-top: 18px;
 
             font-size: 28px;
@@ -491,14 +847,19 @@
         }
 
         .hero-card p {
+            position: relative;
+
             margin-top: 14px;
 
             color: var(--muted);
 
             font-size: 13px;
+            line-height: 1.75;
         }
 
         .focus-list {
+            position: relative;
+
             margin-top: 24px;
 
             display: grid;
@@ -509,13 +870,15 @@
         }
 
         .focus-list li {
-            padding: 11px 13px;
+            position: relative;
+
+            padding: 11px 13px 11px 31px;
 
             border:
                 1px solid
                 rgba(85, 232, 255, 0.1);
 
-            border-radius: 7px;
+            border-radius: 8px;
 
             background:
                 rgba(85, 232, 255, 0.025);
@@ -523,6 +886,43 @@
             color: var(--text);
 
             font-size: 12px;
+
+            transition:
+                transform var(--transition),
+                border-color var(--transition),
+                background var(--transition);
+        }
+
+        .focus-list li::before {
+            position: absolute;
+
+            top: 50%;
+            left: 13px;
+
+            width: 5px;
+            height: 5px;
+
+            border-radius: 50%;
+
+            transform: translateY(-50%);
+
+            background: var(--cyan);
+
+            box-shadow:
+                0 0 10px
+                rgba(85, 232, 255, 0.65);
+
+            content: "";
+        }
+
+        .focus-list li:hover {
+            transform: translateX(4px);
+
+            border-color:
+                rgba(85, 232, 255, 0.24);
+
+            background:
+                rgba(85, 232, 255, 0.055);
         }
 
 
@@ -540,10 +940,10 @@
         .contact-form,
         .resume-box {
             transition:
-                transform 180ms ease,
-                border-color 180ms ease,
-                box-shadow 180ms ease,
-                background 180ms ease;
+                transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
+                border-color 220ms ease,
+                box-shadow 220ms ease,
+                background 220ms ease;
         }
 
         .project-card:hover,
@@ -558,7 +958,7 @@
             transform: translateY(-7px);
 
             border-color:
-                rgba(85, 232, 255, 0.36);
+                rgba(85, 232, 255, 0.34);
 
             box-shadow:
                 0 18px 45px
@@ -588,12 +988,15 @@
                 1.25fr;
 
             gap: 70px;
+
+            align-items: start;
         }
 
         .about-content {
             color: var(--text);
 
             font-size: 15px;
+            line-height: 1.85;
         }
 
         .about-content p + p {
@@ -601,13 +1004,21 @@
         }
 
         .about-highlight {
+            position: relative;
+
             margin-top: 28px;
 
-            padding: 20px;
+            padding: 20px 20px 20px 23px;
+
+            border:
+                1px solid
+                rgba(85, 232, 255, 0.10);
 
             border-left:
                 2px solid
                 var(--cyan);
+
+            border-radius: 0 12px 12px 0;
 
             background:
                 rgba(85, 232, 255, 0.035);
@@ -615,6 +1026,8 @@
             color: var(--text);
 
             font-size: 14px;
+
+            line-height: 1.75;
         }
 
 
@@ -625,15 +1038,20 @@
         .education-card {
             margin-top: 45px;
 
-            padding: 30px;
+            padding: 32px;
 
             border:
                 1px solid
                 var(--border);
 
-            border-radius: 18px;
+            border-radius: var(--radius-lg);
 
-            background: var(--card);
+            background:
+                linear-gradient(
+                    145deg,
+                    var(--card-light),
+                    var(--card)
+                );
         }
 
         .education-top {
@@ -651,7 +1069,7 @@
         }
 
         .college-name {
-            margin-top: 8px;
+            margin-top: 9px;
 
             color: var(--cyan);
 
@@ -668,11 +1086,18 @@
         }
 
         .education-card p {
-            margin-top: 18px;
+            margin-top: 20px;
+
+            padding-top: 18px;
+
+            border-top:
+                1px solid
+                rgba(85, 232, 255, 0.07);
 
             color: var(--muted);
 
             font-size: 14px;
+            line-height: 1.8;
         }
 
 
@@ -692,17 +1117,38 @@
         }
 
         .interest-card {
-            min-height: 145px;
+            position: relative;
 
-            padding: 23px;
+            min-height: 155px;
+
+            padding: 25px;
 
             border:
                 1px solid
                 var(--border);
 
-            border-radius: 15px;
+            border-radius: var(--radius-md);
 
             background: var(--card);
+
+            overflow: hidden;
+        }
+
+        .interest-card::after {
+            position: absolute;
+
+            right: -25px;
+            bottom: -25px;
+
+            width: 90px;
+            height: 90px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(85, 232, 255, 0.025);
+
+            content: "";
         }
 
         .interest-number {
@@ -710,6 +1156,8 @@
 
             font-size: 10px;
             font-weight: 800;
+
+            letter-spacing: 0.12em;
         }
 
         .interest-card h3 {
@@ -743,15 +1191,37 @@
         }
 
         .skill-group {
+            position: relative;
+
+            min-height: 160px;
+
             padding: 25px;
 
             border:
                 1px solid
                 var(--border);
 
-            border-radius: 15px;
+            border-radius: var(--radius-md);
 
             background: var(--card);
+
+            overflow: hidden;
+        }
+
+        .skill-group::before {
+            position: absolute;
+
+            top: 0;
+            left: 0;
+
+            width: 35px;
+            height: 2px;
+
+            background: var(--cyan);
+
+            opacity: 0.55;
+
+            content: "";
         }
 
         .skill-group h3 {
@@ -776,11 +1246,29 @@
                 1px solid
                 rgba(85, 232, 255, 0.12);
 
-            border-radius: 5px;
+            border-radius: 6px;
 
             color: var(--muted);
 
+            background:
+                rgba(85, 232, 255, 0.018);
+
             font-size: 11px;
+
+            transition:
+                color var(--transition),
+                border-color var(--transition),
+                background var(--transition);
+        }
+
+        .skill-list li:hover {
+            color: var(--cyan);
+
+            border-color:
+                rgba(85, 232, 255, 0.28);
+
+            background:
+                rgba(85, 232, 255, 0.055);
         }
 
 
@@ -800,6 +1288,8 @@
         }
 
         .project-card {
+            position: relative;
+
             min-height: 350px;
 
             display: flex;
@@ -811,7 +1301,7 @@
                 1px solid
                 var(--border);
 
-            border-radius: 18px;
+            border-radius: var(--radius-lg);
 
             background:
                 linear-gradient(
@@ -819,6 +1309,24 @@
                     var(--card-light),
                     var(--card)
                 );
+
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            position: absolute;
+
+            top: 0;
+            left: 0;
+
+            width: 45px;
+            height: 2px;
+
+            background: var(--cyan);
+
+            opacity: 0.7;
+
+            content: "";
         }
 
         .project-number {
@@ -844,6 +1352,7 @@
             color: var(--muted);
 
             font-size: 13px;
+            line-height: 1.75;
         }
 
         .project-tags {
@@ -866,6 +1375,9 @@
 
             color: var(--muted);
 
+            background:
+                rgba(85, 232, 255, 0.018);
+
             font-size: 9px;
         }
 
@@ -874,16 +1386,50 @@
 
             padding-top: 25px;
 
+            display: inline-flex;
+            align-items: center;
+
+            width: fit-content;
+
             color: var(--cyan);
 
             font-size: 12px;
             font-weight: 800;
 
             text-decoration: none;
+
+            transition:
+                color var(--transition),
+                transform var(--transition);
         }
 
         .project-link:hover {
             color: var(--cyan-soft);
+
+            transform: translateX(4px);
+        }
+
+        /* Compatibility with your Supabase project images */
+
+        .project-image-wrap {
+            margin-bottom: 20px !important;
+
+            border-radius: 12px !important;
+
+            overflow: hidden !important;
+
+            background:
+                rgba(0, 0, 0, 0.25);
+        }
+
+        .project-image {
+            transition:
+                transform 400ms
+                cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .project-card:hover .project-image {
+            transform: scale(1.025);
         }
 
 
@@ -903,15 +1449,35 @@
         }
 
         .beyond-card {
+            position: relative;
+
             padding: 30px;
 
             border:
                 1px solid
                 var(--border);
 
-            border-radius: 17px;
+            border-radius: var(--radius-lg);
 
             background: var(--card);
+
+            overflow: hidden;
+        }
+
+        .beyond-card::before {
+            position: absolute;
+
+            top: 0;
+            left: 0;
+
+            width: 45px;
+            height: 2px;
+
+            background: var(--cyan);
+
+            opacity: 0.55;
+
+            content: "";
         }
 
         .beyond-card h3 {
@@ -924,6 +1490,11 @@
             color: var(--muted);
 
             font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .beyond-card p + p {
+            margin-top: 12px;
         }
 
 
@@ -947,7 +1518,7 @@
                 1px solid
                 var(--border);
 
-            border-radius: 20px;
+            border-radius: var(--radius-xl);
 
             background:
                 linear-gradient(
@@ -967,6 +1538,10 @@
             color: var(--muted);
 
             font-size: 13px;
+        }
+
+        .resume-box .buttons {
+            margin-top: 0;
         }
 
 
@@ -994,7 +1569,7 @@
                 1px solid
                 var(--border);
 
-            border-radius: 18px;
+            border-radius: var(--radius-lg);
 
             background: var(--card);
         }
@@ -1009,6 +1584,7 @@
             color: var(--muted);
 
             font-size: 14px;
+            line-height: 1.8;
         }
 
         .contact-email {
@@ -1024,6 +1600,13 @@
             text-decoration: none;
 
             word-break: break-word;
+
+            transition:
+                color var(--transition);
+        }
+
+        .contact-email:hover {
+            color: var(--cyan-soft);
         }
 
         .social-links {
@@ -1054,13 +1637,13 @@
         .form-group textarea {
             width: 100%;
 
-            padding: 13px 14px;
+            padding: 14px 14px;
 
             border:
                 1px solid
                 var(--border);
 
-            border-radius: 8px;
+            border-radius: 9px;
 
             outline: none;
 
@@ -1070,12 +1653,29 @@
             color: var(--white);
 
             font-size: 13px;
+
+            transition:
+                border-color var(--transition),
+                box-shadow var(--transition),
+                background var(--transition);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: var(--muted-dark);
         }
 
         .form-group input:focus,
         .form-group textarea:focus {
             border-color:
                 var(--border-strong);
+
+            background:
+                rgba(3, 8, 13, 0.82);
+
+            box-shadow:
+                0 0 0 3px
+                rgba(85, 232, 255, 0.055);
         }
 
         .form-group textarea {
@@ -1099,11 +1699,11 @@
 
         footer {
             padding:
-                28px 0 35px;
+                35px 0 42px;
 
             border-top:
                 1px solid
-                rgba(85, 232, 255, 0.1);
+                rgba(85, 232, 255, 0.10);
 
             color: var(--muted-dark);
 
@@ -1120,8 +1720,50 @@
 
 
         /* =====================================================
+           REVEAL ANIMATION
+        ===================================================== */
+
+        .reveal {
+            opacity: 0;
+
+            transform: translateY(22px);
+
+            transition:
+                opacity 650ms ease,
+                transform 650ms
+                cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+
+            transform: translateY(0);
+        }
+
+
+        /* =====================================================
            TABLET
         ===================================================== */
+
+        @media (max-width: 1050px) {
+
+            .nav-links {
+                gap: 2px;
+            }
+
+            .nav-links a {
+                padding:
+                    0 7px;
+
+                font-size: 9px;
+            }
+
+            .admin-link {
+                padding:
+                    0 9px !important;
+            }
+        }
+
 
         @media (max-width: 950px) {
 
@@ -1133,8 +1775,14 @@
                 padding-top: 150px;
             }
 
+            .hero-card {
+                max-width: 650px;
+            }
+
             .about-grid {
                 grid-template-columns: 1fr;
+
+                gap: 35px;
             }
 
             .interest-grid,
@@ -1149,11 +1797,11 @@
             }
 
             .nav-links {
-                gap: 12px;
+                gap: 2px;
             }
 
             .nav-links a {
-                font-size: 9px;
+                font-size: 8px;
             }
         }
 
@@ -1164,15 +1812,24 @@
 
         @media (max-width: 700px) {
 
+            body::before {
+                background-size: 55px 55px;
+            }
+
             .container {
                 width:
                     calc(100% - 24px);
             }
 
             section {
-                padding: 80px 0;
+                padding: 85px 0;
 
-                scroll-margin-top: 100px;
+                scroll-margin-top: 95px;
+            }
+
+            section::before {
+                width:
+                    calc(100% - 24px);
             }
 
             .navbar {
@@ -1200,14 +1857,38 @@
 
             .hero {
                 padding-top: 125px;
+
+                gap: 45px;
+            }
+
+            .hero-label {
+                font-size: 9px;
+
+                line-height: 1.6;
             }
 
             .hero h1 {
-                font-size: 55px;
+                font-size:
+                    clamp(52px, 15vw, 72px);
             }
 
             .hero-description {
                 font-size: 15px;
+
+                line-height: 1.75;
+            }
+
+            .hero-card {
+                padding: 25px;
+            }
+
+            .section-title {
+                font-size:
+                    clamp(40px, 13vw, 58px);
+            }
+
+            .section-description {
+                font-size: 14px;
             }
 
             .interest-grid,
@@ -1215,6 +1896,11 @@
             .projects-grid,
             .beyond-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .interest-card,
+            .skill-group {
+                min-height: auto;
             }
 
             .education-top {
@@ -1227,12 +1913,21 @@
                 white-space: normal;
             }
 
+            .education-card,
+            .beyond-card {
+                padding: 25px;
+            }
+
             .resume-box {
                 flex-direction: column;
 
                 align-items: flex-start;
 
-                padding: 30px;
+                padding: 28px;
+            }
+
+            .resume-box .buttons {
+                width: 100%;
             }
 
             .contact-info,
@@ -1242,7 +1937,18 @@
 
             .footer-inner {
                 flex-direction: column;
+
+                gap: 8px;
             }
+
+            .buttons {
+                width: 100%;
+            }
+
+            .buttons .button {
+                flex: 1;
+            }
+
         }
 
 
@@ -1264,6 +1970,41 @@
                 width: 100%;
             }
 
+            .hero-card {
+                padding: 22px;
+            }
+
+            .project-card {
+                padding: 23px;
+            }
+
+        }
+
+
+        /* =====================================================
+           REDUCED MOTION
+        ===================================================== */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+
+            .reveal {
+                opacity: 1;
+                transform: none;
+            }
+
         }
 
     </style>
@@ -1277,7 +2018,7 @@
          FLOATING NAVBAR
     ===================================================== -->
 
-    <header class="navbar">
+    <header class="navbar" id="navbar">
 
         <div class="nav-inner">
 
@@ -1291,7 +2032,7 @@
 
             <!-- DESKTOP NAV -->
 
-            <nav class="desktop-nav">
+            <nav class="desktop-nav" aria-label="Main navigation">
 
                 <ul class="nav-links">
 
@@ -1359,6 +2100,7 @@
                 id="mobileNavButton"
                 aria-label="Open navigation menu"
                 aria-expanded="false"
+                aria-controls="mobileMenu"
             >
                 <span></span>
             </button>
@@ -1425,7 +2167,7 @@
 
             <div class="container hero">
 
-                <div>
+                <div class="reveal">
 
                     <div class="hero-label">
                         ELECTRONICS & COMMUNICATION ENGINEERING
@@ -1479,7 +2221,7 @@
                 </div>
 
 
-                <div class="hero-card">
+                <div class="hero-card reveal">
 
                     <div class="hero-card-label">
                         WHAT I LIKE TO WORK ON
@@ -1542,7 +2284,7 @@
 
                 <div class="about-grid">
 
-                    <h2 class="section-title">
+                    <h2 class="section-title reveal">
                         About
                         <span class="cyan">
                             Me.
@@ -1550,7 +2292,7 @@
                     </h2>
 
 
-                    <div class="about-content">
+                    <div class="about-content reveal">
 
                         <p>
                             I'm an Electronics and Communication
@@ -1605,7 +2347,7 @@
                 </div>
 
 
-                <h2 class="section-title">
+                <h2 class="section-title reveal">
                     My
                     <span class="cyan">
                         Education.
@@ -1613,13 +2355,13 @@
                 </h2>
 
 
-                <p class="section-description">
+                <p class="section-description reveal">
                     My college education and current academic
                     background.
                 </p>
 
 
-                <div class="education-card">
+                <div class="education-card reveal">
 
                     <div class="education-top">
 
@@ -1676,7 +2418,7 @@
                 </div>
 
 
-                <h2 class="section-title">
+                <h2 class="section-title reveal">
                     What I'm
                     <span class="cyan">
                         Interested In.
@@ -1684,7 +2426,7 @@
                 </h2>
 
 
-                <p class="section-description">
+                <p class="section-description reveal">
                     Areas I enjoy exploring, learning about
                     and working with.
                 </p>
@@ -1692,7 +2434,7 @@
 
                 <div class="interest-grid">
 
-                    <article class="interest-card">
+                    <article class="interest-card reveal">
 
                         <div class="interest-number">
                             01
@@ -1710,7 +2452,7 @@
                     </article>
 
 
-                    <article class="interest-card">
+                    <article class="interest-card reveal">
 
                         <div class="interest-number">
                             02
@@ -1727,7 +2469,7 @@
                     </article>
 
 
-                    <article class="interest-card">
+                    <article class="interest-card reveal">
 
                         <div class="interest-number">
                             03
@@ -1745,7 +2487,7 @@
                     </article>
 
 
-                    <article class="interest-card">
+                    <article class="interest-card reveal">
 
                         <div class="interest-number">
                             04
@@ -1763,7 +2505,7 @@
                     </article>
 
 
-                    <article class="interest-card">
+                    <article class="interest-card reveal">
 
                         <div class="interest-number">
                             05
@@ -1781,7 +2523,7 @@
                     </article>
 
 
-                    <article class="interest-card">
+                    <article class="interest-card reveal">
 
                         <div class="interest-number">
                             06
@@ -1819,7 +2561,7 @@
                 </div>
 
 
-                <h2 class="section-title">
+                <h2 class="section-title reveal">
                     Things I
                     <span class="cyan">
                         Work With.
@@ -1829,7 +2571,7 @@
 
                 <div class="skills-grid">
 
-                    <div class="skill-group">
+                    <div class="skill-group reveal">
 
                         <h3>
                             Programming
@@ -1845,7 +2587,7 @@
                     </div>
 
 
-                    <div class="skill-group">
+                    <div class="skill-group reveal">
 
                         <h3>
                             Embedded
@@ -1861,7 +2603,7 @@
                     </div>
 
 
-                    <div class="skill-group">
+                    <div class="skill-group reveal">
 
                         <h3>
                             Hardware
@@ -1878,7 +2620,7 @@
                     </div>
 
 
-                    <div class="skill-group">
+                    <div class="skill-group reveal">
 
                         <h3>
                             IoT
@@ -1894,7 +2636,7 @@
                     </div>
 
 
-                    <div class="skill-group">
+                    <div class="skill-group reveal">
 
                         <h3>
                             Tools
@@ -1910,7 +2652,7 @@
                     </div>
 
 
-                    <div class="skill-group">
+                    <div class="skill-group reveal">
 
                         <h3>
                             Other
@@ -1946,7 +2688,7 @@
                 </div>
 
 
-                <h2 class="section-title">
+                <h2 class="section-title reveal">
                     Things I've
                     <span class="cyan">
                         Built.
@@ -1954,7 +2696,7 @@
                 </h2>
 
 
-                <p class="section-description">
+                <p class="section-description reveal">
                     A selection of my embedded systems,
                     IoT, electronics and robotics projects.
                 </p>
@@ -1963,7 +2705,7 @@
                 <div class="projects-grid">
 
 
-                    <article class="project-card">
+                    <article class="project-card reveal">
 
                         <div class="project-number">
                             PROJECT 01
@@ -2009,7 +2751,7 @@
 
 
 
-                    <article class="project-card">
+                    <article class="project-card reveal">
 
                         <div class="project-number">
                             PROJECT 02
@@ -2024,10 +2766,11 @@
                         <p>
                             A sensor-based robotic car built
                             using an Arduino UNO. It uses
-                            ultrasonic and IR sensors to detect
-                            obstacles and a servo motor to scan
-                            different directions while the
-                            Arduino controls the movement system.
+                            ultrasonic and IR sensors to
+                            detect obstacles and a servo motor
+                            to scan different directions while
+                            the Arduino controls the movement
+                            system.
                         </p>
 
 
@@ -2054,7 +2797,7 @@
 
 
 
-                    <article class="project-card">
+                    <article class="project-card reveal">
 
                         <div class="project-number">
                             PROJECT 03
@@ -2119,7 +2862,7 @@
                 </div>
 
 
-                <h2 class="section-title">
+                <h2 class="section-title reveal">
                     More About
                     <span class="cyan">
                         Me.
@@ -2129,7 +2872,7 @@
 
                 <div class="beyond-grid">
 
-                    <article class="beyond-card">
+                    <article class="beyond-card reveal">
 
                         <h3>
                             What I Like To Work On
@@ -2152,7 +2895,7 @@
                     </article>
 
 
-                    <article class="beyond-card">
+                    <article class="beyond-card reveal">
 
                         <h3>
                             What I'm Learning
@@ -2195,7 +2938,7 @@
                 </div>
 
 
-                <h2 class="section-title">
+                <h2 class="section-title reveal">
                     My
                     <span class="cyan">
                         Resume.
@@ -2203,7 +2946,7 @@
                 </h2>
 
 
-                <div class="resume-box">
+                <div class="resume-box reveal">
 
                     <div>
 
@@ -2261,7 +3004,7 @@
                 </div>
 
 
-                <h2 class="section-title">
+                <h2 class="section-title reveal">
                     Let's
                     <span class="cyan">
                         Connect.
@@ -2269,7 +3012,7 @@
                 </h2>
 
 
-                <p class="section-description">
+                <p class="section-description reveal">
                     Have an idea, project, opportunity or
                     simply want to connect? Send me a message.
                 </p>
@@ -2278,7 +3021,7 @@
                 <div class="contact-grid">
 
 
-                    <div class="contact-info">
+                    <div class="contact-info reveal">
 
                         <h3>
                             Get In Touch
@@ -2326,7 +3069,7 @@
 
 
 
-                    <div class="contact-form">
+                    <div class="contact-form reveal">
 
                         <form
                             action="https://formspree.io/f/xnparwzd"
@@ -2456,6 +3199,15 @@
                 "mobileMenu"
             );
 
+        const navbar =
+            document.getElementById(
+                "navbar"
+            );
+
+
+        /* =====================================================
+           MOBILE MENU
+        ===================================================== */
 
         mobileNavButton.addEventListener(
             "click",
@@ -2503,10 +3255,205 @@
             }
         );
 
+
+        /* =====================================================
+           NAVBAR SCROLL STATE
+        ===================================================== */
+
+        function updateNavbar() {
+
+            if (
+                window.scrollY > 25
+            ) {
+
+                navbar.classList.add(
+                    "scrolled"
+                );
+
+            } else {
+
+                navbar.classList.remove(
+                    "scrolled"
+                );
+
+            }
+
+        }
+
+
+        updateNavbar();
+
+
+        window.addEventListener(
+            "scroll",
+            updateNavbar,
+            {
+                passive: true
+            }
+        );
+
+
+        /* =====================================================
+           ACTIVE NAVIGATION
+        ===================================================== */
+
+        const navLinks =
+            document.querySelectorAll(
+                ".nav-links a[href^='#']"
+            );
+
+
+        const sections =
+            document.querySelectorAll(
+                "main section[id]"
+            );
+
+
+        const sectionObserver =
+            new IntersectionObserver(
+                function (entries) {
+
+                    entries.forEach(
+                        function (entry) {
+
+                            if (
+                                !entry.isIntersecting
+                            ) {
+                                return;
+                            }
+
+
+                            navLinks.forEach(
+                                function (link) {
+
+                                    link.classList.remove(
+                                        "active"
+                                    );
+
+                                }
+                            );
+
+
+                            const activeLink =
+                                document.querySelector(
+                                    `.nav-links a[href="#${entry.target.id}"]`
+                                );
+
+
+                            if (activeLink) {
+
+                                activeLink.classList.add(
+                                    "active"
+                                );
+
+                            }
+
+                        }
+                    );
+
+                },
+                {
+                    rootMargin:
+                        "-35% 0px -55% 0px"
+                }
+            );
+
+
+        sections.forEach(
+            function (section) {
+
+                sectionObserver.observe(
+                    section
+                );
+
+            }
+        );
+
+
+        /* =====================================================
+           REVEAL ON SCROLL
+        ===================================================== */
+
+        const revealElements =
+            document.querySelectorAll(
+                ".reveal"
+            );
+
+
+        if (
+            "IntersectionObserver"
+            in window
+        ) {
+
+            const revealObserver =
+                new IntersectionObserver(
+                    function (entries, observer) {
+
+                        entries.forEach(
+                            function (entry) {
+
+                                if (
+                                    !entry.isIntersecting
+                                ) {
+                                    return;
+                                }
+
+
+                                entry.target.classList.add(
+                                    "visible"
+                                );
+
+
+                                observer.unobserve(
+                                    entry.target
+                                );
+
+                            }
+                        );
+
+                    },
+                    {
+                        threshold: 0.08,
+                        rootMargin:
+                            "0px 0px -40px 0px"
+                    }
+                );
+
+
+            revealElements.forEach(
+                function (element) {
+
+                    revealObserver.observe(
+                        element
+                    );
+
+                }
+            );
+
+        } else {
+
+            revealElements.forEach(
+                function (element) {
+
+                    element.classList.add(
+                        "visible"
+                    );
+
+                }
+            );
+
+        }
+
+
+        /* =====================================================
+           SUPABASE LIVE PORTFOLIO
+        ===================================================== */
+
     </script>
 
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
     <script src="portfolio-live.js"></script>
 
 </body>
