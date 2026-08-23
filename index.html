@@ -303,6 +303,19 @@
             background: rgba(180, 108, 255, 0.09);
         }
 
+        .navbar .admin-nav-item a {
+            color: var(--cyan);
+            border: 1px solid rgba(180, 108, 255, 0.22);
+            background: rgba(180, 108, 255, 0.07);
+        }
+
+        .navbar .admin-nav-item a:hover {
+            color: #f4eaff;
+            background: rgba(180, 108, 255, 0.15);
+            border-color: rgba(180, 108, 255, 0.5);
+        }
+
+
         /* =====================================================
            BUTTONS
         ===================================================== */
@@ -1149,7 +1162,20 @@
             </a>
 
 
-            <nav>
+            <button
+                type="button"
+                class="nav-menu-toggle"
+                id="navMenuToggle"
+                aria-label="Open navigation menu"
+                aria-expanded="false"
+                aria-controls="portfolioNav"
+            >
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <nav id="portfolioNav">
 
                 <ul class="nav-links">
 
@@ -1192,6 +1218,12 @@
                     <li>
                         <a href="#contact">
                             Contact
+                        </a>
+                    </li>
+
+                    <li class="admin-nav-item">
+                        <a href="admin.html">
+                            Admin Login
                         </a>
                     </li>
 
