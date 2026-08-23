@@ -35,7 +35,9 @@
 
         try {
 
-            // Check Supabase library
+            // ----------------------------------------------------
+            // CHECK SUPABASE
+            // ----------------------------------------------------
 
             if (!window.supabase) {
 
@@ -47,7 +49,9 @@
             }
 
 
-            // Create Supabase client
+            // ----------------------------------------------------
+            // CREATE CLIENT
+            // ----------------------------------------------------
 
             const supabase =
                 window.supabase.createClient(
@@ -56,9 +60,9 @@
                 );
 
 
-            // ====================================================
+            // ----------------------------------------------------
             // GET PORTFOLIO DATA
-            // ====================================================
+            // ----------------------------------------------------
 
             const {
                 data,
@@ -169,6 +173,7 @@
                     portfolio.hero?.focusItems ||
                     [];
 
+
                 get(".focus-list").innerHTML =
                     items
                         .map(
@@ -180,6 +185,7 @@
                         .join("");
 
             }
+
 
 
             // ====================================================
@@ -220,6 +226,7 @@
                     "";
 
             }
+
 
 
             // ====================================================
@@ -272,6 +279,7 @@
             }
 
 
+
             // ====================================================
             // INTERESTS
             // ====================================================
@@ -302,99 +310,175 @@
             );
 
 
+
             // ====================================================
             // SKILLS
             // ====================================================
+            //
+            // IMPORTANT:
+            //
+            // The old code could ONLY update the skill groups
+            // already present in the HTML.
+            //
+            // This version dynamically creates the skill groups
+            // from the Supabase data.
+            //
+            // ====================================================
 
-            const skillGroups =
-                getAll(
-                    ".skill-group"
-                );
-
-
-            (
-                portfolio.skills ||
-                []
-            ).forEach(
-                (skill, index) => {
-
-                    if (
-                        !skillGroups[index]
-                    ) {
-                        return;
-                    }
+            const savedSkills =
+                Array.isArray(portfolio.skills)
+                    ? portfolio.skills
+                    : [];
 
 
-                    const title =
-                        skillGroups[index]
-                            .querySelector("h3");
+            const existingSkillGroups =
+                getAll(".skill-group");
 
 
-                    const list =
-                        skillGroups[index]
-                            .querySelector(
-                                ".skill-list"
-                            );
+            let skillsContainer = null;
 
 
-                    if (title) {
+            // Find the existing parent container.
 
-                        title.textContent =
-                            skill.title ||
-                            "";
+            if (
+                existingSkillGroups.length > 0
+            ) {
 
-                    }
+                skillsContainer =
+                    existingSkillGroups[0].parentElement;
 
-
-                    if (list) {
-
-                        let items;
+            }
 
 
-                        if (
-                            Array.isArray(
-                                skill.items
-                            )
-                        ) {
+            // Fallbacks in case the original HTML uses
+            // a different structure.
 
-                            items =
-                                skill.items;
+            if (!skillsContainer) {
 
-                        } else {
+                skillsContainer =
+                    get(".skills-grid");
 
-                            items =
-                                String(
-                                    skill.items ||
-                                    ""
-                                )
-                                .split(",")
-                                .map(
-                                    item =>
-                                        item.trim()
-                                )
-                                .filter(
-                                    Boolean
-                                );
-
-                        }
+            }
 
 
-                        list.innerHTML =
-                            items
-                                .map(
-                                    item =>
-                                        `<li>
+            if (!skillsContainer) {
+
+                skillsContainer =
+                    get(".skills-container");
+
+            }
+
+
+            if (!skillsContainer) {
+
+                skillsContainer =
+                    get(".skills-content");
+
+            }
+
+
+            if (
+                skillsContainer &&
+                savedSkills.length
+            ) {
+
+                skillsContainer.innerHTML =
+                    savedSkills
+                        .map(
+                            skill => {
+
+                                let items;
+
+
+                                // ------------------------------------------------
+                                // Support both:
+                                //
+                                // items: ["C", "C++", "Python"]
+                                //
+                                // and:
+                                //
+                                // items: "C, C++, Python"
+                                // ------------------------------------------------
+
+                                if (
+                                    Array.isArray(
+                                        skill.items
+                                    )
+                                ) {
+
+                                    items =
+                                        skill.items;
+
+                                } else {
+
+                                    items =
+                                        String(
+                                            skill.items ||
+                                            ""
+                                        )
+                                            .split(",")
+                                            .map(
+                                                item =>
+                                                    item.trim()
+                                            )
+                                            .filter(
+                                                Boolean
+                                            );
+
+                                }
+
+
+                                return `
+
+                                    <div class="skill-group">
+
+                                        <h3>
                                             ${escapeHTML(
-                                                item
+                                                skill.title ||
+                                                ""
                                             )}
-                                        </li>`
-                                )
-                                .join("");
+                                        </h3>
 
-                    }
+                                        <ul class="skill-list">
 
-                }
-            );
+                                            ${items
+                                                .map(
+                                                    item =>
+                                                        `
+                                                        <li>
+                                                            ${escapeHTML(
+                                                                item
+                                                            )}
+                                                        </li>
+                                                        `
+                                                )
+                                                .join("")}
+
+                                        </ul>
+
+                                    </div>
+
+                                `;
+
+                            }
+                        )
+                        .join("");
+
+            }
+
+
+            // If all skill groups were deleted,
+            // clear the existing container.
+
+            if (
+                skillsContainer &&
+                savedSkills.length === 0
+            ) {
+
+                skillsContainer.innerHTML = "";
+
+            }
+
 
 
             // ====================================================
@@ -428,14 +512,14 @@
                                             project.technologies ||
                                             ""
                                         )
-                                        .split(",")
-                                        .map(
-                                            item =>
-                                                item.trim()
-                                        )
-                                        .filter(
-                                            Boolean
-                                        );
+                                            .split(",")
+                                            .map(
+                                                item =>
+                                                    item.trim()
+                                            )
+                                            .filter(
+                                                Boolean
+                                            );
 
 
                                 const imageHTML =
@@ -568,73 +652,130 @@
             }
 
 
+
             // ====================================================
             // BEYOND PROJECTS
             // ====================================================
+            //
+            // IMPORTANT:
+            //
+            // The old code could ONLY update existing
+            // .beyond-card elements.
+            //
+            // This version dynamically creates and deletes
+            // Beyond Project cards based on Supabase.
+            //
+            // ====================================================
 
-            const beyondCards =
-                getAll(
-                    ".beyond-card"
-                );
-
-
-            (
-                portfolio.beyond ||
-                []
-            ).forEach(
-                (item, index) => {
-
-                    if (
-                        !beyondCards[index]
-                    ) {
-
-                        return;
-
-                    }
+            const savedBeyond =
+                Array.isArray(portfolio.beyond)
+                    ? portfolio.beyond
+                    : [];
 
 
-                    const title =
-                        beyondCards[index]
-                            .querySelector("h3");
+            const existingBeyondCards =
+                getAll(".beyond-card");
 
 
-                    const paragraphs =
-                        beyondCards[index]
-                            .querySelectorAll(
-                                "p"
-                            );
+            let beyondContainer = null;
 
 
-                    if (title) {
+            // Find existing card parent.
 
-                        title.textContent =
-                            item.title ||
-                            "";
+            if (
+                existingBeyondCards.length > 0
+            ) {
 
-                    }
+                beyondContainer =
+                    existingBeyondCards[0].parentElement;
 
-
-                    if (paragraphs[0]) {
-
-                        paragraphs[0]
-                            .textContent =
-                            item.p1 ||
-                            "";
-
-                    }
+            }
 
 
-                    if (paragraphs[1]) {
+            // Fallback container names.
 
-                        paragraphs[1]
-                            .textContent =
-                            item.p2 ||
-                            "";
+            if (!beyondContainer) {
 
-                    }
+                beyondContainer =
+                    get(".beyond-grid");
 
-                }
-            );
+            }
+
+
+            if (!beyondContainer) {
+
+                beyondContainer =
+                    get(".beyond-container");
+
+            }
+
+
+            if (!beyondContainer) {
+
+                beyondContainer =
+                    get(".beyond-content");
+
+            }
+
+
+            if (
+                beyondContainer &&
+                savedBeyond.length
+            ) {
+
+                beyondContainer.innerHTML =
+                    savedBeyond
+                        .map(
+                            item => `
+
+                                <article
+                                    class="beyond-card"
+                                >
+
+                                    <h3>
+                                        ${escapeHTML(
+                                            item.title ||
+                                            ""
+                                        )}
+                                    </h3>
+
+
+                                    <p>
+                                        ${escapeHTML(
+                                            item.p1 ||
+                                            ""
+                                        )}
+                                    </p>
+
+
+                                    <p>
+                                        ${escapeHTML(
+                                            item.p2 ||
+                                            ""
+                                        )}
+                                    </p>
+
+                                </article>
+
+                            `
+                        )
+                        .join("");
+
+            }
+
+
+            // If the admin deleted every Beyond card,
+            // remove all cards from the live page.
+
+            if (
+                beyondContainer &&
+                savedBeyond.length === 0
+            ) {
+
+                beyondContainer.innerHTML = "";
+
+            }
+
 
 
             // ====================================================
@@ -685,6 +826,7 @@
             }
 
 
+
             // ====================================================
             // CONTACT
             // ====================================================
@@ -725,6 +867,7 @@
             }
 
 
+
             // ====================================================
             // SOCIAL LINKS
             // ====================================================
@@ -757,12 +900,31 @@
             }
 
 
+
             // ====================================================
             // SUCCESS
             // ====================================================
 
             console.log(
                 "✓ Portfolio loaded from Supabase"
+            );
+
+
+            console.log(
+                "✓ Skills loaded dynamically:",
+                savedSkills.length
+            );
+
+
+            console.log(
+                "✓ Beyond Projects loaded dynamically:",
+                savedBeyond.length
+            );
+
+
+            console.log(
+                "✓ Projects loaded:",
+                portfolio.projects?.length || 0
             );
 
         }
@@ -777,6 +939,7 @@
         }
 
     }
+
 
 
     // ============================================================
