@@ -1232,17 +1232,13 @@
 
 
     function showDashboard(email) {
+        loginArea.style.display = "none";
+        dashboard.classList.add("show");
+        userEmail.textContent = email;
 
-        loginArea.style.display =
-            "none";
-
-        dashboard.classList.add(
-            "show"
-        );
-
-        userEmail.textContent =
-            email;
-
+        if (typeof loadPortfolioFromSupabase === "function") {
+            loadPortfolioFromSupabase();
+        }
     }
 
 
@@ -1678,7 +1674,7 @@
       if(!projects.length){projectList.innerHTML='<div class="empty-projects">No projects yet. Click <strong style="color:var(--cyan);">+ ADD PROJECT</strong> to create your first project.</div>';return;}
       projects.forEach((p,i)=>{
         const card=document.createElement("article"); card.className="project-editor";
-        card.innerHTML=`<div class="project-editor-head"><div class="project-number">PROJECT ${String(i+1).padStart(2,"0")}</div><div class="project-actions"><button type="button" class="small-button" data-action="clear">CLEAR IMAGE</button><button type="button" class="small-button delete" data-action="delete">DELETE</button></div></div><div class="project-editor-grid"><div><div class="image-box">${p.image?`<img src="${esc(p.image)}" alt="Project image" style="display:block">`:''}<div class="image-placeholder" style="${p.image?'display:none':''}"><strong>${p.image?'Image selected':'PROJECT IMAGE'}</strong>${p.image?'Preview is shown above.':'Choose an image to preview it here.'}<br><label class="upload-button">CHOOSE IMAGE<input class="image-input" type="file" accept="image/*"></label></div></div></div><div class="editor-fields"><div class="editor-field"><label>TITLE</label><input data-field="title" value="${esc(p.title)}" placeholder="Project title"></div><div class="editor-field"><label>DESCRIPTION</label><textarea data-field="description" placeholder="Describe your project">${esc(p.description)}</textarea></div><div class="editor-field"><label>TECHNOLOGIES — comma separated</label><input data-field="tags" value="${esc(p.tags)}" placeholder="ESP32, Blynk, IoT"></div><div class="editor-field"><label>PROJECT URL</label><input type="url" data-field="url" value="${esc(p.url)}" placeholder="https://github.com/..."></div></div></div><div class="project-footer">Step 1 preview editor — changes are held in this page only.</div>`;
+        card.innerHTML=`<div class="project-editor-head"><div class="project-number">PROJECT ${String(i+1).padStart(2,"0")}</div><div class="project-actions"><button type="button" class="small-button" data-action="clear">CLEAR IMAGE</button><button type="button" class="small-button delete" data-action="delete">DELETE</button></div></div><div class="project-editor-grid"><div><div class="image-box">${p.image?`<img src="${esc(p.image)}" alt="Project image" style="display:block">`:''}<div class="image-placeholder" style="${p.image?'display:none':''}"><strong>${p.image?'Image selected':'PROJECT IMAGE'}</strong>${p.image?'Preview is shown above.':'Choose an image to preview it here.'}<br><label class="upload-button">CHOOSE IMAGE<input class="image-input" type="file" accept="image/*"></label></div></div></div><div class="editor-fields"><div class="editor-field"><label>TITLE</label><input data-field="title" value="${esc(p.title)}" placeholder="Project title"></div><div class="editor-field"><label>DESCRIPTION</label><textarea data-field="description" placeholder="Describe your project">${esc(p.description)}</textarea></div><div class="editor-field"><label>TECHNOLOGIES — comma separated</label><input data-field="tags" value="${esc(p.tags)}" placeholder="ESP32, Blynk, IoT"></div><div class="editor-field"><label>PROJECT URL</label><input type="url" data-field="url" value="${esc(p.url)}" placeholder="https://github.com/..."></div></div></div><div class="project-footer">Choose an image, edit the project, then use SAVE CHANGES to publish it.</div>`;
         card.querySelectorAll('[data-field]').forEach(el=>el.addEventListener('input',()=>p[el.dataset.field]=el.value));
         card.querySelector('[data-action="delete"]').onclick=()=>{projects.splice(i,1);renderProjects()};
         card.querySelector('[data-action="clear"]').onclick=()=>{p.image="";renderProjects()};
@@ -1701,12 +1697,14 @@
 
 <script>
 const V4_DEFAULT_DATA={hero:{label:"ELECTRONICS & COMMUNICATION ENGINEERING",name:"Eeshwar",description:"I'm an Electronics and Communication Engineering student interested in Embedded Systems, IoT, electronics, hardware and software.",focusTitle:"Hardware × Software",focusDescription:"I enjoy learning how systems work and building practical projects that combine electronics, programming and real-world problem solving.",focusItems:["Embedded Systems","IoT & Connected Devices","Electronics & Hardware","Firmware & Programming"]},about:{paragraphs:["I'm an Electronics and Communication Engineering student interested in technology, electronics and building practical systems.","I enjoy working with both hardware and software and understanding how different parts of a system work together.","My interests include embedded systems, IoT, electronics, hardware development, programming and learning new technologies through practical work."],highlight:"I like learning by building, experimenting with ideas and turning concepts into useful working projects."},education:{degree:"B.E. / B.Tech in Electronics and Communication Engineering",college:"YOUR COLLEGE NAME",period:"YOUR START YEAR — PRESENT",description:"Currently pursuing Electronics and Communication Engineering with an interest in embedded systems, IoT, electronics, programming and hardware-software integration."},interests:["Embedded Systems","IoT","Electronics","Firmware","Hardware","Automation"],skills:[{title:"Programming",items:"C, C++, Python, Embedded C"},{title:"Embedded",items:"Arduino, ESP32, Microcontrollers, Sensors"},{title:"Hardware",items:"Digital Electronics, Circuit Design, UART, I2C, SPI"},{title:"IoT",items:"Connected Devices, MQTT, Sensor Systems, ESP32"},{title:"Tools",items:"Git, GitHub, VS Code, Arduino IDE"},{title:"Other",items:"Problem Solving, System Design, Prototyping, Learning"}],projects:[{number:"PROJECT 01",title:"Smart Agriculture",description:"An IoT-based smart agriculture system built using an ESP32 and Blynk. The system monitors temperature, humidity, soil moisture and light levels and uses a relay to control irrigation automatically when the soil becomes too dry.",technologies:"ESP32, Blynk, DHT22, Soil Sensor, LDR, IoT",url:"https://github.com/eeshwar18/SMART-AGRICULTURE",image:""},{number:"PROJECT 02",title:"Smart Arduino Car",description:"A sensor-based robotic car built using an Arduino UNO. It uses ultrasonic and IR sensors to detect obstacles and a servo motor to scan different directions while the Arduino controls the movement system.",technologies:"Arduino UNO, Embedded C/C++, Ultrasonic, IR Sensors, Servo, L298N",url:"https://github.com/eeshwar18/Smart-car-ARDUINO-",image:""},{number:"PROJECT 03",title:"Raspberry Pi Smart Car",description:"A Raspberry Pi Zero 2 W based robotic car designed for obstacle detection. An ultrasonic sensor mounted on a servo scans different directions while the Raspberry Pi processes the readings and controls the motors through an L298N driver.",technologies:"Raspberry Pi, Pi Zero 2 W, Python, Ultrasonic, Servo, L298N",url:"https://github.com/eeshwar18/Raspberry-car",image:""}],beyond:[{title:"What I Like To Work On",p1:"I enjoy working on practical ideas where electronics, programming and problem solving come together.",p2:"I like experimenting with hardware, learning how systems work and turning ideas into useful projects."},{title:"What I'm Learning",p1:"I'm continuously exploring new technologies and improving my understanding of embedded systems, IoT, electronics and programming.",p2:"I enjoy learning through practical projects and experimentation."}],resume:{title:"My Professional Resume",description:"View or download my latest resume.",path:"assets/resume.pdf"},contact:{description:"Have an idea, project, opportunity or simply want to connect? Send me a message.",email:"eeshwar182007@gmail.com",github:"https://github.com/eeshwar18",linkedin:"https://www.linkedin.com/"}};
-let D=JSON.parse(localStorage.getItem("eeshwar_v4_full_draft")||"null")||structuredClone(V4_DEFAULT_DATA);
+let D=structuredClone(V4_DEFAULT_DATA);
+let portfolioLoadedFromSupabase=false;
+let portfolioSaveBusy=false;
 const E=v=>String(v??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;");
 function inp(label,key,val,type="text"){return `<label class="f2label">${label}<input class="f2input" data-key="${key}" type="${type}" value="${E(val)}"></label>`}
 function area(label,key,val){return `<label class="f2label">${label}<textarea class="f2input f2area" data-key="${key}">${E(val)}</textarea></label>`}
 function setv(o,path,v){let a=path.split("."),x=o;for(let i=0;i<a.length-1;i++)x=x[a[i]];x[a.at(-1)]=v}
-function render(){let r=document.getElementById("fullV4Editor")||document.body.appendChild(Object.assign(document.createElement("div"),{id:"fullV4Editor"}));r.innerHTML=`<div class="f2box"><div class="f2head"><div><small>STEP 2 · FULL V4 EDITOR</small><h1>Eeshwar Portfolio Editor</h1><p>Edit every section of your V4 portfolio. This step saves a local draft; Supabase comes next.</p></div><span id="f2status">Draft loaded</span></div><div class="f2grid">
+function render(){let r=document.getElementById("fullV4Editor")||document.body.appendChild(Object.assign(document.createElement("div"),{id:"fullV4Editor"}));r.innerHTML=`<div class="f2box"><div class="f2head"><div><small>STEP 2 · FULL V4 EDITOR</small><h1>Eeshwar Portfolio Editor</h1><p>Edit every section of your V4 portfolio. SAVE CHANGES publishes it to Supabase.</p></div><span id="f2status">Editor ready</span></div><div class="f2grid">
 <details class="f2panel" open><summary>🏠 Home / Hero</summary><div>${inp("Hero label","hero.label",D.hero.label)}${inp("Name","hero.name",D.hero.name)}${area("Hero description","hero.description",D.hero.description)}${inp("Focus title","hero.focusTitle",D.hero.focusTitle)}${area("Focus description","hero.focusDescription",D.hero.focusDescription)}${area("Focus items — one per line","hero.focusItems",D.hero.focusItems.join("\n"))}</div></details>
 <details class="f2panel"><summary>👤 About Me</summary><div>${area("Paragraph 1","about.paragraphs.0",D.about.paragraphs[0])}${area("Paragraph 2","about.paragraphs.1",D.about.paragraphs[1])}${area("Paragraph 3","about.paragraphs.2",D.about.paragraphs[2])}${area("Highlight","about.highlight",D.about.highlight)}</div></details>
 <details class="f2panel"><summary>🎓 Education</summary><div>${inp("Degree","education.degree",D.education.degree)}${inp("College","education.college",D.education.college)}${inp("Period","education.period",D.education.period)}${area("Description","education.description",D.education.description)}</div></details>
@@ -1715,9 +1713,105 @@ function render(){let r=document.getElementById("fullV4Editor")||document.body.a
 <details class="f2panel" open><summary>🚀 Projects</summary><div id="f2projects">${D.projects.map((x,i)=>`<div class="f2item"><b>${E(x.number)}</b>${x.image?`<img class="f2preview" src="${x.image}">`:`<div class="f2placeholder">PROJECT IMAGE</div>`}<label class="f2label">Image<input class="f2input" type="file" accept="image/*" onchange="pickImage(event,${i})"></label>${inp("Project number",`projects.${i}.number`,x.number)}${inp("Title",`projects.${i}.title`,x.title)}${area("Description",`projects.${i}.description`,x.description)}${area("Technologies — comma separated",`projects.${i}.technologies`,x.technologies)}${inp("Project URL",`projects.${i}.url`,x.url,"url")}<button class="f2small danger" onclick="delProject(${i});return false">DELETE PROJECT</button></div>`).join("")}</div><button class="f2add" onclick="addProject();return false">+ ADD PROJECT</button></details>
 <details class="f2panel"><summary>🌐 Beyond Projects</summary><div>${D.beyond.map((x,i)=>`<div class="f2item">${inp("Card title",`beyond.${i}.title`,x.title)}${area("Paragraph 1",`beyond.${i}.p1`,x.p1)}${area("Paragraph 2",`beyond.${i}.p2`,x.p2)}</div>`).join("")}</div></details>
 <details class="f2panel"><summary>📄 Resume</summary><div>${inp("Resume title","resume.title",D.resume.title)}${area("Description","resume.description",D.resume.description)}${inp("Resume path","resume.path",D.resume.path)}</div></details>
-<details class="f2panel"><summary>📧 Contact</summary><div>${area("Description","contact.description",D.contact.description)}${inp("Email","contact.email",D.contact.email,"email")}${inp("GitHub","contact.github",D.contact.github,"url")}${inp("LinkedIn","contact.linkedin",D.contact.linkedin,"url")}</div></details></div><div class="f2save"><button onclick="saveDraft()">💾 SAVE CHANGES</button><button class="reset" onclick="resetDraft()">RESET</button><span id="f2msg">Local draft only — Step 3 will connect Supabase.</span></div></div>`;bind()}
+<details class="f2panel"><summary>📧 Contact</summary><div>${area("Description","contact.description",D.contact.description)}${inp("Email","contact.email",D.contact.email,"email")}${inp("GitHub","contact.github",D.contact.github,"url")}${inp("LinkedIn","contact.linkedin",D.contact.linkedin,"url")}</div></details></div><div class="f2save"><button onclick="saveDraft()">💾 SAVE CHANGES</button><button class="reset" onclick="resetDraft()">RESET</button><span id="f2msg">Ready. SAVE CHANGES publishes the portfolio data to Supabase.</span></div></div>`;bind()}
 function bind(){document.querySelectorAll("#fullV4Editor [data-key]").forEach(e=>e.oninput=()=>{let v=e.value;if(e.dataset.key.startsWith("hero.focusItems"))v=v.split("\n").filter(Boolean);if(e.dataset.key.includes(".items"))v=v.split(",").map(x=>x.trim()).filter(Boolean);setv(D,e.dataset.key,v);document.getElementById("f2status").textContent="Unsaved changes"})}
-function saveDraft(){localStorage.setItem("eeshwar_v4_full_draft",JSON.stringify(D));document.getElementById("f2status").textContent="Saved locally";document.getElementById("f2msg").textContent="Saved on this browser. Supabase persistence is Step 3."}
+async function loadPortfolioFromSupabase(){
+  try{
+    const {data,error}=await supabaseClient.from("portfolio_content").select("data").eq("id",1).maybeSingle();
+    if(error) throw error;
+    if(data && data.data && Object.keys(data.data).length){
+      D=structuredClone(data.data);
+      portfolioLoadedFromSupabase=true;
+      render();
+      document.getElementById("f2status").textContent="Loaded from Supabase";
+      document.getElementById("f2msg").textContent="Live portfolio data loaded.";
+    }else{
+      document.getElementById("f2status").textContent="Using V4 defaults";
+      document.getElementById("f2msg").textContent="Save once to create your Supabase portfolio data.";
+    }
+  }catch(error){
+    console.error("Portfolio load error:",error);
+    document.getElementById("f2status").textContent="Database not connected";
+    document.getElementById("f2msg").textContent="Run the Step 3 SQL in Supabase, then reload.";
+  }
+}
+
+function dataUrlToBlob(dataUrl){
+  const parts=dataUrl.split(",");
+  const mimeMatch=parts[0].match(/data:(.*?);base64/);
+  const mime=mimeMatch?mimeMatch[1]:"image/jpeg";
+  const binary=atob(parts[1]);
+  const bytes=new Uint8Array(binary.length);
+  for(let i=0;i<binary.length;i++) bytes[i]=binary.charCodeAt(i);
+  return {blob:new Blob([bytes],{type:mime}),mime};
+}
+
+async function uploadProjectImage(dataUrl,index){
+  const {blob,mime}=dataUrlToBlob(dataUrl);
+  const ext=(mime.split("/")[1]||"jpg").replace("jpeg","jpg");
+  const path=`projects/${crypto.randomUUID()}.${ext}`;
+
+  const {error}=await supabaseClient.storage.from("portfolio-images").upload(
+    path,blob,{contentType:mime,upsert:false}
+  );
+  if(error) throw error;
+
+  const {data}=supabaseClient.storage.from("portfolio-images").getPublicUrl(path);
+  D.projects[index].image=data.publicUrl;
+}
+
+async function prepareProjectImages(){
+  for(let i=0;i<D.projects.length;i++){
+    const image=D.projects[i].image||"";
+    if(image.startsWith("data:image/")) await uploadProjectImage(image,i);
+  }
+}
+
+async function saveDraft(){
+  if(portfolioSaveBusy) return;
+  portfolioSaveBusy=true;
+
+  const saveButton=document.querySelector(".f2save button:first-child");
+  if(saveButton){saveButton.disabled=true;saveButton.textContent="SAVING...";}
+
+  document.getElementById("f2status").textContent="Saving...";
+  document.getElementById("f2msg").textContent="Uploading images and saving portfolio...";
+
+  try{
+    const {data:userData,error:userError}=await supabaseClient.auth.getUser();
+    if(userError || !userData?.user) throw new Error("Your admin session has expired. Please log in again.");
+
+    const email=normalizeEmail(userData.user.email||"");
+    if(!isAdmin(email)) throw new Error("You are not authorized to save this portfolio.");
+
+    await prepareProjectImages();
+
+    const {error}=await supabaseClient.from("portfolio_content").upsert({
+      id:1,
+      data:D,
+      updated_at:new Date().toISOString(),
+      updated_by:userData.user.id
+    },{onConflict:"id"});
+
+    if(error) throw error;
+
+    portfolioLoadedFromSupabase=true;
+    localStorage.setItem("eeshwar_v4_last_saved_backup",JSON.stringify(D));
+    render();
+
+    document.getElementById("f2status").textContent="✓ SAVED TO SUPABASE";
+    document.getElementById("f2msg").textContent="Saved successfully. Refresh your live portfolio to see the changes.";
+  }catch(error){
+    console.error("Portfolio save error:",error);
+    document.getElementById("f2status").textContent="Save failed";
+    document.getElementById("f2msg").textContent=error.message||"Could not save portfolio.";
+    alert("Save failed:\n\n"+(error.message||"Unknown error"));
+  }finally{
+    portfolioSaveBusy=false;
+    const btn=document.querySelector(".f2save button:first-child");
+    if(btn){btn.disabled=false;btn.textContent="💾 SAVE CHANGES";}
+  }
+}
 function resetDraft(){if(confirm("Reset all editor content to the original V4 content?")){localStorage.removeItem("eeshwar_v4_full_draft");D=structuredClone(V4_DEFAULT_DATA);render()}}
 function addInterest(){D.interests.push("New Interest");render()}
 function addSkill(){D.skills.push({title:"New Skill Group",items:"New Skill"});render()}
