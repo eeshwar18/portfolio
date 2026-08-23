@@ -11,13 +11,8 @@
     >
 
     <title>Admin | Eeshwar Portfolio</title>
-    <!-- STEP 4: ABOUT ME + EDUCATION EDITING -->
 
-    <!-- Supabase JavaScript -->
-    <script
-        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
-    ></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <style>
 
@@ -40,10 +35,8 @@
             --muted: #78919b;
 
             --danger: #ff6875;
-
             --border: rgba(85, 232, 255, 0.16);
         }
-
 
         body {
 
@@ -64,9 +57,7 @@
                 "Segoe UI",
                 Arial,
                 sans-serif;
-
         }
-
 
         .page {
 
@@ -77,13 +68,9 @@
 
             padding:
                 30px 0 60px;
-
         }
 
-
-        /* =========================================
-           TOP BAR
-        ========================================= */
+        /* TOP BAR */
 
         .topbar {
 
@@ -97,8 +84,7 @@
 
             gap: 20px;
 
-            padding:
-                0 18px;
+            padding: 0 18px;
 
             border:
                 1px solid
@@ -109,18 +95,14 @@
             background:
                 rgba(5,14,20,0.58);
 
-            backdrop-filter:
-                blur(22px);
+            backdrop-filter: blur(22px);
 
-            -webkit-backdrop-filter:
-                blur(22px);
+            -webkit-backdrop-filter: blur(22px);
 
             box-shadow:
                 0 18px 50px
                 rgba(0,0,0,0.28);
-
         }
-
 
         .brand {
 
@@ -131,14 +113,11 @@
             font-weight: 800;
 
             text-decoration: none;
-
         }
-
 
         .brand span {
             color: var(--cyan);
         }
-
 
         .back-link {
 
@@ -149,18 +128,13 @@
             font-weight: 700;
 
             text-decoration: none;
-
         }
-
 
         .back-link:hover {
             color: var(--cyan);
         }
 
-
-        /* =========================================
-           LOGIN
-        ========================================= */
+        /* LOGIN */
 
         .login-wrapper {
 
@@ -172,9 +146,7 @@
             align-items: center;
 
             justify-content: center;
-
         }
-
 
         .login-card {
 
@@ -199,9 +171,7 @@
             box-shadow:
                 0 25px 70px
                 rgba(0,0,0,0.35);
-
         }
-
 
         .login-label {
 
@@ -211,11 +181,8 @@
 
             font-weight: 800;
 
-            letter-spacing:
-                0.18em;
-
+            letter-spacing: 0.18em;
         }
-
 
         .login-card h1 {
 
@@ -225,16 +192,12 @@
 
             line-height: 1;
 
-            letter-spacing:
-                -0.045em;
-
+            letter-spacing: -0.045em;
         }
-
 
         .login-card h1 span {
             color: var(--cyan);
         }
-
 
         .login-description {
 
@@ -243,23 +206,15 @@
             color: var(--muted);
 
             font-size: 13px;
-
         }
-
 
         .form {
-
             margin-top: 28px;
-
         }
-
 
         .field {
-
             margin-bottom: 16px;
-
         }
-
 
         .field label {
 
@@ -272,9 +227,7 @@
             font-size: 11px;
 
             font-weight: 800;
-
         }
-
 
         .field input {
 
@@ -282,8 +235,7 @@
 
             height: 48px;
 
-            padding:
-                0 14px;
+            padding: 0 14px;
 
             border:
                 1px solid
@@ -299,17 +251,12 @@
             color: var(--white);
 
             font-size: 13px;
-
         }
-
 
         .field input:focus {
-
             border-color:
                 rgba(85,232,255,0.5);
-
         }
-
 
         .button {
 
@@ -321,8 +268,7 @@
 
             border-radius: 8px;
 
-            background:
-                var(--cyan);
+            background: var(--cyan);
 
             color: #001017;
 
@@ -331,26 +277,18 @@
             font-weight: 900;
 
             cursor: pointer;
-
         }
-
 
         .button:hover {
-
-            background:
-                var(--cyan-soft);
-
+            background: var(--cyan-soft);
         }
-
 
         .button:disabled {
 
             opacity: 0.55;
 
             cursor: not-allowed;
-
         }
-
 
         .message {
 
@@ -365,14 +303,11 @@
             font-size: 11px;
 
             line-height: 1.5;
-
         }
-
 
         .message.show {
             display: block;
         }
-
 
         .message.error {
 
@@ -384,9 +319,7 @@
                 rgba(255,104,117,0.06);
 
             color: #ff9ba3;
-
         }
-
 
         .message.success {
 
@@ -398,9 +331,7 @@
                 rgba(85,232,255,0.05);
 
             color: var(--cyan);
-
         }
-
 
         .security-note {
 
@@ -411,37 +342,28 @@
             font-size: 10px;
 
             line-height: 1.6;
-
         }
 
-
-        /* =========================================
-           OTP
-        ========================================= */
+        /* OTP */
 
         #otpSection {
             display: none;
         }
 
-
         #otpSection.show {
             display: block;
         }
-
 
         .otp-input {
 
             text-align: center;
 
-            letter-spacing:
-                0.45em;
+            letter-spacing: 0.45em;
 
             font-size: 22px !important;
 
             font-weight: 800;
-
         }
-
 
         .back-button {
 
@@ -457,8 +379,7 @@
 
             border-radius: 8px;
 
-            background:
-                transparent;
+            background: transparent;
 
             color: var(--muted);
 
@@ -467,30 +388,21 @@
             font-weight: 800;
 
             cursor: pointer;
-
         }
-
 
         .back-button:hover {
             color: var(--cyan);
         }
 
-
-        /* =========================================
-           ADMIN DASHBOARD
-        ========================================= */
+        /* DASHBOARD */
 
         #dashboard {
-
             display: none;
-
         }
-
 
         #dashboard.show {
             display: block;
         }
-
 
         .dashboard-header {
 
@@ -503,9 +415,7 @@
             justify-content: space-between;
 
             gap: 20px;
-
         }
-
 
         .dashboard-label {
 
@@ -515,11 +425,8 @@
 
             font-weight: 800;
 
-            letter-spacing:
-                0.18em;
-
+            letter-spacing: 0.18em;
         }
-
 
         .dashboard-header h1 {
 
@@ -530,11 +437,8 @@
 
             line-height: 0.95;
 
-            letter-spacing:
-                -0.06em;
-
+            letter-spacing: -0.06em;
         }
-
 
         .user-email {
 
@@ -543,14 +447,11 @@
             color: var(--muted);
 
             font-size: 12px;
-
         }
-
 
         .logout-button {
 
-            padding:
-                11px 15px;
+            padding: 11px 15px;
 
             border:
                 1px solid
@@ -568,17 +469,12 @@
             font-weight: 800;
 
             cursor: pointer;
-
         }
-
 
         .logout-button:hover {
-
             background:
                 rgba(255,104,117,0.08);
-
         }
-
 
         .dashboard-grid {
 
@@ -590,9 +486,7 @@
                 repeat(2, 1fr);
 
             gap: 18px;
-
         }
-
 
         .admin-card {
 
@@ -605,24 +499,15 @@
             border-radius: 17px;
 
             background: var(--card);
-
         }
-
 
         .admin-card.full {
-
-            grid-column:
-                1 / -1;
-
+            grid-column: 1 / -1;
         }
-
 
         .admin-card h2 {
-
             font-size: 20px;
-
         }
-
 
         .admin-card p {
 
@@ -631,9 +516,7 @@
             color: var(--muted);
 
             font-size: 12px;
-
         }
-
 
         .status {
 
@@ -653,103 +536,47 @@
             color: var(--cyan);
 
             font-size: 11px;
-
         }
 
-
-        .coming {
-
-            margin-top: 20px;
-
-            padding: 20px;
-
-            border:
-                1px dashed
-                rgba(85,232,255,0.16);
-
-            border-radius: 10px;
-
-            color: var(--muted);
-
-            font-size: 12px;
-
-            line-height: 1.7;
-
-        }
-
-
-        /* =========================================
-           MOBILE
-        ========================================= */
+        /* MOBILE */
 
         @media (max-width: 650px) {
 
             .page {
-
-                width:
-                    calc(100% - 18px);
-
+                width: calc(100% - 18px);
             }
-
 
             .topbar {
-
                 border-radius: 15px;
-
             }
-
 
             .login-card {
-
                 padding: 25px;
-
             }
-
 
             .dashboard-header {
 
-                align-items:
-                    flex-start;
+                align-items: flex-start;
 
-                flex-direction:
-                    column;
-
+                flex-direction: column;
             }
-
 
             .dashboard-grid {
-
-                grid-template-columns:
-                    1fr;
-
+                grid-template-columns: 1fr;
             }
-
 
             .admin-card.full {
-
-                grid-column:
-                    auto;
-
+                grid-column: auto;
             }
-
         }
 
-    
-
-</style>
+    </style>
 
 </head>
 
-
 <body>
 
-
 <div class="page">
-
-
-    <!-- =========================================
-         TOP BAR
-    ========================================== -->
 
     <header class="topbar">
 
@@ -760,7 +587,6 @@
             Eeshwar<span>.</span> Admin
         </a>
 
-
         <a
             href="index.html"
             class="back-link"
@@ -770,11 +596,7 @@
 
     </header>
 
-
-
-    <!-- =========================================
-         LOGIN AREA
-    ========================================== -->
+    <!-- LOGIN -->
 
     <div
         id="loginArea"
@@ -783,21 +605,16 @@
 
         <div class="login-card">
 
-
-            <!-- EMAIL LOGIN -->
-
             <div id="emailSection">
 
                 <div class="login-label">
                     PRIVATE ADMIN AREA
                 </div>
 
-
                 <h1>
                     Admin
                     <span>Login.</span>
                 </h1>
-
 
                 <p class="login-description">
 
@@ -806,7 +623,6 @@
                     will be sent to that email.
 
                 </p>
-
 
                 <form
                     id="emailForm"
@@ -819,7 +635,6 @@
                             ADMIN EMAIL
                         </label>
 
-
                         <input
                             type="email"
                             id="email"
@@ -829,7 +644,6 @@
                         >
 
                     </div>
-
 
                     <button
                         type="submit"
@@ -843,9 +657,7 @@
 
             </div>
 
-
-
-            <!-- OTP LOGIN -->
+            <!-- OTP -->
 
             <div id="otpSection">
 
@@ -853,12 +665,10 @@
                     EMAIL VERIFICATION
                 </div>
 
-
                 <h1>
                     Enter
                     <span>OTP.</span>
                 </h1>
-
 
                 <p class="login-description">
 
@@ -866,7 +676,6 @@
                     to your authorized email address.
 
                 </p>
-
 
                 <form
                     id="otpForm"
@@ -878,7 +687,6 @@
                         <label for="otp">
                             6-DIGIT OTP
                         </label>
-
 
                         <input
                             type="text"
@@ -893,7 +701,6 @@
 
                     </div>
 
-
                     <button
                         type="submit"
                         class="button"
@@ -903,7 +710,6 @@
                     </button>
 
                 </form>
-
 
                 <button
                     type="button"
@@ -915,12 +721,10 @@
 
             </div>
 
-
             <div
                 id="message"
                 class="message"
             ></div>
-
 
             <div class="security-note">
 
@@ -934,15 +738,9 @@
 
     </div>
 
+    <!-- DASHBOARD -->
 
-
-    <!-- =========================================
-         DASHBOARD
-    ========================================== -->
-
-    <main
-        id="dashboard"
-    >
+    <main id="dashboard">
 
         <div class="dashboard-header">
 
@@ -952,7 +750,6 @@
                     AUTHENTICATED ADMIN
                 </div>
 
-
                 <h1>
                     Welcome
                     <span style="color:var(--cyan);">
@@ -960,14 +757,12 @@
                     </span>
                 </h1>
 
-
                 <div
                     id="userEmail"
                     class="user-email"
                 ></div>
 
             </div>
-
 
             <button
                 type="button"
@@ -979,10 +774,7 @@
 
         </div>
 
-
-
         <div class="dashboard-grid">
-
 
             <section class="admin-card">
 
@@ -990,11 +782,9 @@
                     Portfolio Status
                 </h2>
 
-
                 <p>
                     Your admin authentication is working.
                 </p>
-
 
                 <div class="status">
                     ● AUTHENTICATED
@@ -1002,20 +792,16 @@
 
             </section>
 
-
-
             <section class="admin-card">
 
                 <h2>
                     Admin Accounts
                 </h2>
 
-
                 <p>
                     Two authorized accounts are configured
                     for this portfolio.
                 </p>
-
 
                 <div class="status">
 
@@ -1027,765 +813,3511 @@
 
             </section>
 
-
-
         </div>
 
     </main>
 
-
 </div>
-
-
 
 <script>
 
-    /* =====================================================
-       SUPABASE CONFIGURATION
-    ===================================================== */
+/* =====================================================
+   SUPABASE
+===================================================== */
 
-    const SUPABASE_URL =
-        "https://kwnzxflncwmtpvisnhkb.supabase.co";
+const SUPABASE_URL =
+    "https://kwnzxflncwmtpvisnhkb.supabase.co";
 
+const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_ZcTkgrlSgTXQ4_Q5Y6eLIg_a8s4UcSk";
 
-    const SUPABASE_PUBLISHABLE_KEY =
-        "sb_publishable_ZcTkgrlSgTXQ4_Q5Y6eLIg_a8s4UcSk";
-
-
-    const supabaseClient =
-        window.supabase.createClient(
-            SUPABASE_URL,
-            SUPABASE_PUBLISHABLE_KEY,
-            {
-                auth: {
-                    persistSession: true,
-                    autoRefreshToken: true,
-                    detectSessionInUrl: true
-                }
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_PUBLISHABLE_KEY,
+        {
+            auth: {
+                persistSession: true,
+                autoRefreshToken: true,
+                detectSessionInUrl: true
             }
-        );
+        }
+    );
 
 
+/* =====================================================
+   ADMIN EMAILS
+===================================================== */
 
-    /* =====================================================
-       AUTHORIZED ADMINS
-    ===================================================== */
+const ADMIN_EMAILS = [
 
-    const ADMIN_EMAILS = [
+    "eeshwar182007@gmail.com",
 
-        "eeshwar182007@gmail.com",
+    "chocoboychocoboy859@gmail.com"
 
-        "chocoboychocoboy859@gmail.com"
-
-    ];
-
+];
 
 
-    /* =====================================================
-       ELEMENTS
-    ===================================================== */
+/* =====================================================
+   ELEMENTS
+===================================================== */
 
-    const loginArea =
-        document.getElementById(
-            "loginArea"
-        );
+const loginArea =
+    document.getElementById("loginArea");
 
+const emailSection =
+    document.getElementById("emailSection");
 
-    const emailSection =
-        document.getElementById(
-            "emailSection"
-        );
+const otpSection =
+    document.getElementById("otpSection");
 
+const emailForm =
+    document.getElementById("emailForm");
 
-    const otpSection =
-        document.getElementById(
-            "otpSection"
-        );
+const otpForm =
+    document.getElementById("otpForm");
 
+const emailInput =
+    document.getElementById("email");
 
-    const emailForm =
-        document.getElementById(
-            "emailForm"
-        );
+const otpInput =
+    document.getElementById("otp");
 
+const sendOtpButton =
+    document.getElementById("sendOtpButton");
 
-    const otpForm =
-        document.getElementById(
-            "otpForm"
-        );
+const verifyOtpButton =
+    document.getElementById("verifyOtpButton");
 
+const changeEmailButton =
+    document.getElementById("changeEmailButton");
 
-    const emailInput =
-        document.getElementById(
-            "email"
-        );
+const logoutButton =
+    document.getElementById("logoutButton");
 
+const message =
+    document.getElementById("message");
 
-    const otpInput =
-        document.getElementById(
-            "otp"
-        );
+const dashboard =
+    document.getElementById("dashboard");
 
-
-    const sendOtpButton =
-        document.getElementById(
-            "sendOtpButton"
-        );
+const userEmail =
+    document.getElementById("userEmail");
 
 
-    const verifyOtpButton =
-        document.getElementById(
-            "verifyOtpButton"
-        );
+let loginEmail = "";
 
 
-    const changeEmailButton =
-        document.getElementById(
-            "changeEmailButton"
-        );
+/* =====================================================
+   HELPERS
+===================================================== */
+
+function normalizeEmail(email) {
+
+    return email
+        .trim()
+        .toLowerCase();
+
+}
 
 
-    const logoutButton =
-        document.getElementById(
-            "logoutButton"
-        );
+function isAdmin(email) {
+
+    return ADMIN_EMAILS.includes(
+        normalizeEmail(email)
+    );
+
+}
 
 
-    const message =
-        document.getElementById(
-            "message"
-        );
+function showMessage(
+    text,
+    type = "error"
+) {
+
+    message.textContent = text;
+
+    message.className =
+        "message show " + type;
+
+}
 
 
-    const dashboard =
-        document.getElementById(
-            "dashboard"
-        );
+function clearMessage() {
+
+    message.textContent = "";
+
+    message.className =
+        "message";
+
+}
 
 
-    const userEmail =
-        document.getElementById(
-            "userEmail"
-        );
+function showDashboard(email) {
 
+    loginArea.style.display = "none";
 
+    dashboard.classList.add("show");
 
-    let loginEmail = "";
+    userEmail.textContent = email;
 
-
-
-    /* =====================================================
-       HELPERS
-    ===================================================== */
-
-    function normalizeEmail(email) {
-
-        return email
-            .trim()
-            .toLowerCase();
-
-    }
-
-
-    function isAdmin(email) {
-
-        return ADMIN_EMAILS.includes(
-            normalizeEmail(email)
-        );
-
-    }
-
-
-    function showMessage(
-        text,
-        type = "error"
+    if (
+        typeof loadPortfolioFromSupabase ===
+        "function"
     ) {
 
-        message.textContent = text;
+        loadPortfolioFromSupabase();
 
-        message.className =
-            "message show " + type;
+    }
+
+}
+
+
+function showLogin() {
+
+    loginArea.style.display = "flex";
+
+    dashboard.classList.remove("show");
+
+}
+
+
+/* =====================================================
+   CHECK SESSION
+===================================================== */
+
+async function checkSession() {
+
+    const {
+        data,
+        error
+    } =
+        await supabaseClient.auth.getUser();
+
+
+    if (
+        error ||
+        !data ||
+        !data.user
+    ) {
+
+        return;
 
     }
 
 
-    function clearMessage() {
+    const email =
+        normalizeEmail(
+            data.user.email || ""
+        );
 
-        message.textContent = "";
 
-        message.className =
-            "message";
+    if (!isAdmin(email)) {
+
+        await supabaseClient.auth.signOut();
+
+        return;
 
     }
 
 
-    function showDashboard(email) {
-        loginArea.style.display = "none";
-        dashboard.classList.add("show");
-        userEmail.textContent = email;
+    showDashboard(email);
 
-        if (typeof loadPortfolioFromSupabase === "function") {
-            loadPortfolioFromSupabase();
+}
+
+
+/* =====================================================
+   SEND OTP
+===================================================== */
+
+emailForm.addEventListener(
+    "submit",
+    async function(event) {
+
+        event.preventDefault();
+
+        clearMessage();
+
+
+        const email =
+            normalizeEmail(
+                emailInput.value
+            );
+
+
+        if (!isAdmin(email)) {
+
+            showMessage(
+                "Access denied. This email is not an authorized portfolio admin.",
+                "error"
+            );
+
+            return;
+
         }
+
+
+        sendOtpButton.disabled = true;
+
+        sendOtpButton.textContent =
+            "SENDING...";
+
+
+        try {
+
+            const {
+                error
+            } =
+                await supabaseClient.auth.signInWithOtp({
+
+                    email: email,
+
+                    options: {
+
+                        shouldCreateUser: false,
+
+                        emailRedirectTo:
+                            "https://eeshwar18.github.io/portfolio/admin.html"
+
+                    }
+
+                });
+
+
+            if (error) {
+
+                throw error;
+
+            }
+
+
+            loginEmail = email;
+
+
+            emailSection.style.display =
+                "none";
+
+            otpSection.classList.add(
+                "show"
+            );
+
+
+            showMessage(
+                "OTP sent. Check your email and enter the 6-digit code.",
+                "success"
+            );
+
+
+            otpInput.focus();
+
+
+        } catch (error) {
+
+            console.error(error);
+
+            showMessage(
+                error.message ||
+                "Could not send OTP. Please try again.",
+                "error"
+            );
+
+        } finally {
+
+            sendOtpButton.disabled =
+                false;
+
+            sendOtpButton.textContent =
+                "SEND OTP";
+
+        }
+
     }
+);
 
 
-    function showLogin() {
+/* =====================================================
+   VERIFY OTP
+===================================================== */
 
-        loginArea.style.display =
-            "flex";
+otpForm.addEventListener(
+    "submit",
+    async function(event) {
 
-        dashboard.classList.remove(
+        event.preventDefault();
+
+        clearMessage();
+
+
+        const otp =
+            otpInput.value
+                .replace(/\D/g, "")
+                .trim();
+
+
+        if (
+            !loginEmail ||
+            !isAdmin(loginEmail)
+        ) {
+
+            showMessage(
+                "Invalid admin session.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        if (otp.length !== 6) {
+
+            showMessage(
+                "Please enter the 6-digit OTP.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        verifyOtpButton.disabled = true;
+
+        verifyOtpButton.textContent =
+            "VERIFYING...";
+
+
+        try {
+
+            const {
+                data,
+                error
+            } =
+                await supabaseClient.auth.verifyOtp({
+
+                    email: loginEmail,
+
+                    token: otp,
+
+                    type: "email"
+
+                });
+
+
+            if (error) {
+
+                throw error;
+
+            }
+
+
+            const authenticatedEmail =
+                normalizeEmail(
+                    data.user?.email || ""
+                );
+
+
+            if (
+                !isAdmin(
+                    authenticatedEmail
+                )
+            ) {
+
+                await supabaseClient.auth.signOut();
+
+                throw new Error(
+                    "This account is not authorized as a portfolio admin."
+                );
+
+            }
+
+
+            showDashboard(
+                authenticatedEmail
+            );
+
+
+        } catch (error) {
+
+            console.error(error);
+
+            showMessage(
+                error.message ||
+                "Invalid or expired OTP.",
+                "error"
+            );
+
+        } finally {
+
+            verifyOtpButton.disabled =
+                false;
+
+            verifyOtpButton.textContent =
+                "VERIFY OTP";
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   CHANGE EMAIL
+===================================================== */
+
+changeEmailButton.addEventListener(
+    "click",
+    function() {
+
+        loginEmail = "";
+
+        otpInput.value = "";
+
+        otpSection.classList.remove(
             "show"
         );
 
+        emailSection.style.display =
+            "block";
+
+        clearMessage();
+
+        emailInput.focus();
+
+    }
+);
+
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+logoutButton.addEventListener(
+    "click",
+    async function() {
+
+        await supabaseClient.auth.signOut();
+
+        loginEmail = "";
+
+        emailInput.value = "";
+
+        otpInput.value = "";
+
+        emailSection.style.display =
+            "block";
+
+        otpSection.classList.remove(
+            "show"
+        );
+
+        clearMessage();
+
+        showLogin();
+
+    }
+);
+
+
+/* =====================================================
+   AUTH STATE
+===================================================== */
+
+supabaseClient.auth.onAuthStateChange(
+    async function(event, session) {
+
+        if (
+            event === "SIGNED_OUT"
+        ) {
+
+            showLogin();
+
+            return;
+
+        }
+
+
+        if (
+            session &&
+            session.user
+        ) {
+
+            const email =
+                normalizeEmail(
+                    session.user.email || ""
+                );
+
+
+            if (isAdmin(email)) {
+
+                showDashboard(email);
+
+            }
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   START
+===================================================== */
+
+checkSession();
+
+</script>
+
+
+<!-- =====================================================
+     FULL PORTFOLIO EDITOR
+===================================================== -->
+
+<script>
+
+const V4_DEFAULT_DATA = {
+
+    hero: {
+
+        label:
+            "ELECTRONICS & COMMUNICATION ENGINEERING",
+
+        name:
+            "Eeshwar",
+
+        description:
+            "I'm an Electronics and Communication Engineering student interested in Embedded Systems, IoT, electronics, hardware and software.",
+
+        focusTitle:
+            "Hardware × Software",
+
+        focusDescription:
+            "I enjoy learning how systems work and building practical projects that combine electronics, programming and real-world problem solving.",
+
+        focusItems: [
+
+            "Embedded Systems",
+
+            "IoT & Connected Devices",
+
+            "Electronics & Hardware",
+
+            "Firmware & Programming"
+
+        ]
+
+    },
+
+
+    about: {
+
+        paragraphs: [
+
+            "I'm an Electronics and Communication Engineering student interested in technology, electronics and building practical systems.",
+
+            "I enjoy working with both hardware and software and understanding how different parts of a system work together.",
+
+            "My interests include embedded systems, IoT, electronics, hardware development, programming and learning new technologies through practical work."
+
+        ],
+
+        highlight:
+            "I like learning by building, experimenting with ideas and turning concepts into useful working projects."
+
+    },
+
+
+    education: {
+
+        degree:
+            "B.E. / B.Tech in Electronics and Communication Engineering",
+
+        college:
+            "YOUR COLLEGE NAME",
+
+        period:
+            "YOUR START YEAR — PRESENT",
+
+        description:
+            "Currently pursuing Electronics and Communication Engineering with an interest in embedded systems, IoT, electronics, programming and hardware-software integration."
+
+    },
+
+
+    interests: [
+
+        "Embedded Systems",
+
+        "IoT",
+
+        "Electronics",
+
+        "Firmware",
+
+        "Hardware",
+
+        "Automation"
+
+    ],
+
+
+    skills: [
+
+        {
+            title:
+                "Programming",
+
+            items:
+                "C, C++, Python, Embedded C"
+        },
+
+        {
+            title:
+                "Embedded",
+
+            items:
+                "Arduino, ESP32, Microcontrollers, Sensors"
+        },
+
+        {
+            title:
+                "Hardware",
+
+            items:
+                "Digital Electronics, Circuit Design, UART, I2C, SPI"
+        },
+
+        {
+            title:
+                "IoT",
+
+            items:
+                "Connected Devices, MQTT, Sensor Systems, ESP32"
+        },
+
+        {
+            title:
+                "Tools",
+
+            items:
+                "Git, GitHub, VS Code, Arduino IDE"
+        },
+
+        {
+            title:
+                "Other",
+
+            items:
+                "Problem Solving, System Design, Prototyping, Learning"
+        }
+
+    ],
+
+
+    projects: [
+
+        {
+            number:
+                "PROJECT 01",
+
+            title:
+                "Smart Agriculture",
+
+            description:
+                "An IoT-based smart agriculture system built using an ESP32 and Blynk. The system monitors temperature, humidity, soil moisture and light levels and uses a relay to control irrigation automatically when the soil becomes too dry.",
+
+            technologies:
+                "ESP32, Blynk, DHT22, Soil Sensor, LDR, IoT",
+
+            url:
+                "https://github.com/eeshwar18/SMART-AGRICULTURE",
+
+            image:
+                ""
+
+        },
+
+        {
+            number:
+                "PROJECT 02",
+
+            title:
+                "Smart Arduino Car",
+
+            description:
+                "A sensor-based robotic car built using an Arduino UNO. It uses ultrasonic and IR sensors to detect obstacles and a servo motor to scan different directions while the Arduino controls the movement system.",
+
+            technologies:
+                "Arduino UNO, Embedded C/C++, Ultrasonic, IR Sensors, Servo, L298N",
+
+            url:
+                "https://github.com/eeshwar18/Smart-car-ARDUINO-",
+
+            image:
+                ""
+
+        },
+
+        {
+            number:
+                "PROJECT 03",
+
+            title:
+                "Raspberry Pi Smart Car",
+
+            description:
+                "A Raspberry Pi Zero 2 W based robotic car designed for obstacle detection. An ultrasonic sensor mounted on a servo scans different directions while the Raspberry Pi processes the readings and controls the motors through an L298N driver.",
+
+            technologies:
+                "Raspberry Pi, Pi Zero 2 W, Python, Ultrasonic, Servo, L298N",
+
+            url:
+                "https://github.com/eeshwar18/Raspberry-car",
+
+            image:
+                ""
+
+        }
+
+    ],
+
+
+    beyond: [
+
+        {
+            title:
+                "What I Like To Work On",
+
+            p1:
+                "I enjoy working on practical ideas where electronics, programming and problem solving come together.",
+
+            p2:
+                "I like experimenting with hardware, learning how systems work and turning ideas into useful projects."
+
+        },
+
+        {
+            title:
+                "What I'm Learning",
+
+            p1:
+                "I'm continuously exploring new technologies and improving my understanding of embedded systems, IoT, electronics and programming.",
+
+            p2:
+                "I enjoy learning through practical projects and experimentation."
+
+        }
+
+    ],
+
+
+    resume: {
+
+        title:
+            "My Professional Resume",
+
+        description:
+            "View or download my latest resume.",
+
+        path:
+            "assets/resume.pdf"
+
+    },
+
+
+    contact: {
+
+        description:
+            "Have an idea, project, opportunity or simply want to connect? Send me a message.",
+
+        email:
+            "eeshwar182007@gmail.com",
+
+        github:
+            "https://github.com/eeshwar18",
+
+        linkedin:
+            "https://www.linkedin.com/"
+
+    }
+
+};
+
+
+let D =
+    structuredClone(V4_DEFAULT_DATA);
+
+
+let portfolioSaveBusy = false;
+
+
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
+
+function E(value) {
+
+    return String(value ?? "")
+
+        .replaceAll("&", "&amp;")
+
+        .replaceAll("<", "&lt;")
+
+        .replaceAll(">", "&gt;")
+
+        .replaceAll('"', "&quot;");
+
+}
+
+
+/* =====================================================
+   INPUT HELPERS
+===================================================== */
+
+function inp(
+    label,
+    key,
+    value,
+    type = "text"
+) {
+
+    return `
+
+        <label class="f2label">
+
+            ${label}
+
+            <input
+                class="f2input"
+                data-key="${key}"
+                type="${type}"
+                value="${E(value)}"
+            >
+
+        </label>
+
+    `;
+
+}
+
+
+function area(
+    label,
+    key,
+    value
+) {
+
+    return `
+
+        <label class="f2label">
+
+            ${label}
+
+            <textarea
+                class="f2input f2area"
+                data-key="${key}"
+            >${E(value)}</textarea>
+
+        </label>
+
+    `;
+
+}
+
+
+/* =====================================================
+   SET NESTED VALUE
+===================================================== */
+
+function setv(
+    object,
+    path,
+    value
+) {
+
+    const parts =
+        path.split(".");
+
+    let current =
+        object;
+
+    for (
+        let i = 0;
+        i < parts.length - 1;
+        i++
+    ) {
+
+        current =
+            current[parts[i]];
+
+    }
+
+    current[
+        parts[parts.length - 1]
+    ] = value;
+
+}
+
+
+/* =====================================================
+   GET NESTED VALUE
+===================================================== */
+
+function getv(
+    object,
+    path
+) {
+
+    const parts =
+        path.split(".");
+
+    let current =
+        object;
+
+    for (
+        const part of parts
+    ) {
+
+        if (
+            current === undefined ||
+            current === null
+        ) {
+
+            return "";
+
+        }
+
+        current =
+            current[part];
+
+    }
+
+    return current;
+
+}
+
+
+/* =====================================================
+   COLLECT ALL INPUTS BEFORE SAVE
+===================================================== */
+
+function collectEditorValues() {
+
+    const fields =
+        document.querySelectorAll(
+            "#fullV4Editor [data-key]"
+        );
+
+
+    fields.forEach(
+        field => {
+
+            const key =
+                field.dataset.key;
+
+            let value =
+                field.value;
+
+
+            if (
+                key ===
+                "hero.focusItems"
+            ) {
+
+                value =
+                    value
+                        .split("\n")
+                        .map(x => x.trim())
+                        .filter(Boolean);
+
+            }
+
+
+            else if (
+                key.endsWith(".items")
+            ) {
+
+                value =
+                    value
+                        .split(",")
+                        .map(x => x.trim())
+                        .filter(Boolean)
+                        .join(", ");
+
+            }
+
+
+            setv(
+                D,
+                key,
+                value
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   RENDER EDITOR
+===================================================== */
+
+function render() {
+
+    let root =
+        document.getElementById(
+            "fullV4Editor"
+        );
+
+
+    if (!root) {
+
+        root =
+            document.body.appendChild(
+                Object.assign(
+                    document.createElement("div"),
+                    {
+                        id:
+                            "fullV4Editor"
+                    }
+                )
+            );
+
     }
 
 
+    root.innerHTML = `
 
-    /* =====================================================
-       CHECK EXISTING SESSION
-    ===================================================== */
+        <div class="f2box">
 
-    async function checkSession() {
+            <div class="f2head">
+
+                <div>
+
+                    <small>
+                        FULL V4 PORTFOLIO CMS
+                    </small>
+
+                    <h1>
+                        Eeshwar Portfolio Editor
+                    </h1>
+
+                    <p>
+                        Edit your complete V4 portfolio.
+                        SAVE CHANGES publishes the data
+                        to Supabase.
+                    </p>
+
+                </div>
+
+                <span id="f2status">
+                    Editor ready
+                </span>
+
+            </div>
+
+
+            <div class="f2grid">
+
+
+                <!-- HOME -->
+
+                <details
+                    class="f2panel"
+                    open
+                >
+
+                    <summary>
+                        🏠 Home / Hero
+                    </summary>
+
+                    <div>
+
+                        ${inp(
+                            "Hero label",
+                            "hero.label",
+                            D.hero.label
+                        )}
+
+                        ${inp(
+                            "Name",
+                            "hero.name",
+                            D.hero.name
+                        )}
+
+                        ${area(
+                            "Hero description",
+                            "hero.description",
+                            D.hero.description
+                        )}
+
+                        ${inp(
+                            "Focus title",
+                            "hero.focusTitle",
+                            D.hero.focusTitle
+                        )}
+
+                        ${area(
+                            "Focus description",
+                            "hero.focusDescription",
+                            D.hero.focusDescription
+                        )}
+
+                        ${area(
+                            "Focus items — one per line",
+                            "hero.focusItems",
+                            D.hero.focusItems.join("\n")
+                        )}
+
+                    </div>
+
+                </details>
+
+
+                <!-- ABOUT -->
+
+                <details
+                    class="f2panel"
+                    open
+                >
+
+                    <summary>
+                        👤 About Me
+                    </summary>
+
+                    <div>
+
+                        ${area(
+                            "Paragraph 1",
+                            "about.paragraphs.0",
+                            D.about.paragraphs[0]
+                        )}
+
+                        ${area(
+                            "Paragraph 2",
+                            "about.paragraphs.1",
+                            D.about.paragraphs[1]
+                        )}
+
+                        ${area(
+                            "Paragraph 3",
+                            "about.paragraphs.2",
+                            D.about.paragraphs[2]
+                        )}
+
+                        ${area(
+                            "Highlight",
+                            "about.highlight",
+                            D.about.highlight
+                        )}
+
+                    </div>
+
+                </details>
+
+
+                <!-- EDUCATION -->
+
+                <details
+                    class="f2panel"
+                    open
+                >
+
+                    <summary>
+                        🎓 Education
+                    </summary>
+
+                    <div>
+
+                        ${inp(
+                            "Degree",
+                            "education.degree",
+                            D.education.degree
+                        )}
+
+                        ${inp(
+                            "College",
+                            "education.college",
+                            D.education.college
+                        )}
+
+                        ${inp(
+                            "Period",
+                            "education.period",
+                            D.education.period
+                        )}
+
+                        ${area(
+                            "Description",
+                            "education.description",
+                            D.education.description
+                        )}
+
+                    </div>
+
+                </details>
+
+
+                <!-- INTERESTS -->
+
+                <details
+                    class="f2panel"
+                >
+
+                    <summary>
+                        💡 Interests
+                    </summary>
+
+                    <div>
+
+                        <div id="f2interests">
+
+                            ${
+                                D.interests.length
+
+                                ?
+
+                                D.interests
+                                    .map(
+                                        (x, i) => `
+
+                                            <div class="f2item">
+
+                                                ${inp(
+                                                    `Interest ${i + 1}`,
+                                                    `interests.${i}`,
+                                                    x
+                                                )}
+
+                                                <button
+                                                    class="f2small danger"
+                                                    onclick="
+                                                        delInterest(${i});
+                                                        return false;
+                                                    "
+                                                >
+                                                    DELETE INTEREST
+                                                </button>
+
+                                            </div>
+
+                                        `
+                                    )
+                                    .join("")
+
+                                :
+
+                                `
+
+                                    <div class="f2empty">
+                                        No interests added yet.
+                                    </div>
+
+                                `
+                            }
+
+                        </div>
+
+
+                        <button
+                            class="f2small"
+                            onclick="
+                                addInterest();
+                                return false;
+                            "
+                        >
+                            + ADD INTEREST
+                        </button>
+
+                    </div>
+
+                </details>
+
+
+                <!-- SKILLS -->
+
+                <details
+                    class="f2panel"
+                >
+
+                    <summary>
+                        🛠️ Skills
+                    </summary>
+
+                    <div>
+
+                        <div id="f2skills">
+
+                            ${
+                                D.skills.length
+
+                                ?
+
+                                D.skills
+                                    .map(
+                                        (x, i) => `
+
+                                            <div class="f2item">
+
+                                                <strong>
+                                                    SKILL GROUP ${i + 1}
+                                                </strong>
+
+                                                ${inp(
+                                                    "Group title",
+                                                    `skills.${i}.title`,
+                                                    x.title
+                                                )}
+
+                                                ${area(
+                                                    "Skills — comma separated",
+                                                    `skills.${i}.items`,
+                                                    Array.isArray(x.items)
+                                                        ? x.items.join(", ")
+                                                        : x.items
+                                                )}
+
+                                                <button
+                                                    class="f2small danger"
+                                                    onclick="
+                                                        delSkill(${i});
+                                                        return false;
+                                                    "
+                                                >
+                                                    DELETE SKILL GROUP
+                                                </button>
+
+                                            </div>
+
+                                        `
+                                    )
+                                    .join("")
+
+                                :
+
+                                `
+
+                                    <div class="f2empty">
+                                        No skill groups added yet.
+                                    </div>
+
+                                `
+                            }
+
+                        </div>
+
+
+                        <button
+                            class="f2small"
+                            onclick="
+                                addSkill();
+                                return false;
+                            "
+                        >
+                            + ADD SKILL GROUP
+                        </button>
+
+                    </div>
+
+                </details>
+
+
+                <!-- PROJECTS -->
+
+                <details
+                    class="f2panel"
+                    open
+                >
+
+                    <summary>
+                        🚀 Projects
+                    </summary>
+
+                    <div id="f2projects">
+
+                        ${
+                            D.projects.length
+
+                            ?
+
+                            D.projects
+                                .map(
+                                    (x, i) => `
+
+                                        <div class="f2item">
+
+                                            <b>
+                                                ${E(x.number)}
+                                            </b>
+
+
+                                            ${
+                                                x.image
+
+                                                ?
+
+                                                `
+                                                    <img
+                                                        class="f2preview"
+                                                        src="${E(x.image)}"
+                                                        alt="Project image"
+                                                    >
+                                                `
+
+                                                :
+
+                                                `
+                                                    <div class="f2placeholder">
+                                                        PROJECT IMAGE
+                                                    </div>
+                                                `
+                                            }
+
+
+                                            <label class="f2label">
+
+                                                Project Image
+
+                                                <input
+                                                    class="f2input"
+                                                    type="file"
+                                                    accept="image/*"
+                                                    onchange="
+                                                        pickImage(event,${i})
+                                                    "
+                                                >
+
+                                            </label>
+
+
+                                            ${inp(
+                                                "Project number",
+                                                `projects.${i}.number`,
+                                                x.number
+                                            )}
+
+                                            ${inp(
+                                                "Title",
+                                                `projects.${i}.title`,
+                                                x.title
+                                            )}
+
+                                            ${area(
+                                                "Description",
+                                                `projects.${i}.description`,
+                                                x.description
+                                            )}
+
+                                            ${area(
+                                                "Technologies — comma separated",
+                                                `projects.${i}.technologies`,
+                                                x.technologies
+                                            )}
+
+                                            ${inp(
+                                                "Project URL",
+                                                `projects.${i}.url`,
+                                                x.url,
+                                                "url"
+                                            )}
+
+
+                                            <button
+                                                class="f2small danger"
+                                                onclick="
+                                                    delProject(${i});
+                                                    return false;
+                                                "
+                                            >
+                                                DELETE PROJECT
+                                            </button>
+
+                                        </div>
+
+                                    `
+                                )
+                                .join("")
+
+                            :
+
+                            `
+                                <div class="f2empty">
+                                    No projects added yet.
+                                </div>
+                            `
+                        }
+
+                    </div>
+
+
+                    <button
+                        class="f2add"
+                        onclick="
+                            addProject();
+                            return false;
+                        "
+                    >
+                        + ADD PROJECT
+                    </button>
+
+                </details>
+
+
+                <!-- BEYOND -->
+
+                <details
+                    class="f2panel"
+                >
+
+                    <summary>
+                        🌐 Beyond Projects
+                    </summary>
+
+                    <div id="f2beyond">
+
+                        ${
+                            D.beyond.length
+
+                            ?
+
+                            D.beyond
+                                .map(
+                                    (x, i) => `
+
+                                        <div class="f2item">
+
+                                            <strong>
+                                                CARD ${i + 1}
+                                            </strong>
+
+                                            ${inp(
+                                                "Card title",
+                                                `beyond.${i}.title`,
+                                                x.title
+                                            )}
+
+                                            ${area(
+                                                "Paragraph 1",
+                                                `beyond.${i}.p1`,
+                                                x.p1
+                                            )}
+
+                                            ${area(
+                                                "Paragraph 2",
+                                                `beyond.${i}.p2`,
+                                                x.p2
+                                            )}
+
+                                            <button
+                                                class="f2small danger"
+                                                onclick="
+                                                    delBeyond(${i});
+                                                    return false;
+                                                "
+                                            >
+                                                DELETE CARD
+                                            </button>
+
+                                        </div>
+
+                                    `
+                                )
+                                .join("")
+
+                            :
+
+                            `
+                                <div class="f2empty">
+                                    No Beyond Projects cards added yet.
+                                </div>
+                            `
+                        }
+
+                    </div>
+
+
+                    <button
+                        class="f2small"
+                        onclick="
+                            addBeyond();
+                            return false;
+                        "
+                    >
+                        + ADD BEYOND CARD
+                    </button>
+
+                </details>
+
+
+                <!-- RESUME -->
+
+                <details
+                    class="f2panel"
+                >
+
+                    <summary>
+                        📄 Resume
+                    </summary>
+
+                    <div>
+
+                        ${inp(
+                            "Resume title",
+                            "resume.title",
+                            D.resume.title
+                        )}
+
+                        ${area(
+                            "Description",
+                            "resume.description",
+                            D.resume.description
+                        )}
+
+                        ${inp(
+                            "Resume path",
+                            "resume.path",
+                            D.resume.path
+                        )}
+
+                    </div>
+
+                </details>
+
+
+                <!-- CONTACT -->
+
+                <details
+                    class="f2panel"
+                >
+
+                    <summary>
+                        📧 Contact & Social Links
+                    </summary>
+
+                    <div>
+
+                        ${area(
+                            "Description",
+                            "contact.description",
+                            D.contact.description
+                        )}
+
+                        ${inp(
+                            "Email",
+                            "contact.email",
+                            D.contact.email,
+                            "email"
+                        )}
+
+                        ${inp(
+                            "GitHub",
+                            "contact.github",
+                            D.contact.github,
+                            "url"
+                        )}
+
+                        ${inp(
+                            "LinkedIn",
+                            "contact.linkedin",
+                            D.contact.linkedin,
+                            "url"
+                        )}
+
+                    </div>
+
+                </details>
+
+
+            </div>
+
+
+            <!-- SAVE BAR -->
+
+            <div class="f2save">
+
+                <button
+                    onclick="
+                        saveDraft();
+                        return false;
+                    "
+                >
+                    💾 SAVE CHANGES
+                </button>
+
+
+                <button
+                    class="reset"
+                    onclick="
+                        reloadSavedData();
+                        return false;
+                    "
+                >
+                    ↻ RELOAD SAVED
+                </button>
+
+
+                <button
+                    class="reset"
+                    onclick="
+                        resetDraft();
+                        return false;
+                    "
+                >
+                    RESET DEFAULTS
+                </button>
+
+
+                <span id="f2msg">
+
+                    Ready.
+                    SAVE CHANGES publishes the
+                    portfolio data to Supabase.
+
+                </span>
+
+            </div>
+
+        </div>
+
+    `;
+
+
+    bindEditor();
+
+}
+
+
+/* =====================================================
+   BIND EDITOR
+===================================================== */
+
+function bindEditor() {
+
+    document
+        .querySelectorAll(
+            "#fullV4Editor [data-key]"
+        )
+        .forEach(
+            element => {
+
+                element.addEventListener(
+                    "input",
+                    function() {
+
+                        const key =
+                            this.dataset.key;
+
+                        let value =
+                            this.value;
+
+
+                        if (
+                            key ===
+                            "hero.focusItems"
+                        ) {
+
+                            value =
+                                value
+                                    .split("\n")
+                                    .filter(Boolean);
+
+                        }
+
+
+                        setv(
+                            D,
+                            key,
+                            value
+                        );
+
+
+                        const status =
+                            document.getElementById(
+                                "f2status"
+                            );
+
+
+                        if (status) {
+
+                            status.textContent =
+                                "Unsaved changes";
+
+                        }
+
+                    }
+                );
+
+            }
+        );
+
+}
+
+
+/* =====================================================
+   LOAD FROM SUPABASE
+===================================================== */
+
+async function loadPortfolioFromSupabase() {
+
+    try {
 
         const {
             data,
             error
         } =
-            await supabaseClient.auth.getUser();
+            await supabaseClient
+                .from("portfolio_content")
+                .select("data")
+                .eq("id", 1)
+                .maybeSingle();
+
+
+        if (error) {
+
+            throw error;
+
+        }
 
 
         if (
-            error ||
-            !data ||
-            !data.user
+            data &&
+            data.data &&
+            Object.keys(data.data).length
         ) {
 
-            return;
+            D =
+                structuredClone(
+                    data.data
+                );
+
+
+            render();
+
+
+            const status =
+                document.getElementById(
+                    "f2status"
+                );
+
+
+            const msg =
+                document.getElementById(
+                    "f2msg"
+                );
+
+
+            if (status) {
+
+                status.textContent =
+                    "✓ Loaded from Supabase";
+
+            }
+
+
+            if (msg) {
+
+                msg.textContent =
+                    "Live portfolio data loaded from Supabase.";
+
+            }
+
+        }
+
+        else {
+
+            render();
+
+
+            const status =
+                document.getElementById(
+                    "f2status"
+                );
+
+
+            const msg =
+                document.getElementById(
+                    "f2msg"
+                );
+
+
+            if (status) {
+
+                status.textContent =
+                    "Using V4 defaults";
+
+            }
+
+
+            if (msg) {
+
+                msg.textContent =
+                    "Save once to create your portfolio data.";
+
+            }
+
+        }
+
+
+    } catch (error) {
+
+        console.error(
+            "Portfolio load error:",
+            error
+        );
+
+
+        render();
+
+
+        const status =
+            document.getElementById(
+                "f2status"
+            );
+
+
+        const msg =
+            document.getElementById(
+                "f2msg"
+            );
+
+
+        if (status) {
+
+            status.textContent =
+                "Database connection error";
+
+        }
+
+
+        if (msg) {
+
+            msg.textContent =
+                error.message ||
+                "Could not load portfolio data.";
+
+        }
+
+    }
+
+}
+
+
+/* =====================================================
+   DATA URL → BLOB
+===================================================== */
+
+function dataUrlToBlob(dataUrl) {
+
+    const parts =
+        dataUrl.split(",");
+
+
+    const mimeMatch =
+        parts[0].match(
+            /data:(.*?);base64/
+        );
+
+
+    const mime =
+        mimeMatch
+            ? mimeMatch[1]
+            : "image/jpeg";
+
+
+    const binary =
+        atob(parts[1]);
+
+
+    const bytes =
+        new Uint8Array(
+            binary.length
+        );
+
+
+    for (
+        let i = 0;
+        i < binary.length;
+        i++
+    ) {
+
+        bytes[i] =
+            binary.charCodeAt(i);
+
+    }
+
+
+    return {
+
+        blob:
+            new Blob(
+                [bytes],
+                {type: mime}
+            ),
+
+        mime
+
+    };
+
+}
+
+
+/* =====================================================
+   UPLOAD PROJECT IMAGE
+===================================================== */
+
+async function uploadProjectImage(
+    dataUrl,
+    index
+) {
+
+    const {
+        blob,
+        mime
+    } =
+        dataUrlToBlob(
+            dataUrl
+        );
+
+
+    const ext =
+        (
+            mime.split("/")[1] ||
+            "jpg"
+        )
+            .replace(
+                "jpeg",
+                "jpg"
+            );
+
+
+    const path =
+        `projects/${crypto.randomUUID()}.${ext}`;
+
+
+    const {
+        error
+    } =
+        await supabaseClient
+            .storage
+            .from("portfolio-images")
+            .upload(
+                path,
+                blob,
+                {
+                    contentType:
+                        mime,
+
+                    upsert:
+                        false
+                }
+            );
+
+
+    if (error) {
+
+        throw error;
+
+    }
+
+
+    const {
+        data
+    } =
+        supabaseClient
+            .storage
+            .from("portfolio-images")
+            .getPublicUrl(
+                path
+            );
+
+
+    D.projects[index].image =
+        data.publicUrl;
+
+}
+
+
+/* =====================================================
+   PREPARE PROJECT IMAGES
+===================================================== */
+
+async function prepareProjectImages() {
+
+    for (
+        let i = 0;
+        i < D.projects.length;
+        i++
+    ) {
+
+        const image =
+            D.projects[i].image || "";
+
+
+        if (
+            image.startsWith(
+                "data:image/"
+            )
+        ) {
+
+            await uploadProjectImage(
+                image,
+                i
+            );
+
+        }
+
+    }
+
+}
+
+
+/* =====================================================
+   SAVE
+===================================================== */
+
+async function saveDraft() {
+
+    if (portfolioSaveBusy) {
+
+        return;
+
+    }
+
+
+    portfolioSaveBusy = true;
+
+
+    const saveButton =
+        document.querySelector(
+            ".f2save button:first-child"
+        );
+
+
+    try {
+
+        /* IMPORTANT:
+           collect everything currently
+           visible in the editor first.
+        */
+
+        collectEditorValues();
+
+
+        if (saveButton) {
+
+            saveButton.disabled =
+                true;
+
+            saveButton.textContent =
+                "SAVING...";
+
+        }
+
+
+        const status =
+            document.getElementById(
+                "f2status"
+            );
+
+
+        const msg =
+            document.getElementById(
+                "f2msg"
+            );
+
+
+        if (status) {
+
+            status.textContent =
+                "Saving...";
+
+        }
+
+
+        if (msg) {
+
+            msg.textContent =
+                "Uploading images and saving portfolio...";
+
+        }
+
+
+        /* CHECK ADMIN SESSION */
+
+        const {
+            data: userData,
+            error: userError
+        } =
+            await supabaseClient
+                .auth
+                .getUser();
+
+
+        if (
+            userError ||
+            !userData ||
+            !userData.user
+        ) {
+
+            throw new Error(
+                "Your admin session has expired. Please log in again."
+            );
 
         }
 
 
         const email =
             normalizeEmail(
-                data.user.email || ""
+                userData.user.email || ""
             );
 
 
         if (!isAdmin(email)) {
 
-            await supabaseClient.auth.signOut();
-
-            return;
+            throw new Error(
+                "You are not authorized to save this portfolio."
+            );
 
         }
 
 
-        showDashboard(email);
+        /* KEEP EXISTING PROJECT IMAGE SYSTEM */
+
+        await prepareProjectImages();
+
+
+        /* SAVE COMPLETE DATA */
+
+        const {
+            error
+        } =
+            await supabaseClient
+                .from("portfolio_content")
+                .upsert(
+                    {
+                        id: 1,
+
+                        data: D,
+
+                        updated_at:
+                            new Date()
+                                .toISOString(),
+
+                        updated_by:
+                            userData.user.id
+
+                    },
+                    {
+                        onConflict:
+                            "id"
+                    }
+                );
+
+
+        if (error) {
+
+            throw error;
+
+        }
+
+
+        /* SUCCESS */
+
+        localStorage.setItem(
+            "eeshwar_v4_last_saved_backup",
+            JSON.stringify(D)
+        );
+
+
+        if (status) {
+
+            status.textContent =
+                "✓ SAVED TO SUPABASE";
+
+        }
+
+
+        if (msg) {
+
+            msg.textContent =
+                "Saved successfully. Reloading the saved data...";
+
+        }
+
+
+        /*
+           Read the row back from Supabase.
+           This confirms the actual database
+           contains what we just saved.
+        */
+
+        const {
+            data: verifyData,
+            error: verifyError
+        } =
+            await supabaseClient
+                .from("portfolio_content")
+                .select("data")
+                .eq("id", 1)
+                .single();
+
+
+        if (verifyError) {
+
+            throw verifyError;
+
+        }
+
+
+        if (
+            verifyData &&
+            verifyData.data
+        ) {
+
+            D =
+                structuredClone(
+                    verifyData.data
+                );
+
+        }
+
+
+        render();
+
+
+        const newStatus =
+            document.getElementById(
+                "f2status"
+            );
+
+
+        const newMsg =
+            document.getElementById(
+                "f2msg"
+            );
+
+
+        if (newStatus) {
+
+            newStatus.textContent =
+                "✓ SAVED & VERIFIED";
+
+        }
+
+
+        if (newMsg) {
+
+            newMsg.textContent =
+                "Everything is saved in Supabase. Refresh the live portfolio to see the changes.";
+
+        }
+
+
+    } catch (error) {
+
+        console.error(
+            "Portfolio save error:",
+            error
+        );
+
+
+        const status =
+            document.getElementById(
+                "f2status"
+            );
+
+
+        const msg =
+            document.getElementById(
+                "f2msg"
+            );
+
+
+        if (status) {
+
+            status.textContent =
+                "❌ SAVE FAILED";
+
+        }
+
+
+        if (msg) {
+
+            msg.textContent =
+                error.message ||
+                "Could not save portfolio.";
+
+        }
+
+
+        alert(
+            "Save failed:\n\n" +
+            (
+                error.message ||
+                "Unknown error"
+            )
+        );
+
+    } finally {
+
+        portfolioSaveBusy =
+            false;
+
+
+        const btn =
+            document.querySelector(
+                ".f2save button:first-child"
+            );
+
+
+        if (btn) {
+
+            btn.disabled =
+                false;
+
+            btn.textContent =
+                "💾 SAVE CHANGES";
+
+        }
+
+    }
+
+}
+
+
+/* =====================================================
+   RELOAD SAVED DATA
+===================================================== */
+
+async function reloadSavedData() {
+
+    if (
+        !confirm(
+            "Reload the data currently saved in Supabase? Any unsaved changes will be lost."
+        )
+    ) {
+
+        return;
 
     }
 
 
+    await loadPortfolioFromSupabase();
 
-    /* =====================================================
-       SEND OTP
-    ===================================================== */
+}
 
-    emailForm.addEventListener(
-        "submit",
-        async function(event) {
 
-            event.preventDefault();
+/* =====================================================
+   RESET DEFAULTS
+===================================================== */
 
-            clearMessage();
+function resetDraft() {
 
+    if (
+        !confirm(
+            "Reset the editor to the original V4 default content? This does NOT save until you press SAVE CHANGES."
+        )
+    ) {
 
-            const email =
-                normalizeEmail(
-                    emailInput.value
-                );
+        return;
 
-
-            /* First security check */
-
-            if (!isAdmin(email)) {
-
-                showMessage(
-                    "Access denied. This email is not an authorized portfolio admin.",
-                    "error"
-                );
-
-                return;
-
-            }
-
-
-            sendOtpButton.disabled =
-                true;
-
-            sendOtpButton.textContent =
-                "SENDING...";
-
-
-            try {
-
-                const {
-                    error
-                } =
-                    await supabaseClient.auth.signInWithOtp({
-
-                        email: email,
-
-                        options: {
-
-                            shouldCreateUser:
-                                false,
-
-                            emailRedirectTo:
-                                "https://eeshwar18.github.io/portfolio/admin.html"
-
-                        }
-
-                    });
-
-
-                if (error) {
-
-                    throw error;
-
-                }
-
-
-                loginEmail =
-                    email;
-
-
-                emailSection.style.display =
-                    "none";
-
-                otpSection.classList.add(
-                    "show"
-                );
-
-
-                showMessage(
-                    "OTP sent. Check your email and enter the 6-digit code.",
-                    "success"
-                );
-
-
-                otpInput.focus();
-
-
-            } catch (error) {
-
-                console.error(error);
-
-
-                showMessage(
-                    error.message ||
-                    "Could not send OTP. Please try again.",
-                    "error"
-                );
-
-            } finally {
-
-                sendOtpButton.disabled =
-                    false;
-
-                sendOtpButton.textContent =
-                    "SEND OTP";
-
-            }
-
-        }
-    );
-
-
-
-    /* =====================================================
-       VERIFY OTP
-    ===================================================== */
-
-    otpForm.addEventListener(
-        "submit",
-        async function(event) {
-
-            event.preventDefault();
-
-            clearMessage();
-
-
-            const otp =
-                otpInput.value
-                    .replace(/\D/g, "")
-                    .trim();
-
-
-            if (
-                !loginEmail ||
-                !isAdmin(loginEmail)
-            ) {
-
-                showMessage(
-                    "Invalid admin session.",
-                    "error"
-                );
-
-                return;
-
-            }
-
-
-            if (otp.length !== 6) {
-
-                showMessage(
-                    "Please enter the 6-digit OTP.",
-                    "error"
-                );
-
-                return;
-
-            }
-
-
-            verifyOtpButton.disabled =
-                true;
-
-            verifyOtpButton.textContent =
-                "VERIFYING...";
-
-
-            try {
-
-                const {
-                    data,
-                    error
-                } =
-                    await supabaseClient.auth.verifyOtp({
-
-                        email:
-                            loginEmail,
-
-                        token:
-                            otp,
-
-                        type:
-                            "email"
-
-                    });
-
-
-                if (error) {
-
-                    throw error;
-
-                }
-
-
-                const authenticatedEmail =
-                    normalizeEmail(
-                        data.user?.email ||
-                        ""
-                    );
-
-
-                /* SECOND security check */
-
-                if (
-                    !isAdmin(
-                        authenticatedEmail
-                    )
-                ) {
-
-                    await supabaseClient.auth.signOut();
-
-                    throw new Error(
-                        "This account is not authorized as a portfolio admin."
-                    );
-
-                }
-
-
-                showDashboard(
-                    authenticatedEmail
-                );
-
-
-            } catch (error) {
-
-                console.error(error);
-
-
-                showMessage(
-                    error.message ||
-                    "Invalid or expired OTP.",
-                    "error"
-                );
-
-            } finally {
-
-                verifyOtpButton.disabled =
-                    false;
-
-                verifyOtpButton.textContent =
-                    "VERIFY OTP";
-
-            }
-
-        }
-    );
-
-
-
-    /* =====================================================
-       CHANGE EMAIL
-    ===================================================== */
-
-    changeEmailButton.addEventListener(
-        "click",
-        function() {
-
-            loginEmail = "";
-
-            otpInput.value = "";
-
-            otpSection.classList.remove(
-                "show"
-            );
-
-            emailSection.style.display =
-                "block";
-
-            clearMessage();
-
-            emailInput.focus();
-
-        }
-    );
-
-
-
-    /* =====================================================
-       LOGOUT
-    ===================================================== */
-
-    logoutButton.addEventListener(
-        "click",
-        async function() {
-
-            await supabaseClient.auth.signOut();
-
-            loginEmail = "";
-
-            emailInput.value = "";
-
-            otpInput.value = "";
-
-            emailSection.style.display =
-                "block";
-
-            otpSection.classList.remove(
-                "show"
-
-            );
-
-            clearMessage();
-
-            showLogin();
-
-        }
-    );
-
-
-
-    /* =====================================================
-       AUTH STATE LISTENER
-    ===================================================== */
-
-    supabaseClient.auth.onAuthStateChange(
-        async function(event, session) {
-
-            if (
-                event === "SIGNED_OUT"
-            ) {
-
-                showLogin();
-
-                return;
-
-            }
-
-
-            if (
-                session &&
-                session.user
-            ) {
-
-                const email =
-                    normalizeEmail(
-                        session.user.email || ""
-                    );
-
-
-                if (
-                    isAdmin(email)
-                ) {
-
-                    showDashboard(
-                        email
-                    );
-
-                }
-
-            }
-
-        }
-    );
-
-
-
-
-    /* =====================================================
-       START
-    ===================================================== */
-
-    checkSession();
-
-</script>
-
-
-
-<script>
-const V4_DEFAULT_DATA={hero:{label:"ELECTRONICS & COMMUNICATION ENGINEERING",name:"Eeshwar",description:"I'm an Electronics and Communication Engineering student interested in Embedded Systems, IoT, electronics, hardware and software.",focusTitle:"Hardware × Software",focusDescription:"I enjoy learning how systems work and building practical projects that combine electronics, programming and real-world problem solving.",focusItems:["Embedded Systems","IoT & Connected Devices","Electronics & Hardware","Firmware & Programming"]},about:{paragraphs:["I'm an Electronics and Communication Engineering student interested in technology, electronics and building practical systems.","I enjoy working with both hardware and software and understanding how different parts of a system work together.","My interests include embedded systems, IoT, electronics, hardware development, programming and learning new technologies through practical work."],highlight:"I like learning by building, experimenting with ideas and turning concepts into useful working projects."},education:{degree:"B.E. / B.Tech in Electronics and Communication Engineering",college:"YOUR COLLEGE NAME",period:"YOUR START YEAR — PRESENT",description:"Currently pursuing Electronics and Communication Engineering with an interest in embedded systems, IoT, electronics, programming and hardware-software integration."},interests:["Embedded Systems","IoT","Electronics","Firmware","Hardware","Automation"],skills:[{title:"Programming",items:"C, C++, Python, Embedded C"},{title:"Embedded",items:"Arduino, ESP32, Microcontrollers, Sensors"},{title:"Hardware",items:"Digital Electronics, Circuit Design, UART, I2C, SPI"},{title:"IoT",items:"Connected Devices, MQTT, Sensor Systems, ESP32"},{title:"Tools",items:"Git, GitHub, VS Code, Arduino IDE"},{title:"Other",items:"Problem Solving, System Design, Prototyping, Learning"}],projects:[{number:"PROJECT 01",title:"Smart Agriculture",description:"An IoT-based smart agriculture system built using an ESP32 and Blynk. The system monitors temperature, humidity, soil moisture and light levels and uses a relay to control irrigation automatically when the soil becomes too dry.",technologies:"ESP32, Blynk, DHT22, Soil Sensor, LDR, IoT",url:"https://github.com/eeshwar18/SMART-AGRICULTURE",image:""},{number:"PROJECT 02",title:"Smart Arduino Car",description:"A sensor-based robotic car built using an Arduino UNO. It uses ultrasonic and IR sensors to detect obstacles and a servo motor to scan different directions while the Arduino controls the movement system.",technologies:"Arduino UNO, Embedded C/C++, Ultrasonic, IR Sensors, Servo, L298N",url:"https://github.com/eeshwar18/Smart-car-ARDUINO-",image:""},{number:"PROJECT 03",title:"Raspberry Pi Smart Car",description:"A Raspberry Pi Zero 2 W based robotic car designed for obstacle detection. An ultrasonic sensor mounted on a servo scans different directions while the Raspberry Pi processes the readings and controls the motors through an L298N driver.",technologies:"Raspberry Pi, Pi Zero 2 W, Python, Ultrasonic, Servo, L298N",url:"https://github.com/eeshwar18/Raspberry-car",image:""}],beyond:[{title:"What I Like To Work On",p1:"I enjoy working on practical ideas where electronics, programming and problem solving come together.",p2:"I like experimenting with hardware, learning how systems work and turning ideas into useful projects."},{title:"What I'm Learning",p1:"I'm continuously exploring new technologies and improving my understanding of embedded systems, IoT, electronics and programming.",p2:"I enjoy learning through practical projects and experimentation."}],resume:{title:"My Professional Resume",description:"View or download my latest resume.",path:"assets/resume.pdf"},contact:{description:"Have an idea, project, opportunity or simply want to connect? Send me a message.",email:"eeshwar182007@gmail.com",github:"https://github.com/eeshwar18",linkedin:"https://www.linkedin.com/"}};
-let D=structuredClone(V4_DEFAULT_DATA);
-let portfolioLoadedFromSupabase=false;
-let portfolioSaveBusy=false;
-const E=v=>String(v??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;");
-function inp(label,key,val,type="text"){return `<label class="f2label">${label}<input class="f2input" data-key="${key}" type="${type}" value="${E(val)}"></label>`}
-function area(label,key,val){return `<label class="f2label">${label}<textarea class="f2input f2area" data-key="${key}">${E(val)}</textarea></label>`}
-function setv(o,path,v){let a=path.split("."),x=o;for(let i=0;i<a.length-1;i++)x=x[a[i]];x[a.at(-1)]=v}
-function render(){let r=document.getElementById("fullV4Editor")||document.body.appendChild(Object.assign(document.createElement("div"),{id:"fullV4Editor"}));r.innerHTML=`<div class="f2box"><div class="f2head"><div><small>FULL V4 PORTFOLIO CMS</small><h1>Eeshwar Portfolio Editor</h1><p>Edit every editable section of your V4 portfolio. SAVE CHANGES publishes everything to Supabase without changing the working Projects system.</p></div><span id="f2status">Editor ready</span></div><div class="f2grid">
-<details class="f2panel" open><summary>🏠 Home / Hero</summary><div>${inp("Hero label","hero.label",D.hero.label)}${inp("Name","hero.name",D.hero.name)}${area("Hero description","hero.description",D.hero.description)}${inp("Focus title","hero.focusTitle",D.hero.focusTitle)}${area("Focus description","hero.focusDescription",D.hero.focusDescription)}${area("Focus items — one per line","hero.focusItems",D.hero.focusItems.join("\n"))}</div></details>
-<details class="f2panel"><summary>👤 About Me</summary><div>${area("Paragraph 1","about.paragraphs.0",D.about.paragraphs[0])}${area("Paragraph 2","about.paragraphs.1",D.about.paragraphs[1])}${area("Paragraph 3","about.paragraphs.2",D.about.paragraphs[2])}${area("Highlight","about.highlight",D.about.highlight)}</div></details>
-<details class="f2panel"><summary>🎓 Education</summary><div>${inp("Degree","education.degree",D.education.degree)}${inp("College","education.college",D.education.college)}${inp("Period","education.period",D.education.period)}${area("Description","education.description",D.education.description)}</div></details>
-<details class="f2panel"><summary>💡 Interests</summary><div id="f2interests">${D.interests.map((x,i)=>inp(`Interest ${i+1}`,`interests.${i}`,x)).join("")}</div><button class="f2small" onclick="addInterest();return false">+ ADD INTEREST</button></details>
-<details class="f2panel"><summary>🛠️ Skills</summary><div id="f2skills">${D.skills.map((x,i)=>`<div class="f2item">${inp("Group title",`skills.${i}.title`,x.title)}${area("Skills — comma separated",`skills.${i}.items`,x.items)}</div>`).join("")}</div><button class="f2small" onclick="addSkill();return false">+ ADD SKILL GROUP</button></details>
-<details class="f2panel" open><summary>🚀 Projects</summary><div id="f2projects">${D.projects.map((x,i)=>`<div class="f2item"><b>${E(x.number)}</b>${x.image?`<img class="f2preview" src="${x.image}">`:`<div class="f2placeholder">PROJECT IMAGE</div>`}<label class="f2label">Image<input class="f2input" type="file" accept="image/*" onchange="pickImage(event,${i})"></label>${inp("Project number",`projects.${i}.number`,x.number)}${inp("Title",`projects.${i}.title`,x.title)}${area("Description",`projects.${i}.description`,x.description)}${area("Technologies — comma separated",`projects.${i}.technologies`,x.technologies)}${inp("Project URL",`projects.${i}.url`,x.url,"url")}<button class="f2small danger" onclick="delProject(${i});return false">DELETE PROJECT</button></div>`).join("")}</div><button class="f2add" onclick="addProject();return false">+ ADD PROJECT</button></details>
-<details class="f2panel"><summary>🌐 Beyond Projects</summary><div id="f2beyond">${D.beyond.map((x,i)=>`<div class="f2item"><strong>Card ${i+1}</strong>${inp("Card title",`beyond.${i}.title`,x.title)}${area("Paragraph 1",`beyond.${i}.p1`,x.p1)}${area("Paragraph 2",`beyond.${i}.p2`,x.p2)}<button class="f2small danger" onclick="delBeyond(${i});return false">DELETE CARD</button></div>`).join("")}</div><button class="f2small" onclick="addBeyond();return false">+ ADD BEYOND CARD</button></details>
-<details class="f2panel"><summary>📄 Resume</summary><div>${inp("Resume title","resume.title",D.resume.title)}${area("Description","resume.description",D.resume.description)}${inp("Resume path","resume.path",D.resume.path)}</div></details>
-<details class="f2panel"><summary>📧 Contact</summary><div>${area("Description","contact.description",D.contact.description)}${inp("Email","contact.email",D.contact.email,"email")}${inp("GitHub","contact.github",D.contact.github,"url")}${inp("LinkedIn","contact.linkedin",D.contact.linkedin,"url")}</div></details></div><div class="f2save"><button onclick="saveDraft()">💾 SAVE CHANGES</button><button class="reset" onclick="resetDraft()">RESET</button><span id="f2msg">Ready. SAVE CHANGES publishes the portfolio data to Supabase.</span></div></div>`;bind()}
-function bind(){document.querySelectorAll("#fullV4Editor [data-key]").forEach(e=>e.oninput=()=>{let v=e.value;if(e.dataset.key.startsWith("hero.focusItems"))v=v.split("\n").filter(Boolean);if(e.dataset.key.includes(".items"))v=v.split(",").map(x=>x.trim()).filter(Boolean);setv(D,e.dataset.key,v);document.getElementById("f2status").textContent="Unsaved changes"})}
-async function loadPortfolioFromSupabase(){
-  try{
-    const {data,error}=await supabaseClient.from("portfolio_content").select("data").eq("id",1).maybeSingle();
-    if(error) throw error;
-    if(data && data.data && Object.keys(data.data).length){
-      D=structuredClone(data.data);
-      portfolioLoadedFromSupabase=true;
-      render();
-      document.getElementById("f2status").textContent="Loaded from Supabase";
-      document.getElementById("f2msg").textContent="Live portfolio data loaded.";
-    }else{
-      document.getElementById("f2status").textContent="Using V4 defaults";
-      document.getElementById("f2msg").textContent="Save once to create your Supabase portfolio data.";
     }
-  }catch(error){
-    console.error("Portfolio load error:",error);
-    document.getElementById("f2status").textContent="Database not connected";
-    document.getElementById("f2msg").textContent="Run the Step 3 SQL in Supabase, then reload.";
-  }
-}
 
-function dataUrlToBlob(dataUrl){
-  const parts=dataUrl.split(",");
-  const mimeMatch=parts[0].match(/data:(.*?);base64/);
-  const mime=mimeMatch?mimeMatch[1]:"image/jpeg";
-  const binary=atob(parts[1]);
-  const bytes=new Uint8Array(binary.length);
-  for(let i=0;i<binary.length;i++) bytes[i]=binary.charCodeAt(i);
-  return {blob:new Blob([bytes],{type:mime}),mime};
-}
 
-async function uploadProjectImage(dataUrl,index){
-  const {blob,mime}=dataUrlToBlob(dataUrl);
-  const ext=(mime.split("/")[1]||"jpg").replace("jpeg","jpg");
-  const path=`projects/${crypto.randomUUID()}.${ext}`;
+    D =
+        structuredClone(
+            V4_DEFAULT_DATA
+        );
 
-  const {error}=await supabaseClient.storage.from("portfolio-images").upload(
-    path,blob,{contentType:mime,upsert:false}
-  );
-  if(error) throw error;
 
-  const {data}=supabaseClient.storage.from("portfolio-images").getPublicUrl(path);
-  D.projects[index].image=data.publicUrl;
-}
-
-async function prepareProjectImages(){
-  for(let i=0;i<D.projects.length;i++){
-    const image=D.projects[i].image||"";
-    if(image.startsWith("data:image/")) await uploadProjectImage(image,i);
-  }
-}
-
-async function saveDraft(){
-  if(portfolioSaveBusy) return;
-  portfolioSaveBusy=true;
-
-  const saveButton=document.querySelector(".f2save button:first-child");
-  if(saveButton){saveButton.disabled=true;saveButton.textContent="SAVING...";}
-
-  document.getElementById("f2status").textContent="Saving...";
-  document.getElementById("f2msg").textContent="Uploading images and saving portfolio...";
-
-  try{
-    const {data:userData,error:userError}=await supabaseClient.auth.getUser();
-    if(userError || !userData?.user) throw new Error("Your admin session has expired. Please log in again.");
-
-    const email=normalizeEmail(userData.user.email||"");
-    if(!isAdmin(email)) throw new Error("You are not authorized to save this portfolio.");
-
-    await prepareProjectImages();
-
-    const {error}=await supabaseClient.from("portfolio_content").upsert({
-      id:1,
-      data:D,
-      updated_at:new Date().toISOString(),
-      updated_by:userData.user.id
-    },{onConflict:"id"});
-
-    if(error) throw error;
-
-    portfolioLoadedFromSupabase=true;
-    localStorage.setItem("eeshwar_v4_last_saved_backup",JSON.stringify(D));
     render();
 
-    document.getElementById("f2status").textContent="✓ SAVED TO SUPABASE";
-    document.getElementById("f2msg").textContent="Saved successfully. Refresh your live portfolio to see the changes.";
-  }catch(error){
-    console.error("Portfolio save error:",error);
-    document.getElementById("f2status").textContent="Save failed";
-    document.getElementById("f2msg").textContent=error.message||"Could not save portfolio.";
-    alert("Save failed:\n\n"+(error.message||"Unknown error"));
-  }finally{
-    portfolioSaveBusy=false;
-    const btn=document.querySelector(".f2save button:first-child");
-    if(btn){btn.disabled=false;btn.textContent="💾 SAVE CHANGES";}
-  }
+
+    const status =
+        document.getElementById(
+            "f2status"
+        );
+
+
+    const msg =
+        document.getElementById(
+            "f2msg"
+        );
+
+
+    if (status) {
+
+        status.textContent =
+            "Default content loaded";
+
+    }
+
+
+    if (msg) {
+
+        msg.textContent =
+            "Defaults loaded locally. Press SAVE CHANGES to publish them.";
+
+    }
+
 }
-function resetDraft(){if(confirm("Reset all editor content to the original V4 content?")){localStorage.removeItem("eeshwar_v4_full_draft");D=structuredClone(V4_DEFAULT_DATA);render()}}
-function addInterest(){D.interests.push("New Interest");render()}
-function addSkill(){D.skills.push({title:"New Skill Group",items:"New Skill"});render()}
-function addBeyond(){D.beyond.push({title:"New Section",p1:"Write the first paragraph here.",p2:"Write the second paragraph here."});render()}
-function delBeyond(i){if(confirm("Delete this Beyond Projects card?")){D.beyond.splice(i,1);render()}}
-function addProject(){let n=String(D.projects.length+1).padStart(2,"0");D.projects.push({number:`PROJECT ${n}`,title:"New Project",description:"Describe your project here.",technologies:"ESP32, Arduino",url:"",image:""});render()}
-function delProject(i){if(confirm("Delete this project?")){D.projects.splice(i,1);render()}}
-function pickImage(e,i){let f=e.target.files[0];if(!f)return;if(!f.type.startsWith("image/"))return alert("Choose an image file.");let rd=new FileReader();rd.onload=()=>{D.projects[i].image=rd.result;render()};rd.readAsDataURL(f)}
-document.addEventListener("DOMContentLoaded",render);
+
+
+/* =====================================================
+   ADD INTEREST
+===================================================== */
+
+function addInterest() {
+
+    collectEditorValues();
+
+
+    D.interests.push(
+        "New Interest"
+    );
+
+
+    render();
+
+}
+
+
+/* =====================================================
+   DELETE INTEREST
+===================================================== */
+
+function delInterest(index) {
+
+    collectEditorValues();
+
+
+    if (
+        !D.interests[index]
+    ) {
+
+        return;
+
+    }
+
+
+    if (
+        !confirm(
+            `Delete "${D.interests[index]}"?`
+        )
+    ) {
+
+        return;
+
+    }
+
+
+    D.interests.splice(
+        index,
+        1
+    );
+
+
+    render();
+
+}
+
+
+/* =====================================================
+   ADD SKILL
+===================================================== */
+
+function addSkill() {
+
+    collectEditorValues();
+
+
+    D.skills.push({
+
+        title:
+            "New Skill Group",
+
+        items:
+            "New Skill"
+
+    });
+
+
+    render();
+
+}
+
+
+/* =====================================================
+   DELETE SKILL
+===================================================== */
+
+function delSkill(index) {
+
+    collectEditorValues();
+
+
+    if (
+        !D.skills[index]
+    ) {
+
+        return;
+
+    }
+
+
+    if (
+        !confirm(
+            `Delete the "${D.skills[index].title}" skill group?`
+        )
+    ) {
+
+        return;
+
+    }
+
+
+    D.skills.splice(
+        index,
+        1
+    );
+
+
+    render();
+
+}
+
+
+/* =====================================================
+   ADD BEYOND
+===================================================== */
+
+function addBeyond() {
+
+    collectEditorValues();
+
+
+    D.beyond.push({
+
+        title:
+            "New Section",
+
+        p1:
+            "Write the first paragraph here.",
+
+        p2:
+            "Write the second paragraph here."
+
+    });
+
+
+    render();
+
+}
+
+
+/* =====================================================
+   DELETE BEYOND
+===================================================== */
+
+function delBeyond(index) {
+
+    collectEditorValues();
+
+
+    if (
+        !D.beyond[index]
+    ) {
+
+        return;
+
+    }
+
+
+    if (
+        !confirm(
+            `Delete "${D.beyond[index].title}"?`
+        )
+    ) {
+
+        return;
+
+    }
+
+
+    D.beyond.splice(
+        index,
+        1
+    );
+
+
+    render();
+
+}
+
+
+/* =====================================================
+   ADD PROJECT
+===================================================== */
+
+function addProject() {
+
+    collectEditorValues();
+
+
+    const number =
+        String(
+            D.projects.length + 1
+        ).padStart(
+            2,
+            "0"
+        );
+
+
+    D.projects.push({
+
+        number:
+            `PROJECT ${number}`,
+
+        title:
+            "New Project",
+
+        description:
+            "Describe your project here.",
+
+        technologies:
+            "ESP32, Arduino",
+
+        url:
+            "",
+
+        image:
+            ""
+
+    });
+
+
+    render();
+
+}
+
+
+/* =====================================================
+   DELETE PROJECT
+===================================================== */
+
+function delProject(index) {
+
+    collectEditorValues();
+
+
+    if (
+        !D.projects[index]
+    ) {
+
+        return;
+
+    }
+
+
+    if (
+        !confirm(
+            `Delete "${D.projects[index].title}"?`
+        )
+    ) {
+
+        return;
+
+    }
+
+
+    D.projects.splice(
+        index,
+        1
+    );
+
+
+    render();
+
+}
+
+
+/* =====================================================
+   PICK PROJECT IMAGE
+===================================================== */
+
+function pickImage(
+    event,
+    index
+) {
+
+    const file =
+        event.target.files[0];
+
+
+    if (!file) {
+
+        return;
+
+    }
+
+
+    if (
+        !file.type.startsWith(
+            "image/"
+        )
+    ) {
+
+        alert(
+            "Please choose an image file."
+        );
+
+        return;
+
+    }
+
+
+    if (
+        file.size >
+        8 * 1024 * 1024
+    ) {
+
+        alert(
+            "Please choose an image smaller than 8MB."
+        );
+
+        return;
+
+    }
+
+
+    const reader =
+        new FileReader();
+
+
+    reader.onload =
+        function() {
+
+            D.projects[index].image =
+                reader.result;
+
+
+            render();
+
+
+            const status =
+                document.getElementById(
+                    "f2status"
+                );
+
+
+            const msg =
+                document.getElementById(
+                    "f2msg"
+                );
+
+
+            if (status) {
+
+                status.textContent =
+                    "Project image selected";
+
+            }
+
+
+            if (msg) {
+
+                msg.textContent =
+                    "Image is ready. Press SAVE CHANGES to upload it.";
+
+            }
+
+        };
+
+
+    reader.readAsDataURL(
+        file
+    );
+
+}
+
+
+/* =====================================================
+   INITIAL EDITOR
+===================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        render();
+
+    }
+);
+
 </script>
+
+
 <style>
-#fullV4Editor{width:min(1180px,calc(100% - 24px));margin:70px auto 100px;font-family:Inter,"Segoe UI",Arial,sans-serif;color:#f2fbff}.f2box{padding:30px;border:1px solid rgba(85,232,255,.18);border-radius:22px;background:linear-gradient(145deg,#071219,#03080d);box-shadow:0 25px 70px #0008}.f2head{display:flex;justify-content:space-between;gap:20px;margin-bottom:25px}.f2head small{color:#55e8ff;font-weight:800;letter-spacing:.15em}.f2head h1{margin:8px 0;font-size:clamp(32px,5vw,55px);letter-spacing:-.05em}.f2head p{color:#78919b;font-size:14px}.f2head span{padding:9px 12px;border:1px solid #55e8ff33;border-radius:8px;color:#55e8ff;font-size:11px;height:max-content;white-space:nowrap}.f2grid{display:grid;gap:14px}.f2panel{border:1px solid #55e8ff24;border-radius:15px;background:#091720;overflow:hidden}.f2panel summary{padding:18px 20px;cursor:pointer;font-weight:800}.f2panel summary:hover{color:#55e8ff}.f2panel>div{padding:0 20px 20px}.f2label{display:block;margin-top:15px;color:#c8dbe1;font-size:11px;font-weight:800}.f2input{width:100%;margin-top:7px;padding:12px 13px;border:1px solid #55e8ff24;border-radius:8px;outline:0;background:#03080d;color:#f2fbff;font-size:13px}.f2input:focus{border-color:#55e8ff77}.f2area{min-height:105px;resize:vertical}.f2item{margin-top:14px;padding:17px;border:1px solid #55e8ff1a;border-radius:12px;background:#55e8ff06}.f2preview,.f2placeholder{width:100%;min-height:180px;margin-top:14px;border-radius:10px}.f2preview{display:block;max-height:360px;object-fit:cover}.f2placeholder{display:flex;align-items:center;justify-content:center;border:1px dashed #55e8ff2e;color:#526b74;background:#03080d;font-size:11px}.f2small,.f2add,.f2save button{margin-top:14px;padding:10px 14px;border:1px solid #55e8ff33;border-radius:8px;background:#55e8ff0b;color:#55e8ff;cursor:pointer;font-weight:800;font-size:11px}.f2add{width:100%;min-height:48px}.danger{color:#ff9b9b;border-color:#ff646433}.f2save{position:sticky;bottom:12px;z-index:20;display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:24px;padding:14px;border:1px solid #fff2;border-radius:14px;background:#050e14e8;backdrop-filter:blur(18px)}.f2save button:first-child{margin:0;background:#55e8ff;color:#001017;border-color:#55e8ff;padding:13px 18px}.f2save .reset{margin:0}.f2save span{color:#78919b;font-size:11px}@media(max-width:700px){#fullV4Editor{width:calc(100% - 14px);margin-top:45px}.f2box{padding:18px}.f2head{flex-direction:column}.f2save{bottom:7px}}
+
+/* =====================================================
+   EDITOR
+===================================================== */
+
+#fullV4Editor {
+
+    width:
+        min(1180px, calc(100% - 24px));
+
+    margin:
+        70px auto 100px;
+
+    font-family:
+        Inter,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    color:
+        #f2fbff;
+}
+
+
+.f2box {
+
+    padding:
+        30px;
+
+    border:
+        1px solid
+        rgba(85,232,255,.18);
+
+    border-radius:
+        22px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #071219,
+            #03080d
+        );
+
+    box-shadow:
+        0 25px 70px
+        #0008;
+}
+
+
+.f2head {
+
+    display:
+        flex;
+
+    justify-content:
+        space-between;
+
+    gap:
+        20px;
+
+    margin-bottom:
+        25px;
+}
+
+
+.f2head small {
+
+    color:
+        #55e8ff;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        .15em;
+}
+
+
+.f2head h1 {
+
+    margin:
+        8px 0;
+
+    font-size:
+        clamp(32px,5vw,55px);
+
+    letter-spacing:
+        -.05em;
+}
+
+
+.f2head p {
+
+    color:
+        #78919b;
+
+    font-size:
+        14px;
+}
+
+
+.f2head span {
+
+    padding:
+        9px 12px;
+
+    border:
+        1px solid
+        #55e8ff33;
+
+    border-radius:
+        8px;
+
+    color:
+        #55e8ff;
+
+    font-size:
+        11px;
+
+    height:
+        max-content;
+
+    white-space:
+        nowrap;
+}
+
+
+.f2grid {
+
+    display:
+        grid;
+
+    gap:
+        14px;
+}
+
+
+.f2panel {
+
+    border:
+        1px solid
+        #55e8ff24;
+
+    border-radius:
+        15px;
+
+    background:
+        #091720;
+
+    overflow:
+        hidden;
+}
+
+
+.f2panel summary {
+
+    padding:
+        18px 20px;
+
+    cursor:
+        pointer;
+
+    font-weight:
+        800;
+}
+
+
+.f2panel summary:hover {
+
+    color:
+        #55e8ff;
+}
+
+
+.f2panel > div {
+
+    padding:
+        0 20px 20px;
+}
+
+
+.f2label {
+
+    display:
+        block;
+
+    margin-top:
+        15px;
+
+    color:
+        #c8dbe1;
+
+    font-size:
+        11px;
+
+    font-weight:
+        800;
+}
+
+
+.f2input {
+
+    width:
+        100%;
+
+    margin-top:
+        7px;
+
+    padding:
+        12px 13px;
+
+    border:
+        1px solid
+        #55e8ff24;
+
+    border-radius:
+        8px;
+
+    outline:
+        0;
+
+    background:
+        #03080d;
+
+    color:
+        #f2fbff;
+
+    font-size:
+        13px;
+}
+
+
+.f2input:focus {
+
+    border-color:
+        #55e8ff77;
+}
+
+
+.f2area {
+
+    min-height:
+        105px;
+
+    resize:
+        vertical;
+}
+
+
+.f2item {
+
+    margin-top:
+        14px;
+
+    padding:
+        17px;
+
+    border:
+        1px solid
+        #55e8ff1a;
+
+    border-radius:
+        12px;
+
+    background:
+        #55e8ff06;
+}
+
+
+.f2preview,
+.f2placeholder {
+
+    width:
+        100%;
+
+    min-height:
+        180px;
+
+    margin-top:
+        14px;
+
+    border-radius:
+        10px;
+}
+
+
+.f2preview {
+
+    display:
+        block;
+
+    max-height:
+        360px;
+
+    object-fit:
+        cover;
+}
+
+
+.f2placeholder {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    border:
+        1px dashed
+        #55e8ff2e;
+
+    color:
+        #526b74;
+
+    background:
+        #03080d;
+
+    font-size:
+        11px;
+}
+
+
+.f2small,
+.f2add,
+.f2save button {
+
+    margin-top:
+        14px;
+
+    padding:
+        10px 14px;
+
+    border:
+        1px solid
+        #55e8ff33;
+
+    border-radius:
+        8px;
+
+    background:
+        #55e8ff0b;
+
+    color:
+        #55e8ff;
+
+    cursor:
+        pointer;
+
+    font-weight:
+        800;
+
+    font-size:
+        11px;
+}
+
+
+.f2small:hover,
+.f2add:hover {
+
+    background:
+        #55e8ff18;
+}
+
+
+.f2small:disabled,
+.f2save button:disabled {
+
+    opacity:
+        .5;
+
+    cursor:
+        not-allowed;
+}
+
+
+.f2add {
+
+    width:
+        100%;
+
+    min-height:
+        48px;
+}
+
+
+.danger {
+
+    color:
+        #ff9b9b;
+
+    border-color:
+        #ff646433;
+}
+
+
+.danger:hover {
+
+    background:
+        #ff64640d;
+
+    border-color:
+        #ff646466;
+}
+
+
+.f2empty {
+
+    margin-top:
+        14px;
+
+    padding:
+        18px;
+
+    border:
+        1px dashed
+        #55e8ff2e;
+
+    border-radius:
+        10px;
+
+    color:
+        #78919b;
+
+    text-align:
+        center;
+
+    font-size:
+        12px;
+}
+
+
+.f2save {
+
+    position:
+        sticky;
+
+    bottom:
+        12px;
+
+    z-index:
+        20;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        10px;
+
+    flex-wrap:
+        wrap;
+
+    margin-top:
+        24px;
+
+    padding:
+        14px;
+
+    border:
+        1px solid
+        #fff2;
+
+    border-radius:
+        14px;
+
+    background:
+        #050e14e8;
+
+    backdrop-filter:
+        blur(18px);
+}
+
+
+.f2save button:first-child {
+
+    margin:
+        0;
+
+    background:
+        #55e8ff;
+
+    color:
+        #001017;
+
+    border-color:
+        #55e8ff;
+
+    padding:
+        13px 18px;
+}
+
+
+.f2save button:first-child:hover {
+
+    background:
+        #8af1ff;
+}
+
+
+.f2save .reset {
+
+    margin:
+        0;
+}
+
+
+.f2save span {
+
+    color:
+        #78919b;
+
+    font-size:
+        11px;
+}
+
+
+@media(max-width:700px) {
+
+    #fullV4Editor {
+
+        width:
+            calc(100% - 14px);
+
+        margin-top:
+            45px;
+
+    }
+
+
+    .f2box {
+
+        padding:
+            18px;
+
+    }
+
+
+    .f2head {
+
+        flex-direction:
+            column;
+
+    }
+
+
+    .f2save {
+
+        bottom:
+            7px;
+
+    }
+
+}
+
 </style>
 
 </body>
