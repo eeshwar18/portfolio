@@ -1,8 +1,8 @@
 (function () {
 
-    // ============================================================
-    // SUPABASE CONFIG
-    // ============================================================
+    /* ============================================================
+       SUPABASE CONFIG
+    ============================================================ */
 
     const SUPABASE_URL =
         "https://kwnzxflncwmtpvisnhkb.supabase.co";
@@ -11,9 +11,9 @@
         "sb_publishable_ZcTkgrlSgTXQ4_Q5Y6eLIg_a8s4UcSk";
 
 
-    // ============================================================
-    // HELPER
-    // ============================================================
+    /* ============================================================
+       ESCAPE HTML
+    ============================================================ */
 
     function escapeHTML(value) {
 
@@ -27,17 +27,13 @@
     }
 
 
-    // ============================================================
-    // LOAD PORTFOLIO
-    // ============================================================
+    /* ============================================================
+       SUPABASE
+    ============================================================ */
 
     async function loadPortfolio() {
 
         try {
-
-            // ----------------------------------------------------
-            // CHECK SUPABASE
-            // ----------------------------------------------------
 
             if (!window.supabase) {
 
@@ -46,12 +42,9 @@
                 );
 
                 return;
+
             }
 
-
-            // ----------------------------------------------------
-            // CREATE CLIENT
-            // ----------------------------------------------------
 
             const supabase =
                 window.supabase.createClient(
@@ -60,9 +53,9 @@
                 );
 
 
-            // ----------------------------------------------------
-            // GET PORTFOLIO DATA
-            // ----------------------------------------------------
+            /* ====================================================
+               GET DATA
+            ==================================================== */
 
             const {
                 data,
@@ -82,16 +75,18 @@
                 );
 
                 return;
+
             }
 
 
             if (!data || !data.data) {
 
                 console.warn(
-                    "No portfolio data found in Supabase."
+                    "No portfolio data found."
                 );
 
                 return;
+
             }
 
 
@@ -99,9 +94,9 @@
                 data.data;
 
 
-            // ====================================================
-            // SHORTCUTS
-            // ====================================================
+            /* ====================================================
+               HELPERS
+            ==================================================== */
 
             const get =
                 selector =>
@@ -113,15 +108,14 @@
                     document.querySelectorAll(selector);
 
 
-            // ====================================================
-            // HERO
-            // ====================================================
+            /* ====================================================
+               HERO
+            ==================================================== */
 
             if (get(".hero-label")) {
 
                 get(".hero-label").textContent =
-                    portfolio.hero?.label ||
-                    "ELECTRONICS & COMMUNICATION ENGINEERING";
+                    portfolio.hero?.label || "";
 
             }
 
@@ -131,10 +125,9 @@
                 get(".hero h1").innerHTML =
                     `Hi, I'm
                     <span class="cyan">
-                        ${escapeHTML(
-                            portfolio.hero?.name ||
-                            "Eeshwar"
-                        )}.
+                    ${escapeHTML(
+                        portfolio.hero?.name || "Eeshwar"
+                    )}.
                     </span>`;
 
             }
@@ -143,8 +136,7 @@
             if (get(".hero-description")) {
 
                 get(".hero-description").textContent =
-                    portfolio.hero?.description ||
-                    "";
+                    portfolio.hero?.description || "";
 
             }
 
@@ -152,8 +144,7 @@
             if (get(".hero-card h2")) {
 
                 get(".hero-card h2").textContent =
-                    portfolio.hero?.focusTitle ||
-                    "";
+                    portfolio.hero?.focusTitle || "";
 
             }
 
@@ -161,8 +152,7 @@
             if (get(".hero-card p")) {
 
                 get(".hero-card p").textContent =
-                    portfolio.hero?.focusDescription ||
-                    "";
+                    portfolio.hero?.focusDescription || "";
 
             }
 
@@ -170,43 +160,33 @@
             if (get(".focus-list")) {
 
                 const items =
-                    portfolio.hero?.focusItems ||
-                    [];
-
+                    portfolio.hero?.focusItems || [];
 
                 get(".focus-list").innerHTML =
                     items
                         .map(
                             item =>
-                                `<li>
-                                    ${escapeHTML(item)}
-                                </li>`
+                                `<li>${escapeHTML(item)}</li>`
                         )
                         .join("");
 
             }
 
 
-
-            // ====================================================
-            // ABOUT
-            // ====================================================
+            /* ====================================================
+               ABOUT
+            ==================================================== */
 
             const aboutParagraphs =
-                getAll(
-                    ".about-content > p"
-                );
+                getAll(".about-content > p");
 
 
             (
-                portfolio.about?.paragraphs ||
-                []
+                portfolio.about?.paragraphs || []
             ).forEach(
                 (paragraph, index) => {
 
-                    if (
-                        aboutParagraphs[index]
-                    ) {
+                    if (aboutParagraphs[index]) {
 
                         aboutParagraphs[index]
                             .textContent =
@@ -222,26 +202,20 @@
 
                 get(".about-highlight")
                     .textContent =
-                    portfolio.about?.highlight ||
-                    "";
+                    portfolio.about?.highlight || "";
 
             }
 
 
+            /* ====================================================
+               EDUCATION
+            ==================================================== */
 
-            // ====================================================
-            // EDUCATION
-            // ====================================================
+            if (get(".education-card h3")) {
 
-            if (
                 get(".education-card h3")
-            ) {
-
-                get(
-                    ".education-card h3"
-                ).textContent =
-                    portfolio.education?.degree ||
-                    "";
+                    .textContent =
+                    portfolio.education?.degree || "";
 
             }
 
@@ -250,8 +224,7 @@
 
                 get(".college-name")
                     .textContent =
-                    portfolio.education?.college ||
-                    "";
+                    portfolio.education?.college || "";
 
             }
 
@@ -260,145 +233,108 @@
 
                 get(".college-period")
                     .textContent =
-                    portfolio.education?.period ||
-                    "";
+                    portfolio.education?.period || "";
 
             }
 
 
-            if (
+            if (get(".education-card p")) {
+
                 get(".education-card p")
-            ) {
-
-                get(
-                    ".education-card p"
-                ).textContent =
-                    portfolio.education?.description ||
-                    "";
+                    .textContent =
+                    portfolio.education?.description || "";
 
             }
 
 
+            /* ====================================================
+               INTERESTS
+               
+               IMPORTANT:
+               This now dynamically creates the cards.
+               ==================================================== */
 
-            // ====================================================
-            // INTERESTS
-            // ====================================================
-
-            const interestTitles =
-                getAll(
-                    ".interest-card h3"
-                );
+            const interestContainer =
+                get(".interests-grid") ||
+                get(".interests-list");
 
 
-            (
-                portfolio.interests ||
-                []
-            ).forEach(
-                (interest, index) => {
+            if (interestContainer) {
 
-                    if (
-                        interestTitles[index]
-                    ) {
+                const interests =
+                    portfolio.interests || [];
 
-                        interestTitles[index]
-                            .textContent =
-                            interest;
+
+                interestContainer.innerHTML =
+                    interests
+                        .map(
+                            interest => `
+                                <article class="interest-card">
+
+                                    <h3>
+                                        ${escapeHTML(
+                                            interest
+                                        )}
+                                    </h3>
+
+                                </article>
+                            `
+                        )
+                        .join("");
+
+            }
+            else {
+
+                /* Fallback for existing HTML */
+
+                const interestTitles =
+                    getAll(".interest-card h3");
+
+
+                (
+                    portfolio.interests || []
+                ).forEach(
+                    (interest, index) => {
+
+                        if (interestTitles[index]) {
+
+                            interestTitles[index]
+                                .textContent =
+                                interest;
+
+                        }
 
                     }
-
-                }
-            );
-
-
-
-            // ====================================================
-            // SKILLS
-            // ====================================================
-            //
-            // IMPORTANT:
-            //
-            // The old code could ONLY update the skill groups
-            // already present in the HTML.
-            //
-            // This version dynamically creates the skill groups
-            // from the Supabase data.
-            //
-            // ====================================================
-
-            const savedSkills =
-                Array.isArray(portfolio.skills)
-                    ? portfolio.skills
-                    : [];
-
-
-            const existingSkillGroups =
-                getAll(".skill-group");
-
-
-            let skillsContainer = null;
-
-
-            // Find the existing parent container.
-
-            if (
-                existingSkillGroups.length > 0
-            ) {
-
-                skillsContainer =
-                    existingSkillGroups[0].parentElement;
+                );
 
             }
 
 
-            // Fallbacks in case the original HTML uses
-            // a different structure.
+            /* ====================================================
+               SKILLS
+               
+               IMPORTANT:
+               This dynamically creates all skill groups.
+               ==================================================== */
 
-            if (!skillsContainer) {
-
-                skillsContainer =
-                    get(".skills-grid");
-
-            }
-
-
-            if (!skillsContainer) {
-
-                skillsContainer =
-                    get(".skills-container");
-
-            }
+            const skillsContainer =
+                get(".skills-grid") ||
+                get(".skills-container") ||
+                get(".skills-list");
 
 
-            if (!skillsContainer) {
+            if (skillsContainer) {
 
-                skillsContainer =
-                    get(".skills-content");
+                const skills =
+                    portfolio.skills || [];
 
-            }
-
-
-            if (
-                skillsContainer &&
-                savedSkills.length
-            ) {
 
                 skillsContainer.innerHTML =
-                    savedSkills
+                    skills
                         .map(
                             skill => {
 
                                 let items;
-
-
-                                // ------------------------------------------------
-                                // Support both:
-                                //
-                                // items: ["C", "C++", "Python"]
-                                //
-                                // and:
-                                //
-                                // items: "C, C++, Python"
-                                // ------------------------------------------------
 
                                 if (
                                     Array.isArray(
@@ -409,33 +345,32 @@
                                     items =
                                         skill.items;
 
-                                } else {
+                                }
+                                else {
 
                                     items =
                                         String(
-                                            skill.items ||
-                                            ""
+                                            skill.items || ""
                                         )
-                                            .split(",")
-                                            .map(
-                                                item =>
-                                                    item.trim()
-                                            )
-                                            .filter(
-                                                Boolean
-                                            );
+                                        .split(",")
+                                        .map(
+                                            item =>
+                                                item.trim()
+                                        )
+                                        .filter(Boolean);
 
                                 }
 
 
                                 return `
 
-                                    <div class="skill-group">
+                                    <article
+                                        class="skill-group"
+                                    >
 
                                         <h3>
                                             ${escapeHTML(
-                                                skill.title ||
-                                                ""
+                                                skill.title
                                             )}
                                         </h3>
 
@@ -456,7 +391,7 @@
 
                                         </ul>
 
-                                    </div>
+                                    </article>
 
                                 `;
 
@@ -465,37 +400,95 @@
                         .join("");
 
             }
+            else {
+
+                /* Fallback */
+
+                const skillGroups =
+                    getAll(".skill-group");
 
 
-            // If all skill groups were deleted,
-            // clear the existing container.
+                (
+                    portfolio.skills || []
+                ).forEach(
+                    (skill, index) => {
 
-            if (
-                skillsContainer &&
-                savedSkills.length === 0
-            ) {
+                        if (!skillGroups[index]) {
 
-                skillsContainer.innerHTML = "";
+                            return;
+
+                        }
+
+
+                        const title =
+                            skillGroups[index]
+                                .querySelector("h3");
+
+
+                        const list =
+                            skillGroups[index]
+                                .querySelector(
+                                    ".skill-list"
+                                );
+
+
+                        if (title) {
+
+                            title.textContent =
+                                skill.title || "";
+
+                        }
+
+
+                        if (list) {
+
+                            const items =
+                                Array.isArray(
+                                    skill.items
+                                )
+                                ? skill.items
+                                : String(
+                                    skill.items || ""
+                                )
+                                .split(",")
+                                .map(
+                                    x => x.trim()
+                                )
+                                .filter(Boolean);
+
+
+                            list.innerHTML =
+                                items
+                                    .map(
+                                        item =>
+                                            `<li>
+                                                ${escapeHTML(item)}
+                                            </li>`
+                                    )
+                                    .join("");
+
+                        }
+
+                    }
+                );
 
             }
 
 
-
-            // ====================================================
-            // PROJECTS
-            // ====================================================
+            /* ====================================================
+               PROJECTS
+               
+               KEEPING YOUR WORKING PROJECT SYSTEM
+               ==================================================== */
 
             const projectsGrid =
-                get(
-                    ".projects-grid"
-                );
+                get(".projects-grid");
 
 
             if (projectsGrid) {
 
                 const projects =
-                    portfolio.projects ||
-                    [];
+                    portfolio.projects || [];
 
 
                 projectsGrid.innerHTML =
@@ -507,84 +500,77 @@
                                     Array.isArray(
                                         project.technologies
                                     )
-                                        ? project.technologies
-                                        : String(
-                                            project.technologies ||
-                                            ""
-                                        )
-                                            .split(",")
-                                            .map(
-                                                item =>
-                                                    item.trim()
-                                            )
-                                            .filter(
-                                                Boolean
-                                            );
+                                    ? project.technologies
+                                    : String(
+                                        project.technologies || ""
+                                    )
+                                    .split(",")
+                                    .map(
+                                        item =>
+                                            item.trim()
+                                    )
+                                    .filter(Boolean);
 
 
                                 const imageHTML =
                                     project.image
-                                        ? `
-                                            <div
-                                                class="project-image-wrap"
+                                    ? `
+                                        <div
+                                            class="project-image-wrap"
+                                            style="
+                                                width:100%;
+                                                margin-bottom:20px;
+                                                overflow:hidden;
+                                                border-radius:12px;
+                                                border:1px solid rgba(85,232,255,0.12);
+                                            "
+                                        >
+
+                                            <img
+                                                class="project-image"
+                                                src="${escapeHTML(
+                                                    project.image
+                                                )}"
+                                                alt="${escapeHTML(
+                                                    project.title ||
+                                                    "Project image"
+                                                )}"
                                                 style="
                                                     width:100%;
-                                                    margin-bottom:20px;
-                                                    overflow:hidden;
-                                                    border-radius:12px;
-                                                    border:1px solid rgba(85,232,255,0.12);
+                                                    height:210px;
+                                                    object-fit:cover;
+                                                    display:block;
                                                 "
                                             >
 
-                                                <img
-                                                    class="project-image"
-                                                    src="${escapeHTML(
-                                                        project.image
-                                                    )}"
-                                                    alt="${escapeHTML(
-                                                        project.title ||
-                                                        "Project image"
-                                                    )}"
-                                                    style="
-                                                        width:100%;
-                                                        height:210px;
-                                                        object-fit:cover;
-                                                        display:block;
-                                                    "
-                                                >
-
-                                            </div>
-                                        `
-                                        : "";
+                                        </div>
+                                    `
+                                    : "";
 
 
-                                const projectNumber =
+                                const number =
                                     project.number ||
                                     `PROJECT ${
-                                        String(
-                                            index + 1
-                                        ).padStart(
-                                            2,
-                                            "0"
-                                        )
+                                        String(index + 1)
+                                            .padStart(2, "0")
                                     }`;
 
 
-                                const projectLink =
+                                const link =
                                     project.url
-                                        ? `
-                                            <a
-                                                href="${escapeHTML(
-                                                    project.url
-                                                )}"
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                class="project-link"
-                                            >
-                                                View Project →
-                                            </a>
-                                        `
-                                        : "";
+                                    ? `
+                                        <a
+                                            href="${escapeHTML(
+                                                project.url
+                                            )}"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            class="project-link"
+                                        >
+                                            View Project →
+                                        </a>
+                                    `
+                                    : "";
 
 
                                 return `
@@ -595,15 +581,13 @@
 
                                         ${imageHTML}
 
-
                                         <div
                                             class="project-number"
                                         >
                                             ${escapeHTML(
-                                                projectNumber
+                                                number
                                             )}
                                         </div>
-
 
                                         <h3>
                                             ${escapeHTML(
@@ -611,13 +595,11 @@
                                             )}
                                         </h3>
 
-
                                         <p>
                                             ${escapeHTML(
                                                 project.description
                                             )}
                                         </p>
-
 
                                         <div
                                             class="project-tags"
@@ -638,8 +620,7 @@
 
                                         </div>
 
-
-                                        ${projectLink}
+                                        ${link}
 
                                     </article>
 
@@ -652,79 +633,27 @@
             }
 
 
+            /* ====================================================
+               BEYOND PROJECTS
+               
+               IMPORTANT:
+               Dynamically creates/deletes cards on the live site.
+               ==================================================== */
 
-            // ====================================================
-            // BEYOND PROJECTS
-            // ====================================================
-            //
-            // IMPORTANT:
-            //
-            // The old code could ONLY update existing
-            // .beyond-card elements.
-            //
-            // This version dynamically creates and deletes
-            // Beyond Project cards based on Supabase.
-            //
-            // ====================================================
-
-            const savedBeyond =
-                Array.isArray(portfolio.beyond)
-                    ? portfolio.beyond
-                    : [];
+            const beyondContainer =
+                get(".beyond-grid") ||
+                get(".beyond-projects-grid") ||
+                get(".beyond-container");
 
 
-            const existingBeyondCards =
-                getAll(".beyond-card");
+            if (beyondContainer) {
 
+                const beyond =
+                    portfolio.beyond || [];
 
-            let beyondContainer = null;
-
-
-            // Find existing card parent.
-
-            if (
-                existingBeyondCards.length > 0
-            ) {
-
-                beyondContainer =
-                    existingBeyondCards[0].parentElement;
-
-            }
-
-
-            // Fallback container names.
-
-            if (!beyondContainer) {
-
-                beyondContainer =
-                    get(".beyond-grid");
-
-            }
-
-
-            if (!beyondContainer) {
-
-                beyondContainer =
-                    get(".beyond-container");
-
-            }
-
-
-            if (!beyondContainer) {
-
-                beyondContainer =
-                    get(".beyond-content");
-
-            }
-
-
-            if (
-                beyondContainer &&
-                savedBeyond.length
-            ) {
 
                 beyondContainer.innerHTML =
-                    savedBeyond
+                    beyond
                         .map(
                             item => `
 
@@ -734,24 +663,19 @@
 
                                     <h3>
                                         ${escapeHTML(
-                                            item.title ||
-                                            ""
+                                            item.title
                                         )}
                                     </h3>
 
-
                                     <p>
                                         ${escapeHTML(
-                                            item.p1 ||
-                                            ""
+                                            item.p1
                                         )}
                                     </p>
 
-
                                     <p>
                                         ${escapeHTML(
-                                            item.p2 ||
-                                            ""
+                                            item.p2
                                         )}
                                     </p>
 
@@ -762,63 +686,60 @@
                         .join("");
 
             }
+            else {
+
+                /* Fallback for existing HTML */
+
+                const beyondCards =
+                    getAll(".beyond-card");
 
 
-            // If the admin deleted every Beyond card,
-            // remove all cards from the live page.
-
-            if (
-                beyondContainer &&
-                savedBeyond.length === 0
-            ) {
-
-                beyondContainer.innerHTML = "";
-
-            }
-
-
-
-            // ====================================================
-            // RESUME
-            // ====================================================
-
-            if (
-                get(".resume-box h3")
-            ) {
-
-                get(
-                    ".resume-box h3"
-                ).textContent =
-                    portfolio.resume?.title ||
-                    "";
-
-            }
-
-
-            if (
-                get(".resume-box p")
-            ) {
-
-                get(
-                    ".resume-box p"
-                ).textContent =
-                    portfolio.resume?.description ||
-                    "";
-
-            }
-
-
-            if (
-                portfolio.resume?.path
-            ) {
-
-                getAll(
-                    ".resume-box a"
+                (
+                    portfolio.beyond || []
                 ).forEach(
-                    link => {
+                    (item, index) => {
 
-                        link.href =
-                            portfolio.resume.path;
+                        if (!beyondCards[index]) {
+
+                            return;
+
+                        }
+
+
+                        const title =
+                            beyondCards[index]
+                                .querySelector("h3");
+
+
+                        const paragraphs =
+                            beyondCards[index]
+                                .querySelectorAll("p");
+
+
+                        if (title) {
+
+                            title.textContent =
+                                item.title || "";
+
+                        }
+
+
+                        if (paragraphs[0]) {
+
+                            paragraphs[0]
+                                .textContent =
+                                item.p1 || "";
+
+                        }
+
+
+                        if (paragraphs[1]) {
+
+                            paragraphs[1]
+                                .textContent =
+                                item.p2 || "";
+
+                        }
 
                     }
                 );
@@ -826,56 +747,80 @@
             }
 
 
+            /* ====================================================
+               RESUME
+               ==================================================== */
 
-            // ====================================================
-            // CONTACT
-            // ====================================================
+            if (get(".resume-box h3")) {
 
-            if (
-                get(".contact-info p")
-            ) {
-
-                get(
-                    ".contact-info p"
-                ).textContent =
-                    portfolio.contact?.description ||
-                    "";
+                get(".resume-box h3")
+                    .textContent =
+                    portfolio.resume?.title || "";
 
             }
 
 
-            if (
-                get(".contact-email")
-            ) {
+            if (get(".resume-box p")) {
+
+                get(".resume-box p")
+                    .textContent =
+                    portfolio.resume?.description || "";
+
+            }
+
+
+            if (portfolio.resume?.path) {
+
+                getAll(".resume-box a")
+                    .forEach(
+                        link => {
+
+                            link.href =
+                                portfolio.resume.path;
+
+                        }
+                    );
+
+            }
+
+
+            /* ====================================================
+               CONTACT
+               ==================================================== */
+
+            if (get(".contact-info p")) {
+
+                get(".contact-info p")
+                    .textContent =
+                    portfolio.contact?.description || "";
+
+            }
+
+
+            if (get(".contact-email")) {
 
                 const email =
-                    portfolio.contact?.email ||
-                    "";
+                    portfolio.contact?.email || "";
 
 
-                get(
-                    ".contact-email"
-                ).textContent =
+                get(".contact-email")
+                    .textContent =
                     email;
 
 
-                get(
-                    ".contact-email"
-                ).href =
+                get(".contact-email")
+                    .href =
                     `mailto:${email}`;
 
             }
 
 
-
-            // ====================================================
-            // SOCIAL LINKS
-            // ====================================================
+            /* ====================================================
+               SOCIAL LINKS
+               ==================================================== */
 
             const socialLinks =
-                getAll(
-                    ".social-links a"
-                );
+                getAll(".social-links a");
 
 
             if (
@@ -900,31 +845,12 @@
             }
 
 
-
-            // ====================================================
-            // SUCCESS
-            // ====================================================
-
-            console.log(
-                "✓ Portfolio loaded from Supabase"
-            );
-
+            /* ====================================================
+               DONE
+               ==================================================== */
 
             console.log(
-                "✓ Skills loaded dynamically:",
-                savedSkills.length
-            );
-
-
-            console.log(
-                "✓ Beyond Projects loaded dynamically:",
-                savedBeyond.length
-            );
-
-
-            console.log(
-                "✓ Projects loaded:",
-                portfolio.projects?.length || 0
+                "✓ V4 portfolio loaded from Supabase"
             );
 
         }
@@ -941,14 +867,12 @@
     }
 
 
-
-    // ============================================================
-    // START AFTER PAGE LOAD
-    // ============================================================
+    /* ============================================================
+       START
+    ============================================================ */
 
     if (
-        document.readyState ===
-        "loading"
+        document.readyState === "loading"
     ) {
 
         document.addEventListener(
@@ -956,7 +880,8 @@
             loadPortfolio
         );
 
-    } else {
+    }
+    else {
 
         loadPortfolio();
 
