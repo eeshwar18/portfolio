@@ -11,7 +11,7 @@
     >
 
     <title>Admin | Eeshwar Portfolio</title>
-    <!-- STEP 3 FIXED: single source of truth is D.projects -->
+    <!-- STEP 4: ABOUT ME + EDUCATION EDITING -->
 
     <!-- Supabase JavaScript -->
     <script
@@ -1666,7 +1666,7 @@ const E=v=>String(v??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceA
 function inp(label,key,val,type="text"){return `<label class="f2label">${label}<input class="f2input" data-key="${key}" type="${type}" value="${E(val)}"></label>`}
 function area(label,key,val){return `<label class="f2label">${label}<textarea class="f2input f2area" data-key="${key}">${E(val)}</textarea></label>`}
 function setv(o,path,v){let a=path.split("."),x=o;for(let i=0;i<a.length-1;i++)x=x[a[i]];x[a.at(-1)]=v}
-function render(){let r=document.getElementById("fullV4Editor")||document.body.appendChild(Object.assign(document.createElement("div"),{id:"fullV4Editor"}));r.innerHTML=`<div class="f2box"><div class="f2head"><div><small>STEP 2 · FULL V4 EDITOR</small><h1>Eeshwar Portfolio Editor</h1><p>Edit every section of your V4 portfolio. SAVE CHANGES publishes it to Supabase.</p></div><span id="f2status">Editor ready</span></div><div class="f2grid">
+function render(){let r=document.getElementById("fullV4Editor")||document.body.appendChild(Object.assign(document.createElement("div"),{id:"fullV4Editor"}));r.innerHTML=`<div class="f2box"><div class="f2head"><div><small>STEP 4 · ABOUT + EDUCATION</small><h1>Eeshwar Portfolio Editor</h1><p>Edit your V4 portfolio content. About Me and Education are fully editable and SAVE CHANGES publishes everything to Supabase.</p></div><span id="f2status">Editor ready</span></div><div class="f2grid">
 <details class="f2panel" open><summary>🏠 Home / Hero</summary><div>${inp("Hero label","hero.label",D.hero.label)}${inp("Name","hero.name",D.hero.name)}${area("Hero description","hero.description",D.hero.description)}${inp("Focus title","hero.focusTitle",D.hero.focusTitle)}${area("Focus description","hero.focusDescription",D.hero.focusDescription)}${area("Focus items — one per line","hero.focusItems",D.hero.focusItems.join("\n"))}</div></details>
 <details class="f2panel"><summary>👤 About Me</summary><div>${area("Paragraph 1","about.paragraphs.0",D.about.paragraphs[0])}${area("Paragraph 2","about.paragraphs.1",D.about.paragraphs[1])}${area("Paragraph 3","about.paragraphs.2",D.about.paragraphs[2])}${area("Highlight","about.highlight",D.about.highlight)}</div></details>
 <details class="f2panel"><summary>🎓 Education</summary><div>${inp("Degree","education.degree",D.education.degree)}${inp("College","education.college",D.education.college)}${inp("Period","education.period",D.education.period)}${area("Description","education.description",D.education.description)}</div></details>
