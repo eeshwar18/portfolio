@@ -2771,5 +2771,486 @@
 </script>
 
 
+
+<script>
+/* =====================================================
+   LIVE PORTFOLIO DATA LOADER
+   ADDITION ONLY:
+   Reads the content saved by the Admin Editor from
+   Supabase and applies it to the existing portfolio.
+   No existing design/CSS/card effects are changed.
+===================================================== */
+
+(function () {
+
+    const SUPABASE_URL =
+        "https://kwnzxflncwmtpvisnhkb.supabase.co";
+
+    const SUPABASE_PUBLISHABLE_KEY =
+        "sb_publishable_ZcTkgrlSgTXQ4_Q5Y6eLIg_a8s4UcSk";
+
+    function loadSupabaseLibrary() {
+        return new Promise(function (resolve, reject) {
+
+            if (window.supabase) {
+                resolve(window.supabase);
+                return;
+            }
+
+            const script =
+                document.createElement("script");
+
+            script.src =
+                "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2";
+
+            script.onload = function () {
+                if (window.supabase) {
+                    resolve(window.supabase);
+                } else {
+                    reject(
+                        new Error("Supabase library did not load.")
+                    );
+                }
+            };
+
+            script.onerror = function () {
+                reject(
+                    new Error("Unable to load Supabase.")
+                );
+            };
+
+            document.head.appendChild(script);
+        });
+    }
+
+
+    function setText(selector, value) {
+        if (value === undefined || value === null) return;
+
+        const element =
+            document.querySelector(selector);
+
+        if (element) {
+            element.textContent = value;
+        }
+    }
+
+
+    function setHref(selector, value) {
+        if (!value) return;
+
+        const element =
+            document.querySelector(selector);
+
+        if (element) {
+            element.href = value;
+        }
+    }
+
+
+    function applySavedPortfolio(data) {
+
+        if (!data || typeof data !== "object") {
+            return;
+        }
+
+        /*
+           The loader supports the editor's common section
+           structure without touching the original markup
+           or glossy-card system.
+        */
+
+        if (data.hero) {
+
+            setText(
+                ".hero-label",
+                data.hero.label
+            );
+
+            if (data.hero.description) {
+                setText(
+                    ".hero-description",
+                    data.hero.description
+                );
+            }
+
+            if (data.hero.resumeUrl) {
+                setHref(
+                    ".hero .button-secondary",
+                    data.hero.resumeUrl
+                );
+            }
+        }
+
+
+        if (data.about) {
+
+            const paragraphs =
+                document.querySelectorAll(
+                    ".about-content > p"
+                );
+
+            if (Array.isArray(data.about.paragraphs)) {
+                data.about.paragraphs.forEach(
+                    function (value, index) {
+                        if (paragraphs[index]) {
+                            paragraphs[index].textContent =
+                                value;
+                        }
+                    }
+                );
+            }
+
+            if (data.about.highlight) {
+                setText(
+                    ".about-highlight",
+                    data.about.highlight
+                );
+            }
+        }
+
+
+        if (data.education) {
+
+            setText(
+                ".education-card h3",
+                data.education.degree
+            );
+
+            setText(
+                ".college-name",
+                data.education.college
+            );
+
+            setText(
+                ".college-period",
+                data.education.period
+            );
+
+            setText(
+                ".education-card p",
+                data.education.description
+            );
+        }
+
+
+        if (Array.isArray(data.interests)) {
+
+            const cards =
+                document.querySelectorAll(
+                    ".interest-card"
+                );
+
+            data.interests.forEach(
+                function (item, index) {
+
+                    const card = cards[index];
+
+                    if (!card || !item) return;
+
+                    setText(
+                        ".interest-card h3",
+                        item.title
+                    );
+
+                    setText(
+                        ".interest-card p",
+                        item.description
+                    );
+                }
+            );
+        }
+
+
+        if (Array.isArray(data.skills)) {
+
+            const groups =
+                document.querySelectorAll(
+                    ".skill-group"
+                );
+
+            data.skills.forEach(
+                function (item, index) {
+
+                    const group = groups[index];
+
+                    if (!group || !item) return;
+
+                    setText(
+                        ".skill-group h3",
+                        item.title
+                    );
+
+                    const list =
+                        group.querySelector(
+                            ".skill-list"
+                        );
+
+                    if (
+                        list &&
+                        Array.isArray(item.items)
+                    ) {
+                        list.innerHTML = "";
+
+                        item.items.forEach(
+                            function (skill) {
+
+                                const li =
+                                    document.createElement(
+                                        "li"
+                                    );
+
+                                li.textContent =
+                                    skill;
+
+                                list.appendChild(li);
+                            }
+                        );
+                    }
+                }
+            );
+        }
+
+
+        if (Array.isArray(data.projects)) {
+
+            const cards =
+                document.querySelectorAll(
+                    ".project-card"
+                );
+
+            data.projects.forEach(
+                function (item, index) {
+
+                    const card = cards[index];
+
+                    if (!card || !item) return;
+
+                    setText(
+                        ".project-card h3",
+                        item.title
+                    );
+
+                    setText(
+                        ".project-card p",
+                        item.description
+                    );
+
+                    if (item.url) {
+                        setHref(
+                            ".project-link",
+                            item.url
+                        );
+                    }
+
+                    if (Array.isArray(item.tags)) {
+
+                        const tags =
+                            card.querySelector(
+                                ".project-tags"
+                            );
+
+                        if (tags) {
+
+                            tags.innerHTML = "";
+
+                            item.tags.forEach(
+                                function (tag) {
+
+                                    const span =
+                                        document.createElement(
+                                            "span"
+                                        );
+
+                                    span.textContent =
+                                        tag;
+
+                                    tags.appendChild(
+                                        span
+                                    );
+                                }
+                            );
+                        }
+                    }
+                }
+            );
+        }
+
+
+        if (data.beyond) {
+
+            const cards =
+                document.querySelectorAll(
+                    ".beyond-card"
+                );
+
+            if (Array.isArray(data.beyond)) {
+
+                data.beyond.forEach(
+                    function (item, index) {
+
+                        const card =
+                            cards[index];
+
+                        if (!card || !item) return;
+
+                        setText(
+                            "h3",
+                            item.title
+                        );
+
+                        const paragraphs =
+                            card.querySelectorAll(
+                                "p"
+                            );
+
+                        if (
+                            Array.isArray(
+                                item.paragraphs
+                            )
+                        ) {
+                            item.paragraphs.forEach(
+                                function (
+                                    value,
+                                    paragraphIndex
+                                ) {
+                                    if (
+                                        paragraphs[
+                                            paragraphIndex
+                                        ]
+                                    ) {
+                                        paragraphs[
+                                            paragraphIndex
+                                        ].textContent =
+                                            value;
+                                    }
+                                }
+                            );
+                        }
+                    }
+                );
+            }
+        }
+
+
+        if (data.resume) {
+
+            setHref(
+                ".resume-box .button-primary",
+                data.resume.url
+            );
+
+            setHref(
+                ".resume-box .button-secondary",
+                data.resume.url
+            );
+        }
+
+
+        if (data.contact) {
+
+            setText(
+                ".contact-info p",
+                data.contact.description
+            );
+
+            if (data.contact.email) {
+
+                const email =
+                    document.querySelector(
+                        ".contact-email"
+                    );
+
+                if (email) {
+                    email.textContent =
+                        data.contact.email;
+
+                    email.href =
+                        "mailto:" +
+                        data.contact.email;
+                }
+            }
+
+            if (data.contact.github) {
+                setHref(
+                    ".social-links a:nth-child(1)",
+                    data.contact.github
+                );
+            }
+
+            if (data.contact.linkedin) {
+                setHref(
+                    ".social-links a:nth-child(2)",
+                    data.contact.linkedin
+                );
+            }
+        }
+    }
+
+
+    async function loadSavedPortfolio() {
+
+        try {
+
+            const supabase =
+                await loadSupabaseLibrary();
+
+            const client =
+                supabase.createClient(
+                    SUPABASE_URL,
+                    SUPABASE_PUBLISHABLE_KEY
+                );
+
+            const result =
+                await client
+                    .from("portfolio_content")
+                    .select("content")
+                    .eq("id", 1)
+                    .maybeSingle();
+
+            if (result.error) {
+                console.warn(
+                    "Portfolio data could not be loaded:",
+                    result.error.message
+                );
+                return;
+            }
+
+            if (result.data &&
+                result.data.content) {
+
+                applySavedPortfolio(
+                    result.data.content
+                );
+            }
+
+        } catch (error) {
+
+            console.warn(
+                "Live portfolio data loader:",
+                error
+            );
+        }
+    }
+
+
+    if (
+        document.readyState ===
+        "loading"
+    ) {
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            loadSavedPortfolio
+        );
+
+    } else {
+
+        loadSavedPortfolio();
+    }
+
+})();
+</script>
+
 </body>
 </html>
