@@ -761,16 +761,23 @@
             right: 4.5%;
             width: 18%;
             height: 4.5%;
-            z-index: 8;
+            z-index: 12;
             display: block;
             text-decoration: none;
             color: transparent;
             background: transparent;
             border-radius: 5px;
+            cursor: pointer;
+            pointer-events: auto;
+            touch-action: manipulation;
         }
 
         .exact-back-link:focus-visible {
             outline: 1px solid rgba(85,232,255,.7);
+        }
+
+        .exact-back-link:active {
+            transform: scale(.98);
         }
 
         .exact-login-wrapper {
@@ -826,6 +833,7 @@
             top: 74.85%;
             width: 45.95%;
             height: 6.05%;
+            z-index: 11;
             border: 0;
             outline: none;
             background: transparent;
@@ -833,6 +841,8 @@
             font: 500 12px/1 Inter, "Segoe UI", Arial, sans-serif;
             padding: 0 3.2% 0 13.5%;
             caret-color: #55e8ff;
+            pointer-events: auto;
+            touch-action: manipulation;
         }
 
         .exact-email-input::placeholder { color: transparent; }
@@ -845,10 +855,17 @@
             top: 82.45%;
             width: 45.95%;
             height: 6.25%;
+            z-index: 11;
             border: 0;
             border-radius: 7px;
             background: transparent;
             cursor: pointer;
+            pointer-events: auto;
+            touch-action: manipulation;
+        }
+
+        .exact-send-button:active {
+            transform: scale(.99);
         }
 
         .exact-send-button:disabled {
@@ -2168,6 +2185,29 @@ body.editor-unlocked #fullV4Editor {
 
 
 
+
+    /* =====================================================
+       BACK TO PORTFOLIO + EMAIL BUTTON
+       These controls use the existing artwork as-is.
+    ===================================================== */
+
+    const exactBackLink =
+        document.querySelector(".exact-back-link");
+
+    if (exactBackLink) {
+        exactBackLink.addEventListener("click", function(event) {
+            event.preventDefault();
+            window.location.assign("./index.html");
+        });
+    }
+
+    /* The email button already submits the existing email form.
+       Keep the input/button coordinates tied to the supplied artwork. */
+    sendOtpButton.addEventListener("click", function() {
+        if (!emailInput.value.trim()) {
+            emailInput.focus();
+        }
+    });
 
     /* =====================================================
        START
