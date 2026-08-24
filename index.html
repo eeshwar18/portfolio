@@ -1384,6 +1384,109 @@
                 flex-direction: column;
             }
         }
+        /* =====================================================
+           PREMIUM PROJECT CARD MOTION
+           ADDITION ONLY
+        ===================================================== */
+
+        .project-card {
+            will-change: transform, box-shadow;
+        }
+
+        .project-card.gloss-active {
+            box-shadow:
+                0 18px 55px rgba(0, 0, 0, 0.35),
+                0 0 35px rgba(180, 108, 255, 0.12),
+                0 0 8px rgba(180, 108, 255, 0.16),
+                inset 0 1px 0 rgba(255, 255, 255, 0.10);
+        }
+
+        .project-card .project-number {
+            transition:
+                color 0.25s ease,
+                text-shadow 0.25s ease,
+                transform 0.25s ease;
+        }
+
+        .project-card.gloss-active .project-number {
+            color: var(--cyan-soft);
+
+            text-shadow:
+                0 0 12px rgba(180, 108, 255, 0.45);
+
+            transform: translateY(-2px);
+        }
+
+        .project-card h3 {
+            transition:
+                color 0.25s ease,
+                transform 0.25s ease;
+        }
+
+        .project-card.gloss-active h3 {
+            color: #ffffff;
+            transform: translateY(-2px);
+        }
+
+        .project-card .project-tags span {
+            transition:
+                transform 0.25s ease,
+                border-color 0.25s ease,
+                color 0.25s ease,
+                background 0.25s ease;
+        }
+
+        .project-card.gloss-active .project-tags span {
+            border-color:
+                rgba(180, 108, 255, 0.25);
+
+            color: var(--text);
+
+            background:
+                rgba(180, 108, 255, 0.035);
+
+            transform: translateY(-1px);
+        }
+
+        .project-card.gloss-active .project-tags span:nth-child(1) {
+            transition-delay: 0.02s;
+        }
+
+        .project-card.gloss-active .project-tags span:nth-child(2) {
+            transition-delay: 0.04s;
+        }
+
+        .project-card.gloss-active .project-tags span:nth-child(3) {
+            transition-delay: 0.06s;
+        }
+
+        .project-card.gloss-active .project-tags span:nth-child(4) {
+            transition-delay: 0.08s;
+        }
+
+        .project-card.gloss-active .project-tags span:nth-child(5) {
+            transition-delay: 0.10s;
+        }
+
+        .project-card.gloss-active .project-tags span:nth-child(6) {
+            transition-delay: 0.12s;
+        }
+
+        .project-card .project-link {
+            transition:
+                color 0.25s ease,
+                transform 0.25s ease,
+                text-shadow 0.25s ease;
+        }
+
+        .project-card.gloss-active .project-link {
+            color: var(--cyan-soft);
+
+            text-shadow:
+                0 0 12px rgba(180, 108, 255, 0.30);
+
+            transform: translateX(5px);
+        }
 
     </style>
 </head>
