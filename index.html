@@ -2775,12 +2775,9 @@
 <script>
 /* =====================================================
    LIVE PORTFOLIO DATA LOADER
-   ADDITION ONLY:
-   Reads the content saved by the Admin Editor from
-   Supabase and applies it to the existing portfolio.
-   No existing design/CSS/card effects are changed.
+   ADDITION ONLY — DO NOT ALTER EXISTING DESIGN.
+   Reads the EXACT "data" field used by admin.html.
 ===================================================== */
-
 (function () {
 
     const SUPABASE_URL =
@@ -2789,411 +2786,302 @@
     const SUPABASE_PUBLISHABLE_KEY =
         "sb_publishable_ZcTkgrlSgTXQ4_Q5Y6eLIg_a8s4UcSk";
 
-    function loadSupabaseLibrary() {
+    function loadSupabase() {
         return new Promise(function (resolve, reject) {
-
             if (window.supabase) {
                 resolve(window.supabase);
                 return;
             }
 
-            const script =
-                document.createElement("script");
-
-            script.src =
-                "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2";
-
-            script.onload = function () {
-                if (window.supabase) {
-                    resolve(window.supabase);
-                } else {
-                    reject(
-                        new Error("Supabase library did not load.")
-                    );
-                }
+            const s = document.createElement("script");
+            s.src = "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2";
+            s.onload = function () {
+                if (window.supabase) resolve(window.supabase);
+                else reject(new Error("Supabase library did not load."));
             };
-
-            script.onerror = function () {
-                reject(
-                    new Error("Unable to load Supabase.")
-                );
+            s.onerror = function () {
+                reject(new Error("Unable to load Supabase."));
             };
-
-            document.head.appendChild(script);
+            document.head.appendChild(s);
         });
     }
 
-
-    function setText(selector, value) {
-        if (value === undefined || value === null) return;
-
-        const element =
-            document.querySelector(selector);
-
-        if (element) {
-            element.textContent = value;
+    function text(el, value) {
+        if (el && value !== undefined && value !== null) {
+            el.textContent = String(value);
         }
     }
 
-
-    function setHref(selector, value) {
-        if (!value) return;
-
-        const element =
-            document.querySelector(selector);
-
-        if (element) {
-            element.href = value;
-        }
+    function href(el, value) {
+        if (el && value) el.href = String(value);
     }
 
+    function apply(data) {
+        if (!data) return;
 
-    function applySavedPortfolio(data) {
-
-        if (!data || typeof data !== "object") {
-            return;
-        }
-
-        /*
-           The loader supports the editor's common section
-           structure without touching the original markup
-           or glossy-card system.
-        */
-
+        /* ---------------- HOME / HERO ---------------- */
         if (data.hero) {
+            const label = document.querySelector(".hero-label");
+            text(label, data.hero.label);
 
-            setText(
-                ".hero-label",
-                data.hero.label
+            const heroName = document.querySelector(".hero h1 .cyan");
+            text(heroName, data.hero.name);
+
+            text(
+                document.querySelector(".hero-description"),
+                data.hero.description
             );
 
-            if (data.hero.description) {
-                setText(
-                    ".hero-description",
-                    data.hero.description
-                );
-            }
+            text(
+                document.querySelector(".hero-card-label"),
+                "WHAT I LIKE TO WORK ON"
+            );
 
-            if (data.hero.resumeUrl) {
-                setHref(
-                    ".hero .button-secondary",
-                    data.hero.resumeUrl
-                );
+            text(
+                document.querySelector(".hero-card h2"),
+                data.hero.focusTitle
+            );
+
+            text(
+                document.querySelector(".hero-card p"),
+                data.hero.focusDescription
+            );
+
+            const focusItems =
+                document.querySelectorAll(".focus-list li");
+
+            if (Array.isArray(data.hero.focusItems)) {
+                data.hero.focusItems.forEach(function (item, i) {
+                    if (focusItems[i]) text(focusItems[i], item);
+                });
             }
         }
 
-
+        /* ---------------- ABOUT ---------------- */
         if (data.about) {
-
-            const paragraphs =
-                document.querySelectorAll(
-                    ".about-content > p"
-                );
+            const ps =
+                document.querySelectorAll(".about-content > p");
 
             if (Array.isArray(data.about.paragraphs)) {
-                data.about.paragraphs.forEach(
-                    function (value, index) {
-                        if (paragraphs[index]) {
-                            paragraphs[index].textContent =
-                                value;
-                        }
-                    }
-                );
+                data.about.paragraphs.forEach(function (value, i) {
+                    if (ps[i]) text(ps[i], value);
+                });
             }
 
-            if (data.about.highlight) {
-                setText(
-                    ".about-highlight",
-                    data.about.highlight
-                );
-            }
+            text(
+                document.querySelector(".about-highlight"),
+                data.about.highlight
+            );
         }
 
-
+        /* ---------------- EDUCATION ---------------- */
         if (data.education) {
-
-            setText(
-                ".education-card h3",
+            text(
+                document.querySelector(".education-card h3"),
                 data.education.degree
             );
 
-            setText(
-                ".college-name",
+            text(
+                document.querySelector(".college-name"),
                 data.education.college
             );
 
-            setText(
-                ".college-period",
+            text(
+                document.querySelector(".college-period"),
                 data.education.period
             );
 
-            setText(
-                ".education-card p",
+            text(
+                document.querySelector(".education-card p"),
                 data.education.description
             );
         }
 
-
+        /* ---------------- INTERESTS ---------------- */
         if (Array.isArray(data.interests)) {
-
             const cards =
-                document.querySelectorAll(
-                    ".interest-card"
+                document.querySelectorAll(".interest-card");
+
+            data.interests.forEach(function (item, i) {
+                if (!cards[i]) return;
+                text(
+                    cards[i].querySelector("h3"),
+                    item
                 );
-
-            data.interests.forEach(
-                function (item, index) {
-
-                    const card = cards[index];
-
-                    if (!card || !item) return;
-
-                    setText(
-                        ".interest-card h3",
-                        item.title
-                    );
-
-                    setText(
-                        ".interest-card p",
-                        item.description
-                    );
-                }
-            );
+            });
         }
 
-
+        /* ---------------- SKILLS ---------------- */
         if (Array.isArray(data.skills)) {
-
             const groups =
-                document.querySelectorAll(
-                    ".skill-group"
+                document.querySelectorAll(".skill-group");
+
+            data.skills.forEach(function (item, i) {
+                if (!groups[i] || !item) return;
+
+                text(
+                    groups[i].querySelector("h3"),
+                    item.title
                 );
 
-            data.skills.forEach(
-                function (item, index) {
+                const list =
+                    groups[i].querySelector(".skill-list");
 
-                    const group = groups[index];
+                if (list && Array.isArray(item.items)) {
+                    list.innerHTML = "";
 
-                    if (!group || !item) return;
-
-                    setText(
-                        ".skill-group h3",
-                        item.title
-                    );
-
-                    const list =
-                        group.querySelector(
-                            ".skill-list"
-                        );
-
-                    if (
-                        list &&
-                        Array.isArray(item.items)
-                    ) {
-                        list.innerHTML = "";
-
-                        item.items.forEach(
-                            function (skill) {
-
-                                const li =
-                                    document.createElement(
-                                        "li"
-                                    );
-
-                                li.textContent =
-                                    skill;
-
-                                list.appendChild(li);
-                            }
-                        );
-                    }
+                    item.items.forEach(function (skill) {
+                        const li =
+                            document.createElement("li");
+                        li.textContent = skill;
+                        list.appendChild(li);
+                    });
                 }
-            );
+            });
         }
 
-
+        /* ---------------- PROJECTS ---------------- */
         if (Array.isArray(data.projects)) {
-
             const cards =
-                document.querySelectorAll(
-                    ".project-card"
+                document.querySelectorAll(".project-card");
+
+            data.projects.forEach(function (project, i) {
+                const card = cards[i];
+                if (!card || !project) return;
+
+                text(
+                    card.querySelector(".project-number"),
+                    project.number
                 );
 
-            data.projects.forEach(
-                function (item, index) {
+                text(
+                    card.querySelector("h3"),
+                    project.title
+                );
 
-                    const card = cards[index];
+                text(
+                    card.querySelector("p"),
+                    project.description
+                );
 
-                    if (!card || !item) return;
+                href(
+                    card.querySelector(".project-link"),
+                    project.url
+                );
 
-                    setText(
-                        ".project-card h3",
-                        item.title
-                    );
+                const tags =
+                    card.querySelector(".project-tags");
 
-                    setText(
-                        ".project-card p",
-                        item.description
-                    );
+                if (tags && project.technologies !== undefined) {
+                    tags.innerHTML = "";
 
-                    if (item.url) {
-                        setHref(
-                            ".project-link",
-                            item.url
-                        );
-                    }
+                    const items =
+                        Array.isArray(project.technologies)
+                            ? project.technologies
+                            : String(project.technologies || "")
+                                .split(",")
+                                .map(function (x) {
+                                    return x.trim();
+                                })
+                                .filter(Boolean);
 
-                    if (Array.isArray(item.tags)) {
-
-                        const tags =
-                            card.querySelector(
-                                ".project-tags"
-                            );
-
-                        if (tags) {
-
-                            tags.innerHTML = "";
-
-                            item.tags.forEach(
-                                function (tag) {
-
-                                    const span =
-                                        document.createElement(
-                                            "span"
-                                        );
-
-                                    span.textContent =
-                                        tag;
-
-                                    tags.appendChild(
-                                        span
-                                    );
-                                }
-                            );
-                        }
-                    }
+                    items.forEach(function (tag) {
+                        const span =
+                            document.createElement("span");
+                        span.textContent = tag;
+                        tags.appendChild(span);
+                    });
                 }
-            );
+            });
         }
 
-
-        if (data.beyond) {
-
+        /* ---------------- BEYOND PROJECTS ---------------- */
+        if (Array.isArray(data.beyond)) {
             const cards =
-                document.querySelectorAll(
-                    ".beyond-card"
+                document.querySelectorAll(".beyond-card");
+
+            data.beyond.forEach(function (item, i) {
+                const card = cards[i];
+                if (!card || !item) return;
+
+                text(
+                    card.querySelector("h3"),
+                    item.title
                 );
 
-            if (Array.isArray(data.beyond)) {
+                const ps =
+                    card.querySelectorAll("p");
 
-                data.beyond.forEach(
-                    function (item, index) {
-
-                        const card =
-                            cards[index];
-
-                        if (!card || !item) return;
-
-                        setText(
-                            "h3",
-                            item.title
-                        );
-
-                        const paragraphs =
-                            card.querySelectorAll(
-                                "p"
-                            );
-
-                        if (
-                            Array.isArray(
-                                item.paragraphs
-                            )
-                        ) {
-                            item.paragraphs.forEach(
-                                function (
-                                    value,
-                                    paragraphIndex
-                                ) {
-                                    if (
-                                        paragraphs[
-                                            paragraphIndex
-                                        ]
-                                    ) {
-                                        paragraphs[
-                                            paragraphIndex
-                                        ].textContent =
-                                            value;
-                                    }
-                                }
-                            );
-                        }
-                    }
-                );
-            }
+                text(ps[0], item.p1);
+                text(ps[1], item.p2);
+            });
         }
 
-
+        /* ---------------- RESUME ---------------- */
         if (data.resume) {
-
-            setHref(
-                ".resume-box .button-primary",
-                data.resume.url
+            text(
+                document.querySelector(".resume-box h3"),
+                data.resume.title
             );
 
-            setHref(
-                ".resume-box .button-secondary",
-                data.resume.url
+            text(
+                document.querySelector(".resume-box p"),
+                data.resume.description
             );
+
+            const resumeButtons =
+                document.querySelectorAll(
+                    ".resume-box .button"
+                );
+
+            resumeButtons.forEach(function (button) {
+                href(button, data.resume.path);
+            });
+
+            const heroResume =
+                document.querySelector(
+                    '.hero .button-secondary[href*="resume"]'
+                );
+
+            href(heroResume, data.resume.path);
         }
 
-
+        /* ---------------- CONTACT ---------------- */
         if (data.contact) {
-
-            setText(
-                ".contact-info p",
+            text(
+                document.querySelector(".contact-info p"),
                 data.contact.description
             );
 
-            if (data.contact.email) {
+            const email =
+                document.querySelector(".contact-email");
 
-                const email =
-                    document.querySelector(
-                        ".contact-email"
-                    );
-
-                if (email) {
-                    email.textContent =
-                        data.contact.email;
-
-                    email.href =
-                        "mailto:" +
-                        data.contact.email;
-                }
+            if (email && data.contact.email) {
+                email.textContent = data.contact.email;
+                email.href =
+                    "mailto:" + data.contact.email;
             }
 
-            if (data.contact.github) {
-                setHref(
-                    ".social-links a:nth-child(1)",
-                    data.contact.github
-                );
-            }
+            href(
+                document.querySelector(
+                    ".social-links a:nth-child(1)"
+                ),
+                data.contact.github
+            );
 
-            if (data.contact.linkedin) {
-                setHref(
-                    ".social-links a:nth-child(2)",
-                    data.contact.linkedin
-                );
-            }
+            href(
+                document.querySelector(
+                    ".social-links a:nth-child(2)"
+                ),
+                data.contact.linkedin
+            );
         }
     }
 
-
     async function loadSavedPortfolio() {
-
         try {
-
             const supabase =
-                await loadSupabaseLibrary();
+                await loadSupabase();
 
             const client =
                 supabase.createClient(
@@ -3201,51 +3089,58 @@
                     SUPABASE_PUBLISHABLE_KEY
                 );
 
+            /*
+               IMPORTANT:
+               admin.html saves:
+               { id: 1, data: D, ... }
+
+               So the portfolio MUST read "data",
+               NOT "content".
+            */
             const result =
                 await client
                     .from("portfolio_content")
-                    .select("content")
+                    .select("data")
                     .eq("id", 1)
                     .maybeSingle();
 
             if (result.error) {
                 console.warn(
-                    "Portfolio data could not be loaded:",
+                    "Portfolio data load error:",
                     result.error.message
                 );
                 return;
             }
 
-            if (result.data &&
-                result.data.content) {
-
-                applySavedPortfolio(
-                    result.data.content
+            if (
+                result.data &&
+                result.data.data &&
+                Object.keys(result.data.data).length
+            ) {
+                apply(result.data.data);
+                console.log(
+                    "✓ Live portfolio data loaded from Supabase."
+                );
+            } else {
+                console.log(
+                    "No saved portfolio data found; keeping original HTML."
                 );
             }
 
         } catch (error) {
-
             console.warn(
-                "Live portfolio data loader:",
+                "Live portfolio loader:",
                 error
             );
         }
     }
 
-
-    if (
-        document.readyState ===
-        "loading"
-    ) {
-
+    if (document.readyState === "loading") {
         document.addEventListener(
             "DOMContentLoaded",
             loadSavedPortfolio
         );
-
     } else {
-
         loadSavedPortfolio();
     }
 
