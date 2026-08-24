@@ -1488,6 +1488,153 @@
             transform: translateX(5px);
         }
 
+        /* =====================================================
+   PREMIUM GLASS BUTTON HOVER
+   ADDITION ONLY — DO NOT REMOVE EXISTING CODE
+===================================================== */
+
+.button {
+    position: relative;
+    overflow: hidden;
+
+    transition:
+        transform 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        background 0.25s ease,
+        color 0.25s ease;
+}
+
+
+/* Glass reflection layer */
+
+.button::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: -120%;
+
+    width: 70%;
+    height: 100%;
+
+    pointer-events: none;
+
+    background:
+        linear-gradient(
+            110deg,
+            transparent,
+            rgba(255,255,255,0.08),
+            rgba(255,255,255,0.20),
+            rgba(255,255,255,0.08),
+            transparent
+        );
+
+    transform: skewX(-18deg);
+
+    transition:
+        left 0.55s ease;
+}
+
+
+/* Make button content stay above reflection */
+
+.button {
+    isolation: isolate;
+}
+
+.button > * {
+    position: relative;
+    z-index: 2;
+}
+
+
+/* Secondary glass buttons */
+
+.button-secondary {
+    position: relative;
+
+    border-color:
+        rgba(180,108,255,0.22);
+
+    background:
+        rgba(9,23,32,0.58);
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+
+/* Hover */
+
+.button:hover {
+    transform:
+        translateY(-3px);
+
+    border-color:
+        rgba(180,108,255,0.50);
+
+    box-shadow:
+        0 10px 28px rgba(0,0,0,0.30),
+        0 0 22px rgba(180,108,255,0.14),
+        inset 0 1px 0 rgba(255,255,255,0.12);
+}
+
+
+/* Reflection sweep */
+
+.button:hover::before {
+    left: 135%;
+}
+
+
+/* Secondary button hover glass */
+
+.button-secondary:hover {
+    color: var(--cyan-soft);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(180,108,255,0.10),
+            rgba(9,23,32,0.72)
+        );
+
+    border-color:
+        rgba(180,108,255,0.55);
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,0.32),
+        0 0 25px rgba(180,108,255,0.16),
+        inset 0 1px 0 rgba(255,255,255,0.13);
+}
+
+
+/* Primary button hover */
+
+.button-primary:hover {
+    background:
+        linear-gradient(
+            135deg,
+            var(--cyan-soft),
+            var(--cyan)
+        );
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,0.30),
+        0 0 28px rgba(180,108,255,0.28),
+        inset 0 1px 0 rgba(255,255,255,0.25);
+}
+
+
+/* Small press effect */
+
+.button:active {
+    transform:
+        translateY(-1px)
+        scale(0.98);
+}
     </style>
 </head>
 
