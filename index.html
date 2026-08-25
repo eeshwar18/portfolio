@@ -3196,7 +3196,7 @@
                 document.querySelectorAll(".project-card");
 
             data.projects.forEach(function (project, i) {
-                const card = cards[i];
+                const card = !project ? null : (cards[i] || (() => { const c = cards[0].cloneNode(true); document.querySelector(".projects-grid").appendChild(c); return c; })());
                 if (!card || !project) return;
 
                 text(
